@@ -1,0 +1,241 @@
+@model AppValetParking.Models.ValetRegistro
+
+@{
+    Layout = null;
+ 
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Registro Valet</title>
+    <link rel="stylesheet" href="~/css/registro.css" />
+    <style>
+        .form-control.error {
+            border: 2px solid red;
+            background-color: #ffe5e5;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Registro Valet Parking</h1>
+        <form asp-controller="Botones" asp-action="Index" method="post" class="form">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="FolioVP">Folio</label>
+                    <input type="text" id="FolioVP" name="FolioVP" value="@Model?.FolioVP" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="CajonBuffer">Cajon Buffer</label>
+                    <input type="text" id="CajonBuffer" name="CajonBuffer" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Reserva">Reserva</label>
+                    <input type="text" id="Reserva" name="Reserva" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Hotel">Hotel</label>
+                    <input type="text" id="Hotel" name="Hotel" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Habitacion">Habitacion</label>
+                    <input type="text" id="Habitacion" name="Habitacion" class="form-control" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="NumeroOperadorInput">Numero</label>
+                    <input type="text" id="NumeroOperadorInput" name="NumeroOperador" class="form-control" autocomplete="off" placeholder="0000" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="ValetNombreInput">Valet</label>
+                    <input type="text" id="ValetNombreInput" class="form-control" readonly />
+                    <input type="hidden" id="ValetNombreHidden" name="Valet" />
+                </div>
+                <div class="form-group">
+                    <label for="Servicio">Servicio</label>
+                    <select id="Servicio" name="Servicio" class="form-control" required></select>
+                </div>
+
+            </div>
+
+            <div class="btn-container">
+                <button type="submit" class="btn-submit">Guardar</button>
+            </div>
+        </form>
+
+        @if (ViewBag.Mensaje != null)
+{
+        <div id="mensajeConfirmacion" class="mensaje-confirmacion">
+            @ViewBag.Mensaje
+        </div>
+}
+
+
+    </div>
+
+    <script src="~/js/registro.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const folio = document.getElementById('FolioVP');
+            const reserva = document.getElementById('Reserva');
+            const numero = document.getElementById('NumeroOperadorInput');
+
+            form.addEventListener('submit', function (e) {
+                let valid = true;
+
+                // Limpiar errores anteriores
+                [folio, reserva, numero].forEach(input => input.classList.remove('error'));
+
+                if (!folio.value.trim()) {
+                    folio.classList.add('error');
+                    valid = false;
+                }
+
+                //Hacer la reserva obligatoria
+                //      if (!reserva.value.trim()) {
+                //        reserva.classList.add('error');
+                //       valid = false;
+                //  }
+
+                if (!numero.value.trim()) {
+                    numero.classList.add('error');
+                    valid = false;
+                }
+
+                if (!valid) {
+                    alert('Por favor completa los campos obligatorios: Folio y Numero del operador.');
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+<script>
+    //AUTO SELECT EN EL INPUT DE FOLIO
+    document.addEventListener('DOMContentLoaded', () => {
+        const folioInput = document.querySelector('input[name="FolioVP"]');
+        if (folioInput) {
+            folioInput.focus();
+        }
+    });
+</script>
+
+<script>
+    fetch('/Config/configuracionValet.json')
+        .then(response => response.json())
+        .then(config => {
+            const modoRafaga = config.modoRafaga;
+            const cantidadDisparos = config.cantidadDisparos;
+            const identificadores = config.identificadores;
+
+            console.log("Configuración cargada:", config);
+
+            if (modoRafaga) {
+                inicializarModoRafaga(cantidadDisparos, identificadores);
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar la configuración:', error);
+        });
+
+    function inicializarModoRafaga(cantidadDisparos, identificadores) {
+        let disparos = [];
+        let bufferTemporal = {};
+
+        document.addEventListener('keydown', function (event) {
+            if (!/^[a-zA-Z0-9]$/.test(event.key)) return;
+
+            if (!window.scanBuffer) window.scanBuffer = '';
+            window.scanBuffer += event.key;
+
+            clearTimeout(window.scanTimeout);
+            window.scanTimeout = setTimeout(() => {
+                procesarEntrada(window.scanBuffer);
+                window.scanBuffer = '';
+            }, 250);
+        });
+
+        function procesarEntrada(data) {
+            if (!data || data.length < 2) return;
+
+            const tipo = data[0].toUpperCase();
+            const valor = data.substring(1);
+
+            for (const campo in identificadores) {
+                if (identificadores[campo].toUpperCase() === tipo) {
+                    bufferTemporal[campo] = valor;
+                    break;
+                }
+            }
+
+            disparos.push(data);
+
+            if (Object.keys(bufferTemporal).length >= cantidadDisparos) {
+                console.log("Datos capturados:", bufferTemporal);
+                asignarCamposDesdeBuffer(bufferTemporal);
+                bufferTemporal = {};
+                disparos = [];
+            }
+        }
+
+        function asignarCamposDesdeBuffer(datos) {
+            const mapping = {
+                "FOLIO": "FolioVP",
+                "RESERVA": "Reserva",
+                "NUMEROOPERADOR": "NumeroOperadorInput",
+                "CAJONBUFFER": "CajonBuffer"
+            };
+
+            for (const campo in datos) {
+                const campoUpper = campo.toUpperCase();
+                const inputId = mapping[campoUpper];
+                const valor = datos[campo];
+
+                console.log("Asignando campo:", campoUpper, "->", inputId, "valor:", valor);
+
+                if (!inputId) continue;
+
+                const input = document.getElementById(inputId);
+                if (input) input.value = valor;
+
+                if (campoUpper === "RESERVA") {
+                    actualizarDatosReserva(valor);
+                }
+
+                if (campoUpper === "NUMEROOPERADOR") {
+                    input.dispatchEvent(new Event('input'));
+                }
+            }
+        }
+
+    }
+</script>
+
+<script src="@Url.Content("~/js/serviciosvp.js")"></script>
+<script>
+        cargarOpcionesServicio('Servicio', '/Config/servicios.json', '@Model?.Servicio');
+</script>
+
+
+
+
+
+
+</html>

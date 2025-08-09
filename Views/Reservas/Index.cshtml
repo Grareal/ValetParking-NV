@@ -1,0 +1,167 @@
+@model AppValetParking.Models.ReservasViewModel
+
+<link rel="stylesheet" href="~/css/reservas.css" />
+
+<!-- Input oculto para pasar la variable vistaActual al JS -->
+<input type="hidden" id="vistaActual" value="@ViewData["VistaActual"]" />
+
+<div style="display: flex; justify-content:space-between; align-items: center; margin-bottom: 15px;">
+    <h1>Reservas</h1>
+    <form asp-controller="Account" asp-action="Logout" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn-grande" style="background-color:#c00; color:white;">
+            Cerrar sesión
+        </button>
+    </form>
+</div>
+
+<div class="main-container">
+
+    <!-- Vista Llegadas del Día -->
+    <section id="vistaLlegadasDia" class="vista-completa">
+        <div class="header-container" style="display:flex; justify-content: space-between; align-items:center;">
+            <h2>Llegadas del día @DateTime.Today.ToString("dd/MM/yyyy")</h2>
+            <button class="btn-grande" onclick="mostrarVista('vistaReservasMes')">Ver llegadas del mes</button>
+        </div>
+
+        <input type="text" id="filtroLlegadas" placeholder="Buscar en llegadas..." onkeyup="filtrarTablaPorId('filtroLlegadas', 'tablaLlegadas')" />
+
+        <div class="table-container">
+            <table id="tablaLlegadas">
+                <thead>
+                    <tr>
+                        <th>Estatus</th>
+                        <th>Reserva</th>
+                        <th>C. TSW</th>
+                        <th>Nombre</th>
+                        <th>Fecha Ll.</th>
+                        <th>Fecha S.</th>
+                        <th>Acompañantes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.LlegadasDelDia)
+                    {
+                    <tr>
+                        <td>@item.h_status</td>
+                        <td>@item.h_res_cve</td>
+                        <td>@item.h_cod_reserva</td>
+                        <td class="col-nombre">@item.h_nom</td>
+                        <td>@item.h_fec_lld</td>
+                        <td>@item.h_fec_sda</td>
+                        <td class="clickable-personas" data-reserva="@item.h_res_cve" style="cursor:pointer; color:black;">
+                            @{
+    var nombres = item.NombresAcompanantes ?? new List<string>();
+    int maxVisible = 3;
+
+    var visibles = nombres.Take(maxVisible).ToList();
+    int restantes = nombres.Count - maxVisible;
+    string displayText = string.Join(", ", visibles);
+                            }
+                            @displayText
+                            @if (restantes > 0)
+{
+                            <span> (+@restantes más)</span>
+}
+
+
+                        </td>
+
+
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Vista Todas las Reservas del Mes -->
+    <section id="vistaReservasMes" class="vista-completa @(ViewData["VistaActual"]?.ToString() == "reservas" ? "" : "oculto")">
+        <h2>Todas las Reservas del mes</h2>
+
+        <form method="get" class="filtro-fechas" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;" action="/Reservas/Index">
+            <input type="hidden" name="vista" value="reservas" />
+
+            <label for="fechaInicio">Fecha inicio:</label>
+            <input type="date" id="fechaInicio" name="fechaInicio" value="@Model.FechaInicioFiltro.ToString("yyyy-MM-dd")" />
+
+            <label for="fechaFin">Fecha fin:</label>
+            <input type="date" id="fechaFin" name="fechaFin" value="@Model.FechaFinFiltro.ToString("yyyy-MM-dd")" />
+
+            <button type="submit" class="btn-grande" style="margin-left: auto;">Filtrar</button>
+        </form>
+
+        <button class="btn-grande btn-regresar" onclick="mostrarVista('vistaLlegadasDia')">Regresar a llegadas del día</button>
+        <input type="text" id="filtroReservasMes" placeholder="Buscar en Mes..." onkeyup="filtrarTablaPorId('filtroReservasMes', 'tablaReservas')" />
+
+
+        <!-- El filtro de texto que tenías con JS puedes quitarlo o dejarlo pero no funcionará sin fetch -->
+
+        <div class="table-container">
+            <table id="tablaReservas">
+                <thead>
+                    <tr>
+                        <th>ESTATUS</th>
+                        <th>N. RESERVA</th>
+                        <th>C. TSW</th>
+                        <th>TITULAR</th>
+                        <th>FECHA LL.</th>
+                        <th>FECHA S.</th>
+                        <th>Hotel</th>
+                        <th>ACOMPAÑANTES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Reservas)
+                {
+                    <tr>
+                        <td>@item.h_status</td>
+                        <td>@item.h_res_cve</td>
+                        <td>@item.h_cod_reserva</td>
+                        <td>@item.h_nom</td>
+                        <td>@item.h_fec_lld</td>
+                        <td>@item.h_fec_sda</td>
+                        <td>@item.Hotel</td>
+                        <td class="clickable-personas" data-reserva="@item.h_res_cve" style="cursor:pointer; color:black;">
+                            @{
+    var nombres = item.NombresAcompanantes ?? new List<string>();
+    int maxVisible = 3;
+
+    var visibles = nombres.Take(maxVisible).ToList();
+    int restantes = nombres.Count - maxVisible;
+    string displayText = string.Join(", ", visibles);
+                            }
+                            @displayText
+                            @if (restantes > 0)
+{
+                            <span> (+@restantes más)</span>
+}
+
+
+                        </td>
+
+
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+</div>
+
+<!-- Modal -->
+<div id="modalAcompanantes" class="modal">
+    <div class="modal-content">
+        <span class="close" id="cerrarModal">&times;</span>
+        <h3>Acompañantes</h3>
+        <ul id="listaAcompanantes"></ul>
+    </div>
+</div>
+
+ <script src="~/js/funcionesReservas.js"></script>
+
+
+

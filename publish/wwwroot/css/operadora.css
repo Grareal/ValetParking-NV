@@ -1,0 +1,160 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8fafc;
+    color: #333;
+    margin: 0;
+    padding: 10px 0;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: #004085;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.container-fluid {
+     box-sizing: border-box;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0, 64, 133, 0.15);
+    background: #fff;
+    font-size: 1rem;
+    table-layout: auto;
+}
+
+thead {
+    background-color: #004085;
+    color: white;
+}
+
+    thead th {
+        border: none;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+tbody td {
+    vertical-align: middle;
+    text-align: left;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    background-color: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+tbody tr:hover td {
+    background-color: #e9f2ff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-control {
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    min-width: 120px;
+    margin: auto;
+    display: block;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.btn-sm {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.35rem;
+    margin-left: 0.25rem;
+    min-width: 36px;
+}
+
+.btn-success {
+    background-color: #198754;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-success:hover {
+    background-color: #157347;
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+}
+
+.operadora-input {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+
+
+
+#codigoOperador {
+    width: 180px;
+    padding: 6px 10px;
+    font-size: 1.1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* Input de formulario dentro de la tabla */
+.input-operadora {
+    width: 130px;
+    min-width: 100px;
+    margin: 0 2px;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.5rem;
+}
+
+/* Fija ancho y controla texto de la columna N. Operadora */
+#tablaOperadora th:nth-child(2),
+#tablaOperadora td:nth-child(2) {
+    width: 100px;  
+    max-width: 100px;
+    white-space: nowrap; /* Evita salto de línea */
+    overflow: hidden; 
+    text-overflow: ellipsis; /* Muestra "..." si texto es largo */
+}
+
+#tablaOperadora td:nth-child(10) {
+    width: 100px;  
+    max-width: 100px;
+    white-space: nowrap; /* Evita salto de línea */
+    overflow: hidden; /* Oculta texto extra */
+    text-overflow: ellipsis; /* Muestra "..." si texto es largo */
+}
+
+
+/* Aumenta el ancho mínimo de las columnas Valet, Servicio, HoraSalida, CajonBuffer */
+#tablaOperadora th:nth-child(7),
+#tablaOperadora th:nth-child(8),
+#tablaOperadora th:nth-child(9) {
+    min-width: 160px;
+}

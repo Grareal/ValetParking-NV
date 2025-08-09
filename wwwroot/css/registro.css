@@ -1,0 +1,209 @@
+ * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #4A90E2, #50E3C2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+input[value="0000"] {
+    color: gray;
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px 50px;
+    border-radius: 25px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    width: 750px;
+    max-width: 95vw;
+}
+
+.title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    text-align: center;
+    letter-spacing: 1.2px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-row {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group {
+    flex: 1 1 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    color: #34495e;
+    user-select: text;
+}
+
+.form-control {
+    padding: 14px 18px;
+    font-size: 1.2rem;
+    border-radius: 14px;
+    border: 2px solid #bdc3c7;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline-offset: 2px;
+    outline-color: transparent;
+}
+
+    .form-control:focus {
+        border-color: #27ae60;
+        box-shadow: 0 0 12px rgba(39, 174, 96, 0.5);
+        outline-color: #27ae60;
+    }
+
+    .form-control[readonly] {
+        background-color: #ecf0f1;
+        color: #7f8c8d;
+        cursor: not-allowed;
+    }
+
+select.form-control {
+    cursor: pointer;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+.mensaje-confirmacion {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4caf50;  
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+    .mensaje-confirmacion.oculto {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+
+
+.btn-submit {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    padding: 16px 60px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(39, 174, 96, 0.6);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+}
+
+.mensaje-confirmacion {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #27ae60, #2ecc71); 
+    color: white;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    box-shadow: 0 6px 18px rgba(39, 174, 96, 0.7);
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+    user-select: none;
+    text-align: center;
+    min-width: 280px;
+    max-width: 90vw;
+}
+
+    /* Estado oculto para hacer fade out */
+    .mensaje-confirmacion.oculto {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+
+    .btn-submit:hover,
+    .btn-submit:focus {
+        background: linear-gradient(45deg, #2ecc71, #27ae60);
+        box-shadow: 0 14px 30px rgba(39, 174, 96, 0.8);
+        outline: none;
+    }
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        flex: 1 1 100%;
+    }
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1 1 calc(50% - 10px); /* para dos columnas con espacio entre */
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column !important;
+    }
+
+    .form-group {
+        flex: 1 1 100%;
+    }
+}

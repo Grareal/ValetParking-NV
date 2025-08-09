@@ -1,0 +1,184 @@
+@model AppValetParking.Models.ValetRegistro
+
+@{
+    Layout = null;
+
+    if (Model == null)
+    {
+    <text>
+        <div style="color: red; font-weight: bold; margin: 2rem;">
+            No se encontro el registro para editar. Por favor verifica el folio o ID.
+        </div>
+    </text>
+        return;
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Editar Registro Valet</title>
+    <link rel="stylesheet" href="~/css/registro.css" />
+
+    <style>
+        .form-control.error {
+            border: 2px solid red;
+            background-color: #ffe5e5;
+        }
+
+        .ocultar {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Editar Servicio del Registro</h1>
+
+        <form asp-action="EditarRegistro" method="post" class="form" id="editarForm">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="FolioVP">Folio</label>
+                    <input asp-for="FolioVP" class="form-control" readonly />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Hotel">Hotel</label>
+                    <input asp-for="Hotel" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="Habitacion">Habitacion</label>
+                    <input asp-for="Habitacion" class="form-control" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Valet">Valet</label>
+                    <input asp-for="Valet" class="form-control" id="Valet" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NumeroOperador">Numero</label>
+                    <input asp-for="NumeroOperador" id="NumeroOperadorInput" class="form-control" autocomplete="off" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                     <div class="form-group">
+                        <label for="Servicio">Servicio</label>
+                        <select id="Servicio" name="Servicio" class="form-control" required></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CajonBuffer">Cajon Buffer</label>
+                    <input asp-for="CajonBuffer" id="CajonBuffer" class="form-control" placeholder="Ej. A23, B5, etc." required />
+                </div>
+            </div>
+
+
+
+
+            <div class="btn-container">
+                <button type="submit" class="btn-submit" style="display:none">Actualizar Servicio</button>
+            </div>
+        </form>
+
+        @if (ViewBag.Mensaje != null)
+        {
+        <div id="mensajeConfirmacion" class="mensaje-confirmacion" style="color:red; font-weight:bold; margin-bottom: 1rem;">
+            @ViewBag.Mensaje
+        </div>
+        }
+
+        <form method="get" asp-action="EditarPorFolio" class="form-inline mt-3 align-items-center" id="buscarFolioForm">
+            <label for="folioBuscar" class="mr-2 mb-0">Folio: </label>
+
+            <input type="text" name="folio" id="folioBuscar" class="form-control mr-2" style="width: 200px;" placeholder="Ej. G123456" required autocomplete="off" />
+
+            <button type="submit" class="btn btn-submit" style="margin-left: 60px;">Buscar</button>
+        </form>
+
+
+
+    </div>
+
+    <script>
+        (() => {
+            
+
+            const buscarForm = document.getElementById('buscarFolioForm');
+            const folioInput = document.getElementById('folioBuscar');
+            const numeroInput = document.getElementById('NumeroOperadorInput');
+
+            let buffer = '';
+            let typingTimeout = null;
+
+            document.addEventListener('keydown', async function (event) {
+                const active = document.activeElement;
+                const isInput = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA');
+
+                if (isInput && active !== folioInput) return;
+
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    if (buffer.length === 0) return;
+                    await processBuffer();
+                    buffer = '';
+                    return;
+                }
+
+                if (/^[a-zA-Z0-9]$/.test(event.key)) {
+                    buffer += event.key;
+                    if (typingTimeout) clearTimeout(typingTimeout);
+
+                    typingTimeout = setTimeout(async () => {
+                        if (buffer.length > 0) {
+                            await processBuffer();
+                            buffer = '';
+                        }
+                    }, 10000);
+                }
+            });
+
+            async function processBuffer() {
+                folioInput.value = buffer.trim().toUpperCase();
+                buscarForm.submit();
+
+                setTimeout(() => {
+                    if (numeroInput) numeroInput.focus();
+                }, 600);
+            }
+        })();
+
+
+    </script>
+
+    @if (ViewBag.Mensaje != null)
+    {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => {
+                document.getElementById("Valet").value = "";
+                document.getElementById("NumeroOperadorInput").value = "";
+                document.getElementById("CajonBuffer").value = "";
+                document.querySelector("input[name='Habitacion']").value = "";
+                document.querySelector("input[name='Hotel']").value = "";
+                document.querySelector("input[name='FolioVP']").value = "";
+                document.querySelector("select[name='Servicio']").selectedIndex = 0;
+            }, 300);
+        });
+    </script>
+    }
+
+    <script src="@Url.Content("~/js/serviciosvp.js")"></script>
+    <script>
+        cargarOpcionesServicio('Servicio', '/Config/servicios.json', '@Model?.Servicio');
+    </script>
+
+</body>
+</html>

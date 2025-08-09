@@ -1,0 +1,265 @@
+@model AppValetParking.Models.ValetRegistro
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registro Valet - M�vil</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            background: #fff;
+            flex-grow: 1;
+            max-width: 480px;
+            margin: auto;
+            padding: 1.5rem 1.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        h1.title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #343a40;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Contenedor para folio + reserva lado a lado */
+        .row-inline {
+            display: flex;
+            gap: 1rem;
+        }
+
+            .row-inline > div {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: #495057;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            border: 1.5px solid #ced4da;
+            transition: border-color 0.3s ease;
+        }
+
+        input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #0d6efd;
+            outline: none;
+            box-shadow: 0 0 6px rgba(13, 110, 253, 0.4);
+        }
+
+        .form-control.error {
+            border-color: #dc3545 !important;
+            background-color: #f8d7da;
+        }
+
+        button.btn-submit {
+            background-color: #0d6efd;
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+            button.btn-submit:hover {
+                background-color: #084298;
+            }
+
+        .mensaje-confirmacion {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: #d1e7dd;
+            color: #0f5132;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 0 8px rgb(13 110 253 / 0.15);
+        }
+
+        body {
+            padding-top: env(safe-area-inset-top);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Registro Valet Parking</h1>
+        <form asp-controller="Botones" asp-action="Index" method="post" novalidate>
+            <div class="row-inline">
+                <div>
+                    <label for="FolioVP">Folio</label>
+                    <input type="text" id="FolioVP" name="FolioVP" class="form-control" autocomplete="off" />
+                </div>
+                <div>
+                    <label for="Reserva">Reserva</label>
+                    <input type="number" id="Reserva" name="Reserva" class="form-control" autocomplete="off" />
+                </div>
+            </div>
+
+            <div>
+                <label for="NumeroOperadorInput">Numero del operador</label>
+                <input type="text" id="NumeroOperadorInput" name="NumeroOperador" class="form-control" autocomplete="off" />
+            </div>
+
+            <div>
+                <label for="ValetNombreInput">Valet</label>
+                <input type="text" id="ValetNombreInput" name="Valet" class="form-control" />
+            </div>
+
+
+            <div class="form-group">
+                <label for="Servicio">Servicio</label>
+                <select id="Servicio" name="Servicio" class="form-control" required></select>
+            </div>
+
+            <button type="submit" class="btn-submit">Guardar</button>
+        </form>
+
+        @if (ViewBag.Mensaje != null)
+        {
+        <div class="mensaje-confirmacion" role="alert">
+            @ViewBag.Mensaje
+        </div>
+        }
+    </div>
+    <button onclick="activarPantallaCompleta()" style="display:none;" id="btnFullscreen">Pantalla completa</button>
+
+    <script>
+        function activarPantallaCompleta() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen(); // Safari
+            } else if (document.documentElement.msRequestFullscreen) {
+                document.documentElement.msRequestFullscreen(); // IE11
+            }
+        }
+    </script>
+
+    <script src="~/js/registro.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const folioInput = document.getElementById('FolioVP');
+            const reservaInput = document.getElementById('Reserva');
+            const numeroInput = document.getElementById('NumeroOperadorInput');
+            const btnGuardar = document.querySelector('button[type="submit"]');
+            const form = document.querySelector('form');
+            const valetNombreVisible = document.getElementById('ValetNombreInput');
+            const valetNombreHidden = document.getElementById('ValetNombreHidden');
+
+            function esMobile() {
+                return window.innerWidth <= 768;
+            }
+
+            if (esMobile()) {
+                folioInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        reservaInput.focus();
+                    }
+                });
+
+                reservaInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        numeroInput.focus();
+                    }
+                });
+
+                numeroInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        btnGuardar.click();
+                    }
+                });
+            }
+
+            form.addEventListener('submit', () => {
+                valetNombreHidden.value = valetNombreVisible.value;
+            });
+        });
+
+    </script>
+
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch((err) => {
+                    console.warn("No se pudo activar pantalla completa autom�ticamente:", err);
+                });
+            }
+        });
+    </script>
+
+    <script src="@Url.Content("~/js/serviciosvp.js")"></script>
+    <script>
+        cargarOpcionesServicio('Servicio', '/Config/servicios.json', '@Model?.Servicio');
+    </script>
+
+</body>
+</html>
