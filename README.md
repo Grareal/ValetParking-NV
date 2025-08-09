@@ -1,5 +1,5 @@
-Sistema de Gestión de Reservas y Movimientos - Valet Parking
-Este sistema está diseñado para optimizar la administración de reservas, llegadas y salidas en un servicio de Valet Parking. Permite registrar y actualizar reservas con información detallada de vehículos y acompañantes, así como visualizar los movimientos en tiempo real.
+Sistema de Gestión de Reservas y Movimientos - Valet Parking - Grupo vidanta 
+Este sistema está diseñado para optimizar la administración de reservas, llegadas y salidas en un servicio de Valet Parking con llegadas masivas al dia en un total de mas de 10 hoteles . Permite registrar y actualizar reservas con información detallada de vehículos y acompañantes, así como visualizar los movimientos en tiempo real.
 
 Incluye funciones de búsqueda y filtrado por fechas que facilitan la supervisión diaria y mensual, ayudando a evitar conflictos en la asignación y mejorando la eficiencia operativa. Con esta herramienta, se agiliza la atención al cliente y se garantiza un control preciso de los espacios disponibles, ofreciendo una experiencia más fluida tanto para los operadores como para los usuarios.
 
