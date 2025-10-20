@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2aBuPwoxTFLUfwYYngQVQJbXOsBKbSnjm+KL3VRoZ2E=",
+  "Hash": "Pbx46UD+PtS65Fo59Lq/8iBX5QHXkPenJCTYCTFJgck=",
   "Source": "AppValetParking",
   "BasePath": "_content/AppValetParking",
   "Mode": "Default",
@@ -330,6 +330,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\4k8k38o1kc-2it03u2yp7.gz",
+      "SourceId": "AppValetParking",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\",
+      "BasePath": "_content/AppValetParking",
+      "RelativePath": "css/solicitud-vehiculo#[.{fingerprint=2it03u2yp7}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "nl0po5sv57",
+      "Integrity": "tWRx8kzSOGWZkhjzWVNXEh+Af2MUGgo2aWioNS34ASc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css"
     },
     {
       "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\4ry6590vof-hrwsygsryq.gz",
@@ -857,12 +878,12 @@
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\scopedcss\\projectbundle\\AppValetParking.bundle.scp.css"
     },
     {
-      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-97mh7ptaxh.gz",
+      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-cmqwiohl88.gz",
       "SourceId": "AppValetParking",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\",
       "BasePath": "_content/AppValetParking",
-      "RelativePath": "Config/configuracionValet#[.{fingerprint=97mh7ptaxh}]?.json.gz",
+      "RelativePath": "Config/configuracionValet#[.{fingerprint=cmqwiohl88}]?.json.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -871,8 +892,8 @@
       "RelatedAsset": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\configuracionValet.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "08t5jptwpd",
-      "Integrity": "MOoOcAzIvElVIjDbkEzGxovxs0JCUz4oMP5jT1JLjLs=",
+      "Fingerprint": "ym0iun3eel",
+      "Integrity": "RuLWoo4OBtWKZ6oL/Q64YtFfilfB/LLg1kiPn9inpMk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\configuracionValet.json"
@@ -1046,12 +1067,12 @@
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-phvu2oc7q7.gz",
+      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-w5kde5r84p.gz",
       "SourceId": "AppValetParking",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\",
       "BasePath": "_content/AppValetParking",
-      "RelativePath": "Config/servicios#[.{fingerprint=phvu2oc7q7}]?.json.gz",
+      "RelativePath": "Config/servicios#[.{fingerprint=w5kde5r84p}]?.json.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -1060,8 +1081,8 @@
       "RelatedAsset": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "0xdueu9zzp",
-      "Integrity": "9PdcdZ1tX0NXnkCCKVL8NEAj8N6VWTVjOJsqDeU0g9o=",
+      "Fingerprint": "o6pupkdw7w",
+      "Integrity": "AMzx49PaI2qI5wMG8jZti2vL5E+nnXrV2URY62NoT3o=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json"
@@ -1613,6 +1634,27 @@
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
+      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\4k8k38o1kc-2it03u2yp7.br",
+      "SourceId": "AppValetParking",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\",
+      "BasePath": "_content/AppValetParking",
+      "RelativePath": "css/solicitud-vehiculo#[.{fingerprint=2it03u2yp7}]?.css.br",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "br",
+      "Fingerprint": "2houvyp2v3",
+      "Integrity": "Zi7KRVR5FChiUMQUoOf1xjCIxOWHwjhTdn6y1ypCJBw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css"
+    },
+    {
       "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\4ry6590vof-hrwsygsryq.br",
       "SourceId": "AppValetParking",
       "SourceType": "Discovered",
@@ -2138,12 +2180,12 @@
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\scopedcss\\projectbundle\\AppValetParking.bundle.scp.css"
     },
     {
-      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-97mh7ptaxh.br",
+      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-cmqwiohl88.br",
       "SourceId": "AppValetParking",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\",
       "BasePath": "_content/AppValetParking",
-      "RelativePath": "Config/configuracionValet#[.{fingerprint=97mh7ptaxh}]?.json.br",
+      "RelativePath": "Config/configuracionValet#[.{fingerprint=cmqwiohl88}]?.json.br",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2152,8 +2194,8 @@
       "RelatedAsset": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\configuracionValet.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "br",
-      "Fingerprint": "fsqsvyzfyv",
-      "Integrity": "n61r6hhxiBEGqPIZtZacfwcuLqRF69rIGs7f84cz5CI=",
+      "Fingerprint": "n53n5kqzuo",
+      "Integrity": "u8TdjcDkUT4OQqYgqHDinj6Th6kVKkClu5zFrez3uFk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\configuracionValet.json"
@@ -2327,12 +2369,12 @@
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-phvu2oc7q7.br",
+      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-w5kde5r84p.br",
       "SourceId": "AppValetParking",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\",
       "BasePath": "_content/AppValetParking",
-      "RelativePath": "Config/servicios#[.{fingerprint=phvu2oc7q7}]?.json.br",
+      "RelativePath": "Config/servicios#[.{fingerprint=w5kde5r84p}]?.json.br",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2341,8 +2383,8 @@
       "RelatedAsset": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "br",
-      "Fingerprint": "g2iv5bzsvf",
-      "Integrity": "yDFrIE6pxz2PwFpMRLQRABhQXkgxvF/fbGYDa14W/Bw=",
+      "Fingerprint": "qk7fk9hxus",
+      "Integrity": "5oMgXpmH/TKaylG9j0pZf2sz5xTjJBQTmSecvk0ATco=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json"
@@ -2619,6 +2661,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js"
+    },
+    {
+      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\t1kiydg8j0-7toju8t143.br",
+      "SourceId": "AppValetParking",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\",
+      "BasePath": "_content/AppValetParking",
+      "RelativePath": "Config/printers#[.{fingerprint=7toju8t143}]?.json.br",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "br",
+      "Fingerprint": "ctw5mcofkr",
+      "Integrity": "YPt21GgxZzdcJUexZ5aLx9uYhpViBkFomokP83y61iE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json"
     },
     {
       "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\t9yjb9276g-4v8eqarkd7.br",
@@ -2934,6 +2997,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js"
+    },
+    {
+      "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\t1kiydg8j0-7toju8t143.gz",
+      "SourceId": "AppValetParking",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\",
+      "BasePath": "_content/AppValetParking",
+      "RelativePath": "Config/printers#[.{fingerprint=7toju8t143}]?.json.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "zzmmofq0mv",
+      "Integrity": "EY6vaHLvfSa8aMeyM1w1Z9NH2wGB+EbpYX3pyfB7I0M=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json"
     },
     {
       "Identity": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\t9yjb9276g-4v8eqarkd7.gz",
@@ -3265,11 +3349,32 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "97mh7ptaxh",
-      "Integrity": "W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I=",
+      "Fingerprint": "cmqwiohl88",
+      "Integrity": "xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Config\\configuracionValet.json"
+    },
+    {
+      "Identity": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json",
+      "SourceId": "AppValetParking",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\ValetParking\\AppValetParking\\wwwroot\\",
+      "BasePath": "_content/AppValetParking",
+      "RelativePath": "Config/printers#[.{fingerprint}]?.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7toju8t143",
+      "Integrity": "WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Config\\printers.json"
     },
     {
       "Identity": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json",
@@ -3286,8 +3391,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "phvu2oc7q7",
-      "Integrity": "E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU=",
+      "Fingerprint": "w5kde5r84p",
+      "Integrity": "VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Config\\servicios.json"
@@ -3396,6 +3501,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css",
+      "SourceId": "AppValetParking",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\ValetParking\\AppValetParking\\wwwroot\\",
+      "BasePath": "_content/AppValetParking",
+      "RelativePath": "css/solicitud-vehiculo#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2it03u2yp7",
+      "Integrity": "WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\solicitud-vehiculo.css"
     },
     {
       "Identity": "C:\\ValetParking\\AppValetParking\\wwwroot\\favicon.ico",
@@ -5856,13 +5982,13 @@
       ]
     },
     {
-      "Route": "Config/configuracionValet.97mh7ptaxh.json",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-97mh7ptaxh.gz",
+      "Route": "Config/configuracionValet.cmqwiohl88.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-cmqwiohl88.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.006711409396"
+          "Quality": "0.006535947712"
         }
       ],
       "ResponseHeaders": [
@@ -5872,15 +5998,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "152"
         },
         {
           "Name": "ETag",
-          "Value": "\"MOoOcAzIvElVIjDbkEzGxovxs0JCUz4oMP5jT1JLjLs=\""
+          "Value": "\"RuLWoo4OBtWKZ6oL/Q64YtFfilfB/LLg1kiPn9inpMk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5900,13 +6026,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I=\""
+          "Value": "W/\"xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "97mh7ptaxh"
+          "Value": "cmqwiohl88"
         },
         {
           "Name": "label",
@@ -5914,18 +6040,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I="
+          "Value": "sha256-xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc="
         }
       ]
     },
     {
-      "Route": "Config/configuracionValet.97mh7ptaxh.json",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-97mh7ptaxh.br",
+      "Route": "Config/configuracionValet.cmqwiohl88.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-cmqwiohl88.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "br",
-          "Quality": "0.007518796992"
+          "Quality": "0.007352941176"
         }
       ],
       "ResponseHeaders": [
@@ -5935,15 +6061,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "132"
+          "Value": "135"
         },
         {
           "Name": "ETag",
-          "Value": "\"n61r6hhxiBEGqPIZtZacfwcuLqRF69rIGs7f84cz5CI=\""
+          "Value": "\"u8TdjcDkUT4OQqYgqHDinj6Th6kVKkClu5zFrez3uFk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5963,13 +6089,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I=\""
+          "Value": "W/\"xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "97mh7ptaxh"
+          "Value": "cmqwiohl88"
         },
         {
           "Name": "label",
@@ -5977,12 +6103,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I="
+          "Value": "sha256-xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc="
         }
       ]
     },
     {
-      "Route": "Config/configuracionValet.97mh7ptaxh.json",
+      "Route": "Config/configuracionValet.cmqwiohl88.json",
       "AssetFile": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\configuracionValet.json",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5992,7 +6118,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "201"
+          "Value": "203"
         },
         {
           "Name": "Content-Type",
@@ -6000,11 +6126,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I=\""
+          "Value": "\"xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6014,7 +6140,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "97mh7ptaxh"
+          "Value": "cmqwiohl88"
         },
         {
           "Name": "label",
@@ -6022,13 +6148,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I="
+          "Value": "sha256-xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc="
         }
       ]
     },
     {
-      "Route": "Config/configuracionValet.97mh7ptaxh.json.br",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-97mh7ptaxh.br",
+      "Route": "Config/configuracionValet.cmqwiohl88.json.br",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-cmqwiohl88.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6037,7 +6163,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "132"
+          "Value": "135"
         },
         {
           "Name": "Content-Type",
@@ -6045,11 +6171,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"n61r6hhxiBEGqPIZtZacfwcuLqRF69rIGs7f84cz5CI=\""
+          "Value": "\"u8TdjcDkUT4OQqYgqHDinj6Th6kVKkClu5zFrez3uFk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6067,7 +6193,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "97mh7ptaxh"
+          "Value": "cmqwiohl88"
         },
         {
           "Name": "label",
@@ -6075,13 +6201,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-n61r6hhxiBEGqPIZtZacfwcuLqRF69rIGs7f84cz5CI="
+          "Value": "sha256-u8TdjcDkUT4OQqYgqHDinj6Th6kVKkClu5zFrez3uFk="
         }
       ]
     },
     {
-      "Route": "Config/configuracionValet.97mh7ptaxh.json.gz",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-97mh7ptaxh.gz",
+      "Route": "Config/configuracionValet.cmqwiohl88.json.gz",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-cmqwiohl88.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6090,7 +6216,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "152"
         },
         {
           "Name": "Content-Type",
@@ -6098,11 +6224,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"MOoOcAzIvElVIjDbkEzGxovxs0JCUz4oMP5jT1JLjLs=\""
+          "Value": "\"RuLWoo4OBtWKZ6oL/Q64YtFfilfB/LLg1kiPn9inpMk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6120,7 +6246,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "97mh7ptaxh"
+          "Value": "cmqwiohl88"
         },
         {
           "Name": "label",
@@ -6128,18 +6254,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-MOoOcAzIvElVIjDbkEzGxovxs0JCUz4oMP5jT1JLjLs="
+          "Value": "sha256-RuLWoo4OBtWKZ6oL/Q64YtFfilfB/LLg1kiPn9inpMk="
         }
       ]
     },
     {
       "Route": "Config/configuracionValet.json",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-97mh7ptaxh.gz",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-cmqwiohl88.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.006711409396"
+          "Quality": "0.006535947712"
         }
       ],
       "ResponseHeaders": [
@@ -6149,15 +6275,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "152"
         },
         {
           "Name": "ETag",
-          "Value": "\"MOoOcAzIvElVIjDbkEzGxovxs0JCUz4oMP5jT1JLjLs=\""
+          "Value": "\"RuLWoo4OBtWKZ6oL/Q64YtFfilfB/LLg1kiPn9inpMk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6177,24 +6303,24 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I=\""
+          "Value": "W/\"xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I="
+          "Value": "sha256-xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc="
         }
       ]
     },
     {
       "Route": "Config/configuracionValet.json",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-97mh7ptaxh.br",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-cmqwiohl88.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "br",
-          "Quality": "0.007518796992"
+          "Quality": "0.007352941176"
         }
       ],
       "ResponseHeaders": [
@@ -6204,15 +6330,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "132"
+          "Value": "135"
         },
         {
           "Name": "ETag",
-          "Value": "\"n61r6hhxiBEGqPIZtZacfwcuLqRF69rIGs7f84cz5CI=\""
+          "Value": "\"u8TdjcDkUT4OQqYgqHDinj6Th6kVKkClu5zFrez3uFk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6232,13 +6358,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I=\""
+          "Value": "W/\"xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I="
+          "Value": "sha256-xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc="
         }
       ]
     },
@@ -6253,7 +6379,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "201"
+          "Value": "203"
         },
         {
           "Name": "Content-Type",
@@ -6261,11 +6387,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I=\""
+          "Value": "\"xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6275,13 +6401,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-W7pNHCZ7Ba+XGa26tOXoVdIaKjQXtFvIvlgk5kLIU3I="
+          "Value": "sha256-xFB3MUQc64x7gwDROhcERh2aQ17KLykN3QBxPleN8kc="
         }
       ]
     },
     {
       "Route": "Config/configuracionValet.json.br",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-97mh7ptaxh.br",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\e8nk8kna81-cmqwiohl88.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6290,7 +6416,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "132"
+          "Value": "135"
         },
         {
           "Name": "Content-Type",
@@ -6298,11 +6424,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"n61r6hhxiBEGqPIZtZacfwcuLqRF69rIGs7f84cz5CI=\""
+          "Value": "\"u8TdjcDkUT4OQqYgqHDinj6Th6kVKkClu5zFrez3uFk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6320,13 +6446,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-n61r6hhxiBEGqPIZtZacfwcuLqRF69rIGs7f84cz5CI="
+          "Value": "sha256-u8TdjcDkUT4OQqYgqHDinj6Th6kVKkClu5zFrez3uFk="
         }
       ]
     },
     {
       "Route": "Config/configuracionValet.json.gz",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-97mh7ptaxh.gz",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\e8nk8kna81-cmqwiohl88.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6335,7 +6461,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148"
+          "Value": "152"
         },
         {
           "Name": "Content-Type",
@@ -6343,11 +6469,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"MOoOcAzIvElVIjDbkEzGxovxs0JCUz4oMP5jT1JLjLs=\""
+          "Value": "\"RuLWoo4OBtWKZ6oL/Q64YtFfilfB/LLg1kiPn9inpMk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 30 Jul 2025 21:34:33 GMT"
+          "Value": "Fri, 29 Aug 2025 16:08:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6365,73 +6491,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-MOoOcAzIvElVIjDbkEzGxovxs0JCUz4oMP5jT1JLjLs="
+          "Value": "sha256-RuLWoo4OBtWKZ6oL/Q64YtFfilfB/LLg1kiPn9inpMk="
         }
       ]
     },
     {
-      "Route": "Config/servicios.json",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-phvu2oc7q7.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.010101010101"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "98"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"9PdcdZ1tX0NXnkCCKVL8NEAj8N6VWTVjOJsqDeU0g9o=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/json"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU="
-        }
-      ]
-    },
-    {
-      "Route": "Config/servicios.json",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-phvu2oc7q7.br",
+      "Route": "Config/printers.7toju8t143.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\t1kiydg8j0-7toju8t143.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "br",
-          "Quality": "0.012048192771"
+          "Quality": "0.005988023952"
         }
       ],
       "ResponseHeaders": [
@@ -6441,15 +6512,292 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82"
+          "Value": "166"
         },
         {
           "Name": "ETag",
-          "Value": "\"yDFrIE6pxz2PwFpMRLQRABhQXkgxvF/fbGYDa14W/Bw=\""
+          "Value": "\"YPt21GgxZzdcJUexZ5aLx9uYhpViBkFomokP83y61iE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "br"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7toju8t143"
+        },
+        {
+          "Name": "label",
+          "Value": "Config/printers.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y="
+        }
+      ]
+    },
+    {
+      "Route": "Config/printers.7toju8t143.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\t1kiydg8j0-7toju8t143.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.005102040816"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "195"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EY6vaHLvfSa8aMeyM1w1Z9NH2wGB+EbpYX3pyfB7I0M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7toju8t143"
+        },
+        {
+          "Name": "label",
+          "Value": "Config/printers.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y="
+        }
+      ]
+    },
+    {
+      "Route": "Config/printers.7toju8t143.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "495"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7toju8t143"
+        },
+        {
+          "Name": "label",
+          "Value": "Config/printers.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y="
+        }
+      ]
+    },
+    {
+      "Route": "Config/printers.7toju8t143.json.br",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\t1kiydg8j0-7toju8t143.br",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "166"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YPt21GgxZzdcJUexZ5aLx9uYhpViBkFomokP83y61iE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "br"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7toju8t143"
+        },
+        {
+          "Name": "label",
+          "Value": "Config/printers.json.br"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YPt21GgxZzdcJUexZ5aLx9uYhpViBkFomokP83y61iE="
+        }
+      ]
+    },
+    {
+      "Route": "Config/printers.7toju8t143.json.gz",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\t1kiydg8j0-7toju8t143.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EY6vaHLvfSa8aMeyM1w1Z9NH2wGB+EbpYX3pyfB7I0M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7toju8t143"
+        },
+        {
+          "Name": "label",
+          "Value": "Config/printers.json.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-EY6vaHLvfSa8aMeyM1w1Z9NH2wGB+EbpYX3pyfB7I0M="
+        }
+      ]
+    },
+    {
+      "Route": "Config/printers.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\t1kiydg8j0-7toju8t143.br",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "br",
+          "Quality": "0.005988023952"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "166"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YPt21GgxZzdcJUexZ5aLx9uYhpViBkFomokP83y61iE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6469,13 +6817,305 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU=\""
+          "Value": "W/\"WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU="
+          "Value": "sha256-WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y="
+        }
+      ]
+    },
+    {
+      "Route": "Config/printers.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\t1kiydg8j0-7toju8t143.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.005102040816"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "195"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EY6vaHLvfSa8aMeyM1w1Z9NH2wGB+EbpYX3pyfB7I0M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y="
+        }
+      ]
+    },
+    {
+      "Route": "Config/printers.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "495"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WxLnpAnuX7Jjqm7FWkmbAAaSjJPf3a5Imq+c/bUal9Y="
+        }
+      ]
+    },
+    {
+      "Route": "Config/printers.json.br",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\t1kiydg8j0-7toju8t143.br",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "166"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YPt21GgxZzdcJUexZ5aLx9uYhpViBkFomokP83y61iE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "br"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YPt21GgxZzdcJUexZ5aLx9uYhpViBkFomokP83y61iE="
+        }
+      ]
+    },
+    {
+      "Route": "Config/printers.json.gz",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\t1kiydg8j0-7toju8t143.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EY6vaHLvfSa8aMeyM1w1Z9NH2wGB+EbpYX3pyfB7I0M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 02 Sep 2025 22:23:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-EY6vaHLvfSa8aMeyM1w1Z9NH2wGB+EbpYX3pyfB7I0M="
+        }
+      ]
+    },
+    {
+      "Route": "Config/servicios.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-w5kde5r84p.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.008196721311"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "121"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AMzx49PaI2qI5wMG8jZti2vL5E+nnXrV2URY62NoT3o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw="
+        }
+      ]
+    },
+    {
+      "Route": "Config/servicios.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-w5kde5r84p.br",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "br",
+          "Quality": "0.008695652174"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "114"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5oMgXpmH/TKaylG9j0pZf2sz5xTjJBQTmSecvk0ATco=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "br"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw="
         }
       ]
     },
@@ -6490,7 +7130,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "174"
+          "Value": "274"
         },
         {
           "Name": "Content-Type",
@@ -6498,11 +7138,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU=\""
+          "Value": "\"VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6512,13 +7152,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU="
+          "Value": "sha256-VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw="
         }
       ]
     },
     {
       "Route": "Config/servicios.json.br",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-phvu2oc7q7.br",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-w5kde5r84p.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6527,7 +7167,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82"
+          "Value": "114"
         },
         {
           "Name": "Content-Type",
@@ -6535,11 +7175,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yDFrIE6pxz2PwFpMRLQRABhQXkgxvF/fbGYDa14W/Bw=\""
+          "Value": "\"5oMgXpmH/TKaylG9j0pZf2sz5xTjJBQTmSecvk0ATco=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6557,13 +7197,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-yDFrIE6pxz2PwFpMRLQRABhQXkgxvF/fbGYDa14W/Bw="
+          "Value": "sha256-5oMgXpmH/TKaylG9j0pZf2sz5xTjJBQTmSecvk0ATco="
         }
       ]
     },
     {
       "Route": "Config/servicios.json.gz",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-phvu2oc7q7.gz",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-w5kde5r84p.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6572,7 +7212,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "98"
+          "Value": "121"
         },
         {
           "Name": "Content-Type",
@@ -6580,11 +7220,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9PdcdZ1tX0NXnkCCKVL8NEAj8N6VWTVjOJsqDeU0g9o=\""
+          "Value": "\"AMzx49PaI2qI5wMG8jZti2vL5E+nnXrV2URY62NoT3o=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6602,18 +7242,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-9PdcdZ1tX0NXnkCCKVL8NEAj8N6VWTVjOJsqDeU0g9o="
+          "Value": "sha256-AMzx49PaI2qI5wMG8jZti2vL5E+nnXrV2URY62NoT3o="
         }
       ]
     },
     {
-      "Route": "Config/servicios.phvu2oc7q7.json",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-phvu2oc7q7.gz",
+      "Route": "Config/servicios.w5kde5r84p.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-w5kde5r84p.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.010101010101"
+          "Quality": "0.008196721311"
         }
       ],
       "ResponseHeaders": [
@@ -6623,15 +7263,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "98"
+          "Value": "121"
         },
         {
           "Name": "ETag",
-          "Value": "\"9PdcdZ1tX0NXnkCCKVL8NEAj8N6VWTVjOJsqDeU0g9o=\""
+          "Value": "\"AMzx49PaI2qI5wMG8jZti2vL5E+nnXrV2URY62NoT3o=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6651,13 +7291,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU=\""
+          "Value": "W/\"VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "phvu2oc7q7"
+          "Value": "w5kde5r84p"
         },
         {
           "Name": "label",
@@ -6665,18 +7305,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU="
+          "Value": "sha256-VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw="
         }
       ]
     },
     {
-      "Route": "Config/servicios.phvu2oc7q7.json",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-phvu2oc7q7.br",
+      "Route": "Config/servicios.w5kde5r84p.json",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-w5kde5r84p.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "br",
-          "Quality": "0.012048192771"
+          "Quality": "0.008695652174"
         }
       ],
       "ResponseHeaders": [
@@ -6686,15 +7326,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82"
+          "Value": "114"
         },
         {
           "Name": "ETag",
-          "Value": "\"yDFrIE6pxz2PwFpMRLQRABhQXkgxvF/fbGYDa14W/Bw=\""
+          "Value": "\"5oMgXpmH/TKaylG9j0pZf2sz5xTjJBQTmSecvk0ATco=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6714,13 +7354,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU=\""
+          "Value": "W/\"VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "phvu2oc7q7"
+          "Value": "w5kde5r84p"
         },
         {
           "Name": "label",
@@ -6728,12 +7368,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU="
+          "Value": "sha256-VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw="
         }
       ]
     },
     {
-      "Route": "Config/servicios.phvu2oc7q7.json",
+      "Route": "Config/servicios.w5kde5r84p.json",
       "AssetFile": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json",
       "Selectors": [],
       "ResponseHeaders": [
@@ -6743,7 +7383,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "174"
+          "Value": "274"
         },
         {
           "Name": "Content-Type",
@@ -6751,11 +7391,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU=\""
+          "Value": "\"VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6765,7 +7405,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "phvu2oc7q7"
+          "Value": "w5kde5r84p"
         },
         {
           "Name": "label",
@@ -6773,13 +7413,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-E+OIw/YUnWurUEfMoA8Xs9QFYiYK5jqwSZvG942tmTU="
+          "Value": "sha256-VFlm+ORJaNQO11ifDHZYVyZjbplyEOrbH0LwWvacHjw="
         }
       ]
     },
     {
-      "Route": "Config/servicios.phvu2oc7q7.json.br",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-phvu2oc7q7.br",
+      "Route": "Config/servicios.w5kde5r84p.json.br",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\kozogqygts-w5kde5r84p.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6788,7 +7428,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82"
+          "Value": "114"
         },
         {
           "Name": "Content-Type",
@@ -6796,11 +7436,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yDFrIE6pxz2PwFpMRLQRABhQXkgxvF/fbGYDa14W/Bw=\""
+          "Value": "\"5oMgXpmH/TKaylG9j0pZf2sz5xTjJBQTmSecvk0ATco=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6818,7 +7458,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "phvu2oc7q7"
+          "Value": "w5kde5r84p"
         },
         {
           "Name": "label",
@@ -6826,13 +7466,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-yDFrIE6pxz2PwFpMRLQRABhQXkgxvF/fbGYDa14W/Bw="
+          "Value": "sha256-5oMgXpmH/TKaylG9j0pZf2sz5xTjJBQTmSecvk0ATco="
         }
       ]
     },
     {
-      "Route": "Config/servicios.phvu2oc7q7.json.gz",
-      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-phvu2oc7q7.gz",
+      "Route": "Config/servicios.w5kde5r84p.json.gz",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\kozogqygts-w5kde5r84p.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6841,7 +7481,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "98"
+          "Value": "121"
         },
         {
           "Name": "Content-Type",
@@ -6849,11 +7489,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9PdcdZ1tX0NXnkCCKVL8NEAj8N6VWTVjOJsqDeU0g9o=\""
+          "Value": "\"AMzx49PaI2qI5wMG8jZti2vL5E+nnXrV2URY62NoT3o=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 02 Aug 2025 14:55:23 GMT"
+          "Value": "Fri, 29 Aug 2025 22:43:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6871,7 +7511,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "phvu2oc7q7"
+          "Value": "w5kde5r84p"
         },
         {
           "Name": "label",
@@ -6879,7 +7519,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-9PdcdZ1tX0NXnkCCKVL8NEAj8N6VWTVjOJsqDeU0g9o="
+          "Value": "sha256-AMzx49PaI2qI5wMG8jZti2vL5E+nnXrV2URY62NoT3o="
         }
       ]
     },
@@ -9450,6 +10090,520 @@
         {
           "Name": "integrity",
           "Value": "sha256-0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.2it03u2yp7.css",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\4k8k38o1kc-2it03u2yp7.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001177856302"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "848"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tWRx8kzSOGWZkhjzWVNXEh+Af2MUGgo2aWioNS34ASc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2it03u2yp7"
+        },
+        {
+          "Name": "label",
+          "Value": "css/solicitud-vehiculo.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.2it03u2yp7.css",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\4k8k38o1kc-2it03u2yp7.br",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "br",
+          "Quality": "0.001443001443"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "692"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Zi7KRVR5FChiUMQUoOf1xjCIxOWHwjhTdn6y1ypCJBw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "br"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2it03u2yp7"
+        },
+        {
+          "Name": "label",
+          "Value": "css/solicitud-vehiculo.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.2it03u2yp7.css",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2339"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2it03u2yp7"
+        },
+        {
+          "Name": "label",
+          "Value": "css/solicitud-vehiculo.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.2it03u2yp7.css.br",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\4k8k38o1kc-2it03u2yp7.br",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "692"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Zi7KRVR5FChiUMQUoOf1xjCIxOWHwjhTdn6y1ypCJBw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "br"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2it03u2yp7"
+        },
+        {
+          "Name": "label",
+          "Value": "css/solicitud-vehiculo.css.br"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Zi7KRVR5FChiUMQUoOf1xjCIxOWHwjhTdn6y1ypCJBw="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.2it03u2yp7.css.gz",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\4k8k38o1kc-2it03u2yp7.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "848"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tWRx8kzSOGWZkhjzWVNXEh+Af2MUGgo2aWioNS34ASc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2it03u2yp7"
+        },
+        {
+          "Name": "label",
+          "Value": "css/solicitud-vehiculo.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-tWRx8kzSOGWZkhjzWVNXEh+Af2MUGgo2aWioNS34ASc="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.css",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\4k8k38o1kc-2it03u2yp7.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001177856302"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "848"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tWRx8kzSOGWZkhjzWVNXEh+Af2MUGgo2aWioNS34ASc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.css",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\4k8k38o1kc-2it03u2yp7.br",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "br",
+          "Quality": "0.001443001443"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "692"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Zi7KRVR5FChiUMQUoOf1xjCIxOWHwjhTdn6y1ypCJBw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "br"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.css",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2339"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WlBUfqN+cqdaiCeL24OqIWFuJ6xW34jwa9zwP9pBXFQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.css.br",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\publish\\4k8k38o1kc-2it03u2yp7.br",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "692"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Zi7KRVR5FChiUMQUoOf1xjCIxOWHwjhTdn6y1ypCJBw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "br"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Zi7KRVR5FChiUMQUoOf1xjCIxOWHwjhTdn6y1ypCJBw="
+        }
+      ]
+    },
+    {
+      "Route": "css/solicitud-vehiculo.css.gz",
+      "AssetFile": "C:\\ValetParking\\AppValetParking\\obj\\Release\\net9.0\\win-x64\\compressed\\4k8k38o1kc-2it03u2yp7.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "848"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tWRx8kzSOGWZkhjzWVNXEh+Af2MUGgo2aWioNS34ASc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Aug 2025 22:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tWRx8kzSOGWZkhjzWVNXEh+Af2MUGgo2aWioNS34ASc="
         }
       ]
     },

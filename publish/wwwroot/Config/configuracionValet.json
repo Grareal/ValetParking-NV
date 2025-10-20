@@ -1,10 +1,10 @@
 {
-    "modoRafaga": false,
+    "modoRafaga": true,
     "cantidadDisparos": 3,
     "identificadores": {
-        "Folio": "F",
-        "Reserva": "R",
-        "NumeroOperador": "E",
+        "Folio": "VP",
+        "Reserva": "RS",
+        "NumeroOperador": "CL",
         "CajonBuffer": "C"
     }
 }

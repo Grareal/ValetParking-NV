@@ -8,6 +8,8 @@ namespace AppValetParking.Models
         public string? Operacion { get; set; }
         public string? NumeroOperador { get; set; }
 
+ 
+
         public TimeSpan? Solicitud { get; set; }
         public string? Habitacion { get; set; }
         public string? Hotel { get; set; }

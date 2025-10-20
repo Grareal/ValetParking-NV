@@ -1,3 +1,5 @@
+
+
 @model List<AppValetParking.Models.ValetRegistro>
 
     @{
@@ -80,14 +82,14 @@
                 <thead>
                     <tr>
                         <th>Fecha Registro</th>
-                        <th>N. Operadora</th>
+                        <th>N. Operacion</th>
                         <th>Solicitud</th>
                         <th>Hab</th>
                         <th>Hotel</th>
                         <th>Folio VP</th>
                         <th>Valet</th>
                         <th>Servicio</th>
-                        <th>Hora Salida</th>
+                        <th>Ultimo mov.</th>
                         <th>Cajón</th>
                         <th>Acción</th>
                     </tr>
@@ -191,6 +193,44 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+
+            // Función para enviar la solicitud al API
+            function solicitarCoche(folio, hotel) {
+
+                const confirmar = confirm("¿Deseas confirmar la solicitud para el folio " + folio + "?");
+                if (!confirmar) return;
+                const datos = {
+                    FolioVP: folio,
+                    Destino: "Lobby",
+                    Resort: hotel,
+                    NombreSolicitante: document.getElementById("codigoOperador").value,
+                    ApellidoSolicitante: "",
+                    Telefono: "",
+                    Correo: "",
+                    MarcaVehiculo: "",
+                    ColorVehiculo: "",
+                    TipoSalida: "Normal",
+                    Comentarios: ""
+                };
+
+                fetch("/api/valet/crear", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(datos)
+                })
+                    .then(resp => resp.json())
+                    .then(res => {
+                        console.log(res); // ver en consola qué devuelve la API
+                        if (res.exito) {
+                            alert("Solicitud enviada para el folio " + folio);
+                        } else {
+                            alert("Error: " + (res.mensaje || JSON.stringify(res)));
+                        }
+                    })
+                    .catch(err => alert("Error en la solicitud: " + err));
+            }
+
+            // Botones de "Más opciones"
             const botones = document.querySelectorAll(".btn-mas-opciones");
             botones.forEach(btn => {
                 btn.addEventListener("click", function () {
@@ -201,5 +241,18 @@
                     document.getElementById("modalHostname").value = hostname;
                 });
             });
+
+            // Click derecho en filas
+            const filas = document.querySelectorAll("#tablaOperadora tbody tr");
+            filas.forEach(fila => {
+                fila.addEventListener("contextmenu", function (e) {
+                    e.preventDefault(); // evita el menú del navegador
+                    const folio = fila.querySelector("td:nth-child(6)").innerText; // columna Folio VP
+                    const hotel = fila.querySelector("td:nth-child(5)").innerText; // columna Hotel
+                    solicitarCoche(folio, hotel);
+                });
+            });
+
         });
     </script>
+

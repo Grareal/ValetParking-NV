@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using AppValetParking.Data;
+using AppValetParking.Services;
+
 
 
 
@@ -13,6 +15,8 @@ builder.Services.AddAuthentication("MyCookieAuth")
     {
         options.LoginPath = "/Account/Login";
     });
+builder.Services.AddSingleton<PrinterConfigService>();
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

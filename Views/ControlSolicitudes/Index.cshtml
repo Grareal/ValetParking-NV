@@ -1,0 +1,106 @@
+@model IEnumerable<AppValetParking.Models.ValetSolicitud>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Control de Solicitudes de Vehículos</h2>
+
+        <input type="text" id="filtroTabla" class="form-control mb-4" placeholder="Filtrar por habitación, huesped, folio...">
+
+        <div class="row" id="ticketContainer">
+            @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card ticket-card" data-tiempo="@item.TiempoCreado.ToString("o")"
+                     @(item.TiempoAtendido != null ? "style='background-color:#d4edda'" : "")>
+                    <div class="card-body">
+                        <h5 class="card-title">Folio: @item.FolioVP</h5>
+                        <p class="card-text mb-1"><strong>Huesped:</strong> @item.NombreReserva "</p>
+                        <p class="card-text mb-1"><strong>Habitación:</strong> @item.Habitacion"</p>
+                        <p class="card-text mb-1"><strong>Hotel:</strong> @item.Resort "</p>
+                        <p class="card-text mb-1"><strong>Ubicacion:</strong> @item.Destino "</p>
+
+                        <p class="card-text mb-1"><strong>Solicitud:</strong> @item.FechaSolicitud.ToString("HH:mm")</p>
+                        <form asp-action="CambiarEstatus" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-success btn-sm w-100"
+                                    @(item.TiempoAtendido != null ? "disabled" : "")>
+                                @(item.TiempoAtendido != null ? "Atendido" : "Marcar Atendido")
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+    </div>
+
+     <style>
+.ticket-card {
+    transition: background-color 0.5s, border-left 0.5s;
+}
+
+.parpadeo {
+    animation: parpadeo 1s infinite;
+}
+
+@@keyframes parpadeo {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Mejora visual de los botones */
+.ticket-card button {
+    font-weight: bold;
+}
+    </style>
+
+  
+        <script>
+            // Filtrado de tickets
+            document.getElementById("filtroTabla").addEventListener("keyup", function () {
+                const filtro = this.value.toLowerCase();
+                document.querySelectorAll("#ticketContainer .ticket-card").forEach(card => {
+                    let texto = card.innerText.toLowerCase();
+                    card.parentElement.style.display = texto.includes(filtro) ? "block" : "none";
+                });
+            });
+
+            // Colores según tiempo
+            function actualizarColores() {
+                const cards = document.querySelectorAll("#ticketContainer .ticket-card");
+                const ahora = new Date();
+
+                cards.forEach(card => {
+                    const button = card.querySelector("button");
+                    if (button.disabled) return; // ya atendido
+
+                    const tiempoCreado = new Date(card.dataset.tiempo);
+                    const diffMin = (ahora - tiempoCreado) / 60000;
+
+                    if (diffMin >= 30) {
+                        card.style.backgroundColor = "#f8d7da"; // rojo
+                        card.style.borderLeft = "5px solid #dc3545";
+                        card.classList.add("parpadeo");
+                    } else if (diffMin >= 20) {
+                        card.style.backgroundColor = "#ffe5b4"; // naranja
+                        card.style.borderLeft = "5px solid #fd7e14";
+                        card.classList.remove("parpadeo");
+                    } else if (diffMin >= 10) {
+                        card.style.backgroundColor = "#fff3cd"; // amarillo
+                        card.style.borderLeft = "5px solid #ffc107";
+                        card.classList.remove("parpadeo");
+                    } else {
+                        card.style.backgroundColor = "white";
+                        card.style.borderLeft = "5px solid transparent";
+                        card.classList.remove("parpadeo");
+                    }
+                });
+            }
+
+            // Actualiza cada minuto
+            setInterval(actualizarColores, 60000);
+            actualizarColores();
+        </script>
+    

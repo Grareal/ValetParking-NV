@@ -7,8 +7,6 @@ using System.Text.Json;
 using System.IO;
 using ClosedXML.Excel;
 
-
-
 namespace AppValetParking.Controllers
 {
     public class OperadoraController : Controller
@@ -37,7 +35,7 @@ namespace AppValetParking.Controllers
                 .ThenByDescending(r => r.Solicitud)
                 .ToList();
 
-            // Leer servicios.json desde wwwroot/Config (igual que antes)
+            // Leer servicios.json desde wwwroot/Config
             string rutaJson = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Config", "servicios.json");
             List<ServicioItem> servicios = new();
 
@@ -57,8 +55,6 @@ namespace AppValetParking.Controllers
             return View("OperadoraView", registros);
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> ExportarExcel(DateTime fechaInicio, DateTime fechaFin)
         {
@@ -75,14 +71,15 @@ namespace AppValetParking.Controllers
             // Encabezados
             worksheet.Cell(1, 1).Value = "Fecha";
             worksheet.Cell(1, 2).Value = "Operadora";
-            worksheet.Cell(1, 3).Value = "Solicitud";
+            worksheet.Cell(1, 3).Value = "H. Solicitud";
             worksheet.Cell(1, 4).Value = "Habitación";
             worksheet.Cell(1, 5).Value = "Hotel";
             worksheet.Cell(1, 6).Value = "FolioVP";
-            worksheet.Cell(1, 7).Value = "Valet";
-            worksheet.Cell(1, 8).Value = "Servicio";
-            worksheet.Cell(1, 9).Value = "HoraSalida";
-            worksheet.Cell(1, 10).Value = "Cajón";
+            worksheet.Cell(1, 7).Value = "Codigo Gafette";
+            worksheet.Cell(1, 8).Value = "Nombre Valet";
+            worksheet.Cell(1, 9).Value = "Servicio";
+            worksheet.Cell(1, 10).Value = "H. Ultimo Mov";
+            worksheet.Cell(1, 11).Value = "Cajón";
 
             int row = 2;
             foreach (var r in registros)
@@ -93,10 +90,12 @@ namespace AppValetParking.Controllers
                 worksheet.Cell(row, 4).Value = r.Habitacion ?? "";
                 worksheet.Cell(row, 5).Value = r.Hotel ?? "";
                 worksheet.Cell(row, 6).Value = r.FolioVP ?? "";
-                worksheet.Cell(row, 7).Value = r.Valet ?? "";
-                worksheet.Cell(row, 8).Value = r.Servicio ?? "";
-                worksheet.Cell(row, 9).Value = r.HoraSalida?.ToString(@"hh\:mm") ?? "";
-                worksheet.Cell(row, 10).Value = r.CajonBuffer ?? "";
+                worksheet.Cell(row, 7).Value = r.NumeroOperador ?? "";
+                worksheet.Cell(row, 8).Value = r.Valet ?? "";
+                worksheet.Cell(row, 9).Value = r.Servicio ?? "";
+                worksheet.Cell(row, 10).Value = r.HoraSalida?.ToString(@"hh\:mm") ?? "";
+                worksheet.Cell(row, 11).Value = r.CajonBuffer ?? "";
+
                 row++;
             }
 
@@ -111,9 +110,6 @@ namespace AppValetParking.Controllers
             );
         }
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> ActualizarRegistro(ValetRegistro registro)
         {
@@ -122,7 +118,6 @@ namespace AppValetParking.Controllers
             if (registroDb == null)
                 return NotFound();
 
-            // Detectar cambios - ejemplo simple
             var cambios = new List<string>();
 
             if (registroDb.Valet != registro.Valet)
@@ -152,7 +147,6 @@ namespace AppValetParking.Controllers
                 registroDb.HoraSalida = null;
             }
 
-            // Actualizar campos
             registroDb.Valet = registro.Valet;
             registroDb.Servicio = registro.Servicio;
             registroDb.CajonBuffer = registro.CajonBuffer;
@@ -160,7 +154,6 @@ namespace AppValetParking.Controllers
 
             await _contextApp.SaveChangesAsync();
 
-            // Si hubo cambios, crear movimiento
             if (cambios.Any())
             {
                 var textoMovimiento = "Se actualizaron los siguientes campos: " + string.Join("; ", cambios) + $" ({DateTime.Now:yyyy-MM-dd HH:mm})";
@@ -180,7 +173,6 @@ namespace AppValetParking.Controllers
 
             return RedirectToAction("Index");
         }
-
 
         [HttpGet]
         [Route("api/Empleados/BuscarPorCodigo")]
@@ -236,8 +228,6 @@ namespace AppValetParking.Controllers
 
             return RedirectToAction("Index");
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> ActualizarEstatus(int id, string nuevoEstatus)

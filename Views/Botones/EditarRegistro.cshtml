@@ -61,21 +61,31 @@
                     <input asp-for="Valet" class="form-control" id="Valet" />
                 </div>
 
+
+            </div>
+            <div class="form-row">
                 <div class="form-group">
-                    <label asp-for="NumeroOperador">Numero</label>
+                    <label asp-for="NumeroOperador">Gafete</label>
                     <input asp-for="NumeroOperador" id="NumeroOperadorInput" class="form-control" autocomplete="off" required />
                 </div>
+
+                <div class="form-group">
+                    <label>Cajon Actual</label>
+                    <input class="form-control" value="@ViewBag.CajonActual" readonly />
+                </div>
+
             </div>
+
 
             <div class="form-row">
                 <div class="form-group">
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="Servicio">Servicio</label>
                         <select id="Servicio" name="Servicio" class="form-control" required></select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CajonBuffer">Cajon Buffer</label>
+                    <label asp-for="CajonBuffer">Cajon Nuevo</label>
                     <input asp-for="CajonBuffer" id="CajonBuffer" class="form-control" placeholder="Ej. A23, B5, etc." required />
                 </div>
             </div>
@@ -109,7 +119,7 @@
 
     <script>
         (() => {
-            
+
 
             const buscarForm = document.getElementById('buscarFolioForm');
             const folioInput = document.getElementById('folioBuscar');
@@ -179,6 +189,42 @@
     <script>
         cargarOpcionesServicio('Servicio', '/Config/servicios.json', '@Model?.Servicio');
     </script>
+
+    <!-- CHECKBOX MINI OCULTO -->
+    <div style="position: absolute; top: 0; right: 0; font-size: 10px; opacity: 0.3;">
+        <label>
+            <input type="checkbox" id="chkUbicacionPorDefecto" />
+            Ubicación Por Defecto
+        </label>
+    </div>
+
+    <script>
+        const chkUbicacion = document.getElementById('chkUbicacionPorDefecto');
+
+        // Leer valor previo de localStorage
+        const ubicacionPrev = localStorage.getItem('ubicacionPorDefecto') || 'ANDENES';
+        const selectServicio = document.getElementById('Servicio');
+        if (selectServicio) selectServicio.value = ubicacionPrev;
+
+        chkUbicacion.checked = ubicacionPrev !== 'ANDENES'; // marcar si no es Andenes
+
+        chkUbicacion.addEventListener('change', () => {
+            if (chkUbicacion.checked) {
+                const opciones = ['ANDENES', 'EN.REMOTO', 'EN.BUFFER'];
+                let seleccion = prompt("Selecciona ubicación: 1=ANDENES, 2=EN.REMOTO, 3=EN.BUFFER", "1");
+                seleccion = parseInt(seleccion);
+                if (seleccion < 1 || seleccion > 3 || isNaN(seleccion)) seleccion = 1;
+
+                const valor = opciones[seleccion - 1];
+                localStorage.setItem('ubicacionPorDefecto', valor);
+
+                if (selectServicio) selectServicio.value = valor;
+
+                console.log("Ubicación por defecto ahora:", valor);
+            }
+        });
+    </script>
+
 
 </body>
 </html>

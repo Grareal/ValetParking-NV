@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\Config\\configuracionValet.json"
     },
     {
+      "Id": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json",
+      "PackagePath": "staticwebassets\\Config\\printers.json"
+    },
+    {
       "Id": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json",
       "PackagePath": "staticwebassets\\Config\\servicios.json"
     },
@@ -31,6 +35,10 @@
     {
       "Id": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css",
+      "PackagePath": "staticwebassets\\css\\solicitud-vehiculo.css"
     },
     {
       "Id": "C:\\ValetParking\\AppValetParking\\wwwroot\\favicon.ico",

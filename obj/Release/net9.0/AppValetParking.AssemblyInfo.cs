@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AppValetParking")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4fb54d88dfa88420c42adc83216407b73f0b7ee")]
 [assembly: System.Reflection.AssemblyProductAttribute("AppValetParking")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AppValetParking")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

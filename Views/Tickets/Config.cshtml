@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Impresoras por Hotel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-bottom: 20px;
+        }
+
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .hotel-config {
+            border-left: 4px solid #0d6efd;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+
+        .status-message {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .loading {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .tab-content {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            background-color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-print me-2"></i>Configuración de Impresoras</h2>
+            <button id="btnBack" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Volver a Reservas
+            </button>
+        </div>
+
+        <ul class="nav nav-tabs" id="configTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">Configuración General</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="hoteles-tab" data-bs-toggle="tab" data-bs-target="#hoteles" type="button" role="tab">Configuración por Hotel</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="configTabsContent">
+            <!-- Pestaña de Configuración General -->
+            <div class="tab-pane fade show active" id="general" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">Configuración General de Impresión</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-5">
+                                <label class="form-label">Hostname / Equipo</label>
+                                <input id="hostnameInput" class="form-control" placeholder="Ej. NV002-WIN-TAB1">
+                            </div>
+
+                            <div class="col-md-5">
+                                <label class="form-label">Impresora(s) (separar por ';' para múltiples)</label>
+                                <input id="printerInput" class="form-control" placeholder="Ej. \\NV002\WINTIPR008\LOCAL;\\NV002\WINTIPR009\LOCAL">
+                            </div>
+
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button id="btnSaveConfig" class="btn btn-primary w-100">Guardar</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Impresoras instaladas (Servidor)</label>
+                                <select id="installedPrinters" class="form-select" size="6"></select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Configuraciones guardadas</label>
+                                <select id="savedConfigs" class="form-select" size="6">
+                                    <option value="">-- Selecciona config --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Configuración por Hotel -->
+            <div class="tab-pane fade" id="hoteles" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">Configuración de Impresoras por Hotel</div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <p class="text-muted">Configura las impresoras específicas para cada hotel. Estas configuraciones se utilizarán automáticamente al imprimir tickets.</p>
+                        </div>
+
+                        <div id="hotelesContainer">
+                            <!-- Las configuraciones de hoteles se cargarán aquí -->
+                            <div class="text-center my-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                </div>
+                                <p class="mt-2">Cargando configuración de hoteles...</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <button id="btnSaveHotelConfig" class="btn btn-success">
+                                <i class="fas fa-save me-1"></i> Guardar Configuración de Hoteles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="status" class="status-message"></div>
+    </div>
+
+    <!-- Template para configuración de hotel -->
+    <template id="hotelTemplate">
+        <div class="hotel-config">
+            <h5 class="hotel-name"></h5>
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="form-label">Impresora para este hotel</label>
+                    <select class="form-select hotel-printer"></select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">¿Usar configuración general?</label>
+                    <div class="form-check">
+                        <input class="form-check-input use-general" type="checkbox">
+                        <label class="form-check-label">Usar configuración general</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Lista de hoteles para configurar
+        const hoteles = [
+            "NULL",
+            "Beauty of Nature",
+            "Celebrate Park",
+            "Kingdom Of The Sun",
+            "Mayan Palace",
+            "Sea Garden",
+            "The Estates",
+            "The Grand Bliss",
+            "The Grand Luxxe",
+            "The Grand Mayan"
+        ];
+
+        // Configuración de hoteles
+        let configHoteles = {};
+
+        // Inicializar la configuración
+        async function initConfig() {
+            await loadInstalledPrinters();
+            await loadConfigs();
+            await loadHotelConfigs();
+
+            // Event listeners
+            document.getElementById('installedPrinters').addEventListener('dblclick', function () {
+                const selected = this.value;
+                const inp = document.getElementById('printerInput');
+                if (inp.value) inp.value += ';' + selected;
+                else inp.value = selected;
+            });
+
+            document.getElementById('savedConfigs').addEventListener('change', async function () {
+                const sel = this.value;
+                if (!sel) return;
+
+                const res = await fetch('/Tickets/GetPrinterConfigs');
+                const configs = await res.json();
+                const cfg = configs.find(c => c.hostname === sel);
+                if (!cfg) return;
+
+                document.getElementById('hostnameInput').value = cfg.hostname;
+                document.getElementById('printerInput').value = cfg.printers;
+            });
+
+            document.getElementById('btnSaveConfig').addEventListener('click', saveConfig);
+            document.getElementById('btnSaveHotelConfig').addEventListener('click', saveHotelConfig);
+            document.getElementById('btnBack').addEventListener('click', () => {
+                window.location.href = '/Tickets/Reservas';
+            });
+        }
+
+        // Cargar impresoras instaladas
+        async function loadInstalledPrinters() {
+            try {
+                const res = await fetch('/Tickets/GetInstalledPrinters');
+                const list = await res.json();
+                const sel = document.getElementById('installedPrinters');
+                sel.innerHTML = '';
+                list.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p;
+                    opt.text = p;
+                    sel.add(opt);
+                });
+            } catch (err) {
+                console.error('Error al cargar impresoras instaladas', err);
+            }
+        }
+
+        // Cargar configuraciones guardadas
+        async function loadConfigs() {
+            try {
+                const res = await fetch('/Tickets/GetPrinterConfigs');
+                const list = await res.json();
+                const sel = document.getElementById('savedConfigs');
+                sel.innerHTML = '<option value="">-- Selecciona config --</option>';
+                list.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.hostname;
+                    opt.text = (c.name || c.hostname) + ' -> ' + c.printers;
+                    sel.add(opt);
+                });
+            } catch (err) {
+                console.error('Error al cargar configuraciones', err);
+            }
+        }
+
+        // Cargar configuración de hoteles
+        async function loadHotelConfigs() {
+            try {
+                // Intenta cargar la configuración desde el servidor
+                const response = await fetch('/Tickets/GetHotelPrinterConfigs');
+                if (response.ok) {
+                    configHoteles = await response.json();
+                } else {
+                    // Si no existe, inicializa con valores por defecto
+                    hoteles.forEach(hotel => {
+                        configHoteles[hotel] = {
+                            printer: "",
+                            useGeneral: true
+                        };
+                    });
+                }
+
+                renderHotelConfigs();
+            } catch (err) {
+                console.error('Error al cargar configuración de hoteles', err);
+                setStatus('Error al cargar configuración de hoteles', 'error');
+            }
+        }
+
+        // Renderizar configuración de hoteles
+        function renderHotelConfigs() {
+            const container = document.getElementById('hotelesContainer');
+            container.innerHTML = '';
+
+            // Cargar impresoras instaladas para los selects
+            const installedPrinters = Array.from(document.getElementById('installedPrinters').options);
+            const printerOptions = installedPrinters.map(opt => opt.value);
+
+            hoteles.forEach(hotel => {
+                const template = document.getElementById('hotelTemplate').content.cloneNode(true);
+                template.querySelector('.hotel-name').textContent = hotel;
+
+                const select = template.querySelector('.hotel-printer');
+                printerOptions.forEach(printer => {
+                    const option = document.createElement('option');
+                    option.value = printer;
+                    option.textContent = printer;
+                    if (configHoteles[hotel] && configHoteles[hotel].printer === printer) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+
+                if (configHoteles[hotel]) {
+                    template.querySelector('.use-general').checked = configHoteles[hotel].useGeneral;
+                }
+
+                // Guardar referencia al hotel en el select
+                select.setAttribute('data-hotel', hotel);
+
+                container.appendChild(template);
+            });
+        }
+
+        // Guardar configuración general
+        async function saveConfig() {
+            const hostname = document.getElementById('hostnameInput').value.trim();
+            const printers = document.getElementById('printerInput').value.trim();
+            if (!hostname || !printers) {
+                alert('Hostname e impresora(s) requeridos');
+                return;
+            }
+
+            const body = {
+                Hostname: hostname,
+                Printers: printers,
+                Name: hostname,
+                PrintGroups: false
+            };
+
+            try {
+                const res = await fetch('/Tickets/SavePrinterConfig', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    await loadConfigs();
+                    setStatus('Configuración guardada correctamente', 'success');
+                } else {
+                    setStatus('Error al guardar configuración: ' + (data.message || 'unknown'), 'error');
+                }
+            } catch (err) {
+                console.error('Error al guardar configuración', err);
+                setStatus('Error al guardar configuración', 'error');
+            }
+        }
+
+        // Guardar configuración de hoteles
+        async function saveHotelConfig() {
+            // Recopilar la configuración de todos los hoteles
+            const hotelSelects = document.querySelectorAll('.hotel-printer');
+            const hotelCheckboxes = document.querySelectorAll('.use-general');
+
+            const newConfig = {};
+
+            hotelSelects.forEach(select => {
+                const hotel = select.getAttribute('data-hotel');
+                newConfig[hotel] = {
+                    printer: select.value,
+                    useGeneral: false
+                };
+            });
+
+            hotelCheckboxes.forEach(checkbox => {
+                // Encontrar el hotel correspondiente
+                const hotelConfig = checkbox.closest('.hotel-config');
+                if (hotelConfig) {
+                    const hotelName = hotelConfig.querySelector('.hotel-name').textContent;
+                    if (newConfig[hotelName]) {
+                        newConfig[hotelName].useGeneral = checkbox.checked;
+                    }
+                }
+            });
+
+            try {
+                const res = await fetch('/Tickets/SaveHotelPrinterConfigs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newConfig)
+                });
+
+                if (res.ok) {
+                    setStatus('Configuración de hoteles guardada correctamente', 'success');
+                    configHoteles = newConfig;
+                } else {
+                    setStatus('Error al guardar configuración de hoteles', 'error');
+                }
+            } catch (err) {
+                console.error('Error al guardar configuración de hoteles', err);
+                setStatus('Error al guardar configuración de hoteles', 'error');
+            }
+        }
+
+        // Establecer mensaje de estado
+        function setStatus(message, type) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status-message ${type}`;
+            statusEl.style.display = 'block';
+
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', initConfig);
+    </script>
+</body>
+</html>

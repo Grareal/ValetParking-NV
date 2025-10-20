@@ -178,11 +178,16 @@
                 {
                     ViewBag.Mensaje = "No se encontró ningún registro con folio {folio}. ";
                     return View("EditarRegistro", new ValetRegistro());  // <-- Aquí un modelo vacío
+
                 }
 
-                // Limpiar solo el número del operador para que el usuario lo ingrese
-                registro.NumeroOperador = "";
-                 registro.CajonBuffer = "";   // <--- Limpiar aquí
+            ViewBag.CajonActual = registro.CajonBuffer; // <-- el valor que quieres mostrar
+
+
+            // Limpiar solo el número del operador para que el usuario lo ingrese
+            registro.NumeroOperador = "";
+ 
+            registro.CajonBuffer = "";   // <--- Limpiar aquí
 
 
             ViewBag.EnfocarNumero = true; // bandera para JS

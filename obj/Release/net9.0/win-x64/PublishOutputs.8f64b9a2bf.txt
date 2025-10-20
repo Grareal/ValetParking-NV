@@ -1,4 +1,6 @@
 C:\ValetParking\AppValetParking\publish\AppValetParking.exe
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\publish\web.config
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\web.config
 C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\web.config
 C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\web.config
 C:\ValetParking\AppValetParking\publish\publish\publish\publish\web.config
@@ -6,11 +8,13 @@ C:\ValetParking\AppValetParking\publish\publish\publish\web.config
 C:\ValetParking\AppValetParking\publish\publish\web.config
 C:\ValetParking\AppValetParking\publish\appsettings.Development.json
 C:\ValetParking\AppValetParking\publish\appsettings.json
+C:\ValetParking\AppValetParking\publish\Data\hotel-printer-config.json
 C:\ValetParking\AppValetParking\publish\publish\appsettings.Development.json
 C:\ValetParking\AppValetParking\publish\publish\appsettings.json
 C:\ValetParking\AppValetParking\publish\publish\AppValetParking.deps.json
 C:\ValetParking\AppValetParking\publish\publish\AppValetParking.runtimeconfig.json
 C:\ValetParking\AppValetParking\publish\publish\AppValetParking.staticwebassets.endpoints.json
+C:\ValetParking\AppValetParking\publish\publish\Data\hotel-printer-config.json
 C:\ValetParking\AppValetParking\publish\publish\publish\appsettings.Development.json
 C:\ValetParking\AppValetParking\publish\publish\publish\appsettings.json
 C:\ValetParking\AppValetParking\publish\publish\publish\AppValetParking.deps.json
@@ -31,6 +35,20 @@ C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\
 C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\AppValetParking.deps.json
 C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\AppValetParking.runtimeconfig.json
 C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\AppValetParking.staticwebassets.endpoints.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\appsettings.Development.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\appsettings.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\AppValetParking.deps.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\AppValetParking.runtimeconfig.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\AppValetParking.staticwebassets.endpoints.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\publish\appsettings.Development.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\publish\appsettings.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\publish\AppValetParking.deps.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\publish\AppValetParking.runtimeconfig.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\publish\AppValetParking.staticwebassets.endpoints.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\publish\wwwroot\Config\configuracionValet.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\publish\wwwroot\Config\servicios.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\wwwroot\Config\configuracionValet.json
+C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\publish\wwwroot\Config\servicios.json
 C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\wwwroot\Config\configuracionValet.json
 C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\publish\wwwroot\Config\servicios.json
 C:\ValetParking\AppValetParking\publish\publish\publish\publish\publish\wwwroot\Config\configuracionValet.json
@@ -40,6 +58,7 @@ C:\ValetParking\AppValetParking\publish\publish\publish\publish\wwwroot\Config\s
 C:\ValetParking\AppValetParking\publish\publish\publish\wwwroot\Config\configuracionValet.json
 C:\ValetParking\AppValetParking\publish\publish\publish\wwwroot\Config\servicios.json
 C:\ValetParking\AppValetParking\publish\publish\wwwroot\Config\configuracionValet.json
+C:\ValetParking\AppValetParking\publish\publish\wwwroot\Config\printers.json
 C:\ValetParking\AppValetParking\publish\publish\wwwroot\Config\servicios.json
 C:\ValetParking\AppValetParking\publish\AppValetParking.dll
 C:\ValetParking\AppValetParking\publish\AppValetParking.deps.json
@@ -396,6 +415,7 @@ C:\ValetParking\AppValetParking\publish\SixLabors.Fonts.dll
 C:\ValetParking\AppValetParking\publish\System.ClientModel.dll
 C:\ValetParking\AppValetParking\publish\System.Configuration.ConfigurationManager.dll
 C:\ValetParking\AppValetParking\publish\System.Drawing.Common.dll
+C:\ValetParking\AppValetParking\publish\System.Private.Windows.Core.dll
 C:\ValetParking\AppValetParking\publish\System.Formats.Asn1.dll
 C:\ValetParking\AppValetParking\publish\System.IdentityModel.Tokens.Jwt.dll
 C:\ValetParking\AppValetParking\publish\System.IO.Packaging.dll

@@ -36,6 +36,7 @@
                         <th>Nombre</th>
                         <th>Fecha Ll.</th>
                         <th>Fecha S.</th>
+                        <th>Hotel</th>
                         <th>Acompañantes</th>
                     </tr>
                 </thead>
@@ -49,6 +50,8 @@
                         <td class="col-nombre">@item.h_nom</td>
                         <td>@item.h_fec_lld</td>
                         <td>@item.h_fec_sda</td>
+                        <td>@item.Hotel</td>
+
                         <td class="clickable-personas" data-reserva="@item.h_res_cve" style="cursor:pointer; color:black;">
                             @{
     var nombres = item.NombresAcompanantes ?? new List<string>();
@@ -142,7 +145,7 @@
                         </td>
 
 
-                    </tr>
+                    </tr>   
                 }
                 </tbody>
             </table>

@@ -1,0 +1,10 @@
+{
+    "modoRafaga": false,
+    "cantidadDisparos": 3,
+    "identificadores": {
+        "Folio": "F",
+        "Reserva": "R",
+        "NumeroOperador": "E",
+        "CajonBuffer": "C"
+    }
+}

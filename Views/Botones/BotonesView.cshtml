@@ -2,10 +2,7 @@
 
 @{
     Layout = null;
- 
 }
-
-
 
 <!DOCTYPE html>
 <html>
@@ -18,8 +15,32 @@
             border: 2px solid red;
             background-color: #ffe5e5;
         }
-    </style>
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
 
+        .modal-content {
+            background: white;
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+            .modal-content h3 {
+                margin-top: 0;
+            }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -27,15 +48,22 @@
         <form asp-controller="Botones" asp-action="Index" method="post" class="form">
 
             <div class="form-row">
-                <div class="form-group">
+                <div class="form-group" style="flex:1;">
                     <label for="FolioVP">Folio</label>
                     <input type="text" id="FolioVP" name="FolioVP" value="@Model?.FolioVP" class="form-control" />
                 </div>
-                <div class="form-group">
-                    <label for="CajonBuffer">Cajon Buffer</label>
-                    <input type="text" id="CajonBuffer" name="CajonBuffer" class="form-control" />
+                <div class="form-group" style="flex:1;">
+                    <label for="CajonBuffer">Cajón</label>
+                    <div style="display:flex; align-items:center; gap:5px;">
+                        <input type="text" id="CajonBuffer" name="CajonBuffer" class="form-control" style="flex:1;" />
+                        <button type="button" id="btnAbrirCajones"
+                                style="padding:2px 6px; font-size:10px; height:28px;">
+                            ▼
+                        </button>
+                    </div>
                 </div>
             </div>
+
 
             <div class="form-row">
                 <div class="form-group">
@@ -54,7 +82,7 @@
                     <input type="text" id="Habitacion" name="Habitacion" class="form-control" readonly />
                 </div>
                 <div class="form-group">
-                    <label for="NumeroOperadorInput">Numero</label>
+                    <label for="NumeroOperadorInput">Gafete</label>
                     <input type="text" id="NumeroOperadorInput" name="NumeroOperador" class="form-control" autocomplete="off" placeholder="0000" />
                 </div>
             </div>
@@ -69,7 +97,6 @@
                     <label for="Servicio">Servicio</label>
                     <select id="Servicio" name="Servicio" class="form-control" required></select>
                 </div>
-
             </div>
 
             <div class="btn-container">
@@ -78,16 +105,82 @@
         </form>
 
         @if (ViewBag.Mensaje != null)
-{
+        {
         <div id="mensajeConfirmacion" class="mensaje-confirmacion">
             @ViewBag.Mensaje
         </div>
-}
+        }
+    </div>
 
+    <!-- MODAL DE CAJONES -->
+    <div id="modalCajones" class="modal">
+        <div class="modal-content">
+            <h3>Selecciona un cajón</h3>
+            <div id="cajonesContainer" style="display:flex; flex-wrap: wrap;"></div>
+            <button type="button" id="btnCerrarCajones" style="margin-top:10px;">Cerrar</button>
+        </div>
+    </div>
 
+    <!-- CHECKBOXES MINI OCULTOS -->
+    <div style="position: absolute; top: 0; right: 0; font-size: 10px; opacity: 0.3;">
+        <label>
+            <input type="checkbox" id="chkModoRafaga" />
+            Modo Ráfaga
+        </label>
+        <label>
+            <input type="checkbox" id="chkUbicacionPorDefecto" />
+            Ubicación Por Defecto
+        </label>
     </div>
 
     <script src="~/js/registro.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('cajonesContainer');
+            const cajonInput = document.getElementById('CajonBuffer');
+            const modal = document.getElementById('modalCajones');
+            const btnAbrir = document.getElementById('btnAbrirCajones');
+            const btnCerrar = document.getElementById('btnCerrarCajones');
+
+            // Abrir modal
+            btnAbrir.addEventListener('click', () => {
+                modal.style.display = 'block';
+            });
+
+            // Cerrar modal
+            btnCerrar.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            // Cargar cajones desde la DB
+            const response = await fetch('/Cajones/GetCajones');
+            const cajones = await response.json();
+
+            container.innerHTML = '';
+            cajones.forEach(c => {
+                const btn = document.createElement('button');
+                btn.textContent = c.numero;               // camelCase
+                btn.style.margin = '2px';
+                btn.style.width = '35px';
+                btn.style.height = '35px';
+                btn.style.backgroundColor = c.ocupado ? 'red' : 'lightgray'; // camelCase
+                btn.disabled = c.ocupado;                // camelCase
+
+                btn.addEventListener('click', async () => {
+                    cajonInput.value = c.numero;         // camelCase
+                    modal.style.display = 'none';
+
+                    // Solo marcarlo como ocupado en backend
+                    await fetch(`/Cajones/OcupaCajon?numero=${c.numero}`, { method: 'POST' });
+                });
+
+                container.appendChild(btn);
+            });
+
+        });
+    </script>
+
+    <!-- VALIDACIONES Y DEMÁS (SIN CAMBIOS) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.querySelector('form');
@@ -97,20 +190,12 @@
 
             form.addEventListener('submit', function (e) {
                 let valid = true;
-
-                // Limpiar errores anteriores
                 [folio, reserva, numero].forEach(input => input.classList.remove('error'));
 
                 if (!folio.value.trim()) {
                     folio.classList.add('error');
                     valid = false;
                 }
-
-                //Hacer la reserva obligatoria
-                //      if (!reserva.value.trim()) {
-                //        reserva.classList.add('error');
-                //       valid = false;
-                //  }
 
                 if (!numero.value.trim()) {
                     numero.classList.add('error');
@@ -123,119 +208,97 @@
                 }
             });
         });
+
+        const folioInput = document.querySelector('input[name="FolioVP"]');
+        if (folioInput) folioInput.focus();
+
+        const chkRafaga = document.getElementById('chkModoRafaga');
+        const chkUbicacion = document.getElementById('chkUbicacionPorDefecto');
+
+        chkRafaga.checked = localStorage.getItem('modoRafaga') === 'true';
+        chkUbicacion.checked = localStorage.getItem('ubicacionPorDefecto') || 'ANDENES';
+
+        chkRafaga.addEventListener('change', () => {
+            localStorage.setItem('modoRafaga', chkRafaga.checked);
+        });
+
+        chkUbicacion.addEventListener('change', () => {
+            if (chkUbicacion.checked) {
+                const opciones = ['ANDENES', 'EN.REMOTO', 'EN.BUFFER'];
+                let seleccion = prompt("Selecciona ubicación: 1=ANDENES, 2=EN.REMOTO, 3=EN.BUFFER", "1");
+                seleccion = parseInt(seleccion);
+                if (seleccion < 1 || seleccion > 3 || isNaN(seleccion)) seleccion = 1;
+                const valor = opciones[seleccion - 1];
+                localStorage.setItem('ubicacionPorDefecto', valor);
+
+                const selectServicio = document.getElementById('Servicio');
+                if (selectServicio) selectServicio.value = valor;
+            }
+        });
     </script>
 
-</body>
+    <!-- Modo ráfaga (sin cambios) -->
+    <script>
+        fetch('/Config/configuracionValet.json')
+            .then(response => response.json())
+            .then(config => {
+                const modoRafaga = JSON.parse(localStorage.getItem('modoRafaga') || 'false');
+                if (modoRafaga) {
+                    inicializarModoRafaga(config.cantidadDisparos, config.identificadores);
+                }
+            });
 
-<script>
-    //AUTO SELECT EN EL INPUT DE FOLIO
-    document.addEventListener('DOMContentLoaded', () => {
-        const folioInput = document.querySelector('input[name="FolioVP"]');
-        if (folioInput) {
-            folioInput.focus();
-        }
-    });
-</script>
-
-<script>
-    fetch('/Config/configuracionValet.json')
-        .then(response => response.json())
-        .then(config => {
-            const modoRafaga = config.modoRafaga;
-            const cantidadDisparos = config.cantidadDisparos;
-            const identificadores = config.identificadores;
-
-            console.log("Configuración cargada:", config);
-
-            if (modoRafaga) {
-                inicializarModoRafaga(cantidadDisparos, identificadores);
-            }
-        })
-        .catch(error => {
-            console.error('Error al cargar la configuración:', error);
-        });
-
-    function inicializarModoRafaga(cantidadDisparos, identificadores) {
-        let disparos = [];
-        let bufferTemporal = {};
-
-        document.addEventListener('keydown', function (event) {
-            if (!/^[a-zA-Z0-9]$/.test(event.key)) return;
-
-            if (!window.scanBuffer) window.scanBuffer = '';
-            window.scanBuffer += event.key;
-
-            clearTimeout(window.scanTimeout);
-            window.scanTimeout = setTimeout(() => {
-                procesarEntrada(window.scanBuffer);
-                window.scanBuffer = '';
-            }, 250);
-        });
-
-        function procesarEntrada(data) {
-            if (!data || data.length < 2) return;
-
-            const tipo = data[0].toUpperCase();
-            const valor = data.substring(1);
-
-            for (const campo in identificadores) {
-                if (identificadores[campo].toUpperCase() === tipo) {
-                    bufferTemporal[campo] = valor;
-                    break;
+        function inicializarModoRafaga(cantidadDisparos, identificadores) {
+            let bufferTemporal = {};
+            document.addEventListener('keydown', function (event) {
+                if (!/^[a-zA-Z0-9]$/.test(event.key)) return;
+                if (!window.scanBuffer) window.scanBuffer = '';
+                window.scanBuffer += event.key;
+                clearTimeout(window.scanTimeout);
+                window.scanTimeout = setTimeout(() => {
+                    procesarEntrada(window.scanBuffer);
+                    window.scanBuffer = '';
+                }, 250);
+            });
+            function procesarEntrada(data) {
+                if (!data) return;
+                const scanUpper = data.toUpperCase();
+                for (const campo in identificadores) {
+                    const prefijo = identificadores[campo].toUpperCase();
+                    if (scanUpper.startsWith(prefijo)) {
+                        bufferTemporal[campo] = data.substring(prefijo.length);
+                        break;
+                    }
+                }
+                if (Object.keys(bufferTemporal).length >= cantidadDisparos) {
+                    asignarCamposDesdeBuffer(bufferTemporal);
+                    bufferTemporal = {};
                 }
             }
-
-            disparos.push(data);
-
-            if (Object.keys(bufferTemporal).length >= cantidadDisparos) {
-                console.log("Datos capturados:", bufferTemporal);
-                asignarCamposDesdeBuffer(bufferTemporal);
-                bufferTemporal = {};
-                disparos = [];
+            function asignarCamposDesdeBuffer(datos) {
+                const mapping = {
+                    "FOLIO": "FolioVP",
+                    "RESERVA": "Reserva",
+                    "NUMEROOPERADOR": "NumeroOperadorInput",
+                    "UBICACION": "Servicio"
+                };
+                for (const campo in datos) {
+                    const inputId = mapping[campo.toUpperCase()];
+                    if (!inputId) continue;
+                    const input = document.getElementById(inputId);
+                    if (input) input.value = datos[campo];
+                    if (campo.toUpperCase() === "NUMEROOPERADOR") input.dispatchEvent(new Event('input'));
+                }
+                const ubicacionDefault = localStorage.getItem('ubicacionPorDefecto') || 'ANDENES';
+                const selectServicio = document.getElementById('Servicio');
+                if (selectServicio) selectServicio.value = ubicacionDefault;
             }
         }
+    </script>
 
-        function asignarCamposDesdeBuffer(datos) {
-            const mapping = {
-                "FOLIO": "FolioVP",
-                "RESERVA": "Reserva",
-                "NUMEROOPERADOR": "NumeroOperadorInput",
-                "CAJONBUFFER": "CajonBuffer"
-            };
-
-            for (const campo in datos) {
-                const campoUpper = campo.toUpperCase();
-                const inputId = mapping[campoUpper];
-                const valor = datos[campo];
-
-                console.log("Asignando campo:", campoUpper, "->", inputId, "valor:", valor);
-
-                if (!inputId) continue;
-
-                const input = document.getElementById(inputId);
-                if (input) input.value = valor;
-
-                if (campoUpper === "RESERVA") {
-                    actualizarDatosReserva(valor);
-                }
-
-                if (campoUpper === "NUMEROOPERADOR") {
-                    input.dispatchEvent(new Event('input'));
-                }
-            }
-        }
-
-    }
-</script>
-
-<script src="@Url.Content("~/js/serviciosvp.js")"></script>
-<script>
+    <script src="@Url.Content("~/js/serviciosvp.js")"></script>
+    <script>
         cargarOpcionesServicio('Servicio', '/Config/servicios.json', '@Model?.Servicio');
-</script>
-
-
-
-
-
-
+    </script>
+</body>
 </html>

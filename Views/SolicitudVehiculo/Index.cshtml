@@ -1,0 +1,113 @@
+@{
+    ViewBag.Title = "Solicitud de Vehículo";
+}
+
+<link rel="stylesheet" href="~/css/solicitud-vehiculo.css" />
+
+<div class="solicitud-container">
+    <h2 class="titulo">Bienvenido a Grupo Vidanta</h2>
+    <p class="subtitulo">Solicita tu vehículo con el folio de Valet Parking</p>
+
+    <!-- Folio -->
+    <div class="campo">
+        <label for="folio" class="label">Folio de Valet Parking</label>
+        <input type="text" id="folio" class="input-text" placeholder="Ej. VP12345" />
+    </div>
+    <button id="buscarFolio" class="btn-enviar">Buscar datos</button>
+
+    <div class="huesped-card" id="datosFolio" style="white-space: pre-wrap; margin-top: 20px;"></div>
+
+    <!-- Formulario de solicitud
+    <h3 style="margin-top: 30px;">Crear solicitud</h3>
+     -->
+    <form id="formSolicitud">
+        <!--
+    <div class="campo">
+        <label for="nombre" class="label">Nombre</label>
+        <input type="text" id="nombre" class="input-text" placeholder="Nombre" required />
+    </div>
+    <div class="campo">
+        <label for="apellido" class="label">Apellido</label>
+        <input type="text" id="apellido" class="input-text" placeholder="Apellido" required />
+    </div>
+    <div class="campo">
+        <label for="destino" class="label">Destino</label>
+        <input type="text" id="destino" class="input-text" placeholder="Destino" />
+    </div>
+    -->
+        <button type="submit" class="btn-enviar">Enviar solicitud</button>
+    </form>
+
+    <div id="mensaje" class="alerta-exito" style="display:none;"></div>
+</div>
+
+@section Scripts {
+    <script>
+        const buscarBtn = document.getElementById("buscarFolio");
+        const folioInput = document.getElementById("folio");
+        const datosDiv = document.getElementById("datosFolio");
+        const form = document.getElementById("formSolicitud");
+        const mensajeDiv = document.getElementById("mensaje");
+
+        // GET: Buscar folio
+        buscarBtn.addEventListener("click", async () => {
+            const folio = folioInput.value.trim();
+            if (!folio) return alert("Escribe un folio");
+
+            try {
+                const res = await fetch(`/api/valet/folio?folio=${folio}`);
+                if (!res.ok) throw new Error("Folio no encontrado");
+                const data = await res.json();
+                datosDiv.innerText = `Nombre Reserva: ${data.nombreReserva || ""}\n` +
+                    `Habitación: ${data.habitacion || ""}\n` +
+                    `Hotel: ${data.hotel || ""}\n` +
+                    `Servicio: ${data.servicio || ""}`;
+            } catch (e) {
+                datosDiv.innerText = e.message;
+            }
+        });
+
+        // POST: Crear solicitud
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const nombreInput = document.getElementById("nombre");
+            const apellidoInput = document.getElementById("apellido");
+            const destinoInput = document.getElementById("destino");
+
+            const data = {
+                FolioVP: folioInput.value.trim(),
+                Destino: destinoInput ? destinoInput.value : "",
+                Resort: "",
+                NombreSolicitante: nombreInput ? nombreInput.value.trim() : "",
+                ApellidoSolicitante: apellidoInput ? apellidoInput.value.trim() : "",
+                Telefono: "",
+                Correo: "",
+                MarcaVehiculo: "",
+                ColorVehiculo: "",
+                TipoSalida: "",
+                Comentarios: ""
+            };
+
+
+            try {
+                const res = await fetch("/api/valet/crear", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json();
+                mensajeDiv.style.display = "block";
+                mensajeDiv.innerText = result.mensaje;
+                mensajeDiv.style.color = result.exito ? "green" : "red";
+
+                if (result.exito) form.reset();
+            } catch (err) {
+                mensajeDiv.style.display = "block";
+                mensajeDiv.innerText = "Error al enviar solicitud";
+                mensajeDiv.style.color = "red";
+            }
+        });
+    </script>
+}

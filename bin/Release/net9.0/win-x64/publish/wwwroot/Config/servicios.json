@@ -11,5 +11,13 @@
 	{
 		"value": "EN.BUFFER",
 		"text": "EN.BUFFER"
+	},
+	{
+		"value": "SALIDA",
+		"text": "SALIDA"
+	},
+	{
+		"value": "PASEO",
+		"text": "PASEO"
 	}
 ]

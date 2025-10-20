@@ -9,8 +9,12 @@ namespace AppValetParking.Data
             : base(options) { }
 
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<ValetRegistro> ValetRegistros { get; set; } // <- Esta línea es clave
+        public DbSet<ValetRegistro> ValetRegistros { get; set; } 
         public DbSet<ValetMovimiento> ValetMovimientos { get; set; }
+        public DbSet<ValetSolicitud> ValetSolicitudes { get; set; }
+        public DbSet<Cajon> Cajones { get; set; }
+
+
 
     }
 }
