@@ -3,24 +3,212 @@
   "WorkspaceRootPath": "C:\\ValetParking\\AppValetParking\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Data\\ApplicationDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\ApplicationDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Tickets\\Reservas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Tickets\\Reservas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Data\\TcabdopeNewDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\TcabdopeNewDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Tickets\\Config.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Tickets\\Config.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Data\\TcabdopeDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\TcabdopeDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Reserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Reserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\TicketsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\TicketsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ReservasViewModel.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ReservasViewModel.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Reservas\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Reservas\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\Reservas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\Reservas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\ControlSolicitudes\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\ControlSolicitudes\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\TicketRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\TicketRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Services\\PrinterConfigService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Services\\PrinterConfigService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Services\\ServicioHelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Services\\ServicioHelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\configuracionValet.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\Config\\configuracionValet.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\Config\\printers.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Operadora\\OperadoraView.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Operadora\\OperadoraView.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\funcionesReservas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\funcionesReservas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\ReservasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\ReservasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\Reservas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\Reservas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\CajonesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\CajonesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\SolicitudVehiculo\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\SolicitudVehiculo\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\ControlSolicitudesController .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\ControlSolicitudesController .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ValetMovimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ValetMovimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\OperadoraController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\OperadoraController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Operadora\\OperadoraView.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Operadora\\OperadoraView.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Botones\\BotonesView.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Botones\\BotonesView.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\BotonesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\BotonesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Reportes\\Index.cshtml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Reportes\\Index.cshtml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ValetSolicitud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ValetSolicitud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\SolicitudVehiculoController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\SolicitudVehiculoController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ValetRegistro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ValetRegistro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Botones\\EditarRegistro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Botones\\EditarRegistro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Data\\ApplicationDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\ApplicationDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\Config\\servicios.json||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\operadora.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\operadora.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\solicitud-vehiculo.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\logins.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\logins.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\operadora.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\operadora.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\filtros.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\filtros.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Data\\hotel-printer-config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\hotel-printer-config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Data\\TcabdopeDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\TcabdopeDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\PrinterConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\PrinterConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ErrorViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ErrorViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Cajon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Cajon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Acompanante.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Acompanante.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Botones\\BotonesViewMobile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Botones\\BotonesViewMobile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\ReportesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\ReportesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\ValetApiController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\ValetApiController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Data\\TcabdopeNewDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\TcabdopeNewDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ReservationAllView.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ReservationAllView.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\VV_TARJETAS_EMPLEADOS.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,112 +219,12 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Data\\PegasysDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ValetRegistro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ValetRegistro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\operadora.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\operadora.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Tickets\\Reservas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Tickets\\Reservas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\TicketsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\TicketsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\TicketRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\TicketRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Tickets\\Config.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Tickets\\Config.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ValetSolicitud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ValetSolicitud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\SolicitudVehiculo\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\SolicitudVehiculo\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Services\\PrinterConfigService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Services\\PrinterConfigService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\Config\\printers.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\Config\\servicios.json||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\configuracionValet.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\Config\\configuracionValet.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\PrinterConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\PrinterConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ReservasViewModel.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ReservasViewModel.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Reserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Reserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\ReservasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\ReservasController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Botones\\BotonesView.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Botones\\BotonesView.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\ValetApiController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\ValetApiController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\ControlSolicitudes\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\ControlSolicitudes\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\solicitud-vehiculo.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\ControlSolicitudesController .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\ControlSolicitudesController .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\SolicitudVehiculoController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\SolicitudVehiculoController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\AppValetParking.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AppValetParking.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\AppValetParking.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AppValetParking.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\CajonesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\CajonesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -147,80 +235,20 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:appsettings.Development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Cajon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Cajon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Reservas\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Reservas\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\Reservas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\Reservas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Botones\\EditarRegistro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Botones\\EditarRegistro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\BotonesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\BotonesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ValetMovimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ValetMovimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\AccountController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\AccountController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ReservationAllView.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ReservationAllView.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Home\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Home\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\logins.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\logins.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Account\\Login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Account\\Login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\funcionesReservas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\funcionesReservas.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Acompanante.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Acompanante.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\filtros.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\filtros.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\Reservas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\Reservas.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ErrorViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ErrorViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Properties\\launchSettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Properties\\launchSettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Botones\\BotonesViewMobile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Botones\\BotonesViewMobile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -231,20 +259,8 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\js\\serviciosvp.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\Usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Models\\ServicioItem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ServicioItem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Services\\ServicioHelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Services\\ServicioHelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Shared\\_Layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -253,10 +269,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Views\\Home\\Privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Home\\Privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\wwwroot\\css\\operadora.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:wwwroot\\css\\operadora.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\ValetParking\\AppValetParking\\Controllers\\HomeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -282,95 +294,100 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 28,
+          "SelectedChildIndex": 37,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 23,
               "Title": "BotonesView.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Botones\\BotonesView.cshtml",
               "RelativeDocumentMoniker": "Views\\Botones\\BotonesView.cshtml",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Botones\\BotonesView.cshtml",
               "RelativeToolTip": "Views\\Botones\\BotonesView.cshtml",
-              "ViewState": "AgIAABoBAADg//////8rwCcBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAABUBAAAAAAAAAAAIwDABAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-07-20T04:09:23.521Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 37,
               "Title": "registro.js",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\registro.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\registro.js",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\registro.js",
               "RelativeToolTip": "wwwroot\\js\\registro.js",
-              "ViewState": "AgIAABsBAAAArMzMzAwjwA0AAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-07-21T20:36:22.033Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 30,
               "Title": "EditarRegistro.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Botones\\EditarRegistro.cshtml",
               "RelativeDocumentMoniker": "Views\\Botones\\EditarRegistro.cshtml",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Botones\\EditarRegistro.cshtml",
               "RelativeToolTip": "Views\\Botones\\EditarRegistro.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAALAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKwAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-07-24T15:52:07.308Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "OperadoraView.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Operadora\\OperadoraView.cshtml",
               "RelativeDocumentMoniker": "Views\\Operadora\\OperadoraView.cshtml",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Operadora\\OperadoraView.cshtml",
               "RelativeToolTip": "Views\\Operadora\\OperadoraView.cshtml",
-              "ViewState": "AgIAAOkAAAAAAAAAAAAYwAABAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADkBAAAAAAAAAAAIwEUBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-07-20T04:09:10.244Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 12,
               "Title": "configuracionValet.json",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\configuracionValet.json",
               "RelativeDocumentMoniker": "wwwroot\\Config\\configuracionValet.json",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\configuracionValet.json",
               "RelativeToolTip": "wwwroot\\Config\\configuracionValet.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-28T16:14:32.706Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 24,
               "Title": "BotonesController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\BotonesController.cs",
               "RelativeDocumentMoniker": "Controllers\\BotonesController.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Controllers\\BotonesController.cs",
               "RelativeToolTip": "Controllers\\BotonesController.cs",
-              "ViewState": "AgIAAAkBAAAAAAAAAAAiwCgBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA4BAAAAAAAAAAAswCgBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T02:56:37.539Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 22,
               "Title": "OperadoraController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\OperadoraController.cs",
               "RelativeDocumentMoniker": "Controllers\\OperadoraController.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Controllers\\OperadoraController.cs",
               "RelativeToolTip": "Controllers\\OperadoraController.cs",
-              "ViewState": "AgIAAEMAAACgZ2ZmZqYowFcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAswCcAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T16:15:40.671Z",
               "IsPinned": true,
@@ -378,33 +395,34 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 29,
               "Title": "ValetRegistro.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\ValetRegistro.cs",
               "RelativeDocumentMoniker": "Models\\ValetRegistro.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\ValetRegistro.cs",
               "RelativeToolTip": "Models\\ValetRegistro.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAcwBcAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T15:39:27.778Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 35,
               "Title": "registro.css",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\registro.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\registro.css",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\registro.css",
               "RelativeToolTip": "wwwroot\\css\\registro.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAJEAAAAAlZmZmRkmwJ4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-07-21T20:33:43.377Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 60,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
@@ -417,7 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 58,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
@@ -430,46 +448,47 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 38,
               "Title": "operadora.js",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\operadora.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\operadora.js",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\operadora.js",
               "RelativeToolTip": "wwwroot\\js\\operadora.js",
-              "ViewState": "AgIAABYAAAAABAAAAIAYwIUAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAUwHoAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-07-22T17:03:05.715Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 46,
               "Title": "BotonesViewMobile.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Botones\\BotonesViewMobile.cshtml",
               "RelativeDocumentMoniker": "Views\\Botones\\BotonesViewMobile.cshtml",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Botones\\BotonesViewMobile.cshtml",
               "RelativeToolTip": "Views\\Botones\\BotonesViewMobile.cshtml",
-              "ViewState": "AgIAAAMBAAAAAAAAAAAAAAkBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-07-26T17:05:28.91Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 21,
               "Title": "ValetMovimiento.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\ValetMovimiento.cs",
               "RelativeDocumentMoniker": "Models\\ValetMovimiento.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\ValetMovimiento.cs",
               "RelativeToolTip": "Models\\ValetMovimiento.cs",
-              "ViewState": "AgIAAAIAAAAgMzMzMzMrwAgAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAgMzMzMzMrwBEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-26T19:10:15.563Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 36,
               "Title": "logins.css",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\logins.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\logins.css",
@@ -482,33 +501,35 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 6,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Reservas\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Reservas\\Index.cshtml",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Reservas\\Index.cshtml",
               "RelativeToolTip": "Views\\Reservas\\Index.cshtml",
-              "ViewState": "AgIAAIwAAAAAAAAAAAAcwJEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAIwKsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-08-05T19:00:56.31Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 16,
               "Title": "ReservasController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\ReservasController.cs",
               "RelativeDocumentMoniker": "Controllers\\ReservasController.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Controllers\\ReservasController.cs",
               "RelativeToolTip": "Controllers\\ReservasController.cs",
-              "ViewState": "AgIAAMkAAAAAAAAAAAAmwOUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAANoAAAAAAAAAAAAswPQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-05T18:59:58.01Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 39,
               "Title": "filtros.js",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\filtros.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\filtros.js",
@@ -521,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 7,
               "Title": "Reservas.css",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\Reservas.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\Reservas.css",
@@ -530,63 +551,68 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-08-05T19:28:59.156Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 17,
               "Title": "Reservas.js",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\Reservas.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\Reservas.js",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\Reservas.js",
               "RelativeToolTip": "wwwroot\\js\\Reservas.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-08-05T19:39:59.629Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 8,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\ControlSolicitudes\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\ControlSolicitudes\\Index.cshtml",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\ControlSolicitudes\\Index.cshtml",
               "RelativeToolTip": "Views\\ControlSolicitudes\\Index.cshtml",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFEAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAkwFgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-08-12T20:31:30.654Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 20,
               "Title": "ControlSolicitudesController .cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\ControlSolicitudesController .cs",
               "RelativeDocumentMoniker": "Controllers\\ControlSolicitudesController .cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Controllers\\ControlSolicitudesController .cs",
               "RelativeToolTip": "Controllers\\ControlSolicitudesController .cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAmwBMAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAswGoAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-12T20:31:05.311Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 18,
               "Title": "CajonesController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\CajonesController.cs",
               "RelativeDocumentMoniker": "Controllers\\CajonesController.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Controllers\\CajonesController.cs",
               "RelativeToolTip": "Controllers\\CajonesController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAmwB8AAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAswCIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-29T19:10:58.899Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 44,
               "Title": "Cajon.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\Cajon.cs",
               "RelativeDocumentMoniker": "Models\\Cajon.cs",
@@ -599,198 +625,220 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 48,
               "Title": "ValetApiController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\ValetApiController.cs",
               "RelativeDocumentMoniker": "Controllers\\ValetApiController.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Controllers\\ValetApiController.cs",
               "RelativeToolTip": "Controllers\\ValetApiController.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAIwEMAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAACAZ2ZmZmYWwBQAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-28T20:36:49.674Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 34,
               "Title": "solicitud-vehiculo.css",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\solicitud-vehiculo.css",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\solicitud-vehiculo.css",
               "RelativeToolTip": "wwwroot\\css\\solicitud-vehiculo.css",
-              "ViewState": "AgIAAEMAAAAAzMzMzMz2vyAAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-08-12T21:24:17.651Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 28,
               "Title": "SolicitudVehiculoController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\SolicitudVehiculoController.cs",
               "RelativeDocumentMoniker": "Controllers\\SolicitudVehiculoController.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Controllers\\SolicitudVehiculoController.cs",
               "RelativeToolTip": "Controllers\\SolicitudVehiculoController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIMAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-12T20:29:06.876Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 32,
               "Title": "servicios.json",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json",
               "RelativeDocumentMoniker": "wwwroot\\Config\\servicios.json",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\servicios.json",
               "RelativeToolTip": "wwwroot\\Config\\servicios.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-30T22:09:36.251Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 31,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABBAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T20:42:24.508Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 27,
               "Title": "ValetSolicitud.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\ValetSolicitud.cs",
               "RelativeDocumentMoniker": "Models\\ValetSolicitud.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\ValetSolicitud.cs",
               "RelativeToolTip": "Models\\ValetSolicitud.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAD4vwcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAcwBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-28T21:07:41.103Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\SolicitudVehiculo\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\SolicitudVehiculo\\Index.cshtml",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\SolicitudVehiculo\\Index.cshtml",
               "RelativeToolTip": "Views\\SolicitudVehiculo\\Index.cshtml",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAQwGYAAABIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-08-12T20:30:06.132Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 13,
               "Title": "printers.json",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json",
               "RelativeDocumentMoniker": "wwwroot\\Config\\printers.json",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\Config\\printers.json",
               "RelativeToolTip": "wwwroot\\Config\\printers.json",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-09-01T22:42:16.677Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "TicketRequest.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\TicketRequest.cs",
               "RelativeDocumentMoniker": "Models\\TicketRequest.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\TicketRequest.cs",
               "RelativeToolTip": "Models\\TicketRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA7AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-01T22:17:31.259Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 10,
               "Title": "PrinterConfigService.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Services\\PrinterConfigService.cs",
               "RelativeDocumentMoniker": "Services\\PrinterConfigService.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Services\\PrinterConfigService.cs",
               "RelativeToolTip": "Services\\PrinterConfigService.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAD4vygAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAswCsAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-01T22:12:10.795Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 42,
               "Title": "PrinterConfig.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\PrinterConfig.cs",
               "RelativeDocumentMoniker": "Models\\PrinterConfig.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\PrinterConfig.cs",
               "RelativeToolTip": "Models\\PrinterConfig.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-01T22:11:56.528Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 3,
               "Title": "TicketsController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\TicketsController.cs",
               "RelativeDocumentMoniker": "Controllers\\TicketsController.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Controllers\\TicketsController.cs",
               "RelativeToolTip": "Controllers\\TicketsController.cs",
-              "ViewState": "AgIAALgAAAAAAAAAAAAIwMYAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAcwDQAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-01T22:10:47.324Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 4,
               "Title": "Ticket.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\Ticket.cs",
               "RelativeDocumentMoniker": "Models\\Ticket.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\Ticket.cs",
               "RelativeToolTip": "Models\\Ticket.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAIwDAAAAA7AAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAAswEEAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-01T22:12:57.005Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "Reservas.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Tickets\\Reservas.cshtml",
               "RelativeDocumentMoniker": "Views\\Tickets\\Reservas.cshtml",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Tickets\\Reservas.cshtml",
               "RelativeToolTip": "Views\\Tickets\\Reservas.cshtml",
-              "ViewState": "AgIAAFIBAAAAkJmZmZkdwFwBAABGAAAAAAAAAA==",
+              "ViewState": "AgIAANEAAAAAAAAAAAAkwOAAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-09-02T18:54:12.258Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 1,
               "Title": "Config.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Tickets\\Config.cshtml",
               "RelativeDocumentMoniker": "Views\\Tickets\\Config.cshtml",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Tickets\\Config.cshtml",
               "RelativeToolTip": "Views\\Tickets\\Config.cshtml",
-              "ViewState": "AgIAAIoBAAAAAAAAAAAgwJcBAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAOUAAAAAAAAAAAAkwIwBAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-09-02T18:54:00.72Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "TcabdopeNewDbContext.cs",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Data\\TcabdopeNewDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\TcabdopeNewDbContext.cs",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Data\\TcabdopeNewDbContext.cs",
+              "RelativeToolTip": "Data\\TcabdopeNewDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T19:02:37.006Z",
               "IsPinned": true
             },
             {
@@ -802,194 +850,110 @@
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "AppValetParking.csproj.user",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\AppValetParking.csproj.user",
-              "RelativeDocumentMoniker": "AppValetParking.csproj.user",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\AppValetParking.csproj.user",
-              "RelativeToolTip": "AppValetParking.csproj.user",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
-              "WhenOpened": "2025-08-28T20:38:51.78Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PegasysDbContext.cs",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Data\\PegasysDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\PegasysDbContext.cs",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Data\\PegasysDbContext.cs",
-              "RelativeToolTip": "Data\\PegasysDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T15:08:05.776Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "VV_TARJETAS_EMPLEADOS.cs",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\VV_TARJETAS_EMPLEADOS.cs",
-              "RelativeDocumentMoniker": "Models\\VV_TARJETAS_EMPLEADOS.cs",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\VV_TARJETAS_EMPLEADOS.cs",
-              "RelativeToolTip": "Models\\VV_TARJETAS_EMPLEADOS.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T15:08:48.29Z"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "TcabdopeDbContext.cs",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Data\\TcabdopeDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\TcabdopeDbContext.cs",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Data\\TcabdopeDbContext.cs",
-              "RelativeToolTip": "Data\\TcabdopeDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T16:39:34.294Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TcabdopeNewDbContext.cs",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Data\\TcabdopeNewDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\TcabdopeNewDbContext.cs",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Data\\TcabdopeNewDbContext.cs",
-              "RelativeToolTip": "Data\\TcabdopeNewDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T19:02:37.006Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "ReservasViewModel.cs",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\ReservasViewModel.cs",
-              "RelativeDocumentMoniker": "Models\\ReservasViewModel.cs",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\ReservasViewModel.cs",
-              "RelativeToolTip": "Models\\ReservasViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T19:00:10.848Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
               "Title": "Reserva.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\Reserva.cs",
               "RelativeDocumentMoniker": "Models\\Reserva.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\Reserva.cs",
               "RelativeToolTip": "Models\\Reserva.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAmwA8AAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAswCEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T18:58:56.56Z"
+              "WhenOpened": "2025-08-05T18:58:56.56Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T15:09:19.458Z"
+              "WhenOpened": "2025-07-22T15:09:19.458Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "AppValetParking.csproj",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\AppValetParking.csproj",
-              "RelativeDocumentMoniker": "AppValetParking.csproj",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\AppValetParking.csproj",
-              "RelativeToolTip": "AppValetParking.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-23T16:58:24.978Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-22T15:03:34.273Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "appsettings.Development.json",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\appsettings.Development.json",
-              "RelativeToolTip": "appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-23T16:58:26.606Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 44,
-              "Title": "ReservationAllView.cs",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\ReservationAllView.cs",
-              "RelativeDocumentMoniker": "Models\\ReservationAllView.cs",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\ReservationAllView.cs",
-              "RelativeToolTip": "Models\\ReservationAllView.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T16:40:45.245Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 26,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Reportes\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Reportes\\Index.cshtml",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Reportes\\Index.cshtml",
+              "RelativeToolTip": "Views\\Reportes\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPEAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-29T18:58:55.008Z"
+              "WhenOpened": "2025-12-02T13:11:47.436Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 15,
               "Title": "funcionesReservas.js",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\funcionesReservas.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\funcionesReservas.js",
               "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\funcionesReservas.js",
               "RelativeToolTip": "wwwroot\\js\\funcionesReservas.js",
-              "ViewState": "AgIAAGAAAAAAZWZmZqYowCYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAYwEkAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-06T15:01:22.35Z"
+              "WhenOpened": "2025-08-06T15:01:22.35Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
-              "Title": "Acompanante.cs",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\Acompanante.cs",
-              "RelativeDocumentMoniker": "Models\\Acompanante.cs",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\Acompanante.cs",
-              "RelativeToolTip": "Models\\Acompanante.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAuAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "ServicioHelper.cs",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Services\\ServicioHelper.cs",
+              "RelativeDocumentMoniker": "Services\\ServicioHelper.cs",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Services\\ServicioHelper.cs",
+              "RelativeToolTip": "Services\\ServicioHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T18:59:22.763Z"
+              "WhenOpened": "2025-07-30T22:40:59.743Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 5,
+              "Title": "ReservasViewModel.cs",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\ReservasViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ReservasViewModel.cs",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\ReservasViewModel.cs",
+              "RelativeToolTip": "Models\\ReservasViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T19:00:10.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "ReportesController.cs",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\ReportesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReportesController.cs",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Controllers\\ReportesController.cs",
+              "RelativeToolTip": "Controllers\\ReportesController.cs",
+              "ViewState": "AgIAAK0AAAAAAAAAAAAcwMYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T13:10:06.815Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "operadora.css",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\operadora.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\operadora.css",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\operadora.css",
+              "RelativeToolTip": "wwwroot\\css\\operadora.css",
+              "ViewState": "AgIAAK4AAAAwMzMzMzMjwMQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-07-22T17:02:46.591Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
@@ -1001,43 +965,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA3AAAAAAAAAA==",
+              "DocumentIndex": 45,
+              "Title": "Acompanante.cs",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\Acompanante.cs",
+              "RelativeDocumentMoniker": "Models\\Acompanante.cs",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\Acompanante.cs",
+              "RelativeToolTip": "Models\\Acompanante.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T18:59:22.763Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "TcabdopeDbContext.cs",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Data\\TcabdopeDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\TcabdopeDbContext.cs",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Data\\TcabdopeDbContext.cs",
+              "RelativeToolTip": "Data\\TcabdopeDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T16:39:34.294Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "hotel-printer-config.json",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Data\\hotel-printer-config.json",
+              "RelativeDocumentMoniker": "Data\\hotel-printer-config.json",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Data\\hotel-printer-config.json",
+              "RelativeToolTip": "Data\\hotel-printer-config.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-23T16:58:32.536Z"
+              "WhenOpened": "2025-12-02T14:49:57.792Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
-              "Title": "serviciosvp.js",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\serviciosvp.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\serviciosvp.js",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\serviciosvp.js",
-              "RelativeToolTip": "wwwroot\\js\\serviciosvp.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-07-30T22:10:40.551Z"
+              "DocumentIndex": 50,
+              "Title": "ReservationAllView.cs",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\ReservationAllView.cs",
+              "RelativeDocumentMoniker": "Models\\ReservationAllView.cs",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\ReservationAllView.cs",
+              "RelativeToolTip": "Models\\ReservationAllView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T16:40:45.245Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
-              "Title": "site.js",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "wwwroot\\js\\site.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-02T15:29:37.031Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 51,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "Models\\Usuario.cs",
@@ -1049,7 +1025,127 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 52,
+              "Title": "VV_TARJETAS_EMPLEADOS.cs",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\VV_TARJETAS_EMPLEADOS.cs",
+              "RelativeDocumentMoniker": "Models\\VV_TARJETAS_EMPLEADOS.cs",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Models\\VV_TARJETAS_EMPLEADOS.cs",
+              "RelativeToolTip": "Models\\VV_TARJETAS_EMPLEADOS.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T15:08:48.29Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "PegasysDbContext.cs",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Data\\PegasysDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\PegasysDbContext.cs",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Data\\PegasysDbContext.cs",
+              "RelativeToolTip": "Data\\PegasysDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-22T15:08:05.776Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "AppValetParking.csproj.user",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\AppValetParking.csproj.user",
+              "RelativeDocumentMoniker": "AppValetParking.csproj.user",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\AppValetParking.csproj.user",
+              "RelativeToolTip": "AppValetParking.csproj.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2025-08-28T20:38:51.78Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "AppValetParking.csproj",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\AppValetParking.csproj",
+              "RelativeDocumentMoniker": "AppValetParking.csproj",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\AppValetParking.csproj",
+              "RelativeToolTip": "AppValetParking.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-23T16:58:24.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-22T15:03:34.273Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-23T16:58:26.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T18:58:55.008Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-23T16:58:32.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "serviciosvp.js",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\serviciosvp.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\serviciosvp.js",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\serviciosvp.js",
+              "RelativeToolTip": "wwwroot\\js\\serviciosvp.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-30T22:10:40.551Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
+              "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "wwwroot\\js\\site.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-02T15:29:37.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
               "Title": "ServicioItem.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Models\\ServicioItem.cs",
               "RelativeDocumentMoniker": "Models\\ServicioItem.cs",
@@ -1061,31 +1157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
-              "Title": "ServicioHelper.cs",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Services\\ServicioHelper.cs",
-              "RelativeDocumentMoniker": "Services\\ServicioHelper.cs",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\Services\\ServicioHelper.cs",
-              "RelativeToolTip": "Services\\ServicioHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-30T22:40:59.743Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 63,
-              "Title": "operadora.css",
-              "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\operadora.css",
-              "RelativeDocumentMoniker": "wwwroot\\css\\operadora.css",
-              "ToolTip": "C:\\ValetParking\\AppValetParking\\wwwroot\\css\\operadora.css",
-              "RelativeToolTip": "wwwroot\\css\\operadora.css",
-              "ViewState": "AgIAAIUAAACAY2ZmZqYowIkAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-07-22T17:02:46.591Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 65,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -1097,7 +1169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 66,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Privacy.cshtml",
@@ -1109,7 +1181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 67,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
@@ -1121,7 +1193,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 68,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
@@ -1133,7 +1205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 69,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
@@ -1145,7 +1217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 70,
               "Title": "EmpleadosController.cs",
               "DocumentMoniker": "C:\\ValetParking\\AppValetParking\\Controllers\\EmpleadosController.cs",
               "RelativeDocumentMoniker": "Controllers\\EmpleadosController.cs",

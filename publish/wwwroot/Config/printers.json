@@ -16,5 +16,11 @@
     "Printers": "\\\\NVO03WINTISOP14\\IMPRESORA_TALLER",
     "Name": "NVO03WINTISOP14",
     "PrintGroups": false
+  },
+  {
+    "Hostname": "NVO03WINTISOP13",
+    "Printers": "123",
+    "Name": "NVO03WINTISOP13",
+    "PrintGroups": false
   }
 ]

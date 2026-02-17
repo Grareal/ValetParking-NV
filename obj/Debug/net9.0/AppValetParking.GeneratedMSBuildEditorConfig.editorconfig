@@ -52,6 +52,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3BlcmFkb3JhXE9wZXJhZG9yYVZpZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ValetParking/AppValetParking/Views/Reportes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ValetParking/AppValetParking/Views/Reservas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

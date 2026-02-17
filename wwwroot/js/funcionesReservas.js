@@ -1,4 +1,6 @@
-// Funciones para mostrar/ocultar las vistas
+// ==================================================
+// Mostrar/ocultar vistas
+// ==================================================
 function mostrarVista(idVista) {
     const vistas = ['vistaLlegadasDia', 'vistaReservasMes'];
     vistas.forEach(vista => {
@@ -17,7 +19,10 @@ function mostrarVistaAlCargar(vistaActual) {
     }
 }
 
- function filtrarTablaPorId(idInput, idTabla) {
+// ==================================================
+// Filtrar tabla por input
+// ==================================================
+function filtrarTablaPorId(idInput, idTabla) {
     const input = document.getElementById(idInput);
     const filter = input.value.toLowerCase();
     const table = document.getElementById(idTabla);
@@ -29,23 +34,19 @@ function mostrarVistaAlCargar(vistaActual) {
     }
 }
 
-
-
 window.mostrarVista = mostrarVista;
 window.mostrarVistaAlCargar = mostrarVistaAlCargar;
 window.filtrarTablaPorId = filtrarTablaPorId;
 
-
-// Código que depende de DOMContentLoaded (no necesita ser global)
+// ==================================================
+// DOMContentLoaded
+// ==================================================
 document.addEventListener("DOMContentLoaded", () => {
-    // Cargar reservas inicial sin filtro ni fechas (o con fechas por defecto)
-    cargarReservas();
 
-    const filtroInput = document.getElementById("filtroReservas");
+    const filtroInput = document.getElementById("filtroReservasMes");
     const fechaInicioInput = document.getElementById("fechaInicio");
     const fechaFinInput = document.getElementById("fechaFin");
 
-    // Función para cargar reservas con filtro y fechas
     async function cargarReservas(texto = "") {
         const fechaInicio = fechaInicioInput ? fechaInicioInput.value : "";
         const fechaFin = fechaFinInput ? fechaFinInput.value : "";
@@ -73,45 +74,37 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${item.h_nom}</td>
                     <td>${item.h_fec_lld}</td>
                     <td>${item.h_fec_sda}</td>
-                    <td>${item.Hotel || ""}</td>
-                    <td>${item.Acompanantes && item.Acompanantes.length > 0 ? item.Acompanantes.join(", ") : "Sin acompañantes"}</td>
+                    <td>${item.hotel ?? ""}</td>
+                <td>${item.acompanantesTexto ?? "Sin acompañantes"}</td>
+
                 `;
                 tbody.appendChild(tr);
             });
+
         } catch (error) {
             console.error("Error cargando reservas:", error);
         }
     }
 
-    // Evento para filtro por texto en reservas del mes
+    // Cargar reservas inicial
+    cargarReservas();
+
+    // Eventos de filtro
     if (filtroInput) {
         filtroInput.addEventListener("keyup", () => {
-            const texto = filtroInput.value.trim();
-            cargarReservas(texto);
+            cargarReservas(filtroInput.value.trim());
         });
     }
 
-    // También carga reservas cuando cambian las fechas
     if (fechaInicioInput) {
         fechaInicioInput.addEventListener("change", () => {
-            cargarReservas(filtroInput.value.trim());
+            cargarReservas(filtroInput ? filtroInput.value.trim() : "");
         });
     }
+
     if (fechaFinInput) {
         fechaFinInput.addEventListener("change", () => {
-            cargarReservas(filtroInput.value.trim());
+            cargarReservas(filtroInput ? filtroInput.value.trim() : "");
         });
     }
 });
-
-
-function toggleAcompanantes(reservaId) {
-    const div = document.getElementById('acompanantes-' + reservaId);
-    if (!div) return;
-
-    if (div.style.display === 'none' || div.style.display === '') {
-        div.style.display = 'block';
-    } else {
-        div.style.display = 'none';
-    }
-}

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.IO;
 using ClosedXML.Excel;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace AppValetParking.Controllers
 {
@@ -20,9 +22,14 @@ namespace AppValetParking.Controllers
             _contextPegasys = contextPegasys;
         }
 
-        public IActionResult Index(DateTime? fechaInicio, DateTime? fechaFin)
+        public IActionResult Index(DateTime? fechaInicio, DateTime? fechaFin, string buscar, int pagina = 1)
         {
-            var query = _contextApp.ValetRegistros.AsQueryable();
+            int pageSize = 20;
+
+            var query = _contextApp.ValetRegistros
+                .Where(r => r.Situacion == "USADO")
+                .AsNoTracking()
+                .AsQueryable();
 
             if (fechaInicio.HasValue)
                 query = query.Where(r => r.Fecha >= fechaInicio.Value);
@@ -30,12 +37,37 @@ namespace AppValetParking.Controllers
             if (fechaFin.HasValue)
                 query = query.Where(r => r.Fecha <= fechaFin.Value);
 
+            //  BÚSQUEDA GLOBAL EN TODA LA TABLA
+            if (!string.IsNullOrWhiteSpace(buscar))
+            {
+                buscar = buscar.Trim();
+
+                query = query.Where(r =>
+                    (r.FolioVP != null && r.FolioVP.Contains(buscar)) ||
+                    (r.Habitacion != null && r.Habitacion.Contains(buscar)) ||
+                    (r.Reserva != null && r.Reserva.Contains(buscar)) ||
+                    (r.Hotel != null && r.Hotel.Contains(buscar)) ||
+                    (r.Valet != null && r.Valet.Contains(buscar))
+                );
+            }
+
+            int totalRegistros = query.Count();
+
             var registros = query
                 .OrderByDescending(r => r.Fecha)
                 .ThenByDescending(r => r.Solicitud)
+                .Skip((pagina - 1) * pageSize)
+                .Take(pageSize)
                 .ToList();
 
-            // Leer servicios.json desde wwwroot/Config
+            ViewBag.PaginaActual = pagina;
+            ViewBag.TotalPaginas = (int)Math.Ceiling((double)totalRegistros / pageSize);
+
+            ViewBag.FechaInicio = fechaInicio?.ToString("yyyy-MM-dd");
+            ViewBag.FechaFin = fechaFin?.ToString("yyyy-MM-dd");
+            ViewBag.Buscar = buscar;
+
+            // Servicios JSON (con fix null)
             string rutaJson = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Config", "servicios.json");
             List<ServicioItem> servicios = new();
 
@@ -43,17 +75,14 @@ namespace AppValetParking.Controllers
             {
                 var json = System.IO.File.ReadAllText(rutaJson);
                 var opciones = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                servicios = JsonSerializer.Deserialize<List<ServicioItem>>(json, opciones);
+                servicios = JsonSerializer.Deserialize<List<ServicioItem>>(json, opciones) ?? new List<ServicioItem>();
             }
 
             ViewBag.Servicios = servicios;
 
-            // Para que los inputs en la vista mantengan el valor seleccionado:
-            ViewBag.FechaInicio = fechaInicio?.ToString("yyyy-MM-dd") ?? DateTime.Now.ToString("yyyy-MM-dd");
-            ViewBag.FechaFin = fechaFin?.ToString("yyyy-MM-dd") ?? DateTime.Now.ToString("yyyy-MM-dd");
-
             return View("OperadoraView", registros);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> ExportarExcel(DateTime fechaInicio, DateTime fechaFin)
@@ -74,12 +103,13 @@ namespace AppValetParking.Controllers
             worksheet.Cell(1, 3).Value = "H. Solicitud";
             worksheet.Cell(1, 4).Value = "Habitación";
             worksheet.Cell(1, 5).Value = "Hotel";
-            worksheet.Cell(1, 6).Value = "FolioVP";
-            worksheet.Cell(1, 7).Value = "Codigo Gafette";
-            worksheet.Cell(1, 8).Value = "Nombre Valet";
-            worksheet.Cell(1, 9).Value = "Servicio";
-            worksheet.Cell(1, 10).Value = "H. Ultimo Mov";
-            worksheet.Cell(1, 11).Value = "Cajón";
+            worksheet.Cell(1, 6).Value = "Reserva";
+            worksheet.Cell(1, 7).Value = "FolioVP";
+            worksheet.Cell(1, 8).Value = "Codigo Gafette";
+            worksheet.Cell(1, 9).Value = "Nombre Valet";
+            worksheet.Cell(1, 10).Value = "Servicio";
+            worksheet.Cell(1, 11).Value = "H. Ultimo Mov";
+            worksheet.Cell(1, 12).Value = "Cajón";
 
             int row = 2;
             foreach (var r in registros)
@@ -89,12 +119,13 @@ namespace AppValetParking.Controllers
                 worksheet.Cell(row, 3).Value = r.Solicitud?.ToString(@"hh\:mm\:ss") ?? "";
                 worksheet.Cell(row, 4).Value = r.Habitacion ?? "";
                 worksheet.Cell(row, 5).Value = r.Hotel ?? "";
-                worksheet.Cell(row, 6).Value = r.FolioVP ?? "";
-                worksheet.Cell(row, 7).Value = r.NumeroOperador ?? "";
-                worksheet.Cell(row, 8).Value = r.Valet ?? "";
-                worksheet.Cell(row, 9).Value = r.Servicio ?? "";
-                worksheet.Cell(row, 10).Value = r.HoraSalida?.ToString(@"hh\:mm") ?? "";
-                worksheet.Cell(row, 11).Value = r.CajonBuffer ?? "";
+                worksheet.Cell(row, 6).Value = r.Reserva ?? "";
+                worksheet.Cell(row, 7).Value = r.FolioVP ?? "";
+                worksheet.Cell(row, 8).Value = r.NumeroOperador ?? "";
+                worksheet.Cell(row, 9).Value = r.Valet ?? "";
+                worksheet.Cell(row, 10).Value = r.Servicio ?? "";
+                worksheet.Cell(row, 11).Value = r.HoraSalida?.ToString(@"hh\:mm") ?? "";
+                worksheet.Cell(row, 12).Value = r.CajonBuffer ?? "";
 
                 row++;
             }
@@ -109,6 +140,35 @@ namespace AppValetParking.Controllers
                 $"Registros_{fechaInicio:yyyyMMdd}_{fechaFin:yyyyMMdd}.xlsx"
             );
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LiberarFolioVP(string folioVP)
+        {
+            if (string.IsNullOrWhiteSpace(folioVP))
+                return RedirectToAction("Index");
+
+            var registro = _contextApp.ValetRegistros
+                .FirstOrDefault(r => r.FolioVP == folioVP);
+
+            if (registro == null)
+            {
+                TempData["Error"] = "El FolioVP no existe.";
+                return RedirectToAction("Index");
+            }
+
+            // También eliminar movimientos relacionados si existen
+            var movimientos = _contextApp.ValetMovimientos
+                .Where(m => m.IdRegistro == registro.Id);
+
+            _contextApp.ValetMovimientos.RemoveRange(movimientos);
+            _contextApp.ValetRegistros.Remove(registro);
+
+            await _contextApp.SaveChangesAsync();
+
+            TempData["Success"] = $"Folio {folioVP} liberado correctamente.";
+            return RedirectToAction("Index");
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> ActualizarRegistro(ValetRegistro registro)

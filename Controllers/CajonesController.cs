@@ -33,5 +33,27 @@ namespace AppValetParking.Controllers
             }
             return NotFound();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LiberarCajon(int numero)
+        {
+            var cajon = await _context.Cajones
+                .FirstOrDefaultAsync(c => c.Numero == numero);
+
+            if (cajon != null)
+            {
+                cajon.Ocupado = false;
+
+                // Opcional: limpiar ubicación si la usas
+                // cajon.Ubicacion = null;
+
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+
+            return NotFound();
+        }
+
+
     }
 }

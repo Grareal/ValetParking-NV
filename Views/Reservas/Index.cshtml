@@ -41,7 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.LlegadasDelDia)
+                    @foreach (var item in Model.LlegadasDelDia.Where(x => x.h_status != "CANCELLED"))
                     {
                     <tr>
                         <td>@item.h_status</td>
@@ -116,7 +116,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Reservas)
+                    @foreach (var item in Model.Reservas.Where(x => x.h_status != "CANCELLED"))
                 {
                     <tr>
                         <td>@item.h_status</td>
@@ -145,7 +145,8 @@
                         </td>
 
 
-                    </tr>   
+                    </tr>
+
                 }
                 </tbody>
             </table>

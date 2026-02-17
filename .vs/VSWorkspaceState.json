@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers",
     "\\Data",
+    "\\Services",
     "\\Views",
-    "\\Views\\Operadora",
+    "\\Views\\ControlSolicitudes",
+    "\\Views\\Home",
+    "\\Views\\Reportes",
     "\\Views\\SolicitudVehiculo",
     "\\wwwroot",
-    "\\wwwroot\\Config",
-    "\\wwwroot\\js",
-    "\\wwwroot\\lib"
+    "\\wwwroot\\js"
   ],
-  "SelectedNode": "\\Data\\ApplicationDbContext.cs",
+  "SelectedNode": "\\Models\\Reserva.cs",
   "PreviewInSolutionExplorer": false
 }

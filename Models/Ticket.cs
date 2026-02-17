@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Printing;
+using QRCoder;
 
 namespace AppValetParking.Models
 {
@@ -62,9 +63,10 @@ namespace AppValetParking.Models
                 new RectangleF(x, y, width, lineHeight),
                 center);
             y += lineHeight + 4;
+            e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm tt"), font, Brushes.Black, x, y);
+            y += lineHeight;
 
-            // Información de la reserva
-            e.Graphics.DrawString($"Folio: {FOLIO}", font, Brushes.Black, x, y);
+            e.Graphics.DrawString($"RESERVA: {FOLIO}", font, Brushes.Black, x, y);
             y += lineHeight;
 
             e.Graphics.DrawString($"Nombre: {NAME}", font, Brushes.Black, x, y);
@@ -73,22 +75,36 @@ namespace AppValetParking.Models
             e.Graphics.DrawString($"Habitación: {ROOM}", font, Brushes.Black, x, y);
             y += lineHeight;
 
-            // ← NUEVA LÍNEA: Mostrar el HOTEL
             if (!string.IsNullOrEmpty(HOTEL) && HOTEL != "NULL")
             {
                 e.Graphics.DrawString($"Hotel: {HOTEL}", font, Brushes.Black, x, y);
                 y += lineHeight;
             }
 
-            e.Graphics.DrawString($"Tipo: {TYPE}", font, Brushes.Black, x, y);
-            y += lineHeight;
+            y += 5;
 
-            // Observaciones
-            e.Graphics.DrawString("--OBSERVACIONES--", font, Brushes.Black, x, y);
-            y += lineHeight;
+            // ----------------------------
+            // 🔹 CÓDIGO QR CON EL FOLIO
+            // ----------------------------
+            using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
+            {
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(FOLIO, QRCodeGenerator.ECCLevel.Q);
+                using (QRCode qrCode = new QRCode(qrCodeData))
+                using (Bitmap qrBitmap = qrCode.GetGraphic(5))
+                {
+                    float qrSize = 120;
+                    float qrX = (width - qrSize) / 2;
+                    e.Graphics.DrawImage(qrBitmap, qrX, y, qrSize, qrSize);
+                    y += qrSize + 10;
+                }
+            }
 
+            // Comentarios
             if (!string.IsNullOrWhiteSpace(OBS))
             {
+                e.Graphics.DrawString("Comentarios:", font, Brushes.Black, x, y);
+                y += lineHeight;
+
                 int pos = 0;
                 int chunk = 28;
                 while (pos < OBS.Length)
@@ -100,15 +116,7 @@ namespace AppValetParking.Models
                 }
             }
 
-            // Información del sistema
-            e.Graphics.DrawString($"Tablet/Host: {TROOM}", font, Brushes.Black, x, y);
-            y += lineHeight;
-
-            e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm tt"), font, Brushes.Black, x, y);
-            y += lineHeight;
-
-            // Pie
-            e.Graphics.DrawString("************************", font, Brushes.Black, x, y);
         }
+
     }
 }

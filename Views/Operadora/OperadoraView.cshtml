@@ -47,6 +47,23 @@
             </div>
         </form>
 
+        <!--PROBANDO ANDO -->
+        <div class="card mb-3 p-3 shadow-sm">
+            <form asp-controller="Operadora" asp-action="LiberarFolioVP" method="post" class="d-flex gap-2 align-items-end">
+                <div>
+                    <label for="folioLiberar">Liberar FolioVP:</label>
+                    <input type="text" id="folioLiberar" name="folioVP" class="form-control" placeholder="Ingrese FolioVP" required />
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-danger">
+                        Liberar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+
         <!-- Formulario Exportar a Excel -->
         <form asp-controller="Operadora" asp-action="ExportarExcel" method="post" class="d-flex gap-2 align-items-end flex-wrap" target="_blank">
             <div>
@@ -74,7 +91,20 @@
         @ViewData["Title"]
 
         <div class="mb-3">
-            <input type="text" id="filtroTabla" class="form-control" placeholder="Escribe para filtrar..." />
+            <form method="get" asp-action="Index" class="mb-3 d-flex gap-2">
+                <input type="hidden" name="fechaInicio" value="@ViewBag.FechaInicio" />
+                <input type="hidden" name="fechaFin" value="@ViewBag.FechaFin" />
+
+                <input type="text"
+                       name="buscar"
+                       value="@ViewBag.Buscar"
+                       class="form-control"
+                       placeholder="Buscar en todos los registros..." />
+
+                <button type="submit" class="btn btn-dark">
+                    Buscar
+                </button>
+            </form>
         </div>
 
         <div class="table-responsive shadow-sm rounded">
@@ -86,6 +116,7 @@
                         <th>Solicitud</th>
                         <th>Hab</th>
                         <th>Hotel</th>
+                        <th>N.Res</th>
                         <th>Folio VP</th>
                         <th>Valet</th>
                         <th>Servicio</th>
@@ -103,6 +134,7 @@
                         <td>@(item.Solicitud?.ToString(@"hh\:mm\:ss") ?? "")</td>
                         <td>@item.Habitacion</td>
                         <td>@item.Hotel</td>
+                        <td>@item.Reserva</td>
                         <td>@item.FolioVP</td>
                         <td>
                             <input type="text" name="Valet" value="@item.Valet" class="form-control input-operadora" placeholder="Valet" form="form-@item.Id" />
@@ -158,6 +190,56 @@
 
             </table>
         </div>
+        <nav class="mt-3">
+            <ul class="pagination justify-content-center">
+
+                @if (ViewBag.PaginaActual > 1)
+        {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-pagina="@(ViewBag.PaginaActual - 1)"
+                       asp-route-fechaInicio="@ViewBag.FechaInicio"
+                       asp-route-fechaFin="@ViewBag.FechaFin"
+                       asp-route-buscar="@ViewBag.Buscar">
+                        Anterior
+                    </a>
+                </li>
+        }
+
+                @for (int i = 1; i <= ViewBag.TotalPaginas; i++)
+        {
+                <li class="page-item @(i == ViewBag.PaginaActual ? "active" : "")">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-pagina="@i"
+                       asp-route-fechaInicio="@ViewBag.FechaInicio"
+                       asp-route-fechaFin="@ViewBag.FechaFin"
+                       asp-route-buscar="@ViewBag.Buscar">
+                        @i
+                    </a>
+                </li>
+        }
+
+                @if (ViewBag.PaginaActual < ViewBag.TotalPaginas)
+        {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-action="Index"
+                       asp-route-pagina="@(ViewBag.PaginaActual + 1)"
+                       asp-route-fechaInicio="@ViewBag.FechaInicio"
+                       asp-route-fechaFin="@ViewBag.FechaFin"
+                       asp-route-buscar="@ViewBag.Buscar">
+                        Siguiente
+                    </a>
+                </li>
+        }
+
+            </ul>
+        </nav>
+
+
+
     </div>
     <!-- Modal para editar información adicional -->
     <div class="modal fade" id="modalOpciones" tabindex="-1" aria-labelledby="modalOpcionesLabel" aria-hidden="true">

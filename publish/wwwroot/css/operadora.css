@@ -1,3 +1,7 @@
+/* =============================
+   ESTILOS GENERALES
+============================= */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8fafc;
@@ -6,53 +10,50 @@ body {
     padding: 10px 0;
 }
 
-h2 {
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-    color: #004085;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.container-fluid {
+    box-sizing: border-box;
 }
 
-.container-fluid {
-     box-sizing: border-box;
-}
+/* =============================
+   TABLA
+============================= */
 
 .table-responsive {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: auto; /* IMPORTANTE: permitir que se vea todo */
 }
 
 table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 8px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 3px 12px rgba(0, 64, 133, 0.15);
+    border-spacing: 0 6px;
     background: #fff;
-    font-size: 1rem;
-    table-layout: auto;
+    box-shadow: 0 3px 12px rgba(0, 64, 133, 0.15);
+    table-layout: fixed;
+    font-size: 0.88rem;
 }
+
+/* =============================
+   ENCABEZADO
+============================= */
 
 thead {
     background-color: #004085;
-    color: white;
+    color: #fff;
 }
 
     thead th {
-        border: none;
-        text-align: left;
-        font-size: 1rem;
+        padding: 0.5rem 0.5rem;
         font-weight: 600;
+        text-align: left;
     }
 
+/* =============================
+   CUERPO
+============================= */
+
 tbody td {
-    vertical-align: middle;
-    text-align: left;
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
+    padding: 0.35rem 0.45rem;
     background-color: #fafafa;
     border-bottom: 1px solid #e0e0e0;
     white-space: nowrap;
@@ -62,99 +63,146 @@ tbody td {
 
 tbody tr:hover td {
     background-color: #e9f2ff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.form-control {
-    border-radius: 0.3rem;
-    font-size: 1rem;
-    padding: 0.5rem 0.75rem;
-    min-width: 120px;
-    margin: auto;
-    display: block;
-    text-align: left;
-    box-sizing: border-box;
+/* =============================
+   COLUMNAS COMPACTAS
+============================= */
+
+/* Fecha */
+#tablaOperadora th:nth-child(1),
+#tablaOperadora td:nth-child(1) {
+    width: 95px;
 }
+
+/* N. Operación */
+#tablaOperadora th:nth-child(2),
+#tablaOperadora td:nth-child(2) {
+    width: 75px;
+    text-align: center;
+}
+
+/* Solicitud */
+#tablaOperadora th:nth-child(3),
+#tablaOperadora td:nth-child(3) {
+    width: 90px;
+    text-align: center;
+}
+
+/* Hab */
+#tablaOperadora th:nth-child(4),
+#tablaOperadora td:nth-child(4) {
+    width: 65px;
+    text-align: center;
+}
+
+/* Hotel */
+#tablaOperadora th:nth-child(5),
+#tablaOperadora td:nth-child(5) {
+    width: 95px;
+}
+
+/* N. Res */
+#tablaOperadora th:nth-child(6),
+#tablaOperadora td:nth-child(6) {
+    width: 85px;
+    text-align: center;
+}
+
+/* Folio VP */
+#tablaOperadora th:nth-child(7),
+#tablaOperadora td:nth-child(7) {
+    width: 95px;
+    text-align: center;
+}
+
+/* Valet */
+#tablaOperadora th:nth-child(8),
+#tablaOperadora td:nth-child(8) {
+    width: 110px;
+}
+
+/* Servicio */
+#tablaOperadora th:nth-child(9),
+#tablaOperadora td:nth-child(9) {
+    width: 120px;
+}
+
+/* Último mov */
+#tablaOperadora th:nth-child(10),
+#tablaOperadora td:nth-child(10) {
+    width: 85px;
+    text-align: center;
+}
+
+/* Cajón */
+#tablaOperadora th:nth-child(11),
+#tablaOperadora td:nth-child(11) {
+    width: 85px;
+    text-align: center;
+}
+
+/* =============================
+   ACCIÓN (CLAVE)
+============================= */
+
+#tablaOperadora th:nth-child(12),
+#tablaOperadora td:nth-child(12) {
+    width: 220px;
+    min-width: 220px;
+    text-align: center;
+    overflow: visible; /* CLAVE para que se vean los ... */
+}
+
+/* =============================
+   INPUTS
+============================= */
+
+.form-control,
+.input-operadora {
+    width: 100%;
+    font-size: 0.82rem;
+    padding: 0.25rem 0.35rem;
+}
+
+/* =============================
+   BOTONES
+============================= */
 
 .btn-sm {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.35rem;
-    margin-left: 0.25rem;
-    min-width: 36px;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.45rem;
+    margin: 0 1px;
 }
 
-.btn-success {
-    background-color: #198754;
-    border: none;
-    transition: background-color 0.2s ease;
+.btn-mas-opciones {
+    min-width: 34px;
+    font-weight: bold;
 }
 
-.btn-danger {
-    background-color: #dc3545;
-    border: none;
-    transition: background-color 0.2s ease;
-}
-
-.btn-success:hover {
-    background-color: #157347;
-}
-
-.btn-danger:hover {
-    background-color: #bb2d3b;
-}
+/* =============================
+   OPERADORA HEADER
+============================= */
 
 .operadora-input {
-    margin: 20px 0;
+    margin: 15px 0;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
 }
-
-
-
 
 #codigoOperador {
-    width: 180px;
-    padding: 6px 10px;
-    font-size: 1.1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-/* Input de formulario dentro de la tabla */
-.input-operadora {
-    width: 130px;
-    min-width: 100px;
-    margin: 0 2px;
+    width: 160px;
+    padding: 5px 8px;
     font-size: 0.95rem;
-    padding: 0.4rem 0.5rem;
 }
 
-/* Fija ancho y controla texto de la columna N. Operadora */
-#tablaOperadora th:nth-child(2),
-#tablaOperadora td:nth-child(2) {
-    width: 100px;  
-    max-width: 100px;
-    white-space: nowrap; /* Evita salto de línea */
-    overflow: hidden; 
-    text-overflow: ellipsis; /* Muestra "..." si texto es largo */
-}
+/* =============================
+   FILTRO
+============================= */
 
-#tablaOperadora td:nth-child(10) {
-    width: 100px;  
-    max-width: 100px;
-    white-space: nowrap; /* Evita salto de línea */
-    overflow: hidden; /* Oculta texto extra */
-    text-overflow: ellipsis; /* Muestra "..." si texto es largo */
-}
-
-
-/* Aumenta el ancho mínimo de las columnas Valet, Servicio, HoraSalida, CajonBuffer */
-#tablaOperadora th:nth-child(7),
-#tablaOperadora th:nth-child(8),
-#tablaOperadora th:nth-child(9) {
-    min-width: 160px;
+#filtroTabla {
+    max-width: 280px;
+    font-size: 0.85rem;
 }

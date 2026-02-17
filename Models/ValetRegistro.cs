@@ -25,6 +25,7 @@ namespace AppValetParking.Models
         public string? HOSTNAME { get; set; }
         public string? Movimientos { get; set; }
 
+        public string? Situacion { get; set; }
 
 
     }

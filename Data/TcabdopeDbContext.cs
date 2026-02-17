@@ -13,7 +13,8 @@ public class TcabdopeDbContext : DbContext
         modelBuilder.Entity<ReservationAllView>(entity =>
         {
             entity.HasNoKey();
-            entity.ToView("rep_reservation_all_view", "dbo");
+            //vw_reservations_with_confno
+            entity.ToView("vw_reservations_cloud", "dbo");
         });
     }
 }

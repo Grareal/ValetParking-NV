@@ -1,791 +1,282 @@
-﻿<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservas del Día</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --vip-color: #ffc107;
-            --vip-estates-color: #e67e22;
-            --platino-color: #95a5a6;
-            --grupos-color: #3498db;
-            --no-llegadas-color: #e74c3c;
-            --intercambio-color: #9b59b6;
-            --tgm-color: #2ecc71;
+﻿@{
+    ViewData["Title"] = "Reservas del Día";
+}
+
+<style>
+    body {
+        background: #f4f6f9;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        padding: 25px;
+        margin-top: 25px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .controls {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    input, select {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background: #2c3e50;
+        color: white;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    th {
+        cursor: pointer;
+    }
+
+    tbody tr {
+        transition: 0.2s;
+    }
+
+        tbody tr:hover {
+            background: #f1f7ff;
         }
 
-        body {
-            background-color: #f8f9fa;
-            padding-bottom: 20px;
+    .badge {
+        background: #3498db;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+    }
+
+    .btn-print {
+        background: #27ae60;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .btn-print:hover {
+            background: #219150;
         }
 
-        .card {
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-            height: 100%;
-        }
+    .status-bar {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #555;
+    }
+</style>
 
-            .card:hover {
-                transform: translateY(-5px);
-            }
+<div class="card">
 
-        .reserva-header {
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            padding: 10px 15px;
-            color: white;
-            font-weight: bold;
-        }
-
-        .vip {
-            background-color: var(--vip-color);
-        }
-
-        .vip-estates {
-            background-color: var(--vip-estates-color);
-        }
-
-        .platino {
-            background-color: var(--platino-color);
-        }
-
-        .grupos {
-            background-color: var(--grupos-color);
-        }
-
-        .no-llegadas {
-            background-color: var(--no-llegadas-color);
-        }
-
-        .intercambio {
-            background-color: var(--intercambio-color);
-        }
-
-        .tgm {
-            background-color: var(--tgm-color);
-        }
-
-        .search-container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .filter-badge {
-            cursor: pointer;
-            margin: 0 5px 5px 0;
-        }
-
-        .reserva-content {
-            padding: 15px;
-        }
-
-        .badge-tipo {
-            font-size: 0.8em;
-            padding: 5px 8px;
-            border-radius: 4px;
-        }
-
-        .print-section {
-            background-color: white;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        .legend-item {
-            display: inline-flex;
-            align-items: center;
-            margin-right: 15px;
-            margin-bottom: 10px;
-        }
-
-        .legend-color {
-            width: 15px;
-            height: 15px;
-            border-radius: 3px;
-            margin-right: 5px;
-        }
-
-        .status-message {
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-        .loading {
-            background-color: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .bg-vip {
-            background-color: var(--vip-color);
-        }
-
-        .bg-vip-estates {
-            background-color: var(--vip-estates-color);
-        }
-
-        .bg-platino {
-            background-color: var(--platino-color);
-        }
-
-        .bg-grupos {
-            background-color: var(--grupos-color);
-        }
-
-        .bg-no-llegadas {
-            background-color: var(--no-llegadas-color);
-        }
-
-        .bg-intercambio {
-            background-color: var(--intercambio-color);
-        }
-
-        .bg-tgm {
-            background-color: var(--tgm-color);
-        }
-
-        .spinner-border-sm {
-            width: 1rem;
-            height: 1rem;
-        }
-
-        .auto-print-info {
-            background-color: #e9ecef;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="container mt-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2><i class="fas fa-calendar-day me-2"></i>Reservas del Día</h2>
-            <button id="btnConfig" class="btn btn-outline-primary">
-                <i class="fas fa-cog me-1"></i> Configuración
-            </button>
-        </div>
-
-        <!-- Filtros y Búsqueda -->
-        <div class="search-container">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre, habitación o folio...">
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <select id="filterSelect" class="form-select">
-                        <option value="">Todos los tipos</option>
-                        <option value="VIP">VIP</option>
-                        <option value="VIP ESTATES">VIP ESTATES</option>
-                        <option value="PLATINO">PLATINO</option>
-                        <option value="GRUPOS">GRUPOS</option>
-                        <option value="NO LLEGADAS">NO LLEGADAS</option>
-                        <option value="INTERCAMBIO">INTERCAMBIO</option>
-                        <option value="TGM">TGM Deluxxe</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="mb-2">Filtrar por tipo:</div>
-            <div class="d-flex flex-wrap">
-                <span class="badge filter-badge bg-vip" data-filter="VIP">VIP</span>
-                <span class="badge filter-badge bg-vip-estates" data-filter="VIP ESTATES">VIP ESTATES</span>
-                <span class="badge filter-badge bg-platino" data-filter="PLATINO">PLATINO</span>
-                <span class="badge filter-badge bg-grupos" data-filter="GRUPOS">GRUPOS</span>
-                <span class="badge filter-badge bg-no-llegadas" data-filter="NO LLEGADAS">NO LLEGADAS</span>
-                <span class="badge filter-badge bg-intercambio" data-filter="INTERCAMBIO">INTERCAMBIO</span>
-                <span class="badge filter-badge bg-tgm" data-filter="TGM">TGM Deluxxe</span>
-                <span class="badge filter-badge bg-secondary" data-filter="">Todos</span>
-            </div>
-        </div>
-
-        <!-- Leyenda de colores -->
-        <div class="alert alert-light d-flex flex-wrap">
-            <div class="legend-item"><div class="legend-color bg-vip"></div> VIP</div>
-            <div class="legend-item"><div class="legend-color bg-vip-estates"></div> VIP ESTATES</div>
-            <div class="legend-item"><div class="legend-color bg-platino"></div> PLATINO</div>
-            <div class="legend-item"><div class="legend-color bg-grupos"></div> GRUPOS</div>
-            <div class="legend-item"><div class="legend-color bg-no-llegadas"></div> NO LLEGADAS</div>
-            <div class="legend-item"><div class="legend-color bg-intercambio"></div> INTERCAMBIO</div>
-            <div class="legend-item"><div class="legend-color bg-tgm"></div> TGM Deluxxe</div>
-        </div>
-
-        <!-- Lista de Reservas -->
-        <div id="loadingReservas" class="text-center my-4">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Cargando...</span>
-            </div>
-            <p class="mt-2">Cargando reservas...</p>
-        </div>
-        <div id="reservasContainer" class="row" style="display: none;">
-            <!-- Las reservas se cargarán aquí dinámicamente -->
-        </div>
-
-        <!-- Sección de Impresión (Simplificada) -->
-        <div class="print-section">
-            <h4 class="mb-3"><i class="fas fa-print me-2"></i>Impresión de Tickets</h4>
-
-            <div class="auto-print-info">
-                <i class="fas fa-info-circle me-2"></i>
-                El sistema detectará automáticamente la impresora según el hotel de la reserva.
-                No es necesario configurar manualmente la impresora.
-            </div>
-
-            <div class="d-flex gap-2">
-                <button id="btnPrintSelected" class="btn btn-success">
-                    <i class="fas fa-print me-1"></i> Imprimir Reserva Seleccionada
-                </button>
-                <button id="btnPrintAll" class="btn btn-outline-secondary">
-                    <i class="fas fa-print me-1"></i> Imprimir Todas
-                </button>
-                <button id="btnPrintFiltered" class="btn btn-outline-primary">
-                    <i class="fas fa-print me-1"></i> Imprimir Filtradas
-                </button>
-            </div>
-
-            <div id="status" class="status-message"></div>
-        </div>
+    <div class="header">
+        <div class="title">Reservas del Día</div>
+        <div class="badge" id="contador">0 reservas</div>
     </div>
 
-    <script>
-        // Variables globales
-        let todasLasReservas = [];
-        let reservaSeleccionada = null;
-
-        // Mapeo de tipos a clases CSS
-        function obtenerClasePorTipo(reserva) {
-            const tipo = determinarTipoReserva(reserva);
-            const tipoToClass = {
-                "VIP": "vip",
-                "VIP ESTATES": "vip-estates",
-                "PLATINO": "platino",
-                "GRUPOS": "grupos",
-                "NO LLEGADAS": "no-llegadas",
-                "INTERCAMBIO": "intercambio",
-                "TGM": "tgm"
-            };
-            return tipoToClass[tipo] || "";
-        }
-
-        // Determinar el tipo de reserva basado en los datos
-        // Determinar el tipo de reserva basado en los datos
-        function determinarTipoReserva(reserva) {
-            console.log("Analizando reserva para tipo:", reserva);
-
-            // 1. Verificar por TIPO explícito
-            if (reserva.h_tipo) {
-                const tipo = reserva.h_tipo.toUpperCase();
-                if (tipo.includes("VIP ESTATES")) return "VIP ESTATES";
-                if (tipo.includes("VIP")) return "VIP";
-                if (tipo.includes("PLATINO")) return "PLATINO";
-                if (tipo.includes("GRUPO")) return "GRUPOS";
-            }
-
-            // 2. Verificar por ESTADO (No Llegadas)
-            if (reserva.h_estado) {
-                const estado = reserva.h_estado.toUpperCase();
-                if (estado.includes("NO LLEGADA") || estado.includes("NO LLEG") ||
-                    estado.includes("CANCELADA") || estado.includes("NO SHOW")) {
-                    return "NO LLEGADAS";
-                }
-            }
-
-            // 3. Verificar PROCEDENCIA (Intercambios)
-            if (reserva.h_procedencia) {
-                const procedencia = reserva.h_procedencia.toUpperCase();
-                if (procedencia.includes("RCI") || procedencia.includes("ITV") ||
-                    procedencia.includes("ICE") || procedencia.includes("PVD") ||
-                    procedencia.includes("ECM") || procedencia.includes("SFX") ||
-                    procedencia.includes("HSI") || procedencia.includes("TRC") ||
-                    procedencia.includes("INTERCAMBIO")) {
-                    return "INTERCAMBIO";
-                }
-            }
-
-            // 4. Verificar TIPO DE HABITACIÓN (TGM Deluxxe)
-            if (reserva.h_tipo_habitacion) {
-                const tipoHab = reserva.h_tipo_habitacion.toUpperCase();
-                // DeLuxxe
-                if (tipoHab.includes("GMAD18") || tipoHab.includes("GMAD20") ||
-                    tipoHab.includes("GMADJS") || tipoHab.includes("TGM") ||
-                    tipoHab.includes("DELUXXE")) {
-                    return "TGM";
-                }
-                // VIP por tipo de habitación de lujo
-                if (tipoHab.includes("LUXE") || tipoHab.includes("LUXXE") ||
-                    tipoHab.includes("MASTER") || tipoHab.includes("SUITE") ||
-                    tipoHab.includes("PRESIDENTIAL")) {
-                    return "VIP";
-                }
-            }
-
-            // 5. Verificar por CÓDIGO o OTROS CAMPOS
-            if (reserva.h_res_cve) {
-                const folio = reserva.h_res_cve.toUpperCase();
-                // Lógica adicional si los folios tienen patrones específicos
-            }
-
-            // 6. Valor por defecto
-            return "PLATINO";
-        }
-
-        // Obtener el hotel de la reserva
-        // Obtener el hotel de la reserva BASADO EN LAS SIGLAS
-        function obtenerHotelDeReserva(reserva) {
-            console.log("Buscando hotel en reserva:", reserva);
-
-            // 1. Buscar en el tipo de habitación (siglas)
-            if (reserva.h_tipo_habitacion) {
-                const siglas = reserva.h_tipo_habitacion.toUpperCase().trim();
-                console.log("Siglas encontradas:", siglas);
-
-                // Determinar hotel basado en las siglas proporcionadas
-                const hotel = determinarHotelPorSiglas(siglas);
-                if (hotel && hotel !== "NULL") {
-                    console.log("Hotel determinado por siglas:", hotel);
-                    return hotel;
-                }
-            }
-
-            // 2. Buscar campo directo de hotel (como respaldo)
-            const posiblesCamposHotel = [
-                'h_hotel', 'hotel', 'H_hotel', 'Hotel', 'HOTEL',
-                'h_property', 'property', 'h_resort', 'resort'
-            ];
-
-            for (const campo of posiblesCamposHotel) {
-                if (reserva[campo]) {
-                    console.log("Hotel encontrado en campo", campo, ":", reserva[campo]);
-                    return reserva[campo];
-                }
-            }
-
-            // 3. Valor por defecto
-            console.log("Hotel no determinado, usando NULL");
-            return "NULL";
-        }
-
-        // Función para determinar hotel basado en siglas
-        function determinarHotelPorSiglas(siglas) {
-            const mapeoSiglas = {
-                // Grand Luxxe
-                'LVIMR': 'The Grand Luxxe', 'LCOMR': 'The Grand Luxxe',
-                'LCOMS': 'The Grand Luxxe', 'LCOST': 'The Grand Luxxe',
-                'LVIST': 'The Grand Luxxe', 'LVIMS': 'The Grand Luxxe',
-                'LRL1B': 'The Grand Luxxe', 'LRLCE': 'The Grand Luxxe',
-                'LPUSH': 'The Grand Luxxe', 'LPU1B': 'The Grand Luxxe',
-                'LPU2B': 'The Grand Luxxe', 'LPU3B': 'The Grand Luxxe',
-                'LSP2B': 'The Grand Luxxe', 'LSP3B': 'The Grand Luxxe',
-                'LRL2B': 'The Grand Luxxe', 'LRL3B': 'The Grand Luxxe',
-                'LRL4B': 'The Grand Luxxe', 'LRD1B': 'The Grand Luxxe',
-                'LRD28': 'The Grand Luxxe',
-
-                // Grand Bliss
-                'GBLMR': 'The Grand Bliss', 'GBLST': 'The Grand Bliss',
-                'GBLMS': 'The Grand Bliss',
-
-                // Grand Mayan
-                'GMAMR': 'The Grand Mayan', 'GMAST': 'The Grand Mayan',
-                'GMAMS': 'The Grand Mayan',
-
-                // Mayan Palace
-                'MPAMR': 'Mayan Palace', 'MPAST': 'Mayan Palace',
-                'MPAMS': 'Mayan Palace',
-
-                // Sea Garden
-                'SGAMR': 'Sea Garden', 'SGAST': 'Sea Garden',
-
-                // Bliss
-                'BLIMR': 'Bliss', 'BLIST': 'Bliss', 'BLIMS': 'Bliss',
-
-                // The Estates
-                'EST1B': 'The Estates', 'EST2B': 'The Estates',
-                'EST3B': 'The Estates', 'EST4B': 'The Estates',
-
-                // Celebrate Park
-                'CPAJS': 'Celebrate Park', 'CPAJL': 'Celebrate Park',
-                'CPA2B': 'Celebrate Park',
-
-                // Empire Estates / Kingdom of the Sun
-                'EEE4B': 'Kingdom Of The Sun', 'KOSPST': 'Kingdom Of The Sun',
-                'KOS2PS': 'Kingdom Of The Sun', 'BON1BK': 'Kingdom Of The Sun',
-                'BON1BD': 'Kingdom Of The Sun',
-
-                // DeLuxxe (Grand Mayan)
-                'GMAD2B': 'The Grand Mayan', 'GMAD1B': 'The Grand Mayan',
-                'GMADJS': 'The Grand Mayan'
-            };
-
-            return mapeoSiglas[siglas] || "NULL";
-        }
-
-        // Obtener impresora automáticamente según el hotel
-        async function obtenerImpresoraParaHotel(hotel) {
-            try {
-                const response = await fetch('/Tickets/GetHotelPrinterConfigs');
-                if (response.ok) {
-                    const configHoteles = await response.json();
-                    if (configHoteles[hotel] && configHoteles[hotel].printer) {
-                        return configHoteles[hotel].printer;
-                    }
-                }
-
-                // Si no hay configuración específica, usar la general
-                const configResponse = await fetch('/Tickets/GetPrinterConfigs');
-                if (configResponse.ok) {
-                    const configs = await configResponse.json();
-                    if (configs.length > 0) {
-                        return configs[0].printers;
-                    }
-                }
-
-                return ""; // No se encontró configuración
-            } catch (err) {
-                console.error('Error al obtener configuración de impresora', err);
-                return "";
-            }
-        }
-
-        // Cargar reservas desde la API
-        async function cargarReservas() {
-            try {
-                mostrarLoading(true);
-                const response = await fetch('/Tickets/GetReservasDia');
-
-                if (!response.ok) {
-                    throw new Error('Error al cargar las reservas');
-                }
-
-                const data = await response.json();
-                todasLasReservas = data;
-                mostrarReservas(data);
-                mostrarLoading(false);
-            } catch (error) {
-                console.error('Error:', error);
-                setStatus('Error al cargar las reservas: ' + error.message, 'error');
-                mostrarLoading(false);
-            }
-        }
-
-        // Mostrar/ocultar loading
-        function mostrarLoading(mostrar) {
-            document.getElementById('loadingReservas').style.display = mostrar ? 'block' : 'none';
-            document.getElementById('reservasContainer').style.display = mostrar ? 'none' : 'block';
-        }
-
-        // Mostrar reservas en la página
-        function mostrarReservas(reservas) {
-            const container = document.getElementById('reservasContainer');
-            container.innerHTML = '';
-
-            if (reservas.length === 0) {
-                container.innerHTML = '<div class="col-12"><div class="alert alert-info text-center">No se encontraron reservas</div></div>';
-                return;
-            }
-
-            reservas.forEach(reserva => {
-                const tipoClass = obtenerClasePorTipo(reserva);
-                const tipo = determinarTipoReserva(reserva);
-                const hotel = obtenerHotelDeReserva(reserva);
-
-                // En la función mostrarReservas, modifica la card para mostrar más información:
-                const card = `
-    <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card">
-            <div class="reserva-header ${tipoClass}">
-                <div class="d-flex justify-content-between">
-                    <span>Habitación: ${reserva.h_num_hab || 'N/A'}</span>
-                    <span class="badge bg-dark">${reserva.h_res_cve || 'N/A'}</span>
-                </div>
-            </div>
-            <div class="reserva-content">
-                <h5 class="card-title">${reserva.h_nom || 'Nombre no disponible'}</h5>
-                <div class="mb-2">
-                    <span class="badge badge-tipo ${tipoClass}">${tipo}</span>
-                    <span class="badge bg-info">${hotel}</span>
-                    ${reserva.h_tipo_habitacion ?
-                        `<span class="badge bg-secondary">${reserva.h_tipo_habitacion}</span>` : ''}
-                </div>
-                <p class="card-text">${reserva.m_msg0 || 'Sin observaciones'}</p>
-                <div class="card-text">
-                    <small>Tipo hospedaje: ${reserva.h_tpo_hsp || 'N/A'}</small>
-                    ${reserva.h_procedencia ?
-                        `<br><small>Procedencia: ${reserva.h_procedencia}</small>` : ''}
-                </div>
-                <button class="btn btn-sm btn-outline-primary print-btn" data-id="${reserva.h_res_cve}">
-                    <i class="fas fa-print me-1"></i> Imprimir
-                </button>
-            </div>
-        </div>
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre, folio o habitación...">
+        <select id="hotelFilter">
+            <option value="">Todos los hoteles</option>
+        </select>
+        <select id="printerSelect"></select>
     </div>
-`;
-                container.innerHTML += card;
-            });
 
-            // Agregar event listeners a los botones de imprimir
-            document.querySelectorAll('.print-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const id = btn.getAttribute('data-id');
-                    const reserva = todasLasReservas.find(r => r.h_res_cve == id);
-                    seleccionarReservaParaImprimir(reserva);
+    <table id="tablaReservas">
+        <thead>
+            <tr>
+                <th onclick="ordenar('h_res_cve')">RESERVA</th>
+                <th onclick="ordenar('h_tsw')">C. TSW</th>
+                <th onclick="ordenar('h_nom')">Nombre</th>
+                <th onclick="ordenar('h_num_hab')">Habitación</th>
+                <th onclick="ordenar('hotel')">Hotel</th>
+
+
+                <th>Tipo</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="status-bar" id="statusMsg"></div>
+</div>
+
+<script>
+    let reservasGlobal = [];
+    let ordenActual = '';
+    let ascendente = true;
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        cargarReservas();
+        cargarImpresoras();
+
+        document.getElementById("searchInput").addEventListener("input", filtrarTabla);
+        document.getElementById("hotelFilter").addEventListener("change", filtrarTabla);
+    });
+
+    function cargarReservas() {
+        fetch('/Tickets/GetReservasDia')
+            .then(res => res.json())
+            .then(data => {
+
+                reservasGlobal = data;
+                llenarFiltroHoteles(data);
+                renderTabla(data);
+
+                document.getElementById("contador").innerText = data.length + " reservas";
+            });
+    }
+
+    function cargarImpresoras() {
+        fetch('/Tickets/GetInstalledPrinters')
+            .then(res => res.json())
+            .then(data => {
+                const select = document.getElementById("printerSelect");
+                select.innerHTML = "";
+
+                data.forEach(p => {
+                    select.innerHTML += `<option value="${p}">${p}</option>`;
                 });
             });
-        }
+    }
 
-        // Filtrar reservas
-        function filtrarReservas() {
-            const searchText = document.getElementById('searchInput').value.toLowerCase();
-            const filterType = document.getElementById('filterSelect').value;
+    function renderTabla(data) {
+        const tbody = document.querySelector("#tablaReservas tbody");
+        tbody.innerHTML = "";
 
-            let resultados = todasLasReservas;
+        data.forEach(r => {
+            const row = `
+        <tr>
 
-            // Aplicar filtro de búsqueda
-            if (searchText) {
-                resultados = resultados.filter(r =>
-                    (r.h_nom && r.h_nom.toLowerCase().includes(searchText)) ||
-                    (r.h_num_hab && r.h_num_hab.toLowerCase().includes(searchText)) ||
-                    (r.h_res_cve && r.h_res_cve.toLowerCase().includes(searchText))
-                );
-            }
-
-            // Aplicar filtro por tipo
-            if (filterType) {
-                resultados = resultados.filter(r => determinarTipoReserva(r) === filterType);
-            }
-
-            mostrarReservas(resultados);
-        }
-
-        // Seleccionar reserva para imprimir
-        function seleccionarReservaParaImprimir(reserva) {
-            reservaSeleccionada = reserva;
-            setStatus(`Reserva ${reserva.h_res_cve} seleccionada para imprimir`, 'success');
-        }
-
-        // Imprimir reserva seleccionada
-        async function imprimirReserva() {
-            if (!reservaSeleccionada) {
-                setStatus('Selecciona una reserva primero', 'error');
-                return;
-            }
-
-            setStatus('Obteniendo configuración de impresión...', 'loading');
-
-            // Obtener el hotel y la impresora automáticamente
-            const hotel = obtenerHotelDeReserva(reservaSeleccionada);
-            const impresora = await obtenerImpresoraParaHotel(hotel);
-
-            if (!impresora) {
-                setStatus('No se encontró configuración de impresora para el hotel: ' + hotel, 'error');
-                return;
-            }
-
-            const body = {
-                Folio: reservaSeleccionada.h_res_cve,
-                Key: reservaSeleccionada.h_res_cve,
-                Name: reservaSeleccionada.h_nom,
-                Room: reservaSeleccionada.h_num_hab,
-                Type: reservaSeleccionada.h_tpo_hsp,
-                Obs: reservaSeleccionada.m_msg0 || '',
-                Hostname: "AUTO",
-                Printer: impresora,
-                Hotel: hotel  
-            };
-
-            try {
-                const resp = await fetch('/Tickets/PrintTicket', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body)
-                });
-
-                const result = await resp.json();
-                if (result.success) {
-                    setStatus(`Impresión enviada correctamente a: ${impresora}`, 'success');
-                } else {
-                    setStatus('Error: ' + (result.message || 'unknown'), 'error');
-                }
-            } catch (err) {
-                console.error('Error al imprimir ticket', err);
-                setStatus('Error al imprimir ticket', 'error');
-            }
-        }
-
-        // Imprimir todas las reservas
-        async function imprimirTodasLasReservas() {
-            if (todasLasReservas.length === 0) {
-                setStatus('No hay reservas para imprimir', 'error');
-                return;
-            }
-
-            setStatus(`Imprimiendo ${todasLasReservas.length} reservas...`, 'loading');
-
-            for (const reserva of todasLasReservas) {
-                const hotel = obtenerHotelDeReserva(reserva);
-                const impresora = await obtenerImpresoraParaHotel(hotel);
-
-                if (impresora) {
-                    const body = {
-                        Folio: reserva.h_res_cve,
-                        Key: reserva.h_res_cve,
-                        Name: reserva.h_nom,
-                        Room: reserva.h_num_hab,
-                        Type: reserva.h_tpo_hsp,
-                        Obs: reserva.m_msg0 || '',
-                        Hostname: "AUTO",
-                        Printer: impresora,
-                            Hotel: hotel  
-
-                    };
-
-                    try {
-                        await fetch('/Tickets/PrintTicket', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(body)
-                        });
-
-                        // Pequeña pausa entre impresiones
-                        await new Promise(resolve => setTimeout(resolve, 500));
-                    } catch (err) {
-                        console.error('Error al imprimir ticket', err);
-                    }
-                }
-            }
-
-            setStatus('Todas las reservas enviadas a imprimir', 'success');
-        }
-
-        // Imprimir reservas filtradas
-        async function imprimirReservasFiltradas() {
-            // Obtener reservas filtradas actuales
-            const searchText = document.getElementById('searchInput').value.toLowerCase();
-            const filterType = document.getElementById('filterSelect').value;
-
-            let reservasFiltradas = todasLasReservas;
-
-            if (searchText) {
-                reservasFiltradas = reservasFiltradas.filter(r =>
-                    (r.h_nom && r.h_nom.toLowerCase().includes(searchText)) ||
-                    (r.h_num_hab && r.h_num_hab.toLowerCase().includes(searchText)) ||
-                    (r.h_res_cve && r.h_res_cve.toLowerCase().includes(searchText))
-                );
-            }
-
-            if (filterType) {
-                reservasFiltradas = reservasFiltradas.filter(r => determinarTipoReserva(r) === filterType);
-            }
-
-            if (reservasFiltradas.length === 0) {
-                setStatus('No hay reservas filtradas para imprimir', 'error');
-                return;
-            }
-
-            setStatus(`Imprimiendo ${reservasFiltradas.length} reservas filtradas...`, 'loading');
-
-            for (const reserva of reservasFiltradas) {
-                const hotel = obtenerHotelDeReserva(reserva);
-                const impresora = await obtenerImpresoraParaHotel(hotel);
-
-                if (impresora) {
-                    const body = {
-                        Folio: reserva.h_res_cve,
-                        Key: reserva.h_res_cve,
-                        Name: reserva.h_nom,
-                        Room: reserva.h_num_hab,
-                        Type: reserva.h_tpo_hsp,
-                        Obs: reserva.m_msg0 || '',
-                        Hostname: "AUTO",
-                        Printer: impresora,
-                            Hotel: hotel  
-
-                    };
-
-                    try {
-                        await fetch('/Tickets/PrintTicket', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(body)
-                        });
-
-                        // Pequeña pausa entre impresiones
-                        await new Promise(resolve => setTimeout(resolve, 500));
-                    } catch (err) {
-                        console.error('Error al imprimir ticket', err);
-                    }
-                }
-            }
-
-            setStatus(`${reservasFiltradas.length} reservas filtradas enviadas a imprimir`, 'success');
-        }
-
-        // Establecer mensaje de estado
-        function setStatus(message, type) {
-            const statusEl = document.getElementById('status');
-            statusEl.textContent = message;
-            statusEl.className = `status-message ${type}`;
-            statusEl.style.display = 'block';
-
-            // Ocultar después de 5 segundos para mensajes de éxito/error
-            if (type !== 'loading') {
-                setTimeout(() => {
-                    statusEl.style.display = 'none';
-                }, 5000);
-            }
-        }
-
-        // Inicializar la página
-        document.addEventListener('DOMContentLoaded', function () {
-            // Cargar reservas desde la API
-            cargarReservas();
-
-            // Configurar event listeners
-            document.getElementById('searchInput').addEventListener('input', filtrarReservas);
-            document.getElementById('filterSelect').addEventListener('change', filtrarReservas);
-
-            // Filtros rápidos por tipo
-            document.querySelectorAll('.filter-badge').forEach(badge => {
-                badge.addEventListener('click', () => {
-                    const filter = badge.getAttribute('data-filter');
-                    document.getElementById('filterSelect').value = filter;
-                    filtrarReservas();
-                });
-            });
-
-            // Botones de impresión
-            document.getElementById('btnPrintSelected').addEventListener('click', imprimirReserva);
-            document.getElementById('btnPrintAll').addEventListener('click', imprimirTodasLasReservas);
-            document.getElementById('btnPrintFiltered').addEventListener('click', imprimirReservasFiltradas);
-
-            // Botón de configuración
-            document.getElementById('btnConfig').addEventListener('click', () => {
-                window.location.href = '/Tickets/Config';
-            });
+            <td>${r.h_res_cve ?? ''}</td>
+                <td>${r.h_cod_reserva ?? ''}</td> <!-- nueva columna -->
+            <td>${r.h_nom ?? ''}</td>
+            <td>${r.h_num_hab ?? ''}</td>
+            <td><span class="badge">${r.hotel ?? ''}</span></td>
+            <td>${r.h_tpo_hab ?? ''}</td>
+            <td>
+                <button class="btn-print" onclick="imprimir(
+                    '${r.h_res_cve}',
+                    '${r.h_nom}',
+                    '${r.h_num_hab}',
+                    '${r.hotel}'
+                )">
+                    Imprimir
+                </button>
+            </td>
+        </tr>`;
+            tbody.innerHTML += row;
         });
-    </script>
-</body>
-</html>
+    }
+
+    function llenarFiltroHoteles(data) {
+        const hoteles = [...new Set(data.map(r => r.hotel).filter(Boolean))];
+        const select = document.getElementById("hotelFilter");
+
+        hoteles.forEach(h => {
+            select.innerHTML += `<option value="${h}">${h}</option>`;
+        });
+    }
+
+    function filtrarTabla() {
+        const texto = document.getElementById("searchInput").value.toLowerCase();
+        const hotel = document.getElementById("hotelFilter").value;
+
+        const filtradas = reservasGlobal.filter(r => {
+
+            const coincideTexto =
+                (r.h_nom ?? '').toLowerCase().includes(texto) ||
+                (r.h_res_cve ?? '').toLowerCase().includes(texto) ||
+                (r.h_num_hab ?? '').toLowerCase().includes(texto) ||
+                (r.h_cod_reserva ?? '').toLowerCase().includes(texto); // <-- agregamos TSW
+;
+
+            const coincideHotel = hotel === "" || r.hotel === hotel;
+
+            return coincideTexto && coincideHotel;
+        });
+
+        renderTabla(filtradas);
+        document.getElementById("contador").innerText = filtradas.length + " reservas";
+    }
+
+    function ordenar(campo) {
+        ascendente = ordenActual === campo ? !ascendente : true;
+        ordenActual = campo;
+
+        reservasGlobal.sort((a, b) => {
+            const valA = a[campo] ?? '';
+            const valB = b[campo] ?? '';
+            return ascendente
+                ? valA.localeCompare(valB)
+                : valB.localeCompare(valA);
+        });
+
+        renderTabla(reservasGlobal);
+    }
+
+    function imprimir(folio, name, room, hotel) {
+
+        const printer = document.getElementById("printerSelect").value;
+
+        fetch('/Tickets/PrintTicket', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                folio: folio,
+                name: name,
+                room: room,
+                hotel: hotel,
+                printer: printer,
+                comments: "" // si no tienes txtComentarios
+            })
+        })
+            .then(res => res.json())
+            .then(resp => {
+                const status = document.getElementById("statusMsg");
+
+                if (resp.success) {
+                    status.innerHTML = "✔ Ticket enviado correctamente";
+                    status.style.color = "green";
+                } else {
+                    status.innerHTML = "✖ Error: " + resp.message;
+                    status.style.color = "red";
+                }
+            });
+    }
+
+</script>

@@ -1,0 +1,257 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Reportes</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+</head>
+<body class="container mt-3">
+
+<h3>Reportes</h3>
+
+<div class="row mb-3">
+    <div class="col-md-2">
+        <label>Fecha Inicio</label>
+        <input type="date" id="inicio" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <label>Fecha Fin</label>
+        <input type="date" id="fin" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <label>Servicio</label>
+        <select id="servicio" class="form-control">
+            <option value="">Todos</option>
+            @foreach (var s in ViewBag.Servicios)
+            {
+                <option>@s</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <label>Valet</label>
+        <select id="valet" class="form-control">
+            <option value="">Todos</option>
+            @foreach (var v in ViewBag.Valets)
+            {
+                <option>@v</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <label>Hotel</label>
+        <select id="hotel" class="form-control">
+            <option value="">Todos</option>
+            @foreach (var h in ViewBag.Hoteles)
+            {
+                <option>@h</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+        <button id="btnFiltrar" class="btn btn-primary w-100">Aplicar filtros</button>
+    </div>
+</div>
+
+<button id="btnExcel" class="btn btn-success mb-3">Exportar Excel</button>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <h5>Carros por día</h5>
+        <canvas id="chartCars"></canvas>
+    </div>
+    <div class="col-md-6">
+        <h5>Movimientos por Valet</h5>
+        <canvas id="chartValets"></canvas>
+    </div>
+</div>
+
+<hr />
+
+<table id="tablaReportes" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Operacion</th>
+            <th>Habitacion</th>
+            <th>Hotel</th>
+            <th>Folio</th>
+            <th>Valet</th>
+            <th>Servicio</th>
+        </tr>
+    </thead>
+</table>
+
+
+<!-- ======================================================== -->
+<!-- LIBRERÍAS (ORDEN IMPORTANTE)                             -->
+<!-- ======================================================== -->
+
+<!-- jQuery (siempre primero) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables JS (después de jQuery) -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<!-- ======================================================== -->
+<!-- SCRIPT PRINCIPAL                                         -->
+<!-- ======================================================== -->
+<script>
+
+let tabla;
+let carsChart;
+let valetChart;
+
+function getFilters() {
+    return {
+        inicio: document.getElementById("inicio").value,
+        fin: document.getElementById("fin").value,
+        servicio: document.getElementById("servicio").value,
+        valet: document.getElementById("valet").value,
+        hotel: document.getElementById("hotel").value
+    };
+}
+
+// ----------------------------------------------------
+// Inicializar tabla
+// ----------------------------------------------------
+function cargarTabla() {
+
+    if (tabla) tabla.destroy();
+
+    tabla = $('#tablaReportes').DataTable({
+        serverSide: true,
+        ajax: {
+            url: '@Url.Action("GetData")',
+            type: 'POST',
+            data: function (d) {
+                return Object.assign(d, getFilters());
+            }
+        },
+        columns: [
+            { data: "fecha", render: d => new Date(d).toLocaleDateString() },
+            { data: "operacion" },
+            { data: "habitacion" },
+            { data: "hotel" },
+            { data: "folioVP" },
+            { data: "valet" },
+            { data: "servicio" }
+        ]
+    });
+}
+
+
+// ----------------------------------------------------
+// Cargar gráficos
+// ----------------------------------------------------
+function cargarCharts() {
+
+    const filtros = getFilters();
+    const params = new URLSearchParams(filtros).toString();
+
+    // ---- Cars per day ----
+    fetch('@Url.Action("CarsPerDay")?' + params)
+        .then(r => r.json())
+        .then(data => {
+
+            if (carsChart) carsChart.destroy();
+
+            carsChart = new Chart(document.getElementById("chartCars"), {
+                type: 'bar',
+                data: {
+                    labels: data.map(x => x.date),
+                    datasets: [{
+                        label: "Carros atendidos",
+                        data: data.map(x => x.count)
+                    }]
+                }
+            });
+        });
+
+    // ---- Movimientos por Valet ----
+    fetch('@Url.Action("MovimientosPorValet")?' + params)
+        .then(r => r.json())
+        .then(data => {
+
+            if (valetChart) valetChart.destroy();
+
+            valetChart = new Chart(document.getElementById("chartValets"), {
+                type: 'bar',
+                data: {
+                    labels: data.map(x => x.valet),
+                    datasets: [{
+                        label: "Movimientos",
+                        data: data.map(x => x.count)
+                    }]
+                },
+                options: { indexAxis: 'y' }
+            });
+        });
+}
+
+// ----------------------------------------------------
+// Botón aplicar filtros
+// ----------------------------------------------------
+document.getElementById("btnFiltrar").addEventListener("click", () => {
+    cargarTabla();
+    cargarCharts();
+});
+
+// ----------------------------------------------------
+// Exportar Excel
+// ----------------------------------------------------
+document.getElementById("btnExcel").addEventListener("click", () => {
+
+    const filtros = getFilters();
+    const form = new FormData();
+
+    for (let k in filtros)
+        form.append(k, filtros[k]);
+
+    fetch('@Url.Action("ExportarExcel")', {
+        method: 'POST',
+        body: form
+    })
+        .then(resp => resp.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "ReporteValet.xlsx";
+            a.click();
+        });
+});
+
+// ----------------------------------------------------
+// Inicializar todo
+// ----------------------------------------------------
+cargarTabla();
+cargarCharts();
+</script>
+
+</body>
+</html>

@@ -10,7 +10,7 @@ public class TcabdopeNewDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Acompanante>().ToTable("hothch", "dbo").HasNoKey();
-        modelBuilder.Entity<Reserva>().ToTable("hothsp", "dbo").HasNoKey();
+        modelBuilder.Entity<Acompanante>().ToTable("hothch_v2", "dbo").HasNoKey();
+        modelBuilder.Entity<Reserva>().ToTable("hothsp2", "dbo").HasNoKey();
     }
 }

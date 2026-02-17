@@ -10,7 +10,8 @@ namespace AppValetParking.Models
         public string Obs { get; set; } = string.Empty;
         public string Hostname { get; set; } = string.Empty;
         public string Printer { get; set; } = string.Empty;
-        public string Hotel { get; set; } 
+        public string Hotel { get; set; }
+        public string Comments { get; set; }  // 
 
     }
 }

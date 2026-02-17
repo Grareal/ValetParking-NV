@@ -1,106 +1,219 @@
-@model IEnumerable<AppValetParking.Models.ValetSolicitud>
+﻿@model IEnumerable<AppValetParking.Models.ValetSolicitud>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
 
     <div class="container mt-4">
-        <h2 class="mb-4">Control de Solicitudes de Veh�culos</h2>
 
-        <input type="text" id="filtroTabla" class="form-control mb-4" placeholder="Filtrar por habitaci�n, huesped, folio...">
+        <h2 class="mb-4">Control de Solicitudes de Vehículos</h2>
 
-        <div class="row" id="ticketContainer">
+        <!-- BOTÓN EXPORTAR -->
+        <a href="/ControlSolicitudes/Excel"
+           class="btn btn-success mb-3">
+            📥 Exportar Excel
+        </a>
+
+        <!-- ================== PANEL DE CONTADORES ================== -->
+        <div class="row text-center mb-4">
+            <div class="col-md-2"><div class="card p-3 shadow"><h6>Total</h6><h3>@ViewBag.Total</h3></div></div>
+            <div class="col-md-2"><div class="card p-3 shadow"><h6>Pendientes</h6><h3 id="cntPendientes">@ViewBag.Pendientes</h3></div></div>
+            <div class="col-md-2"><div class="card p-3 shadow"><h6>Atendidos</h6><h3>@ViewBag.Atendidos</h3></div></div>
+            <div class="col-md-2"><div class="card p-3 shadow"><h6>Rápidos (&le;10m)</h6><h3>@ViewBag.Rapidos</h3></div></div>
+            <div class="col-md-2"><div class="card p-3 shadow"><h6>Normales (10–20m)</h6><h3>@ViewBag.Normales</h3></div></div>
+            <div class="col-md-2"><div class="card p-3 shadow"><h6>Lentos (&gt;20m)</h6><h3>@ViewBag.Lentos</h3></div></div>
+        </div>
+
+        <form method="get" class="row mb-3">
+
+            <div class="col-md-3">
+                <label>Fecha Inicio</label>
+                <input type="date" name="inicio"
+                       value="@ViewBag.Inicio"
+                       class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <label>Fecha Fin</label>
+                <input type="date" name="fin"
+                       value="@ViewBag.Fin"
+                       class="form-control" />
+            </div>
+
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">
+                    Filtrar
+                </button>
+            </div>
+
+            <div class="col-md-3 d-flex align-items-end">
+                <a asp-action="Excel"
+                   asp-route-inicio="@ViewBag.Inicio"
+                   asp-route-fin="@ViewBag.Fin"
+                   class="btn btn-success w-100">
+                    📥 Exportar Excel
+                </a>
+            </div>
+
+        </form>
+
+
+        <!-- FILTROS -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <input id="buscar" class="form-control" placeholder="Buscar por folio, huésped, habitación..." />
+            </div>
+            <div class="col-md-3">
+                <select id="filtroHotel" class="form-select">
+                    <option value="">Todos los Hoteles</option>
+                    @foreach (var hotel in Model.Select(x => x.Resort).Distinct())
+                {
+                    <option value="@hotel">@hotel</option>
+                }
+                </select>
+            </div>
+        </div>
+
+        <!-- LISTADO DE TICKETS -->
+        <div class="row" id="contenedor">
+
             @foreach (var item in Model)
         {
-            <div class="col-md-4 mb-3">
-                <div class="card ticket-card" data-tiempo="@item.TiempoCreado.ToString("o")"
-                     @(item.TiempoAtendido != null ? "style='background-color:#d4edda'" : "")>
-                    <div class="card-body">
-                        <h5 class="card-title">Folio: @item.FolioVP</h5>
-                        <p class="card-text mb-1"><strong>Huesped:</strong> @item.NombreReserva "</p>
-                        <p class="card-text mb-1"><strong>Habitaci�n:</strong> @item.Habitacion"</p>
-                        <p class="card-text mb-1"><strong>Hotel:</strong> @item.Resort "</p>
-                        <p class="card-text mb-1"><strong>Ubicacion:</strong> @item.Destino "</p>
+            var tiempoAt = item.TiempoAtendido != null
+                ? (item.TiempoAtendido - item.TiempoCreado)?.TotalMinutes.ToString("0") + " min"
+                : "Pendiente";
 
-                        <p class="card-text mb-1"><strong>Solicitud:</strong> @item.FechaSolicitud.ToString("HH:mm")</p>
-                        <form asp-action="CambiarEstatus" method="post">
-                            <input type="hidden" name="id" value="@item.Id" />
-                            <button type="submit" class="btn btn-success btn-sm w-100"
-                                    @(item.TiempoAtendido != null ? "disabled" : "")>
-                                @(item.TiempoAtendido != null ? "Atendido" : "Marcar Atendido")
-                            </button>
-                        </form>
-                    </div>
+            <div class="col-md-4 mb-3 ticket"
+                 data-hotel="@item.Resort"
+                 data-creado="@item.TiempoCreado.ToString("o")"
+            data-atendido="@(item.TiempoAtendido != null ? "true" : "false")">
+
+
+
+                <div class="card p-3 shadow ticket-card">
+                    <span class="badge bg-dark float-end tiempo"></span>
+
+                    <h5>Folio: @item.FolioVP</h5>
+                    <p><strong>Huésped:</strong> @item.NombreReserva</p>
+                    <p><strong>Habitación:</strong> @item.Habitacion</p>
+                    <p><strong>Hotel:</strong> @item.Resort</p>
+                    <p><strong>Ubicación:</strong> @item.Destino</p>
+
+                    <p><strong>Tiempo atención:</strong> @tiempoAt</p>
+
+                    <form asp-action="CambiarEstatus" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button class="btn btn-success w-100"
+                                @(item.TiempoAtendido != null ? "disabled" : "")>
+                            @(item.TiempoAtendido != null ? "Atendido" : "Marcar Atendido")
+                        </button>
+                    </form>
                 </div>
             </div>
         }
+
         </div>
     </div>
 
-     <style>
-.ticket-card {
-    transition: background-color 0.5s, border-left 0.5s;
-}
 
-.parpadeo {
-    animation: parpadeo 1s infinite;
-}
+    <style>
+        .ticket-card {
+            transition: background-color .4s, border-left .4s;
+        }
 
-@@keyframes parpadeo {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
+        .parpadeo {
+            animation: alertBlink 1s infinite;
+        }
 
-/* Mejora visual de los botones */
-.ticket-card button {
-    font-weight: bold;
-}
-    </style>
-
-  
-        <script>
-            // Filtrado de tickets
-            document.getElementById("filtroTabla").addEventListener("keyup", function () {
-                const filtro = this.value.toLowerCase();
-                document.querySelectorAll("#ticketContainer .ticket-card").forEach(card => {
-                    let texto = card.innerText.toLowerCase();
-                    card.parentElement.style.display = texto.includes(filtro) ? "block" : "none";
-                });
-            });
-
-            // Colores seg�n tiempo
-            function actualizarColores() {
-                const cards = document.querySelectorAll("#ticketContainer .ticket-card");
-                const ahora = new Date();
-
-                cards.forEach(card => {
-                    const button = card.querySelector("button");
-                    if (button.disabled) return; // ya atendido
-
-                    const tiempoCreado = new Date(card.dataset.tiempo);
-                    const diffMin = (ahora - tiempoCreado) / 60000;
-
-                    if (diffMin >= 30) {
-                        card.style.backgroundColor = "#f8d7da"; // rojo
-                        card.style.borderLeft = "5px solid #dc3545";
-                        card.classList.add("parpadeo");
-                    } else if (diffMin >= 20) {
-                        card.style.backgroundColor = "#ffe5b4"; // naranja
-                        card.style.borderLeft = "5px solid #fd7e14";
-                        card.classList.remove("parpadeo");
-                    } else if (diffMin >= 10) {
-                        card.style.backgroundColor = "#fff3cd"; // amarillo
-                        card.style.borderLeft = "5px solid #ffc107";
-                        card.classList.remove("parpadeo");
-                    } else {
-                        card.style.backgroundColor = "white";
-                        card.style.borderLeft = "5px solid transparent";
-                        card.classList.remove("parpadeo");
-                    }
-                });
+        /* IMPORTANTE PARA QUE NO FALLE RAZOR */
+        @@keyframes alertBlink {
+            0% {
+                opacity: 1;
             }
 
-            // Actualiza cada minuto
-            setInterval(actualizarColores, 60000);
-            actualizarColores();
-        </script>
-    
+            50% {
+                opacity: .4;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+
+
+    <script>
+        function actualizarTiempos() {
+            const ahora = new Date();
+            let pendientes = 0;
+
+            document.querySelectorAll(".ticket").forEach(t => {
+                const creado = new Date(t.dataset.creado);
+                const badge = t.querySelector(".tiempo");
+
+                if (t.dataset.atendido === "true"){
+                    badge.innerText = "Atendido";
+                    return;
+                }
+
+                pendientes++;
+                const diff = Math.floor((ahora - creado) / 60000);
+                badge.innerText = diff + " min";
+
+                const card = t.querySelector(".ticket-card");
+
+                if (diff > 20) {
+                    // 🔴 LENTOS (>20m)
+                    card.style.background = "#f8d7da";
+                    card.style.borderLeft = "6px solid #dc3545";
+                    card.classList.add("parpadeo");
+                }
+                else if (diff > 10) {
+                    // 🟡 NORMALES (10–20m)
+                    card.style.background = "#fff3cd";
+                    card.style.borderLeft = "6px solid #ffc107";
+                    card.classList.remove("parpadeo");
+                }
+                else {
+                    // 🟢 RÁPIDOS (≤10m)
+                    card.style.background = "#d4edda";
+                    card.style.borderLeft = "6px solid #28a745";
+                    card.classList.remove("parpadeo");
+                }
+            });
+
+            document.getElementById("cntPendientes").innerText = pendientes;
+        }
+
+        // Ordenar: los más nuevos arriba
+        function ordenar() {
+            const cont = document.getElementById("contenedor");
+            const items = Array.from(cont.children);
+
+            items.sort((a, b) => {
+                let ta = new Date(a.dataset.creado);
+                let tb = new Date(b.dataset.creado);
+                return tb - ta; // más nuevos arriba
+            });
+
+            items.forEach(i => cont.appendChild(i));
+        }
+
+        // FILTRO DE TEXTO
+        document.getElementById("buscar").addEventListener("keyup", function () {
+            const f = this.value.toLowerCase();
+            document.querySelectorAll(".ticket").forEach(t => {
+                t.style.display = t.innerText.toLowerCase().includes(f) ? "block" : "none";
+            });
+        });
+
+        // FILTRO HOTEL
+        document.getElementById("filtroHotel").addEventListener("change", function () {
+            const h = this.value.toLowerCase();
+            document.querySelectorAll(".ticket").forEach(t => {
+                t.style.display = !h || t.dataset.hotel.toLowerCase() === h ? "block" : "none";
+            });
+        });
+
+        setInterval(() => { actualizarTiempos(); ordenar(); }, 60000);
+        actualizarTiempos();
+        ordenar();
+    </script>

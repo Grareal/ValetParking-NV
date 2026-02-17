@@ -16,9 +16,9 @@ namespace AppValetParking.Models
         public string? h_nom { get; set; }
         public string? h_fec_lld { get; set; }      // varchar, no DateTime
         public string? h_fec_sda { get; set; }      // varchar, no DateTime
-        public double? h_num_adu { get; set; }
-        public double? h_num_men { get; set; }
-        public double? h_num_per { get; set; }
+        public int? h_num_adu { get; set; }
+        public int? h_num_men { get; set; }
+        public int? h_num_per { get; set; }
         public string? h_num_hab { get; set; }      // varchar
         public string? h_tpo_hab { get; set; }
         public string? h_for_pgo { get; set; }

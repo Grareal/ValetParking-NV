@@ -10,9 +10,9 @@ namespace AppValetParking.Models
         public string? h_nom { get; set; }
         public string? h_fec_lld { get; set; }      // varchar, no DateTime
         public string? h_fec_sda { get; set; }      // varchar, no DateTime
-        public double? h_num_adu { get; set; }      // float en BD
-        public double? h_num_men { get; set; }      // float en BD
-        public double? h_num_per { get; set; }      // float en BD
+        public int? h_num_adu { get; set; }      // float en BD
+        public int? h_num_men { get; set; }      // float en BD
+        public int? h_num_per { get; set; }      // float en BD
         public string? h_num_hab { get; set; }      // varchar en BD
         public string? h_tpo_hab { get; set; }
         public string? h_for_pgo { get; set; }

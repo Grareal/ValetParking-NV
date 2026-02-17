@@ -7,21 +7,21 @@ namespace AppValetParking.Models
         public int Id { get; set; }
 
         // Campos obligatorios con valor por defecto
-        public string FolioVP { get; set; } = string.Empty;
-        public string Destino { get; set; } = "Lobby";
-        public string Resort { get; set; } = "Desconocido";
-        public string Habitacion { get; set; } = "N/A";
-        public string NombreReserva { get; set; } = "Invitado";
-        public string NombreSolicitante { get; set; } = "Desconocido";
-        public string TipoSalida { get; set; } = "Normal";
+        public string? FolioVP { get; set; }
+        public string? Destino { get; set; }
+        public string? Resort { get; set; }
+        public string? Habitacion { get; set; }
+        public string? NombreReserva { get; set; }
+        public string? NombreSolicitante { get; set; }
+        public string? TipoSalida { get; set; }
 
-        // Campos opcionales, nunca null
-        public string ApellidoSolicitante { get; set; } = string.Empty;
-        public string Telefono { get; set; } = string.Empty;
-        public string Correo { get; set; } = string.Empty;
-        public string MarcaVehiculo { get; set; } = string.Empty;
-        public string ColorVehiculo { get; set; } = string.Empty;
-        public string Comentarios { get; set; } = string.Empty;
+        public string? ApellidoSolicitante { get; set; }
+        public string? Telefono { get; set; }
+        public string? Correo { get; set; }
+        public string? MarcaVehiculo { get; set; }
+        public string? ColorVehiculo { get; set; }
+        public string? Comentarios { get; set; }
+
 
         // Fechas
         public DateTime FechaSolicitud { get; set; } = DateTime.Now;
