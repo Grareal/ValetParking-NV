@@ -80,13 +80,13 @@
             <div class="form-row">
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="Servicio">Servicio</label>
+                        <label for="Servicio">Nuevo Servicio</label>
                         <select id="Servicio" name="Servicio" class="form-control" required></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="CajonBuffer">Cajon Nuevo</label>
-                    <input asp-for="CajonBuffer" id="CajonBuffer" class="form-control" placeholder="Ej. A23, B5, etc." required />
+                    <input asp-for="CajonBuffer" id="CajonBuffer" class="form-control" placeholder="Ej. A23, B5, etc." />
                 </div>
             </div>
 
@@ -187,7 +187,8 @@
 
     <script src="@Url.Content("~/js/serviciosvp.js")"></script>
     <script>
-        cargarOpcionesServicio('Servicio', '/Config/servicios.json', '@Model?.Servicio');
+        const servicioDefault = localStorage.getItem('ubicacionPorDefecto') || '@Model?.Servicio' || 'ANDENES';
+cargarOpcionesServicio('Servicio', '/Config/servicios.json', servicioDefault);
     </script>
 
     <!-- CHECKBOX MINI OCULTO -->
@@ -210,10 +211,13 @@
 
         chkUbicacion.addEventListener('change', () => {
             if (chkUbicacion.checked) {
-                const opciones = ['ANDENES', 'EN.REMOTO', 'EN.BUFFER'];
-                let seleccion = prompt("Selecciona ubicación: 1=ANDENES, 2=EN.REMOTO, 3=EN.BUFFER", "1");
+                const opciones = ['ANDENES', 'EN.REMOTO', 'EN.BUFFER', 'PASEO', 'GRAVIN','SALIDA'];
+                let seleccion = prompt(
+                    "Selecciona ubicación:\n1=ANDENES\n2=EN.REMOTO\n3=EN.BUFFER\n4=PASEO\n5=GRAVIN\n6=SALIDA",
+                    "1"
+                );
                 seleccion = parseInt(seleccion);
-                if (seleccion < 1 || seleccion > 3 || isNaN(seleccion)) seleccion = 1;
+                if (seleccion < 1 || seleccion > opciones.length || isNaN(seleccion)) seleccion = 1;
 
                 const valor = opciones[seleccion - 1];
                 localStorage.setItem('ubicacionPorDefecto', valor);

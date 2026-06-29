@@ -75,6 +75,7 @@
                     <input type="text" id="Hotel" name="Hotel" class="form-control" readonly />
                 </div>
             </div>
+            <input type="hidden" id="NombreReserva" name="NombreReserva" />
 
             <div class="form-row">
                 <div class="form-group">
@@ -187,8 +188,16 @@
             const folio = document.getElementById('FolioVP');
             const reserva = document.getElementById('Reserva');
             const numero = document.getElementById('NumeroOperadorInput');
+            const btnSubmit = document.querySelector('.btn-submit');
 
-            form.addEventListener('submit', function (e) {
+            form.addEventListener('submit', async function (e) {
+
+                // Si ya está guardando, bloquear segundo submit
+                if (btnSubmit.disabled) {
+                    e.preventDefault();
+                    return;
+                }
+
                 let valid = true;
                 [folio, reserva, numero].forEach(input => input.classList.remove('error'));
 
@@ -202,10 +211,19 @@
                     valid = false;
                 }
 
+                if (reserva.value.trim()) {
+                    await actualizarDatosReserva(reserva.value.trim());
+                }
+
                 if (!valid) {
                     alert('Por favor completa los campos obligatorios: Folio y Numero del operador.');
                     e.preventDefault();
+                    return;
                 }
+
+                // Bloquear botón y cambiar texto
+                btnSubmit.disabled = true;
+                btnSubmit.innerText = "Guardando...";
             });
         });
 
@@ -276,19 +294,40 @@
                 }
             }
             function asignarCamposDesdeBuffer(datos) {
+
                 const mapping = {
                     "FOLIO": "FolioVP",
                     "RESERVA": "Reserva",
                     "NUMEROOPERADOR": "NumeroOperadorInput",
                     "UBICACION": "Servicio"
                 };
+
                 for (const campo in datos) {
+
                     const inputId = mapping[campo.toUpperCase()];
                     if (!inputId) continue;
+
                     const input = document.getElementById(inputId);
-                    if (input) input.value = datos[campo];
-                    if (campo.toUpperCase() === "NUMEROOPERADOR") input.dispatchEvent(new Event('input'));
+                    if (!input) continue;
+
+                    input.value = datos[campo];
+
+                    if (campo.toUpperCase() === "RESERVA") {
+
+                        input.dispatchEvent(new Event('input'));
+                        input.dispatchEvent(new Event('change'));
+
+                        // Forzar consulta de hotel y habitación
+                        if (typeof actualizarDatosReserva === "function") {
+                            actualizarDatosReserva(datos[campo]);
+                        }
+                    }
+
+                    if (campo.toUpperCase() === "NUMEROOPERADOR") {
+                        input.dispatchEvent(new Event('input'));
+                    }
                 }
+
                 const ubicacionDefault = localStorage.getItem('ubicacionPorDefecto') || 'ANDENES';
                 const selectServicio = document.getElementById('Servicio');
                 if (selectServicio) selectServicio.value = ubicacionDefault;

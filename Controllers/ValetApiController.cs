@@ -70,20 +70,48 @@ namespace AppValetParking.Controllers
             };
 
             _context.ValetSolicitudes.Add(nuevaSolicitud);
+
+            // Actualiza el Estatus del vehículo según el tipo de movimiento:
+            // PASEO/Parcial -> "Parcial", SALIDA/Permanente -> "Fuera",
+            // REGRESO -> vuelve a "Dentro" (el huésped regresó de su paseo).
+            var nuevoEstatus = MapTipoSalidaAEstatus(solicitud.TipoSalida);
+            if (nuevoEstatus != null)
+            {
+                var vehiculo = await _context.VehiculosInfo
+                    .FirstOrDefaultAsync(v => v.FolioVP == solicitud.FolioVP);
+
+                if (vehiculo != null)
+                    vehiculo.Estatus = nuevoEstatus;
+            }
+
             await _context.SaveChangesAsync();
 
             return Ok(new { exito = true, mensaje = $"Solicitud enviada para el folio {solicitud.FolioVP}" });
         }
 
+        private static string MapTipoSalidaAEstatus(string tipoSalida)
+        {
+            if (string.IsNullOrWhiteSpace(tipoSalida)) return null;
+
+            return tipoSalida.Trim().ToUpperInvariant() switch
+            {
+                "PARCIAL" or "PASEO" => "Parcial",
+                "PERMANENTE" or "SALIDA" => "Fuera",
+                "REGRESO" => "Dentro",
+                _ => null
+            };
+        }
+
+
         public class SolicitudVehiculoDto
         {
             public string FolioVP { get; set; }
-            public string Destino { get; set; }
+            public string? Destino { get; set; }
             public string Resort { get; set; }
-            public string NombreSolicitante { get; set; }
-            public string ApellidoSolicitante { get; set; }
-            public string Telefono { get; set; }
-            public string Correo { get; set; }
+            public string? NombreSolicitante { get; set; }
+            public string? ApellidoSolicitante { get; set; }
+            public string? Telefono { get; set; }
+            public string? Correo { get; set; }
             public string MarcaVehiculo { get; set; }
             public string ColorVehiculo { get; set; }
             public string TipoSalida { get; set; }

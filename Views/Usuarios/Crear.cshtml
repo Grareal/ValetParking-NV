@@ -1,0 +1,292 @@
+﻿@model AppValetParking.Models.Usuario
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI';
+}
+
+body{
+background:linear-gradient(135deg,#4fa3d1,#53c2b6);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* CONTENEDOR */
+        .container {
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+/* CARD */
+        .card {
+            background: white;
+            padding: 30px;
+            width: 500px;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+/* TITULO */
+.title{
+font-size:26px;
+font-weight:700;
+color:#2c3e50;
+margin-bottom:25px;
+text-align:center;
+}
+
+/* INPUT */
+.input-group{
+margin-bottom:16px;
+}
+
+label{
+display:block;
+margin-bottom:5px;
+font-weight:600;
+color:#555;
+font-size:14px;
+}
+
+input{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+font-size:14px;
+}
+
+/* PERMISOS */
+        .permisos {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+            .permisos label {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 13px;
+                background: #f8f8f8;
+                padding: 6px 8px;
+                border-radius: 6px;
+            }
+
+/* BOTON */
+button{
+margin-top:25px;
+width:100%;
+padding:13px;
+border:none;
+border-radius:12px;
+font-weight:600;
+font-size:16px;
+color:white;
+background:linear-gradient(135deg,#c79a5c,#a6783e);
+cursor:pointer;
+}
+
+/* PANEL DERECHO */
+        .info-panel {
+            background: white;
+            padding: 25px;
+            width: 420px;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 5px 20px rgba(0,0,0,0.08);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            align-content: start;
+        }
+
+        .info-title {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+/* ITEM */
+        .info-item {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+            .info-item b {
+                color: #2f6ea3;
+                font-size: 14px;
+            }
+
+            .info-item span {
+                color: #666;
+                font-size: 12px;
+            }
+
+/* ANIMACION */
+@@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- FORM -->
+        <div class="card">
+
+            <div class="title">Crear Usuario</div>
+
+            <form method="post">
+
+                <div class="input-group">
+                    <label>Usuario</label>
+                    <input asp-for="Username" />
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input asp-for="Password" type="password" />
+                </div>
+
+                <div class="input-group">
+                    <label>Buscar Empleado</label>
+                    <input type="text" id="buscadorEmpleado" placeholder="Escribe nombre..." />
+                    <div id="resultados" style="background:white;border:1px solid #ddd;max-height:150px;overflow:auto;"></div>
+                </div>
+
+                <div class="input-group">
+                    <label>Gafete</label>
+                    <input asp-for="Gafete" id="gafete" type="text" />
+                </div>
+
+                <div class="permisos">
+                    <label><input type="checkbox" name="permisos" value="Operadora" /> Operadora</label>
+                    <label><input type="checkbox" name="permisos" value="Botones" /> Botones</label>
+                    <label><input type="checkbox" name="permisos" value="PuertaSol" /> Puerta del Sol</label>
+                    <label><input type="checkbox" name="permisos" value="Reportes" /> Reportes</label>
+                    <label><input type="checkbox" name="permisos" value="Administracion" /> Administración</label>
+                    <label><input type="checkbox" name="permisos" value="TI" /> TI</label>
+                    <label><input type="checkbox" name="permisos" value="Configuracion" /> Configuración</label>
+                </div>
+
+                <button>Guardar Usuario</button>
+
+            </form>
+
+        </div>
+
+        <!-- GUIA -->
+        <div class="info-panel">
+
+            <div class="info-title">Guía de Permisos</div>
+
+            <div class="info-item">📞 <b>Operadora</b><span>Monitoreo de registros y movimientos</span></div>
+            <div class="info-item">🔑 <b>Botones</b><span>Registro de movimientos de los carros</span></div>
+            <div class="info-item">✏️ <b>Movimientos</b><span>Edicion de movimientos de los carros</span></div>
+            <div class="info-item">🚪 <b>Puerta del Sol</b><span>Envio de Tickets desde puerta del sol</span></div>
+            <div class="info-item">📊 <b>Reportes</b><span>Reporteria y monitoreo para jefatura y supervision </span></div>
+            <div class="info-item">⚙️ <b>Configuración</b><span>Configuracion de impresoras (solo TI)</span></div>
+            <div class="info-item">👤 <b>Administración</b><span>Acceso total personal de valet parking</span></div>
+            <div class="info-item">💻 <b>TI</b><span>Acceso total (perfil de TI)</span></div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+<script>
+document.getElementById("buscadorEmpleado").addEventListener("input", function () {
+
+    let term = this.value;
+
+    if (term.length < 2) {
+        document.getElementById("resultados").innerHTML = "";
+        return;
+    }
+
+    fetch('/Usuarios/BuscarEmpleado?term=' + term)
+        .then(res => res.json())
+        .then(data => {
+
+            let html = "";
+
+            data.forEach(e => {
+                html += `
+                    <div style="padding:5px;cursor:pointer"
+                         onclick="seleccionarEmpleado('${e.gafete}')">
+                        ${e.nombre}
+                    </div>`;
+            });
+
+            document.getElementById("resultados").innerHTML = html;
+        });
+});
+
+function seleccionarEmpleado(gafete) {
+    document.getElementById("gafete").value = gafete;
+    document.getElementById("resultados").innerHTML = "";
+    document.getElementById("buscadorEmpleado").value = "";
+}
+</script><script>
+document.getElementById("buscadorEmpleado").addEventListener("input", function () {
+
+    let term = this.value;
+
+    if (term.length < 2) {
+        document.getElementById("resultados").innerHTML = "";
+        return;
+    }
+
+    fetch('/Usuarios/BuscarEmpleado?term=' + term)
+        .then(res => res.json())
+        .then(data => {
+
+            let html = "";
+
+            data.forEach(e => {
+                html += `
+                    <div style="padding:5px;cursor:pointer"
+                         onclick="seleccionarEmpleado('${e.gafete}')">
+                        ${e.nombre}
+                    </div>`;
+            });
+
+            document.getElementById("resultados").innerHTML = html;
+        });
+});
+
+function seleccionarEmpleado(gafete) {
+    document.getElementById("gafete").value = gafete;
+    document.getElementById("resultados").innerHTML = "";
+    document.getElementById("buscadorEmpleado").value = "";
+}
+</script>

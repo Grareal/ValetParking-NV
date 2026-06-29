@@ -1,0 +1,351 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Mapa de Cajones</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts (marca Smart Valet) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --sv-primary: #0D5C63;
+            --sv-primary-dark: #134A54;
+            --sv-gold: #D4AF37;
+            --sv-bg: #F8F5EF;
+            --sv-ink: #263238;
+            --sv-ink-soft: rgba(38, 50, 56, 0.62);
+            --sv-border: rgba(38, 50, 56, 0.10);
+            --sv-white: #FFFFFF;
+            --sv-radius-md: 14px;
+            --sv-radius-sm: 8px;
+            --sv-shadow-sm: 0 2px 8px rgba(19, 74, 84, 0.06);
+
+            --sv-success: #2e7d4f;
+            --sv-success-bg: #e3f3e9;
+            --sv-danger: #b3261e;
+            --sv-danger-bg: #fbe4e2;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background: var(--sv-bg);
+            color: var(--sv-ink);
+            font-family: 'Inter', sans-serif;
+            padding-bottom: 24px;
+            font-size: 0.85rem;
+        }
+
+        .sv-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 0 4px;
+        }
+
+        .sv-logo-mark {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, var(--sv-primary) 0%, var(--sv-primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sv-white);
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .sv-header h3 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            color: var(--sv-primary-dark);
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .sv-header p {
+            margin: 0;
+            font-size: 0.78rem;
+            color: var(--sv-ink-soft);
+        }
+
+        /* ---------- Barra de herramientas (sticky) ---------- */
+        .sv-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--sv-bg);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--sv-border);
+            margin-bottom: 12px;
+        }
+
+        .sv-toolbar .form-control, .sv-toolbar .form-select {
+            border: 1.5px solid var(--sv-border);
+            border-radius: var(--sv-radius-sm);
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            height: 34px;
+        }
+
+        .sv-toolbar .form-control:focus, .sv-toolbar .form-select:focus {
+            outline: none;
+            border-color: var(--sv-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+        }
+
+        .sv-check {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.78rem;
+            color: var(--sv-ink-soft);
+            white-space: nowrap;
+        }
+
+        .sv-stats {
+            margin-left: auto;
+            display: flex;
+            gap: 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .sv-stats .libre { color: var(--sv-success); }
+        .sv-stats .ocupado { color: var(--sv-danger); }
+
+        /* ---------- Zonas ---------- */
+        .sv-zona-title {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            color: var(--sv-primary-dark);
+            font-size: 0.92rem;
+            margin: 14px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sv-zona-title .sv-zona-count {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--sv-ink-soft);
+        }
+
+        .sv-cajones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+            gap: 7px;
+        }
+
+        .sv-cajon {
+            background: var(--sv-success-bg);
+            border: 1px solid var(--sv-border);
+            border-left: 4px solid var(--sv-success);
+            border-radius: var(--sv-radius-sm);
+            padding: 6px 8px;
+            cursor: default;
+            transition: transform .12s ease;
+        }
+
+        .sv-cajon:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--sv-shadow-sm);
+        }
+
+        .sv-cajon.ocupado {
+            background: var(--sv-danger-bg);
+            border-left-color: var(--sv-danger);
+        }
+
+        .sv-cajon-numero {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--sv-primary-dark);
+            line-height: 1.1;
+        }
+
+        .sv-cajon-folio {
+            font-weight: 700;
+            font-size: 0.74rem;
+            color: var(--sv-ink);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sv-cajon-detalle {
+            font-size: 0.68rem;
+            color: var(--sv-ink-soft);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sv-empty {
+            color: var(--sv-ink-soft);
+            font-size: 0.85rem;
+            padding: 16px 0;
+        }
+    </style>
+</head>
+<body class="container-fluid px-3">
+
+<div class="sv-header">
+    <div class="sv-logo-mark">P</div>
+    <div>
+        <h3>Mapa de Cajones</h3>
+        <p>Ocupación en vivo por zona — coincide con Reportes / Editar registro</p>
+    </div>
+</div>
+
+<div class="sv-toolbar">
+    <input id="buscar" class="form-control" style="width:200px;" placeholder="Buscar folio, huésped, placas..." />
+
+    <select id="filtroZona" class="form-select" style="width:160px;">
+        <option value="">Todas las zonas</option>
+    </select>
+
+    <label class="sv-check">
+        <input type="checkbox" id="chkSoloOcupados" /> Solo ocupados
+    </label>
+    <!--
+    <label class="sv-check">
+        <input type="checkbox" id="chkZonasLegacy" /> Incluir zonas legacy
+    </label>
+    -->
+    <div class="sv-stats">
+        <span class="ocupado" id="statOcupados">0 ocupados</span>
+        <span class="libre" id="statLibres">0 libres</span>
+    </div>
+</div>
+
+<div id="contenedorZonas"></div>
+
+<script>
+    let cajonesData = [];
+
+    function escapeHtml(valor) {
+        if (valor === null || valor === undefined) return '';
+        return valor.toString()
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
+    function renderCajon(c) {
+        const ocupado = c.ocupado;
+        const titulo = ocupado
+            ? `${c.folioVP || 'Sin folio'} · ${[c.marca, c.modelo, c.color].filter(Boolean).join(' ')} ${c.placas || ''}`.trim()
+            : 'Disponible';
+
+        return `
+            <div class="sv-cajon ${ocupado ? 'ocupado' : ''}" title="${escapeHtml(titulo)}">
+                <div class="sv-cajon-numero">${escapeHtml(c.numero)}</div>
+                ${ocupado
+                    ? `<div class="sv-cajon-folio">${escapeHtml(c.folioVP) || '—'}</div>
+                       <div class="sv-cajon-detalle">${escapeHtml(c.nombreReserva || c.placas || '')}</div>`
+                    : `<div class="sv-cajon-detalle">Libre</div>`}
+            </div>`;
+    }
+
+    function pasaFiltros(c) {
+        const zona = document.getElementById('filtroZona').value;
+        const soloOcupados = document.getElementById('chkSoloOcupados').checked;
+        const texto = document.getElementById('buscar').value.trim().toLowerCase();
+
+        if (zona && c.ubicacion !== zona) return false;
+        if (soloOcupados && !c.ocupado) return false;
+        if (texto) {
+            const haystack = [c.numero, c.folioVP, c.nombreReserva, c.placas, c.marca, c.modelo, c.habitacion]
+                .filter(Boolean).join(' ').toLowerCase();
+            if (!haystack.includes(texto)) return false;
+        }
+        return true;
+    }
+
+    function renderTodo() {
+        const filtrados = cajonesData.filter(pasaFiltros);
+        const contenedor = document.getElementById('contenedorZonas');
+
+        const ocupados = cajonesData.filter(c => c.ocupado).length;
+        document.getElementById('statOcupados').textContent = `${ocupados} ocupados`;
+        document.getElementById('statLibres').textContent = `${cajonesData.length - ocupados} libres`;
+
+        if (!filtrados.length) {
+            contenedor.innerHTML = '<div class="sv-empty">No hay cajones que coincidan con el filtro.</div>';
+            return;
+        }
+
+        const zonas = {};
+        filtrados.forEach(c => {
+            const zona = c.ubicacion || 'Sin zona';
+            if (!zonas[zona]) zonas[zona] = [];
+            zonas[zona].push(c);
+        });
+
+        contenedor.innerHTML = Object.keys(zonas).sort((a, b) => {
+            if (a === 'BUFFER') return -1;
+            if (b === 'BUFFER') return 1;
+            return a.localeCompare(b);
+        }).map(zona => {
+            const items = zonas[zona];
+            const ocupadosZona = items.filter(c => c.ocupado).length;
+            return `
+                <div class="sv-zona-title">
+                    ${escapeHtml(zona)}
+                    <span class="sv-zona-count">${ocupadosZona}/${items.length} ocupados</span>
+                </div>
+                <div class="sv-cajones-grid">
+                    ${items.map(renderCajon).join('')}
+                </div>`;
+        }).join('');
+    }
+
+    function actualizarSelectorZonas() {
+        const select = document.getElementById('filtroZona');
+        const actual = select.value;
+        const zonas = [...new Set(cajonesData.map(c => c.ubicacion).filter(Boolean))].sort((a, b) => {
+            if (a === 'BUFFER') return -1;
+            if (b === 'BUFFER') return 1;
+            return a.localeCompare(b);
+        });
+        select.innerHTML = '<option value="">Todas las zonas</option>' +
+            zonas.map(z => `<option value="${escapeHtml(z)}">${escapeHtml(z)}</option>`).join('');
+        select.value = zonas.includes(actual) ? actual : '';
+    }
+
+    async function cargarMapa() {
+        const resp = await fetch('@Url.Action("GetMapa")');
+        cajonesData = await resp.json();
+        actualizarSelectorZonas();
+        renderTodo();
+    }
+
+    document.getElementById('buscar').addEventListener('input', renderTodo);
+    document.getElementById('filtroZona').addEventListener('change', renderTodo);
+    document.getElementById('chkSoloOcupados').addEventListener('change', renderTodo);
+
+    cargarMapa();
+    setInterval(cargarMapa, 15000);
+</script>
+</body>
+</html>

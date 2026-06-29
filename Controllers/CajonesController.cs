@@ -16,18 +16,24 @@ namespace AppValetParking.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCajones()
         {
-            var cajones = await _context.Cajones.OrderBy(c => c.Numero).ToListAsync();
-            return Json(cajones);
+            var cajones = await _context.Cajones.ToListAsync();
+            var ordenados = cajones
+                .OrderBy(c => c.Ubicacion)
+                .ThenBy(c => int.TryParse(c.Numero, out var n) ? n : int.MaxValue)
+                .ToList();
+            return Json(ordenados);
         }
 
+        // numero + ubicacion identifican un cajón de forma única: el mismo
+        // número puede repetirse en distintas zonas (ej. Buffer 12 y Remoto A-12).
         [HttpPost]
-        public async Task<IActionResult> OcupaCajon(int numero, string ubicacion)
+        public async Task<IActionResult> OcupaCajon(string numero, string ubicacion)
         {
-            var cajon = await _context.Cajones.FirstOrDefaultAsync(c => c.Numero == numero);
+            var cajon = await _context.Cajones
+                .FirstOrDefaultAsync(c => c.Numero == numero && c.Ubicacion == ubicacion);
             if (cajon != null)
             {
                 cajon.Ocupado = true;
-               // cajon.Ubicacion = ubicacion;
                 await _context.SaveChangesAsync();
                 return Ok();
             }
@@ -35,18 +41,14 @@ namespace AppValetParking.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LiberarCajon(int numero)
+        public async Task<IActionResult> LiberarCajon(string numero, string ubicacion)
         {
             var cajon = await _context.Cajones
-                .FirstOrDefaultAsync(c => c.Numero == numero);
+                .FirstOrDefaultAsync(c => c.Numero == numero && c.Ubicacion == ubicacion);
 
             if (cajon != null)
             {
                 cajon.Ocupado = false;
-
-                // Opcional: limpiar ubicaci�n si la usas
-                // cajon.Ubicacion = null;
-
                 await _context.SaveChangesAsync();
                 return Ok();
             }

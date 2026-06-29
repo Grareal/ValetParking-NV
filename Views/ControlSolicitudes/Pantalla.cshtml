@@ -1,0 +1,344 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Valet Parking · Smart Valet</title>
+
+    <style>
+        :root {
+            --sv-teal-900: #0D5D63;
+            --sv-teal-950: #0A4347;
+            --sv-teal-deep: #0A2E2F;
+            --sv-gold-500: #D9A427;
+            --sv-gold-300: #EFC766;
+            --sv-cream: #F7F4EE;
+            --sv-ink: #16241F;
+            --sv-ink-soft: #6E7E7A;
+            --sv-line: #E4E1D8;
+            --sv-white: #FFFFFF;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 15% 10%, rgba(217,164,39,0.10), transparent 45%),
+                radial-gradient(circle at 85% 90%, rgba(19,165,164,0.10), transparent 45%),
+                var(--sv-cream);
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            color: var(--sv-ink);
+            padding-bottom: 90px;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(120deg, var(--sv-teal-deep), var(--sv-teal-900));
+            padding: 26px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            border-bottom: 5px solid var(--sv-gold-500);
+            box-shadow: 0 10px 30px rgba(10, 46, 47, 0.25);
+        }
+
+        .header .mark {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(217, 164, 39, 0.15);
+            border: 1.5px solid rgba(217, 164, 39, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sv-gold-300);
+            font-weight: 800;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            font-size: 38px;
+            color: var(--sv-white);
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            margin: 0;
+        }
+
+        .header .sub {
+            font-size: 13px;
+            color: var(--sv-gold-300);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin: 3px 0 0;
+        }
+
+        /* ===== MENSAJE ===== */
+        .mensaje {
+            text-align: center;
+            font-size: 22px;
+            margin: 26px auto 6px;
+            color: var(--sv-ink-soft);
+            font-weight: 500;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .mensaje .es { color: var(--sv-ink); font-weight: 700; }
+        .mensaje .sep { color: var(--sv-gold-500); margin: 0 10px; }
+
+        /* ===== TURNO ACTUAL (2 principales) ===== */
+        .turno-actual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 26px;
+            margin: 30px 36px;
+        }
+
+        .turno-principal {
+            position: relative;
+            background: linear-gradient(150deg, var(--sv-teal-900), var(--sv-teal-deep));
+            padding: 38px 30px;
+            border-radius: 22px;
+            box-shadow: 0 22px 50px rgba(10, 46, 47, 0.32);
+            text-align: center;
+            overflow: hidden;
+            border: 1px solid rgba(217, 164, 39, 0.35);
+            animation: glow 2.2s ease-in-out infinite;
+        }
+
+        .turno-principal::before {
+            content: "SIGUIENTE";
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            letter-spacing: 0.22em;
+            color: var(--sv-gold-300);
+            font-weight: 800;
+        }
+
+        .turno-principal .folio {
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--sv-white);
+            margin-top: 22px;
+            letter-spacing: 0.02em;
+            line-height: 1;
+        }
+
+        .turno-principal .huesped {
+            font-size: 26px;
+            color: var(--sv-gold-300);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .turno-principal .ubicacion {
+            font-size: 18px;
+            color: rgba(255,255,255,0.72);
+            margin-top: 6px;
+            letter-spacing: 0.02em;
+        }
+
+        /* ===== LISTA DE TURNOS EN ESPERA ===== */
+        .turnos {
+            padding: 10px 36px 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        .ticket {
+            background: var(--sv-white);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 22px rgba(13, 30, 28, 0.08);
+            border: 1px solid var(--sv-line);
+            border-top: 3px solid var(--sv-gold-500);
+        }
+
+        .ticket .folio {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--sv-teal-900);
+        }
+
+        .ticket .huesped {
+            font-size: 18px;
+            color: var(--sv-ink);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .ticket .ubicacion {
+            font-size: 15px;
+            color: var(--sv-ink-soft);
+            margin-top: 3px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--sv-teal-deep);
+            text-align: center;
+            padding: 16px;
+            font-size: 17px;
+            color: rgba(255,255,255,0.85);
+            border-top: 3px solid var(--sv-gold-500);
+            font-weight: 500;
+        }
+
+        .footer .es { color: var(--sv-gold-300); font-weight: 700; }
+        .footer .sep { color: rgba(255,255,255,0.4); margin: 0 8px; }
+
+        /* ===== ANIMACIÓN ===== */
+        @@keyframes glow {
+            0% { box-shadow: 0 22px 50px rgba(10, 46, 47, 0.32), 0 0 0 rgba(217,164,39,0); }
+            50% { box-shadow: 0 22px 50px rgba(10, 46, 47, 0.32), 0 0 24px rgba(217,164,39,0.35); }
+            100% { box-shadow: 0 22px 50px rgba(10, 46, 47, 0.32), 0 0 0 rgba(217,164,39,0); }
+        }
+
+        @@media (max-width: 900px) {
+            .turno-actual {
+                grid-template-columns: 1fr;
+                margin: 24px 20px;
+            }
+            .header h1 { font-size: 28px; }
+            .turnos { padding: 10px 20px 26px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="mark">SV</div>
+        <div>
+            <p class="sub">Smart Valet · Luxury Operations Suite</p>
+            <h1>VALET PARKING</h1>
+        </div>
+    </div>
+
+    <div class="mensaje">
+        <span class="es">Su vehículo está siendo acercado</span>
+        <span class="sep">·</span>
+        <span>Your vehicle is approaching</span>
+    </div>
+
+    <!-- TURNO PRINCIPAL -->
+    <div id="turnoActual"></div>
+
+    <!-- LISTA DE TURNOS -->
+    <div class="turnos" id="listaTurnos"></div>
+
+    <div class="footer">
+        <span class="es">Gracias por su paciencia</span>
+        <span class="sep">·</span>
+        <span>Thank you for your patience</span>
+    </div>
+
+    <script>
+
+        async function cargarSolicitudes() {
+
+            const resp = await fetch('/ControlSolicitudes/Index?inicio=2000-01-01');
+            const html = await resp.text();
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            let tickets = Array.from(doc.querySelectorAll(".ticket"));
+
+            // FIFO
+            tickets.sort((a, b) => {
+                let ta = new Date(a.dataset.creado);
+                let tb = new Date(b.dataset.creado);
+                return ta - tb;
+            });
+
+            let lista = [];
+
+            tickets.forEach(t => {
+                if (t.dataset.atendido === "true") return;
+
+                const folio = t.innerText.match(/Folio:\s*(.*)/)?.[1] ?? "";
+                const huesped = t.innerText.match(/Hu�sped:\s*(.*)/)?.[1] ?? "";
+                const ubicacion = t.innerText.match(/Ubicaci�n:\s*(.*)/)?.[1] ?? "";
+
+                lista.push({ folio, huesped, ubicacion });
+            });
+
+            const turnoActual = document.getElementById("turnoActual");
+            const listaTurnos = document.getElementById("listaTurnos");
+
+            turnoActual.innerHTML = "";
+            listaTurnos.innerHTML = "";
+
+            if (lista.length > 0) {
+
+                const primero = lista[0];
+                const segundo = lista[1];
+
+                turnoActual.innerHTML = `
+<div class="turno-actual">
+
+    <div class="turno-principal">
+        <div class="folio">${primero.folio}</div>
+        <div class="huesped">${primero.huesped}</div>
+        <div class="ubicacion">${primero.ubicacion}</div>
+    </div>
+
+    ${segundo ? `
+    <div class="turno-principal">
+        <div class="folio">${segundo.folio}</div>
+        <div class="huesped">${segundo.huesped}</div>
+        <div class="ubicacion">${segundo.ubicacion}</div>
+    </div>
+    ` : ""}
+
+</div>
+`;
+
+                lista.splice(0, 2);
+            }
+
+            lista.forEach(t => {
+
+                const div = document.createElement("div");
+                div.className = "ticket";
+
+                div.innerHTML = `
+                <div class="folio">${t.folio}</div>
+                <div class="huesped">${t.huesped}</div>
+                <div class="ubicacion">${t.ubicacion}</div>
+            `;
+
+                listaTurnos.appendChild(div);
+
+            });
+
+        }
+
+        setInterval(cargarSolicitudes, 5000);
+        cargarSolicitudes();
+
+    </script>
+
+</body>
+</html>

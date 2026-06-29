@@ -1,0 +1,26 @@
+[
+  {
+    "Prioridad": 1,
+    "NombreRegla": "",
+    "Campo": "Habitacion",
+    "ContieneTexto": "No Show",
+    "ColorHex": "#6f4444",
+    "Impresora": "PDF24"
+  },
+  {
+    "Prioridad": 2,
+    "NombreRegla": "",
+    "Campo": "Hotel",
+    "ContieneTexto": "Beauty of Nature",
+    "ColorHex": "#baa1a1",
+    "Impresora": "PDF24"
+  },
+  {
+    "Prioridad": 2,
+    "NombreRegla": "",
+    "Campo": "Hotel",
+    "ContieneTexto": "Mayan Palace",
+    "ColorHex": "#b9a7a7",
+    "Impresora": "PDF24"
+  }
+]

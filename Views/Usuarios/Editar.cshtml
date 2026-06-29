@@ -1,0 +1,215 @@
+@model AppValetParking.Models.Usuario
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI';
+        }
+
+        body {
+            background: linear-gradient(135deg,#4fa3d1,#53c2b6);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25),0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .input-group {
+            flex: 1 1 200px; /* crece, se encoge, mínimo 200px */
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 11px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #53c2b6;
+            box-shadow: 0 0 6px rgba(83,194,182,0.3);
+        }
+
+        .permisos {
+            flex: 1 1 100%;
+        }
+
+        .permisos label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+            font-weight: 500;
+        }
+
+        .permisos input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .buttons {
+            flex: 1 1 100%;
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            color: white;
+            background: linear-gradient(135deg,#c79a5c,#a6783e);
+            cursor: pointer;
+        }
+
+        .buttons a {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            background: #ccc;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+        @@media (max-width: 768px) {
+            form {
+                flex-direction: column;
+            }
+
+            .permisos label {
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="title">Editar Usuario</div>
+
+        <form method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+
+            <div class="input-group">
+                <label>Usuario</label>
+                <input type="text" name="username" value="@Model.Username" />
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" value="@Model.Password" />
+            </div>
+
+            <div class="input-group">
+                <label>Buscar Empleado</label>
+                <input type="text" id="buscadorEmpleado" placeholder="Escribe nombre..." />
+                <div id="resultados" style="background:white;border:1px solid #ddd;max-height:150px;overflow:auto;"></div>
+            </div>
+
+            <div class="input-group">
+                <label>Gafete</label>
+                <input asp-for="Gafete" id="gafete" type="text" />
+            </div>
+
+            <div class="permisos">
+                <label>Permisos:</label>
+                @foreach (var rol in (string[])ViewBag.RolesDisponibles)
+                {
+                <label>
+                    <input type="checkbox" name="permisos" value="@rol"
+                           @( ((string[])ViewBag.RolesAsignados).Contains(rol) ? "checked" : "" ) />
+                    @rol
+                </label>
+                }
+            </div>
+
+            <div class="buttons">
+                <button>Guardar</button>
+                <a href="/Usuarios/Index">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+document.getElementById("buscadorEmpleado").addEventListener("input", function () {
+
+    let term = this.value;
+
+    if (term.length < 2) {
+        document.getElementById("resultados").innerHTML = "";
+        return;
+    }
+
+    fetch('/Usuarios/BuscarEmpleado?term=' + term)
+        .then(res => res.json())
+        .then(data => {
+
+            let html = "";
+
+            data.forEach(e => {
+                html += `
+                    <div style="padding:5px;cursor:pointer"
+                         onclick="seleccionarEmpleado('${e.gafete}')">
+                        ${e.nombre}
+                    </div>`;
+            });
+
+            document.getElementById("resultados").innerHTML = html;
+        });
+});
+
+function seleccionarEmpleado(gafete) {
+    document.getElementById("gafete").value = gafete;
+    document.getElementById("resultados").innerHTML = "";
+    document.getElementById("buscadorEmpleado").value = "";
+}
+</script>

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const variableFolioLenght = 6;
-    const variableReservaLenght = 7;
+    const variableFolioLenght = 9;
+    const variableReservaLenght = 10;
 
     const folioInput = document.getElementById('FolioVP');
     const cajonInput = document.getElementById('CajonBuffer');
@@ -149,19 +149,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }*/
 
     async function actualizarDatosReserva(reserva) {
+        console.log("===== DEBUG FRONT RESERVA =====");
+        console.log("Valor enviado:", reserva);
+        console.log("Tipo:", typeof reserva);
+        console.log("Length:", reserva.length);
         try {
-            const response = await fetch(`/Botones/ObtenerReserva?confirmacion=${reserva}`);
-            if (!response.ok) {
-                throw new Error('Error al obtener los datos');
+            const url = `/Botones/ObtenerReserva?confirmacion=${encodeURIComponent(reserva)}`;
+            console.log("URL:", url);
+
+            const response = await fetch(url);
+
+            console.log("Status:", response.status);
+            let data;
+            try {
+                data = await response.json();
+            } catch {
+                throw new Error("La respuesta no es JSON válido");
             }
 
-            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || "Error al obtener los datos");
+            }
 
-            if (data && data.hotel && data.habitacion) {
-                document.getElementById('Hotel').value = data.hotel;
-                document.getElementById('Habitacion').value = data.habitacion;
+            if (data && data.confirmation) {
+                document.getElementById('Hotel').value = data.hotel || '';
+                document.getElementById('Habitacion').value = data.habitacion || ' ';
+                document.getElementById('NombreReserva').value = data.nombre || '';
+
             } else {
                 alert('Reserva no encontrada o datos incompletos');
+
+                reservaInput.value = '';
+                hotelInput.value = '';
+                habitacionInput.value = '';
+                reservaInput.focus();
             }
 
         } catch (error) {
@@ -169,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
            // alert('Error al obtener la reserva');
         }
     }
+    window.actualizarDatosReserva = actualizarDatosReserva;
 
 
     if (numeroOperadorInput) {
@@ -286,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
             numeroInput.value = buffer.trim();
             numeroInput.dispatchEvent(new Event('input'));
 
-            while (window.fetchInProgress) {
+            while (fetchInProgress) {
                 await new Promise(resolve => setTimeout(resolve, 50));
             }
 

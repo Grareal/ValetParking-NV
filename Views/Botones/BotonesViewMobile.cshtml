@@ -18,59 +18,54 @@
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-            display: flex;
-            flex-direction: column;
+            background: linear-gradient(135deg,#0f172a,#1e293b);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 1rem;
         }
 
         .container {
-            background: #fff;
-            flex-grow: 1;
-            max-width: 480px;
-            margin: auto;
-            padding: 1.5rem 1.5rem 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            background: white;
             width: 100%;
+            max-width: 480px;
+            border-radius: 18px;
+            padding: 1.8rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,.25), 0 6px 12px rgba(0,0,0,.15);
         }
 
         h1.title {
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             font-weight: 700;
-            font-size: 1.8rem;
-            color: #343a40;
+            font-size: 1.7rem;
+            color: #0f172a;
         }
 
+
         form {
-            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1.2rem;
         }
+
 
         .row-inline {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
             .row-inline > div {
                 flex: 1;
-                display: flex;
-                flex-direction: column;
             }
 
         label {
+            font-size: .85rem;
             font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: #495057;
-            display: block;
+            color: #475569;
         }
+
 
         input[type="text"],
         input[type="number"],
@@ -84,8 +79,7 @@
         }
 
         input[readonly] {
-            background-color: #e9ecef;
-            cursor: not-allowed;
+            background: #f1f5f9;
         }
 
         input[type="text"]:focus,
@@ -102,31 +96,46 @@
         }
 
         button.btn-submit {
-            background-color: #0d6efd;
-            border: none;
+            margin-top: .5rem;
+            background: linear-gradient(135deg,#2563eb,#1d4ed8);
             color: white;
-            font-size: 1.3rem;
+            border: none;
             padding: 1rem;
-            border-radius: 10px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: 700;
-            transition: background-color 0.3s ease;
-            width: 100%;
+            transition: .2s;
+        }
+
+        input:focus, select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,.2);
+            outline: none;
         }
 
             button.btn-submit:hover {
-                background-color: #084298;
+                transform: translateY(-1px);
+                box-shadow: 0 10px 20px rgba(37,99,235,.3);
             }
 
         .mensaje-confirmacion {
             margin-top: 1rem;
-            padding: 1rem;
+            padding: .8rem;
+            background: #dcfce7;
+            color: #166534;
             border-radius: 8px;
-            background-color: #d1e7dd;
-            color: #0f5132;
-            font-weight: 600;
             text-align: center;
-            box-shadow: 0 0 8px rgb(13 110 253 / 0.15);
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.9rem;
+            border-radius: 10px;
+            border: 1.5px solid #cbd5e1;
+            font-size: 1rem;
+            transition: .2s;
         }
 
         body {
@@ -152,6 +161,18 @@
                 </div>
             </div>
 
+            <div class="row-inline">
+                <div>
+                    <label for="Hotel">Hotel</label>
+                    <input type="text" id="Hotel" readonly class="form-control" />
+                </div>
+
+                <div>
+                    <label for="Habitacion">Habitación</label>
+                    <input type="text" id="Habitacion" readonly class="form-control" />
+                </div>
+            </div>
+
             <div>
                 <label for="NumeroOperadorInput">Numero del operador</label>
                 <input type="text" id="NumeroOperadorInput" name="NumeroOperador" class="form-control" autocomplete="off" />
@@ -160,6 +181,7 @@
             <div>
                 <label for="ValetNombreInput">Valet</label>
                 <input type="text" id="ValetNombreInput" name="Valet" class="form-control" />
+                <input type="hidden" id="ValetNombreHidden" name="ValetNombreHidden" />
             </div>
 
             <div class="form-group">
@@ -288,19 +310,38 @@
             }
 
             function asignarCamposDesdeBuffer(datos) {
+
                 const mapping = {
                     "FOLIO": "FolioVP",
                     "RESERVA": "Reserva",
                     "NUMEROOPERADOR": "NumeroOperadorInput",
                     "UBICACION": "Servicio"
                 };
+
                 for (const campo in datos) {
+
                     const inputId = mapping[campo.toUpperCase()];
                     if (!inputId) continue;
+
                     const input = document.getElementById(inputId);
-                    if (input) input.value = datos[campo];
-                    if (campo.toUpperCase() === "NUMEROOPERADOR") input.dispatchEvent(new Event('input'));
+                    if (!input) continue;
+
+                    input.value = datos[campo];
+
+
+
+                    if (campo.toUpperCase() === "RESERVA") {
+                        window.actualizarDatosReserva(datos[campo]);
+                    }
+
+                    if (campo.toUpperCase() === "NUMEROOPERADOR") {
+
+                        input.dispatchEvent(new Event('input')); 
+
+
+                    }
                 }
+
                 const ubicacionDefault = localStorage.getItem('ubicacionPorDefecto') || 'ANDENES';
                 const selectServicio = document.getElementById('Servicio');
                 if (selectServicio) selectServicio.value = ubicacionDefault;

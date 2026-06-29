@@ -22,6 +22,12 @@ namespace AppValetParking.Models
         public string? ColorVehiculo { get; set; }
         public string? Comentarios { get; set; }
 
+        public string? Placas { get; set; }
+        public string? Marca { get; set; }
+        public string? Color { get; set; }
+        public string? Posicion { get; set; }
+        public string? Estatus { get; set; }
+
 
         // Fechas
         public DateTime FechaSolicitud { get; set; } = DateTime.Now;

@@ -1,86 +1,219 @@
-@{
-    ViewBag.Title = "Solicitud de Veh�culo";
+﻿@{
+    ViewBag.Title = "Solicitud de Vehículo";
 }
 
-<link rel="stylesheet" href="~/css/solicitud-vehiculo.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 
-<div class="solicitud-container">
-    <h2 class="titulo">Bienvenido a Grupo Vidanta</h2>
-    <p class="subtitulo">Solicita tu veh�culo con el folio de Valet Parking</p>
+<style>
+/* =========================================
+   PANTALLA COMPLETA
+========================================= */
+html, body {
+    height:100%;
+    margin:0;
+    font-family:'Segoe UI';
+}
 
-    <!-- Folio -->
-    <div class="campo">
-        <label for="folio" class="label">Folio de Valet Parking</label>
-        <input type="text" id="folio" class="input-text" placeholder="Ej. VP12345" />
+/* FONDO GENERAL */
+body {
+    background: linear-gradient(135deg, #d8cbb7, #e6dccd, #d4c3aa);
+}
+
+/* CONTENEDOR QUE CENTRA TODO */
+.solicitud-wrapper {
+    height:100vh;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+.solicitud-container {
+    width:520px;
+    padding:40px;
+    background:#f2f2f2;
+    border-radius:18px;
+    box-shadow:0 18px 40px rgba(0,0,0,0.20);
+}
+
+/* =========================================
+   TITULOS
+========================================= */
+.titulo {
+    font-size:34px;
+    font-weight:700;
+    text-align:center;
+    color:#b3874a;
+}
+.subtitulo {
+    text-align:center;
+    color:#6b7280;
+    margin-bottom:30px;
+    font-size:16px;
+}
+
+/* =========================================
+   INPUT
+========================================= */
+.input-text {
+    width:100%;
+    padding:16px;
+    border-radius:10px;
+    border:1px solid #c9a87c;
+    outline:none;
+    font-size:18px;
+    margin-bottom:20px;
+    background:white;
+}
+.input-text:focus {
+    border-color:#b3874a;
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+.btn-enviar {
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:600;
+    background:#b3874a;
+    color:white;
+    margin-top:10px;
+    transition:0.25s;
+}
+.btn-enviar:hover {
+    background:#9c743f;
+}
+
+/* =========================================
+   CARD HUESPED
+========================================= */
+.huesped-card {
+    margin-top:18px;
+    padding:15px;
+    border-radius:10px;
+    background:#e9e2d8;
+    font-size:17px;
+    color:#374151;
+}
+
+/* =========================================
+   MENSAJE EXITO
+========================================= */
+.toast-exito {
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#b3874a;
+    color:white;
+    padding:30px 45px;
+    font-size:22px;
+    border-radius:14px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    display:none;
+    text-align:center;
+}
+
+/* =========================================
+   AUTO ANIMADO
+========================================= */
+.car-animation {
+    font-size:45px;
+    animation: drive 2s linear infinite;
+}
+
+@@keyframes drive {
+    0%{transform:translateX(-40px);}
+    50%{transform:translateX(40px);}
+    100%{transform:translateX(-40px);}
+}
+</style>
+
+<div class="solicitud-wrapper">
+    <div class="solicitud-container">
+        <h2 class="titulo">🚗 Grupo Vidanta</h2>
+        <p class="subtitulo">
+            Escanea o escribe tu folio de Valet Parking <br />
+            Scan your Valet Parking ticket number
+        </p>
+
+        <input type="text" id="folio" class="input-text" placeholder="Escanea tu folio &nbsp; &nbsp; Scan your folio" />
+
+        <button id="buscarFolio" class="btn-enviar">Buscar datos</button>
+
+        <div id="datosFolio" class="huesped-card" style="display:none;"></div>
+
+        <form id="formSolicitud">
+            <button type="submit" class="btn-enviar">Solicitar vehículo</button>
+        </form>
     </div>
-    <button id="buscarFolio" class="btn-enviar">Buscar datos</button>
-
-    <div class="huesped-card" id="datosFolio" style="white-space: pre-wrap; margin-top: 20px;"></div>
-
-    <!-- Formulario de solicitud
-    <h3 style="margin-top: 30px;">Crear solicitud</h3>
-     -->
-    <form id="formSolicitud">
-        <!--
-    <div class="campo">
-        <label for="nombre" class="label">Nombre</label>
-        <input type="text" id="nombre" class="input-text" placeholder="Nombre" required />
-    </div>
-    <div class="campo">
-        <label for="apellido" class="label">Apellido</label>
-        <input type="text" id="apellido" class="input-text" placeholder="Apellido" required />
-    </div>
-    <div class="campo">
-        <label for="destino" class="label">Destino</label>
-        <input type="text" id="destino" class="input-text" placeholder="Destino" />
-    </div>
-    -->
-        <button type="submit" class="btn-enviar">Enviar solicitud</button>
-    </form>
-
-    <div id="mensaje" class="alerta-exito" style="display:none;"></div>
 </div>
+
+<div id="mensajeExito" class="toast-exito"></div>
 
 @section Scripts {
     <script>
-        const buscarBtn = document.getElementById("buscarFolio");
         const folioInput = document.getElementById("folio");
+        const buscarBtn = document.getElementById("buscarFolio");
         const datosDiv = document.getElementById("datosFolio");
         const form = document.getElementById("formSolicitud");
-        const mensajeDiv = document.getElementById("mensaje");
+        const toast = document.getElementById("mensajeExito");
 
-        // GET: Buscar folio
+        let hotelActual = "";
+        let servicioActual = "";
+
+        // Focus automático
+        function enfocarFolio() {
+            folioInput.value = "";
+            folioInput.focus();
+        }
+        window.onload = enfocarFolio;
+
+        // Buscar folio
         buscarBtn.addEventListener("click", async () => {
             const folio = folioInput.value.trim();
-            if (!folio) return alert("Escribe un folio");
-
+            if (!folio) {
+                alert("Escanea o escribe un folio");
+                enfocarFolio();
+                return;
+            }
             try {
                 const res = await fetch(`/api/valet/folio?folio=${folio}`);
                 if (!res.ok) throw new Error("Folio no encontrado");
                 const data = await res.json();
-                datosDiv.innerText = `Nombre Reserva: ${data.nombreReserva || ""}\n` +
-                    `Habitaci�n: ${data.habitacion || ""}\n` +
-                    `Hotel: ${data.hotel || ""}\n` +
-                    `Servicio: ${data.servicio || ""}`;
-            } catch (e) {
-                datosDiv.innerText = e.message;
+                hotelActual = data.hotel;
+                servicioActual = data.servicio;
+
+                datosDiv.style.display = "block";
+                datosDiv.innerHTML = `
+                    👤 <b>${data.nombreReserva || ""}</b><br>
+                    🏨 Hotel: ${data.hotel || ""}<br>
+                    🚗 Ubicacion: ${data.servicio || ""}
+                `;
+            }
+            catch (e) {
+                datosDiv.style.display = "block";
+                datosDiv.innerHTML = "❌ " + e.message;
+                enfocarFolio();
             }
         });
 
-        // POST: Crear solicitud
+        // Crear solicitud
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-
-            const nombreInput = document.getElementById("nombre");
-            const apellidoInput = document.getElementById("apellido");
-            const destinoInput = document.getElementById("destino");
-
             const data = {
                 FolioVP: folioInput.value.trim(),
-                Destino: destinoInput ? destinoInput.value : "",
-                Resort: "",
-                NombreSolicitante: nombreInput ? nombreInput.value.trim() : "",
-                ApellidoSolicitante: apellidoInput ? apellidoInput.value.trim() : "",
+                Destino: servicioActual,
+                Resort: hotelActual,
+                NombreSolicitante: "",
+                ApellidoSolicitante: "",
                 Telefono: "",
                 Correo: "",
                 MarcaVehiculo: "",
@@ -88,25 +221,51 @@
                 TipoSalida: "",
                 Comentarios: ""
             };
-
-
             try {
                 const res = await fetch("/api/valet/crear", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
                 });
-
                 const result = await res.json();
-                mensajeDiv.style.display = "block";
-                mensajeDiv.innerText = result.mensaje;
-                mensajeDiv.style.color = result.exito ? "green" : "red";
+                if (result.exito) mostrarMensaje(data.FolioVP);
+                else mostrarMensajeError(result.mensaje);
+            } catch {
+                mostrarMensajeError("Error al enviar solicitud");
+            }
+        });
 
-                if (result.exito) form.reset();
-            } catch (err) {
-                mensajeDiv.style.display = "block";
-                mensajeDiv.innerText = "Error al enviar solicitud";
-                mensajeDiv.style.color = "red";
+        // Mensaje bonito
+        function mostrarMensaje(folio) {
+            toast.style.background = "#b3874a";
+            toast.innerHTML = `<div class="car-animation">🚗</div><br>
+                               Solicitud enviada<br>
+                               <b>Folio ${folio}</b><br><br>
+                               Su vehículo llegará pronto`;
+            toast.style.display = "block";
+            setTimeout(() => {
+                toast.style.display = "none";
+                form.reset();
+                datosDiv.style.display = "none";
+                enfocarFolio();
+            }, 4000);
+        }
+
+        function mostrarMensajeError(texto) {
+            toast.style.background = "#dc2626";
+            toast.innerHTML = "⚠ " + texto;
+            toast.style.display = "block";
+            setTimeout(() => {
+                toast.style.display = "none";
+                toast.style.background = "#16a34a";
+                enfocarFolio();
+            }, 3000);
+        }
+
+        folioInput.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                buscarBtn.click();
             }
         });
     </script>

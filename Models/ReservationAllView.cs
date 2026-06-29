@@ -8,6 +8,6 @@ public class ReservationAllView
         public string? ACCOMPANYING_NAMES { get; set; }
         public string? ROOM { get; set; }
         public string? ROOM_CLASS { get; set; }
-
+        public double? RESV_NAME_ID { get; set; }
     }
 }

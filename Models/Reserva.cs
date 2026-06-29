@@ -25,6 +25,7 @@ namespace AppValetParking.Models
         public string? h_cod_reserva { get; set; }
         public string? h_seg_mer { get; set; }
         public string? h_tpo_hsp { get; set; }
+        public string h_vip { get; set; }
         public string? h_apellido_p { get; set; }
         public string? m_msg0 { get; set; }
         public string? Hotel { get; set; }

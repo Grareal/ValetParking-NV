@@ -1,219 +1,520 @@
-﻿@model IEnumerable<AppValetParking.Models.ValetSolicitud>
+@model IEnumerable<AppValetParking.Models.ValetSolicitud>
+@{
+    Layout = null;
+}
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Control de Solicitudes</title>
 
-    <div class="container mt-4">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
-        <h2 class="mb-4">Control de Solicitudes de Vehículos</h2>
-
-        <!-- BOTÓN EXPORTAR -->
-        <a href="/ControlSolicitudes/Excel"
-           class="btn btn-success mb-3">
-            📥 Exportar Excel
-        </a>
-
-        <!-- ================== PANEL DE CONTADORES ================== -->
-        <div class="row text-center mb-4">
-            <div class="col-md-2"><div class="card p-3 shadow"><h6>Total</h6><h3>@ViewBag.Total</h3></div></div>
-            <div class="col-md-2"><div class="card p-3 shadow"><h6>Pendientes</h6><h3 id="cntPendientes">@ViewBag.Pendientes</h3></div></div>
-            <div class="col-md-2"><div class="card p-3 shadow"><h6>Atendidos</h6><h3>@ViewBag.Atendidos</h3></div></div>
-            <div class="col-md-2"><div class="card p-3 shadow"><h6>Rápidos (&le;10m)</h6><h3>@ViewBag.Rapidos</h3></div></div>
-            <div class="col-md-2"><div class="card p-3 shadow"><h6>Normales (10–20m)</h6><h3>@ViewBag.Normales</h3></div></div>
-            <div class="col-md-2"><div class="card p-3 shadow"><h6>Lentos (&gt;20m)</h6><h3>@ViewBag.Lentos</h3></div></div>
-        </div>
-
-        <form method="get" class="row mb-3">
-
-            <div class="col-md-3">
-                <label>Fecha Inicio</label>
-                <input type="date" name="inicio"
-                       value="@ViewBag.Inicio"
-                       class="form-control" />
-            </div>
-
-            <div class="col-md-3">
-                <label>Fecha Fin</label>
-                <input type="date" name="fin"
-                       value="@ViewBag.Fin"
-                       class="form-control" />
-            </div>
-
-            <div class="col-md-3 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary w-100">
-                    Filtrar
-                </button>
-            </div>
-
-            <div class="col-md-3 d-flex align-items-end">
-                <a asp-action="Excel"
-                   asp-route-inicio="@ViewBag.Inicio"
-                   asp-route-fin="@ViewBag.Fin"
-                   class="btn btn-success w-100">
-                    📥 Exportar Excel
-                </a>
-            </div>
-
-        </form>
-
-
-        <!-- FILTROS -->
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <input id="buscar" class="form-control" placeholder="Buscar por folio, huésped, habitación..." />
-            </div>
-            <div class="col-md-3">
-                <select id="filtroHotel" class="form-select">
-                    <option value="">Todos los Hoteles</option>
-                    @foreach (var hotel in Model.Select(x => x.Resort).Distinct())
-                {
-                    <option value="@hotel">@hotel</option>
-                }
-                </select>
-            </div>
-        </div>
-
-        <!-- LISTADO DE TICKETS -->
-        <div class="row" id="contenedor">
-
-            @foreach (var item in Model)
-        {
-            var tiempoAt = item.TiempoAtendido != null
-                ? (item.TiempoAtendido - item.TiempoCreado)?.TotalMinutes.ToString("0") + " min"
-                : "Pendiente";
-
-            <div class="col-md-4 mb-3 ticket"
-                 data-hotel="@item.Resort"
-                 data-creado="@item.TiempoCreado.ToString("o")"
-            data-atendido="@(item.TiempoAtendido != null ? "true" : "false")">
-
-
-
-                <div class="card p-3 shadow ticket-card">
-                    <span class="badge bg-dark float-end tiempo"></span>
-
-                    <h5>Folio: @item.FolioVP</h5>
-                    <p><strong>Huésped:</strong> @item.NombreReserva</p>
-                    <p><strong>Habitación:</strong> @item.Habitacion</p>
-                    <p><strong>Hotel:</strong> @item.Resort</p>
-                    <p><strong>Ubicación:</strong> @item.Destino</p>
-
-                    <p><strong>Tiempo atención:</strong> @tiempoAt</p>
-
-                    <form asp-action="CambiarEstatus" method="post">
-                        <input type="hidden" name="id" value="@item.Id" />
-                        <button class="btn btn-success w-100"
-                                @(item.TiempoAtendido != null ? "disabled" : "")>
-                            @(item.TiempoAtendido != null ? "Atendido" : "Marcar Atendido")
-                        </button>
-                    </form>
-                </div>
-            </div>
-        }
-
-        </div>
-    </div>
-
+    <!-- Google Fonts (marca Smart Valet) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --sv-primary: #0D5C63;
+            --sv-primary-dark: #134A54;
+            --sv-gold: #D4AF37;
+            --sv-bg: #F8F5EF;
+            --sv-ink: #263238;
+            --sv-ink-soft: rgba(38, 50, 56, 0.62);
+            --sv-border: rgba(38, 50, 56, 0.10);
+            --sv-white: #FFFFFF;
+            --sv-radius-lg: 20px;
+            --sv-radius-md: 14px;
+            --sv-radius-sm: 10px;
+            --sv-shadow-sm: 0 2px 8px rgba(19, 74, 84, 0.06);
+            --sv-shadow-md: 0 8px 24px rgba(19, 74, 84, 0.10);
+            --sv-shadow-lg: 0 16px 40px rgba(19, 74, 84, 0.14);
+
+            --sv-success: #2e7d4f;
+            --sv-success-bg: #e3f3e9;
+            --sv-warning: #b8860b;
+            --sv-warning-bg: #fbf1da;
+            --sv-danger: #b3261e;
+            --sv-danger-bg: #fbe4e2;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background: var(--sv-bg);
+            color: var(--sv-ink);
+            font-family: 'Inter', sans-serif;
+            padding-bottom: 60px;
+        }
+
+        /* ---------- Encabezado de marca ---------- */
+        .sv-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 28px 0 8px;
+        }
+
+        .sv-logo-mark {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, var(--sv-primary) 0%, var(--sv-primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sv-white);
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            box-shadow: var(--sv-shadow-sm);
+            flex-shrink: 0;
+        }
+
+        .sv-header h3 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            color: var(--sv-primary-dark);
+            margin: 0;
+            font-size: 1.6rem;
+        }
+
+        .sv-header p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--sv-ink-soft);
+        }
+
+        hr {
+            border-top: 1px solid var(--sv-border);
+            margin: 32px 0;
+            opacity: 1;
+        }
+
+        /* ---------- Tarjeta genérica ---------- */
+        .sv-card {
+            background: var(--sv-white);
+            border: 1px solid var(--sv-border);
+            border-radius: var(--sv-radius-md);
+            box-shadow: var(--sv-shadow-sm);
+            padding: 20px;
+        }
+
+        .sv-card-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--sv-primary-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sv-card-title .sv-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--sv-gold);
+            display: inline-block;
+        }
+
+        /* ---------- Filtros / formulario ---------- */
+        .sv-filters {
+            margin-bottom: 24px;
+        }
+
+        .sv-filters label {
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--sv-ink-soft);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-control, .form-select, select.form-control {
+            border: 1.5px solid var(--sv-border);
+            border-radius: var(--sv-radius-sm);
+            padding: 9px 12px;
+            font-size: 0.9rem;
+            transition: border-color .15s ease, box-shadow .15s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--sv-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+        }
+
+        .btn {
+            border-radius: var(--sv-radius-sm) !important;
+            font-weight: 600;
+            padding: 9px 20px;
+            letter-spacing: 0.2px;
+            border: none;
+            transition: filter .15s ease, transform .1s ease, box-shadow .15s ease;
+        }
+
+        .btn:active { transform: translateY(1px); }
+
+        .btn-primary {
+            background: var(--sv-primary);
+            color: var(--sv-white);
+        }
+
+        .btn-primary:hover, .btn-primary:focus {
+            background: var(--sv-primary-dark);
+            color: var(--sv-white);
+        }
+
+        .btn-success {
+            background: var(--sv-gold);
+            color: var(--sv-ink);
+        }
+
+        .btn-success:hover, .btn-success:focus {
+            background: #c29c2e;
+            color: var(--sv-ink);
+        }
+
+        .btn-success:disabled {
+            background: rgba(38, 50, 56, 0.12);
+            color: var(--sv-ink-soft);
+            opacity: 1;
+        }
+
+        /* ---------- KPIs (panel de contadores) ---------- */
+        .sv-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        @@media (max-width: 991px) {
+            .sv-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @@media (max-width: 575px) {
+            .sv-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .sv-kpi {
+            background: var(--sv-white);
+            border: 1px solid var(--sv-border);
+            border-radius: var(--sv-radius-md);
+            box-shadow: var(--sv-shadow-sm);
+            padding: 16px 18px;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow .2s ease, transform .2s ease;
+        }
+
+        .sv-kpi:hover {
+            box-shadow: var(--sv-shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .sv-kpi::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--sv-gold);
+        }
+
+        .sv-kpi.sv-kpi-success::before { background: var(--sv-success); }
+        .sv-kpi.sv-kpi-warning::before { background: var(--sv-warning); }
+        .sv-kpi.sv-kpi-danger::before { background: var(--sv-danger); }
+
+        .sv-kpi-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--sv-ink-soft);
+            margin-bottom: 8px;
+        }
+
+        .sv-kpi-value {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--sv-primary-dark);
+            line-height: 1;
+        }
+
+        /* ---------- Tickets de solicitudes ---------- */
         .ticket-card {
-            transition: background-color .4s, border-left .4s;
+            background: var(--sv-white);
+            border: 1px solid var(--sv-border);
+            border-left: 6px solid var(--sv-success);
+            border-radius: var(--sv-radius-md);
+            box-shadow: var(--sv-shadow-sm);
+            padding: 18px 20px;
+            height: 100%;
+            transition: box-shadow .2s ease, transform .2s ease, background-color .4s, border-left-color .4s;
+            position: relative;
+        }
+
+        .ticket-card:hover {
+            box-shadow: var(--sv-shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .ticket-card.sv-estado-rapido { background: var(--sv-success-bg); border-left-color: var(--sv-success); }
+        .ticket-card.sv-estado-normal { background: var(--sv-warning-bg); border-left-color: var(--sv-warning); }
+        .ticket-card.sv-estado-lento { background: var(--sv-danger-bg); border-left-color: var(--sv-danger); }
+
+        .ticket-card h5 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            color: var(--sv-primary-dark);
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            padding-right: 70px;
+        }
+
+        .ticket-card p {
+            font-size: 0.86rem;
+            margin-bottom: 6px;
+            color: var(--sv-ink);
+        }
+
+        .ticket-card p strong {
+            color: var(--sv-ink-soft);
+            font-weight: 600;
+        }
+
+        .ticket-card .tiempo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--sv-primary-dark);
+            color: var(--sv-white);
+            font-weight: 600;
+            font-size: 0.74rem;
+            letter-spacing: 0.3px;
+            border-radius: 999px;
+            padding: 5px 12px;
         }
 
         .parpadeo {
             animation: alertBlink 1s infinite;
         }
 
-        /* IMPORTANTE PARA QUE NO FALLE RAZOR */
         @@keyframes alertBlink {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: .4;
-            }
-
-            100% {
-                opacity: 1;
-            }
+            0% { opacity: 1; }
+            50% { opacity: .4; }
+            100% { opacity: 1; }
         }
     </style>
 
+</head>
+<body class="container mt-3">
 
-    <script>
-        function actualizarTiempos() {
-            const ahora = new Date();
-            let pendientes = 0;
+<div class="sv-header">
+    <div class="sv-logo-mark">P</div>
+    <div>
+        <h3>Control de Solicitudes</h3>
+        <p>Seguimiento en vivo de las solicitudes de vehículos</p>
+    </div>
+</div>
 
-            document.querySelectorAll(".ticket").forEach(t => {
-                const creado = new Date(t.dataset.creado);
-                const badge = t.querySelector(".tiempo");
+<!-- ============== PANEL DE CONTADORES ============== -->
+<div class="sv-kpi-grid">
+    <div class="sv-kpi">
+        <div class="sv-kpi-label">Total</div>
+        <div class="sv-kpi-value">@ViewBag.Total</div>
+    </div>
+    <div class="sv-kpi">
+        <div class="sv-kpi-label">Pendientes</div>
+        <div class="sv-kpi-value" id="cntPendientes">@ViewBag.Pendientes</div>
+    </div>
+    <div class="sv-kpi">
+        <div class="sv-kpi-label">Atendidos</div>
+        <div class="sv-kpi-value">@ViewBag.Atendidos</div>
+    </div>
+    <div class="sv-kpi sv-kpi-success">
+        <div class="sv-kpi-label">Rápidos (&le;10m)</div>
+        <div class="sv-kpi-value">@ViewBag.Rapidos</div>
+    </div>
+    <div class="sv-kpi sv-kpi-warning">
+        <div class="sv-kpi-label">Normales (10–20m)</div>
+        <div class="sv-kpi-value">@ViewBag.Normales</div>
+    </div>
+    <div class="sv-kpi sv-kpi-danger">
+        <div class="sv-kpi-label">Lentos (&gt;20m)</div>
+        <div class="sv-kpi-value">@ViewBag.Lentos</div>
+    </div>
+</div>
 
-                if (t.dataset.atendido === "true"){
-                    badge.innerText = "Atendido";
-                    return;
+<!-- ============== FILTROS DE FECHA ============== -->
+<div class="sv-card sv-filters">
+    <div class="sv-card-title"><span class="sv-dot"></span>Filtros</div>
+    <form method="get" class="row g-3">
+        <div class="col-md-3">
+            <label>Fecha Inicio</label>
+            <input type="date" name="inicio" value="@ViewBag.Inicio" class="form-control" />
+        </div>
+
+        <div class="col-md-3">
+            <label>Fecha Fin</label>
+            <input type="date" name="fin" value="@ViewBag.Fin" class="form-control" />
+        </div>
+
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+        </div>
+
+        <div class="col-md-2 d-flex align-items-end">
+            <a href="/ControlSolicitudes/Excel?inicio=@ViewBag.Inicio&fin=@ViewBag.Fin"
+               class="btn btn-success w-100">
+                Exportar Excel
+            </a>
+        </div>
+    </form>
+</div>
+
+<!-- ============== BUSCADOR / FILTRO DE HOTEL ============== -->
+<div class="sv-card sv-filters">
+    <div class="sv-card-title"><span class="sv-dot"></span>Buscar</div>
+    <div class="row g-3">
+        <div class="col-md-8">
+            <input id="buscar" class="form-control" placeholder="Buscar por folio, huésped, habitación..." />
+        </div>
+        <div class="col-md-4">
+            <select id="filtroHotel" class="form-select">
+                <option value="">Todos los Hoteles</option>
+                @foreach (var hotel in Model.Select(x => x.Resort).Distinct())
+                {
+                    <option value="@hotel">@hotel</option>
                 }
+            </select>
+        </div>
+    </div>
+</div>
 
-                pendientes++;
-                const diff = Math.floor((ahora - creado) / 60000);
-                badge.innerText = diff + " min";
+<!-- ============== LISTADO DE TICKETS ============== -->
+<div class="row g-3" id="contenedor">
 
-                const card = t.querySelector(".ticket-card");
+    @foreach (var item in Model)
+    {
+        var tiempoAt = item.TiempoAtendido != null
+        ? (item.TiempoAtendido - item.TiempoCreado)?.TotalMinutes.ToString("0") + " min"
+        : "Pendiente";
 
-                if (diff > 20) {
-                    // 🔴 LENTOS (>20m)
-                    card.style.background = "#f8d7da";
-                    card.style.borderLeft = "6px solid #dc3545";
-                    card.classList.add("parpadeo");
-                }
-                else if (diff > 10) {
-                    // 🟡 NORMALES (10–20m)
-                    card.style.background = "#fff3cd";
-                    card.style.borderLeft = "6px solid #ffc107";
-                    card.classList.remove("parpadeo");
-                }
-                else {
-                    // 🟢 RÁPIDOS (≤10m)
-                    card.style.background = "#d4edda";
-                    card.style.borderLeft = "6px solid #28a745";
-                    card.classList.remove("parpadeo");
-                }
-            });
+        <div class="col-md-4 ticket"
+             data-hotel="@item.Resort"
+             data-creado="@item.TiempoCreado.ToString("o")"
+             data-atendido="@(item.TiempoAtendido != null ? "true" : "false")">
 
-            document.getElementById("cntPendientes").innerText = pendientes;
-        }
+            <div class="ticket-card">
+                <span class="badge tiempo"></span>
 
-        // Ordenar: los más nuevos arriba
-        function ordenar() {
-            const cont = document.getElementById("contenedor");
-            const items = Array.from(cont.children);
+                <h5>Folio: @item.FolioVP</h5>
+                <p><strong>Huésped:</strong> @item.NombreReserva</p>
+                <p><strong>Habitación:</strong> @item.Habitacion</p>
+                <p><strong>Hotel:</strong> @item.Resort</p>
+                <p><strong>Ubicación:</strong> @item.Destino</p>
+                <p><strong>Tiempo atención:</strong> @tiempoAt</p>
 
-            items.sort((a, b) => {
-                let ta = new Date(a.dataset.creado);
-                let tb = new Date(b.dataset.creado);
-                return tb - ta; // más nuevos arriba
-            });
+                <form asp-action="CambiarEstatus" method="post">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button class="btn btn-success w-100"
+                            @(item.TiempoAtendido != null ? "disabled" : "")>
+                        @(item.TiempoAtendido != null ? "Atendido" : "Marcar Atendido")
+                    </button>
+                </form>
+            </div>
+        </div>
+    }
 
-            items.forEach(i => cont.appendChild(i));
-        }
+</div>
 
-        // FILTRO DE TEXTO
-        document.getElementById("buscar").addEventListener("keyup", function () {
-            const f = this.value.toLowerCase();
-            document.querySelectorAll(".ticket").forEach(t => {
-                t.style.display = t.innerText.toLowerCase().includes(f) ? "block" : "none";
-            });
+<!-- ======================================================== -->
+<!-- LIBRERÍAS                                                -->
+<!-- ======================================================== -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function actualizarTiempos() {
+        const ahora = new Date();
+        let pendientes = 0;
+
+        document.querySelectorAll(".ticket").forEach(t => {
+            const creado = new Date(t.dataset.creado);
+            const badge = t.querySelector(".tiempo");
+            const card = t.querySelector(".ticket-card");
+
+            if (t.dataset.atendido === "true") {
+                badge.innerText = "Atendido";
+                card.classList.remove("sv-estado-rapido", "sv-estado-normal", "sv-estado-lento", "parpadeo");
+                return;
+            }
+
+            pendientes++;
+            const diff = Math.floor((ahora - creado) / 60000);
+            badge.innerText = diff + " min";
+
+            card.classList.remove("sv-estado-rapido", "sv-estado-normal", "sv-estado-lento", "parpadeo");
+
+            if (diff > 20) {
+                // 🔴 LENTOS (>20m)
+                card.classList.add("sv-estado-lento", "parpadeo");
+            }
+            else if (diff > 10) {
+                // 🟡 NORMALES (10–20m)
+                card.classList.add("sv-estado-normal");
+            }
+            else {
+                // 🟢 RÁPIDOS (≤10m)
+                card.classList.add("sv-estado-rapido");
+            }
         });
 
-        // FILTRO HOTEL
-        document.getElementById("filtroHotel").addEventListener("change", function () {
-            const h = this.value.toLowerCase();
-            document.querySelectorAll(".ticket").forEach(t => {
-                t.style.display = !h || t.dataset.hotel.toLowerCase() === h ? "block" : "none";
-            });
+        document.getElementById("cntPendientes").innerText = pendientes;
+    }
+
+    // Ordenar: los más nuevos arriba
+    function ordenar() {
+        const cont = document.getElementById("contenedor");
+        const items = Array.from(cont.children);
+
+        items.sort((a, b) => {
+            let ta = new Date(a.dataset.creado);
+            let tb = new Date(b.dataset.creado);
+            return tb - ta; // más nuevos arriba
         });
 
-        setInterval(() => { actualizarTiempos(); ordenar(); }, 60000);
-        actualizarTiempos();
-        ordenar();
-    </script>
+        items.forEach(i => cont.appendChild(i));
+    }
+
+    // FILTRO DE TEXTO
+    document.getElementById("buscar").addEventListener("keyup", function () {
+        const f = this.value.toLowerCase();
+        document.querySelectorAll(".ticket").forEach(t => {
+            t.style.display = t.innerText.toLowerCase().includes(f) ? "block" : "none";
+        });
+    });
+
+    // FILTRO HOTEL
+    document.getElementById("filtroHotel").addEventListener("change", function () {
+        const h = this.value.toLowerCase();
+        document.querySelectorAll(".ticket").forEach(t => {
+            t.style.display = !h || t.dataset.hotel.toLowerCase() === h ? "block" : "none";
+        });
+    });
+
+    setInterval(() => { actualizarTiempos(); ordenar(); }, 60000);
+    actualizarTiempos();
+    ordenar();
+</script>
+</body>
+</html>

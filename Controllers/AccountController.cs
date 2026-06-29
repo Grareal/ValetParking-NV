@@ -35,10 +35,39 @@ namespace AppValetParking.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        // Agregar en AccountController
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public IActionResult LoginApi([FromBody] LoginRequest request)
+        {
+            var usuario = _context.Usuarios
+                .FirstOrDefault(u => u.Username == request.Username
+                                  && u.Password == request.Password);
+
+            if (usuario == null)
+                return Unauthorized(new { error = "Usuario o contraseña incorrectos." });
+
+            return Json(new
+            {
+                id = usuario.Id,
+                username = usuario.Username,
+                funciones = usuario.Funciones,
+                gaffete = usuario.Gafete  // el numeroOperador
+            });
+        }
+
+        // Clase para recibir el body JSON
+        public class LoginRequest
+        {
+            public string Username { get; set; }
+            public string Password { get; set; }
+        }
+
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            var usuario = _context.Usuarios.FirstOrDefault(u => u.Username == username && u.Password == password);
+            var usuario = _context.Usuarios
+                .FirstOrDefault(u => u.Username == username && u.Password == password);
 
             if (usuario == null)
             {
@@ -46,21 +75,12 @@ namespace AppValetParking.Controllers
                 return View();
             }
 
-            switch (usuario.Funciones)
-            {
-                case "Operadora":
-                    return RedirectToAction("Index", "Operadora");
-                case "Botones":
-                    return RedirectToAction("Index", "Botones");
-                case "Movimientos":
-                    return RedirectToAction("EditarRegistro", "Botones");
+            // Guardar sesión
+            HttpContext.Session.SetString("Usuario", usuario.Username);
+            HttpContext.Session.SetString("Permisos", usuario.Funciones);
 
-                case "PuertaSol":
-                    return RedirectToAction("Index", "Reservas");
-                default:
-                    ViewBag.Error = "Función no autorizada.";
-                    return View();
-            }
+            // Ir al menú principal
+            return RedirectToAction("Index", "Dashboard");
         }
 
     }

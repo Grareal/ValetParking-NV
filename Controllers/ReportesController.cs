@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using AppValetParking.Data;
 using AppValetParking.Models;
 using ClosedXML.Excel;
+using AppValetParking.Services;
 
 namespace AppValetParking.Controllers
 {
@@ -158,6 +159,43 @@ namespace AppValetParking.Controllers
         }
 
         // ====================================================================
+        //  DETALLE DE VEHICULO + FOTOS (por folio)
+        // ====================================================================
+        [HttpGet]
+        public async Task<IActionResult> GetDetalleFolio(string folio)
+        {
+            if (string.IsNullOrWhiteSpace(folio))
+                return BadRequest(new { mensaje = "Folio requerido" });
+
+            var registro = await _context.ValetRegistros
+                .FirstOrDefaultAsync(x => x.FolioVP == folio);
+
+            var vehiculo = await _context.VehiculosInfo
+                .FirstOrDefaultAsync(x => x.FolioVP == folio);
+
+            var fotos = await _context.VehiculoFotos
+                .Where(f => f.FolioVP == folio)
+                .Select(f => new { f.Slot, f.RutaArchivo })
+                .ToListAsync();
+
+            return Json(new
+            {
+                folio,
+                hotel = registro?.Hotel,
+                habitacion = registro?.Habitacion,
+                nombreReserva = registro?.NombreReserva,
+                servicio = registro?.Servicio,
+                valet = registro?.Valet,
+                placas = vehiculo?.Placas,
+                marca = vehiculo?.Marca,
+                modelo = vehiculo?.Modelo,
+                color = vehiculo?.Color,
+                estatus = vehiculo?.Estatus,
+                fotos
+            });
+        }
+
+        // ====================================================================
         //  EXPORTAR EXCEL
         // ====================================================================
         [HttpPost]
@@ -185,7 +223,8 @@ namespace AppValetParking.Controllers
             using var wb = new XLWorkbook();
             var ws = wb.Worksheets.Add("Reporte");
 
-            ws.Cell(1, 1).InsertTable(list);
+            var table = ws.Cell(1, 1).InsertTable(list);
+            ExcelExportHelper.StyleInsertedTable(table);
 
             using var ms = new MemoryStream();
             wb.SaveAs(ms);

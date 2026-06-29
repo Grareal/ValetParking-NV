@@ -14,90 +14,512 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
+    <!-- Google Fonts (marca Smart Valet) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --sv-primary: #0D5C63;
+            --sv-primary-dark: #134A54;
+            --sv-gold: #D4AF37;
+            --sv-bg: #F8F5EF;
+            --sv-ink: #263238;
+            --sv-ink-soft: rgba(38, 50, 56, 0.62);
+            --sv-border: rgba(38, 50, 56, 0.10);
+            --sv-white: #FFFFFF;
+            --sv-radius-lg: 20px;
+            --sv-radius-md: 14px;
+            --sv-radius-sm: 10px;
+            --sv-shadow-sm: 0 2px 8px rgba(19, 74, 84, 0.06);
+            --sv-shadow-md: 0 8px 24px rgba(19, 74, 84, 0.10);
+            --sv-shadow-lg: 0 16px 40px rgba(19, 74, 84, 0.14);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background: var(--sv-bg);
+            color: var(--sv-ink);
+            font-family: 'Inter', sans-serif;
+            padding-bottom: 60px;
+        }
+
+        /* ---------- Encabezado de marca ---------- */
+        .sv-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 28px 0 8px;
+        }
+
+        .sv-logo-mark {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, var(--sv-primary) 0%, var(--sv-primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sv-white);
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            box-shadow: var(--sv-shadow-sm);
+            flex-shrink: 0;
+        }
+
+        .sv-header h3 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            color: var(--sv-primary-dark);
+            margin: 0;
+            font-size: 1.6rem;
+        }
+
+        .sv-header p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--sv-ink-soft);
+        }
+
+        hr {
+            border-top: 1px solid var(--sv-border);
+            margin: 32px 0;
+            opacity: 1;
+        }
+
+        /* ---------- Tarjeta genérica ---------- */
+        .sv-card {
+            background: var(--sv-white);
+            border: 1px solid var(--sv-border);
+            border-radius: var(--sv-radius-md);
+            box-shadow: var(--sv-shadow-sm);
+            padding: 20px;
+        }
+
+        .sv-card-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--sv-primary-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sv-card-title .sv-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--sv-gold);
+            display: inline-block;
+        }
+
+        /* ---------- Filtros ---------- */
+        .sv-filters {
+            margin-bottom: 24px;
+        }
+
+        .sv-filters label {
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--sv-ink-soft);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-control, .form-select, select.form-control {
+            border: 1.5px solid var(--sv-border);
+            border-radius: var(--sv-radius-sm);
+            padding: 9px 12px;
+            font-size: 0.9rem;
+            transition: border-color .15s ease, box-shadow .15s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--sv-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+        }
+
+        .btn {
+            border-radius: var(--sv-radius-sm) !important;
+            font-weight: 600;
+            padding: 9px 20px;
+            letter-spacing: 0.2px;
+            border: none;
+            transition: filter .15s ease, transform .1s ease, box-shadow .15s ease;
+        }
+
+        .btn:active { transform: translateY(1px); }
+
+        .btn-primary {
+            background: var(--sv-primary);
+            color: var(--sv-white);
+        }
+
+        .btn-primary:hover, .btn-primary:focus {
+            background: var(--sv-primary-dark);
+            color: var(--sv-white);
+        }
+
+        .btn-success {
+            background: var(--sv-gold);
+            color: var(--sv-ink);
+        }
+
+        .btn-success:hover, .btn-success:focus {
+            background: #c29c2e;
+            color: var(--sv-ink);
+        }
+
+        /* ---------- KPIs ---------- */
+        .sv-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        @@media (max-width: 991px) {
+            .sv-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @@media (max-width: 575px) {
+            .sv-kpi-grid { grid-template-columns: 1fr; }
+        }
+
+        .sv-kpi {
+            background: var(--sv-white);
+            border: 1px solid var(--sv-border);
+            border-radius: var(--sv-radius-md);
+            box-shadow: var(--sv-shadow-sm);
+            padding: 18px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow .2s ease, transform .2s ease;
+        }
+
+        .sv-kpi:hover {
+            box-shadow: var(--sv-shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .sv-kpi::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--sv-gold);
+        }
+
+        .sv-kpi-label {
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--sv-ink-soft);
+            margin-bottom: 8px;
+        }
+
+        .sv-kpi-value {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--sv-primary-dark);
+            line-height: 1;
+        }
+
+        .sv-kpi-sub {
+            font-size: 0.78rem;
+            color: var(--sv-ink-soft);
+            margin-top: 6px;
+        }
+
+        .sv-kpi-icon {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            font-size: 1.3rem;
+            opacity: 0.18;
+            color: var(--sv-primary-dark);
+        }
+
+        /* ---------- Charts ---------- */
+        .sv-chart-row {
+            margin-bottom: 28px;
+        }
+
+        .sv-chart-card {
+            background: var(--sv-white);
+            border: 1px solid var(--sv-border);
+            border-radius: var(--sv-radius-md);
+            box-shadow: var(--sv-shadow-sm);
+            padding: 20px;
+            height: 100%;
+        }
+
+        .sv-chart-card canvas {
+            max-height: 280px;
+        }
+
+        /* ---------- Tabla ---------- */
+        .sv-table-wrap {
+            background: var(--sv-white);
+            border: 1px solid var(--sv-border);
+            border-radius: var(--sv-radius-lg);
+            box-shadow: var(--sv-shadow-md);
+            padding: 6px;
+            overflow-x: auto;
+        }
+
+        table#tablaReportes {
+            margin-bottom: 0 !important;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        table#tablaReportes.table-bordered { border: none; }
+
+        table#tablaReportes thead th {
+            background: var(--sv-primary-dark);
+            color: var(--sv-white);
+            font-weight: 600;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            border: none !important;
+            padding: 14px 12px;
+            white-space: nowrap;
+        }
+
+        table#tablaReportes thead th:first-child { border-top-left-radius: var(--sv-radius-md); }
+        table#tablaReportes thead th:last-child { border-top-right-radius: var(--sv-radius-md); }
+
+        table#tablaReportes tbody td {
+            border: none;
+            border-top: 1px solid var(--sv-border);
+            padding: 10px 12px;
+            font-size: 0.88rem;
+        }
+
+        table#tablaReportes.table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(13, 92, 99, 0.035);
+        }
+
+        table#tablaReportes tbody tr:hover {
+            background-color: rgba(212, 175, 55, 0.10);
+        }
+
+        /* DataTables controles (buscador / longitud / paginación) */
+        .dataTables_wrapper .dataTables_length select,
+        .dataTables_wrapper .dataTables_filter input {
+            border: 1.5px solid var(--sv-border);
+            border-radius: var(--sv-radius-sm);
+            padding: 6px 10px;
+        }
+
+        .dataTables_wrapper .dataTables_filter input:focus,
+        .dataTables_wrapper .dataTables_length select:focus {
+            outline: none;
+            border-color: var(--sv-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            border-radius: var(--sv-radius-sm) !important;
+            padding: 6px 12px !important;
+            margin-left: 4px !important;
+            border: 1.5px solid var(--sv-border) !important;
+            color: var(--sv-primary-dark) !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: var(--sv-primary) !important;
+            border-color: var(--sv-primary) !important;
+            color: var(--sv-white) !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: rgba(13, 92, 99, 0.08) !important;
+            color: var(--sv-primary-dark) !important;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            color: var(--sv-ink-soft);
+            font-size: 0.85rem;
+            padding-top: 14px;
+        }
+
+        .dataTables_wrapper .dataTables_processing {
+            background: var(--sv-white) !important;
+            color: var(--sv-primary-dark) !important;
+            border-radius: var(--sv-radius-sm);
+            box-shadow: var(--sv-shadow-sm);
+        }
+    </style>
+
 </head>
 <body class="container mt-3">
 
-<h3>Reportes</h3>
-
-<div class="row mb-3">
-    <div class="col-md-2">
-        <label>Fecha Inicio</label>
-        <input type="date" id="inicio" class="form-control" />
-    </div>
-
-    <div class="col-md-2">
-        <label>Fecha Fin</label>
-        <input type="date" id="fin" class="form-control" />
-    </div>
-
-    <div class="col-md-2">
-        <label>Servicio</label>
-        <select id="servicio" class="form-control">
-            <option value="">Todos</option>
-            @foreach (var s in ViewBag.Servicios)
-            {
-                <option>@s</option>
-            }
-        </select>
-    </div>
-
-    <div class="col-md-2">
-        <label>Valet</label>
-        <select id="valet" class="form-control">
-            <option value="">Todos</option>
-            @foreach (var v in ViewBag.Valets)
-            {
-                <option>@v</option>
-            }
-        </select>
-    </div>
-
-    <div class="col-md-2">
-        <label>Hotel</label>
-        <select id="hotel" class="form-control">
-            <option value="">Todos</option>
-            @foreach (var h in ViewBag.Hoteles)
-            {
-                <option>@h</option>
-            }
-        </select>
-    </div>
-
-    <div class="col-md-2 d-flex align-items-end">
-        <button id="btnFiltrar" class="btn btn-primary w-100">Aplicar filtros</button>
+<div class="sv-header">
+    <div class="sv-logo-mark">P</div>
+    <div>
+        <h3>Reportes</h3>
+        <p>Indicadores y movimientos del servicio de valet</p>
     </div>
 </div>
 
-<button id="btnExcel" class="btn btn-success mb-3">Exportar Excel</button>
+<div class="sv-card sv-filters">
+    <div class="sv-card-title"><span class="sv-dot"></span>Filtros</div>
+    <div class="row g-3">
+        <div class="col-md-2">
+            <label>Fecha Inicio</label>
+            <input type="date" id="inicio" class="form-control" />
+        </div>
+
+        <div class="col-md-2">
+            <label>Fecha Fin</label>
+            <input type="date" id="fin" class="form-control" />
+        </div>
+
+        <div class="col-md-2">
+            <label>Servicio</label>
+            <select id="servicio" class="form-control">
+                <option value="">Todos</option>
+                @foreach (var s in ViewBag.Servicios)
+                {
+                    <option>@s</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <label>Valet</label>
+            <select id="valet" class="form-control">
+                <option value="">Todos</option>
+                @foreach (var v in ViewBag.Valets)
+                {
+                    <option>@v</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <label>Hotel</label>
+            <select id="hotel" class="form-control">
+                <option value="">Todos</option>
+                @foreach (var h in ViewBag.Hoteles)
+                {
+                    <option>@h</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2 d-flex align-items-end">
+            <button id="btnFiltrar" class="btn btn-primary w-100">Aplicar filtros</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============== TARJETAS KPI (calculadas en el front, sin endpoints nuevos) ============== -->
+<div class="sv-kpi-grid">
+    <div class="sv-kpi">
+        <div class="sv-kpi-icon">&#128663;</div>
+        <div class="sv-kpi-label">Movimientos totales</div>
+        <div class="sv-kpi-value" id="kpiTotalMovimientos">&mdash;</div>
+        <div class="sv-kpi-sub">Registros que cumplen el filtro actual</div>
+    </div>
+    <div class="sv-kpi">
+        <div class="sv-kpi-icon">&#128197;</div>
+        <div class="sv-kpi-label">Carros atendidos</div>
+        <div class="sv-kpi-value" id="kpiTotalCarros">&mdash;</div>
+        <div class="sv-kpi-sub">Suma del periodo seleccionado</div>
+    </div>
+    <div class="sv-kpi">
+        <div class="sv-kpi-icon">&#128202;</div>
+        <div class="sv-kpi-label">Promedio diario</div>
+        <div class="sv-kpi-value" id="kpiPromedioDiario">&mdash;</div>
+        <div class="sv-kpi-sub">Carros por día con actividad</div>
+    </div>
+    <div class="sv-kpi">
+        <div class="sv-kpi-icon">&#11088;</div>
+        <div class="sv-kpi-label">Valet más activo</div>
+        <div class="sv-kpi-value" id="kpiValetTop" style="font-size: 1.4rem;">&mdash;</div>
+        <div class="sv-kpi-sub" id="kpiValetTopSub">Movimientos registrados</div>
+    </div>
+</div>
+
+<button id="btnExcel" class="btn btn-success mb-4">Exportar Excel</button>
 
 <hr />
 
-<div class="row">
+<div class="row sv-chart-row g-3">
     <div class="col-md-6">
-        <h5>Carros por día</h5>
-        <canvas id="chartCars"></canvas>
+        <div class="sv-chart-card">
+            <div class="sv-card-title"><span class="sv-dot"></span>Carros por día</div>
+            <canvas id="chartCars"></canvas>
+        </div>
     </div>
     <div class="col-md-6">
-        <h5>Movimientos por Valet</h5>
-        <canvas id="chartValets"></canvas>
+        <div class="sv-chart-card">
+            <div class="sv-card-title"><span class="sv-dot"></span>Movimientos por Valet</div>
+            <canvas id="chartValets"></canvas>
+        </div>
     </div>
 </div>
 
 <hr />
 
-<table id="tablaReportes" class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>Operacion</th>
-            <th>Habitacion</th>
-            <th>Hotel</th>
-            <th>Folio</th>
-            <th>Valet</th>
-            <th>Servicio</th>
-        </tr>
-    </thead>
-</table>
+<div class="sv-table-wrap">
+    <table id="tablaReportes" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Operacion</th>
+                <th>Habitacion</th>
+                <th>Hotel</th>
+                <th>Folio</th>
+                <th>Valet</th>
+                <th>Servicio</th>
+                <th>Detalle</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<!-- ============== MODAL DETALLE DE VEHICULO ============== -->
+<div class="modal fade" id="modalDetalleFolio" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--sv-radius-lg); border: none;">
+            <div class="modal-header" style="border-bottom: 1px solid var(--sv-border);">
+                <h5 class="modal-title">Detalle del vehículo &mdash; Folio <span id="detFolio"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3"><div class="sv-kpi-label">Placas</div><div id="detPlacas">&mdash;</div></div>
+                    <div class="col-md-3"><div class="sv-kpi-label">Marca</div><div id="detMarca">&mdash;</div></div>
+                    <div class="col-md-3"><div class="sv-kpi-label">Modelo</div><div id="detModelo">&mdash;</div></div>
+                    <div class="col-md-3"><div class="sv-kpi-label">Color</div><div id="detColor">&mdash;</div></div>
+                    <div class="col-md-3"><div class="sv-kpi-label">Hotel</div><div id="detHotel">&mdash;</div></div>
+                    <div class="col-md-3"><div class="sv-kpi-label">Habitación</div><div id="detHabitacion">&mdash;</div></div>
+                    <div class="col-md-3"><div class="sv-kpi-label">Huésped</div><div id="detHuesped">&mdash;</div></div>
+                    <div class="col-md-3"><div class="sv-kpi-label">Estatus</div><div id="detEstatus">&mdash;</div></div>
+                </div>
+                <hr />
+                <div class="sv-card-title"><span class="sv-dot"></span>Fotos de inspección</div>
+                <div class="row g-2" id="detFotos">
+                    <div class="col-12 text-muted" id="detFotosVacio">Sin fotos registradas para este folio.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- ======================================================== -->
@@ -126,6 +548,11 @@ let tabla;
 let carsChart;
 let valetChart;
 
+// Paleta de marca para las gráficas
+const SV_PRIMARY = "#0D5C63";
+const SV_GOLD = "#D4AF37";
+const SV_PRIMARY_DARK = "#134A54";
+
 function getFilters() {
     return {
         inicio: document.getElementById("inicio").value,
@@ -150,6 +577,11 @@ function cargarTabla() {
             type: 'POST',
             data: function (d) {
                 return Object.assign(d, getFilters());
+            },
+            // KPI #1: Movimientos totales -- se lee del mismo payload que ya devuelve el servidor
+            dataSrc: function (json) {
+                actualizarKpiTotalMovimientos(json.recordsFiltered ?? json.recordsTotal ?? 0);
+                return json.data;
             }
         },
         columns: [
@@ -159,14 +591,63 @@ function cargarTabla() {
             { data: "hotel" },
             { data: "folioVP" },
             { data: "valet" },
-            { data: "servicio" }
+            { data: "servicio" },
+            {
+                data: "folioVP",
+                orderable: false,
+                render: d => d
+                    ? `<button type="button" class="btn btn-sm btn-primary" onclick="verDetalleFolio('${d}')">Ver</button>`
+                    : ''
+            }
         ]
     });
 }
 
+// ----------------------------------------------------
+// Modal de detalle de vehículo + fotos por folio
+// ----------------------------------------------------
+function verDetalleFolio(folio) {
+    fetch('@Url.Action("GetDetalleFolio")?folio=' + encodeURIComponent(folio))
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById("detFolio").textContent = data.folio || folio;
+            document.getElementById("detPlacas").textContent = data.placas || "—";
+            document.getElementById("detMarca").textContent = data.marca || "—";
+            document.getElementById("detModelo").textContent = data.modelo || "—";
+            document.getElementById("detColor").textContent = data.color || "—";
+            document.getElementById("detHotel").textContent = data.hotel || "—";
+            document.getElementById("detHabitacion").textContent = data.habitacion || "—";
+            document.getElementById("detHuesped").textContent = data.nombreReserva || "—";
+            document.getElementById("detEstatus").textContent = data.estatus || "—";
+
+            const cont = document.getElementById("detFotos");
+            cont.innerHTML = "";
+            if (!data.fotos || data.fotos.length === 0) {
+                cont.innerHTML = '<div class="col-12 text-muted" id="detFotosVacio">Sin fotos registradas para este folio.</div>';
+            } else {
+                data.fotos.forEach(f => {
+                    cont.innerHTML += `
+                        <div class="col-md-3 col-6">
+                            <div class="sv-card-title" style="font-size:0.78rem;">${f.slot}</div>
+                            <a href="${f.rutaArchivo}" target="_blank">
+                                <img src="${f.rutaArchivo}" style="width:100%; border-radius: var(--sv-radius-sm); border:1px solid var(--sv-border);" />
+                            </a>
+                        </div>`;
+                });
+            }
+
+            new bootstrap.Modal(document.getElementById("modalDetalleFolio")).show();
+        })
+        .catch(() => alert("No se pudo cargar el detalle del folio."));
+}
+
+function actualizarKpiTotalMovimientos(total) {
+    document.getElementById("kpiTotalMovimientos").textContent = total.toLocaleString();
+}
+
 
 // ----------------------------------------------------
-// Cargar gráficos
+// Cargar gráficos + KPIs derivados de los mismos datos
 // ----------------------------------------------------
 function cargarCharts() {
 
@@ -186,10 +667,27 @@ function cargarCharts() {
                     labels: data.map(x => x.date),
                     datasets: [{
                         label: "Carros atendidos",
-                        data: data.map(x => x.count)
+                        data: data.map(x => x.count),
+                        backgroundColor: SV_PRIMARY,
+                        borderRadius: 6,
+                        maxBarThickness: 36
                     }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { precision: 0 } }
+                    }
                 }
             });
+
+            // KPI #2: Carros atendidos (suma) y KPI #3: Promedio diario
+            const totalCarros = data.reduce((acc, x) => acc + (x.count || 0), 0);
+            const diasConDatos = data.length || 0;
+            const promedio = diasConDatos > 0 ? (totalCarros / diasConDatos) : 0;
+
+            document.getElementById("kpiTotalCarros").textContent = totalCarros.toLocaleString();
+            document.getElementById("kpiPromedioDiario").textContent = promedio.toFixed(1);
         });
 
     // ---- Movimientos por Valet ----
@@ -205,11 +703,31 @@ function cargarCharts() {
                     labels: data.map(x => x.valet),
                     datasets: [{
                         label: "Movimientos",
-                        data: data.map(x => x.count)
+                        data: data.map(x => x.count),
+                        backgroundColor: SV_GOLD,
+                        borderRadius: 6,
+                        maxBarThickness: 28
                     }]
                 },
-                options: { indexAxis: 'y' }
+                options: {
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { beginAtZero: true, ticks: { precision: 0 } }
+                    }
+                }
             });
+
+            // KPI #4: Valet más activo
+            if (data.length > 0) {
+                const top = data.reduce((max, x) => (x.count > (max.count || 0) ? x : max), {});
+                document.getElementById("kpiValetTop").textContent = top.valet || "—";
+                document.getElementById("kpiValetTopSub").textContent =
+                    (top.count ?? 0).toLocaleString() + " movimientos registrados";
+            } else {
+                document.getElementById("kpiValetTop").textContent = "—";
+                document.getElementById("kpiValetTopSub").textContent = "Sin datos en el periodo";
+            }
         });
 }
 

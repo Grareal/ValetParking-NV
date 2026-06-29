@@ -13,7 +13,9 @@ namespace AppValetParking.Data
         public DbSet<ValetMovimiento> ValetMovimientos { get; set; }
         public DbSet<ValetSolicitud> ValetSolicitudes { get; set; }
         public DbSet<Cajon> Cajones { get; set; }
-
+        public DbSet<TicketEnviado> TicketsEnviados { get; set; }
+        public DbSet<VehiculoInfo> VehiculosInfo { get; set; }
+        public DbSet<VehiculoFoto> VehiculoFotos { get; set; }
 
 
     }

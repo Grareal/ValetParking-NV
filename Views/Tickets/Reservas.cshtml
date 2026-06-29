@@ -3,280 +3,1123 @@
 }
 
 <style>
+
+   :root {
+
+    /* ===== PRIMARIOS ===== */
+
+    --sv-teal-950: #0B1F4D;   /* Azul marino profundo */
+    --sv-teal-900: #163F86;   /* Azul corporativo */
+    --sv-teal-500: #4F87D9;   /* Azul principal */
+    --sv-teal-100: #B8E0D2;   /* Verde menta claro */
+
+    /* ===== SECUNDARIOS ===== */
+
+    --sv-gold-500: #7EBCCB;   /* Azul turquesa suave */
+    --sv-gold-600: #5E9CAD;
+    --sv-gold-100: #EAF6F8;
+
+    /* ===== FONDOS ===== */
+
+    --sv-cream: #F5F8FC;
+    --sv-white: #FFFFFF;
+
+    /* ===== TEXTO ===== */
+
+    --sv-ink: #1E293B;
+    --sv-ink-soft: #64748B;
+
+    /* ===== BORDES ===== */
+
+    --sv-line: #D7E1EC;
+
+    /* ===== ESTADOS ===== */
+
+    --sv-danger: #DC2626;
+    --sv-danger-soft: #FEE2E2;
+
+    /* ===== UI ===== */
+
+    --sv-radius-lg: 16px;
+    --sv-radius-md: 10px;
+    --sv-radius-sm: 7px;
+
+    --sv-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+    --sv-shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+    * {
+        box-sizing: border-box;
+    }
+
     body {
-        background: #f4f6f9;
-        font-family: 'Segoe UI', sans-serif;
+        background: var(--sv-cream);
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        color: var(--sv-ink);
     }
 
-    .card {
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-        padding: 25px;
-        margin-top: 25px;
+    .sv-shell {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 28px 28px 60px;
     }
 
-    .header {
+    /* ===== HEADER BAR ===== */
+    .sv-topbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 22px;
+        flex-wrap: wrap;
+        gap: 14px;
     }
 
-    .title {
-        font-size: 24px;
-        font-weight: 600;
-        color: #2c3e50;
+    .sv-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 
-    .controls {
+    .sv-brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 11px;
+        background: linear-gradient(145deg, var(--sv-teal-900), var(--sv-teal-950));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--sv-gold-500);
+        font-weight: 800;
+        font-size: 18px;
+        flex-shrink: 0;
+        box-shadow: var(--sv-shadow-sm);
+    }
+
+    .sv-brand-text .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--sv-teal-500);
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .sv-brand-text h1 {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 1px 0 0;
+        color: var(--sv-ink);
+        letter-spacing: -0.01em;
+    }
+
+    .sv-topbar-actions {
         display: flex;
         gap: 10px;
+        align-items: center;
         flex-wrap: wrap;
     }
 
-    input, select {
-        padding: 8px 12px;
+    /* ===== STAT CHIPS ===== */
+    .sv-stats {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .sv-stat {
+        background: var(--sv-white);
+        border: 1px solid var(--sv-line);
+        border-radius: var(--sv-radius-md);
+        padding: 14px 18px;
+        min-width: 150px;
+        flex: 1;
+        box-shadow: var(--sv-shadow-sm);
+    }
+
+    .sv-stat .sv-stat-label {
+        font-size: 11.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--sv-ink-soft);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .sv-stat .sv-stat-value {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--sv-teal-900);
+        line-height: 1;
+    }
+
+    .sv-stat.is-accent .sv-stat-value {
+        color: var(--sv-gold-600);
+    }
+
+    .sv-stat.is-accent {
+        border-color: #f0dca5;
+        background: var(--sv-gold-100);
+    }
+
+    /* ===== BUTTONS ===== */
+    .sv-btn {
+        font-family: inherit;
+        font-size: 13.5px;
+        font-weight: 600;
+        border-radius: var(--sv-radius-sm);
+        padding: 10px 18px;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+        line-height: 1.1;
+    }
+
+    .sv-btn:active {
+        transform: translateY(1px);
+    }
+
+    .sv-btn-primary {
+        background: var(--sv-teal-900);
+        color: var(--sv-white);
+    }
+
+    .sv-btn-primary:hover {
+        background: var(--sv-teal-950);
+        box-shadow: 0 6px 14px rgba(13, 93, 99, 0.28);
+    }
+
+    .sv-btn-gold {
+        background: var(--sv-gold-500);
+        color: #2a1f04;
+    }
+
+    .sv-btn-gold:hover {
+        background: var(--sv-gold-600);
+        box-shadow: 0 6px 14px rgba(217, 164, 39, 0.35);
+    }
+
+    .sv-btn-ghost {
+        background: var(--sv-white);
+        color: var(--sv-teal-900);
+        border: 1px solid var(--sv-line);
+    }
+
+    .sv-btn-ghost:hover {
+        border-color: var(--sv-teal-500);
+        color: var(--sv-teal-950);
+    }
+
+    .sv-btn-outline-danger {
+        background: var(--sv-white);
+        color: var(--sv-danger);
+        border: 1px solid #ecc9c4;
+    }
+
+    .sv-btn-sm {
+        padding: 6px 13px;
+        font-size: 12.5px;
         border-radius: 6px;
-        border: 1px solid #ddd;
-        font-size: 14px;
+    }
+
+    /* ===== CARD / TABLE PANEL ===== */
+    .sv-panel {
+        background: var(--sv-white);
+        border-radius: var(--sv-radius-lg);
+        box-shadow: var(--sv-shadow);
+        padding: 22px 22px 8px;
+        border: 1px solid var(--sv-line);
+    }
+
+    .sv-panel-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .sv-panel-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--sv-ink);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .sv-panel-title .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--sv-teal-500);
+        display: inline-block;
+    }
+
+    .sv-controls {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .sv-search-wrap {
+        position: relative;
+    }
+
+    .sv-search-wrap svg {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sv-ink-soft);
+        pointer-events: none;
+    }
+
+    input, select, textarea {
+        font-family: inherit;
+        padding: 9px 12px;
+        border-radius: var(--sv-radius-sm);
+        border: 1px solid var(--sv-line);
+        font-size: 13.5px;
+        background: var(--sv-cream);
+        color: var(--sv-ink);
+        outline: none;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input::placeholder {
+        color: #93A29D;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--sv-teal-500);
+        box-shadow: 0 0 0 3px rgba(19, 165, 164, 0.14);
+        background: var(--sv-white);
+    }
+
+    #searchInput {
+        padding-left: 34px;
+        width: 240px;
+    }
+
+    /* ===== TABLE ===== */
+    .sv-table-container {
+        width: 100%;
+        overflow-x: auto;
+        border-radius: var(--sv-radius-md);
+        border: 1px solid var(--sv-line);
     }
 
     table {
         width: 100%;
         border-collapse: collapse;
+        min-width: 920px;
     }
 
     thead {
-        background: #2c3e50;
-        color: white;
+        background: var(--sv-teal-900);
+        color: var(--sv-white);
     }
 
     th, td {
-        padding: 12px;
+        padding: 13px 14px;
         text-align: left;
-        font-size: 14px;
+        font-size: 13.5px;
     }
 
     th {
+        font-weight: 600;
+        font-size: 11.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
         cursor: pointer;
+        white-space: nowrap;
     }
 
     tbody tr {
-        transition: 0.2s;
-    }
-
-        tbody tr:hover {
-            background: #f1f7ff;
-        }
-
-    .badge {
-        background: #3498db;
-        color: white;
-        padding: 4px 10px;
-        border-radius: 20px;
-        font-size: 12px;
-    }
-
-    .btn-print {
-        background: #27ae60;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 6px;
+        border-bottom: 1px solid var(--sv-line);
         cursor: pointer;
-        transition: 0.2s;
+        transition: background 0.12s ease;
     }
 
-        .btn-print:hover {
-            background: #219150;
+    tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    tbody tr:hover {
+        background: var(--sv-teal-100);
+    }
+
+    .sv-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-size: 11.5px;
+        font-weight: 700;
+    }
+
+    .sv-badge-vip {
+        background: var(--sv-gold-100);
+        color: var(--sv-gold-600);
+        border: 1px solid #f0dca5;
+    }
+
+    .sv-badge-noshow {
+        background: var(--sv-danger-soft);
+        color: var(--sv-danger);
+    }
+
+    .sv-check {
+        color: var(--sv-teal-500);
+        font-weight: 800;
+        font-size: 15px;
+    }
+
+    .sv-status-bar {
+        margin-top: 14px;
+        padding: 10px 0;
+        font-size: 13px;
+        font-weight: 600;
+        min-height: 18px;
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(13, 26, 24, 0.55);
+        backdrop-filter: blur(2px);
+    }
+
+    .modal-content {
+        background: var(--sv-white);
+        margin: 8% auto;
+        padding: 28px;
+        width: 420px;
+        max-width: 92vw;
+        border-radius: var(--sv-radius-lg);
+        box-shadow: 0 24px 60px rgba(13, 30, 28, 0.25);
+        border-top: 4px solid var(--sv-gold-500);
+    }
+
+    .modal-content h3 {
+        margin: 0 0 16px;
+        font-size: 18px;
+        color: var(--sv-teal-950);
+        font-weight: 700;
+    }
+
+    .modal-body p {
+        margin: 0;
+        padding: 8px 0;
+        border-bottom: 1px dashed var(--sv-line);
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .modal-body p b {
+        color: var(--sv-ink-soft);
+        font-weight: 600;
+        font-size: 12.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .modal textarea {
+        width: 100%;
+        margin-top: 14px;
+        min-height: 70px;
+        resize: vertical;
+    }
+
+    .modal-actions {
+        margin-top: 18px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    /* RESPONSIVE */
+    @@media (max-width:1024px) {
+        .sv-controls {
+            width: 100%;
+        }
+        #searchInput {
+            width: 100%;
+        }
+        .sv-panel-head {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .sv-topbar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    @@media (max-width: 768px) {
+
+        .sv-shell {
+            padding: 16px 14px 50px;
         }
 
-    .status-bar {
-        margin-top: 10px;
-        font-size: 13px;
-        color: #555;
+        table thead {
+            display: none;
+        }
+
+        table, table tbody, table tr, table td {
+            display: block;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .sv-table-container {
+            overflow-x: visible;
+            border: none;
+        }
+
+        table tr {
+            margin-bottom: 12px;
+            background: var(--sv-white);
+            border-radius: var(--sv-radius-md);
+            box-shadow: var(--sv-shadow-sm);
+            padding: 10px 12px;
+            border: 1px solid var(--sv-line);
+        }
+
+        table td {
+            text-align: right;
+            padding: 7px 0;
+            padding-left: 50%;
+            position: relative;
+            border-bottom: 1px dashed var(--sv-line);
+            min-height: 28px;
+        }
+
+        table td:last-child {
+            border-bottom: none;
+        }
+
+        table td::before {
+            position: absolute;
+            left: 0;
+            width: 45%;
+            text-align: left;
+            font-weight: 700;
+            color: var(--sv-ink-soft);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        table td:nth-of-type(1)::before { content: "Reserva"; }
+        table td:nth-of-type(2)::before { content: "TSW"; }
+        table td:nth-of-type(3)::before { content: "Nombre"; }
+        table td:nth-of-type(4)::before { content: "Habitación"; }
+        table td:nth-of-type(5)::before { content: "Hotel"; }
+        table td:nth-of-type(6)::before { content: "Tipo"; }
+        table td:nth-of-type(7)::before { content: "VIP"; }
+        table td:nth-of-type(8)::before { content: "Enviado"; }
+        table td:nth-of-type(9)::before { content: "Acción"; }
     }
 </style>
 
-<div class="card">
+<div class="sv-shell">
 
-    <div class="header">
-        <div class="title">Reservas del Día</div>
-        <div class="badge" id="contador">0 reservas</div>
+    <div class="sv-topbar">
+        <div class="sv-brand">
+            <div class="sv-brand-mark">SV</div>
+            <div class="sv-brand-text">
+
+                <h1>Reservas del Día</h1>
+            </div>
+        </div>
+
+        <div class="sv-topbar-actions">
+            <button class="sv-btn sv-btn-ghost" onclick="abrirBusquedaReserva()">
+                ✉ Enviar Mensaje
+            </button>
+            <button class="sv-btn sv-btn-primary" onclick="verHistorial()">
+                Ver Historial
+            </button>
+        </div>
     </div>
 
-    <div class="controls">
-        <input type="text" id="searchInput" placeholder="Buscar por nombre, folio o habitación...">
-        <select id="hotelFilter">
-            <option value="">Todos los hoteles</option>
-        </select>
-        <select id="printerSelect"></select>
+    <div class="sv-stats">
+        <div class="sv-stat">
+            <div class="sv-stat-label">Reservas totales</div>
+            <div class="sv-stat-value" id="statTotal">0</div>
+        </div>
+        <div class="sv-stat">
+            <div class="sv-stat-label">Vigentes</div>
+            <div class="sv-stat-value" id="statVigentes">0</div>
+        </div>
+        <div class="sv-stat is-accent">
+            <div class="sv-stat-label">Tickets enviados hoy</div>
+            <div class="sv-stat-value" id="statEnviados">0</div>
+        </div>
     </div>
 
-    <table id="tablaReservas">
-        <thead>
-            <tr>
-                <th onclick="ordenar('h_res_cve')">RESERVA</th>
-                <th onclick="ordenar('h_tsw')">C. TSW</th>
-                <th onclick="ordenar('h_nom')">Nombre</th>
-                <th onclick="ordenar('h_num_hab')">Habitación</th>
-                <th onclick="ordenar('hotel')">Hotel</th>
+    <!-- legacy counters kept for script compatibility, hidden -->
+    <div id="contador" style="display:none"></div>
+    <div id="contadorEnviados" style="display:none"></div>
 
+    <div class="sv-panel">
 
-                <th>Tipo</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+        <div class="sv-panel-head">
+            <div class="sv-panel-title"><span class="dot"></span> Listado de reservas</div>
 
-    <div class="status-bar" id="statusMsg"></div>
+            <div class="sv-controls">
+                <div class="sv-search-wrap">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" placeholder="Buscar por nombre, reserva, habitación...">
+                </div>
+                <select id="hotelFilter">
+                    <option value="">Todos los hoteles</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="sv-table-container">
+            <table id="tablaReservas">
+                <thead>
+                    <tr>
+                        <th>Reserva</th>
+                        <th>TSW</th>
+                        <th>Nombre</th>
+                        <th>Habitación</th>
+                        <th>Hotel</th>
+                        <th>Tipo</th>
+                        <th>VIP</th>
+                        <th>Enviado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="sv-status-bar" id="statusMsg"></div>
+    </div>
+
+</div>
+
+<!-- MODAL IMPRIMIR -->
+<div id="printModal" class="modal">
+    <div class="modal-content">
+
+        <h3>Confirmar impresión</h3>
+
+        <div class="modal-body">
+            <p><b>Reserva</b> <span id="m_reserva"></span></p>
+            <p><b>TSW</b> <span id="m_tsw"></span></p>
+            <p><b>Nombre</b> <span id="m_nombre"></span></p>
+            <p><b>Habitación</b> <span id="m_habitacion"></span></p>
+            <p><b>Hotel</b> <span id="m_hotel"></span></p>
+            <p><b>Tipo</b> <span id="m_tipo"></span></p>
+
+            <textarea id="m_comentario" placeholder="Comentario (opcional)"></textarea>
+        </div>
+
+        <div class="modal-actions">
+            <button class="sv-btn sv-btn-ghost" onclick="cerrarModal()">Cancelar</button>
+            <button class="sv-btn sv-btn-gold" onclick="confirmarImpresion()">🖨 Imprimir</button>
+        </div>
+
+    </div>
+</div>
+
+<div id="buscarModal" class="modal">
+    <div class="modal-content">
+
+        <h3>Buscar Reserva</h3>
+
+        <input id="buscarReservaInput" placeholder="Número de reserva" style="width:100%">
+
+        <div class="modal-actions">
+            <button class="sv-btn sv-btn-ghost" onclick="cerrarBusqueda()">Cancelar</button>
+            <button class="sv-btn sv-btn-primary" onclick="buscarReserva()">Buscar</button>
+        </div>
+
+    </div>
 </div>
 
 <script>
+
+    let reservaSeleccionada = null;
     let reservasGlobal = [];
-    let ordenActual = '';
-    let ascendente = true;
+    let reglasGlobal = [];
+    let ticketsEnviados = [];
+    function cargarTicketsEnviadosHoy() {
+        fetch('/Tickets/GetTicketsEnviadosHoy')
+            .then(res => res.json())
+            .then(data => {
 
+                ticketsEnviados = data;
+                actualizarContadorEnviados();
+
+                renderTabla(reservasGlobal); // refresca checks ✔
+            });
+    }
     document.addEventListener("DOMContentLoaded", function () {
+        // cargarTicketsEnviadosHoy();  ← QUITAR esta línea
+        cargarReglas();
+        cargarReservas(); // esto internamente ya llama a cargarTicketsEnviadosHoy
+        actualizarContadorEnviados();
 
-        cargarReservas();
-        cargarImpresoras();
 
-        document.getElementById("searchInput").addEventListener("input", filtrarTabla);
-        document.getElementById("hotelFilter").addEventListener("change", filtrarTabla);
+        let debounceTimer;
+
+        document.getElementById("searchInput")
+            .addEventListener("input", function () {
+
+                clearTimeout(debounceTimer);
+
+                debounceTimer = setTimeout(() => {
+                    filtrarTabla();
+                }, 250);
+
+            });
+
+
+        document.getElementById("hotelFilter")
+            .addEventListener("change", filtrarTabla);
     });
 
+    // ==========================================
+    // CARGAR RESERVAS
+    // ==========================================
     function cargarReservas() {
         fetch('/Tickets/GetReservasDia')
             .then(res => res.json())
             .then(data => {
-
                 reservasGlobal = data;
                 llenarFiltroHoteles(data);
-                renderTabla(data);
-
-                document.getElementById("contador").innerText = data.length + " reservas";
+                actualizarContador(data);
+                cargarTicketsEnviadosHoy(); // ← primero carga tickets, luego pinta
             });
     }
 
-    function cargarImpresoras() {
-        fetch('/Tickets/GetInstalledPrinters')
+    // ==========================================
+    // CARGAR REGLAS
+    // ==========================================
+    function cargarReglas() {
+        fetch('/Tickets/GetTicketRules')
             .then(res => res.json())
             .then(data => {
-                const select = document.getElementById("printerSelect");
-                select.innerHTML = "";
-
-                data.forEach(p => {
-                    select.innerHTML += `<option value="${p}">${p}</option>`;
-                });
+                reglasGlobal = data || [];
+                renderTabla(reservasGlobal);
             });
     }
 
-    function renderTabla(data) {
-        const tbody = document.querySelector("#tablaReservas tbody");
-        tbody.innerHTML = "";
 
-        data.forEach(r => {
-            const row = `
-        <tr>
+    // ==========================================
+    // MOTOR DE REGLAS CON PRIORIDAD
+    // ==========================================
+    function obtenerReglaAplicable(reserva) {
 
-            <td>${r.h_res_cve ?? ''}</td>
-                <td>${r.h_cod_reserva ?? ''}</td> <!-- nueva columna -->
-            <td>${r.h_nom ?? ''}</td>
-            <td>${r.h_num_hab ?? ''}</td>
-            <td><span class="badge">${r.hotel ?? ''}</span></td>
-            <td>${r.h_tpo_hab ?? ''}</td>
-            <td>
-                <button class="btn-print" onclick="imprimir(
-                    '${r.h_res_cve}',
-                    '${r.h_nom}',
-                    '${r.h_num_hab}',
-                    '${r.hotel}'
-                )">
-                    Imprimir
-                </button>
-            </td>
-        </tr>`;
-            tbody.innerHTML += row;
-        });
+        let reglasCoincidentes = [];
+
+        for (let regla of reglasGlobal) {
+
+            let valor = "";
+
+            if (regla.campo.toLowerCase() === "hotel")
+                valor = (reserva.hotel ?? "").trim();
+
+            if (regla.campo.toLowerCase() === "tipo")
+                valor = (reserva.h_tpo_hsp ?? "").trim();
+
+            if (regla.campo.toLowerCase() === "habitacion") {
+
+                if (reserva.h_status === "01" || reserva.h_status === "02") {
+                    valor = "NO SHOW";
+                } else {
+                    valor = (reserva.h_num_hab ?? "").trim();
+                }
+
+            }
+            if (
+                valor.toUpperCase()
+                    .includes((regla.contieneTexto ?? "").toUpperCase().trim())
+            ) {
+                reglasCoincidentes.push(regla);
+            }
+        }
+
+        if (reglasCoincidentes.length === 0)
+            return null;
+
+        reglasCoincidentes.sort((a, b) => a.prioridad - b.prioridad);
+
+        return reglasCoincidentes[0];
     }
 
+    // ==========================================
+    // RENDER TABLA
+    // ==========================================
+    function renderTabla(data) {
+
+        const tbody = document.querySelector("#tablaReservas tbody");
+
+        let html = "";
+
+        data.forEach(r => {
+            const enviado = ticketsEnviados.includes(r.h_cod_reserva) ? '<span class="sv-check">✔</span>' : "";
+            const regla = obtenerReglaAplicable(r);
+            const color = regla ? regla.colorHex : "";
+            const esNoShow = (r.h_status === "01" || r.h_status === "02");
+            const vipBadge = r.h_vip ? `<span class="sv-badge sv-badge-vip">★ ${r.h_vip}</span>` : '';
+            const habitacionCell = esNoShow
+                ? '<span class="sv-badge sv-badge-noshow">No Show</span>'
+                : (r.h_num_hab ?? '');
+
+            html += `
+<tr ${color ? `style="background:${color}"` : ''}
+onclick="abrirModalImpresion(
+'${r.h_cod_reserva ?? ''}',
+'${r.h_res_cve ?? ''}',
+'${r.h_nom ?? ''}',
+'${r.h_num_hab ?? ''}',
+'${r.hotel ?? ''}',
+'${r.h_tpo_hsp ?? ''}'
+)">            <td>${r.h_res_cve ?? ''}</td>
+            <td>${r.h_cod_reserva ?? ''}</td>
+            <td>${r.h_nom ?? ''}</td>
+            <td>${habitacionCell}</td>
+            <td>${r.hotel ?? ''}</td>
+            <td>${r.h_tpo_hsp ?? ''}</td>
+            <td>${vipBadge}</td>
+            <td style="text-align:center">
+            ${enviado}
+            </td>
+            <td>
+                                    <button class="sv-btn sv-btn-gold sv-btn-sm"
+                    data-folio="${r.h_cod_reserva}"
+                        data-reserva="${r.h_res_cve}"    
+                    data-name="${r.h_nom}"
+                    data-room="${r.h_num_hab}"
+                    data-hotel="${r.hotel}"
+                    data-type="${r.h_tpo_hsp}"
+                    onclick="event.stopPropagation(); abrirModalDesdeBtn(this)">
+                    Imprimir
+                    </button>   
+            </td>
+        </tr>`;
+        });
+
+        tbody.innerHTML = html;
+    }
+
+    function abrirModalDesdeBtn(btn) {
+
+        abrirModalImpresion(
+
+            btn.dataset.folio,
+            btn.dataset.reserva,   // ← nuevo
+
+
+            btn.dataset.name,
+            btn.dataset.room,
+            btn.dataset.hotel,
+            btn.dataset.type
+        );
+
+    }
+
+    function actualizarContador(data) {
+
+        const total = data.length;
+
+        const vigentes = data.filter(r =>
+            !(r.h_status === "01" || r.h_status === "02")
+        ).length;
+
+        document.getElementById("contador").innerText =
+            total + " reservas | " + vigentes + " vigentes";
+
+        document.getElementById("statTotal").innerText = total;
+        document.getElementById("statVigentes").innerText = vigentes;
+    }
+
+
+    // ==========================================
+    // FILTRO HOTELES
+    // ==========================================
     function llenarFiltroHoteles(data) {
-        const hoteles = [...new Set(data.map(r => r.hotel).filter(Boolean))];
+
+        const hoteles = [...new Set(
+            data.map(r => r.hotel).filter(Boolean)
+        )];
+
         const select = document.getElementById("hotelFilter");
+        select.innerHTML = `<option value="">Todos los hoteles</option>`;
 
         hoteles.forEach(h => {
             select.innerHTML += `<option value="${h}">${h}</option>`;
         });
     }
 
+    // ==========================================
+    // FILTRO AVANZADO
+    // ==========================================
     function filtrarTabla() {
-        const texto = document.getElementById("searchInput").value.toLowerCase();
-        const hotel = document.getElementById("hotelFilter").value;
 
-        const filtradas = reservasGlobal.filter(r => {
+        const texto = document
+            .getElementById("searchInput")
+            .value.toLowerCase();
 
-            const coincideTexto =
-                (r.h_nom ?? '').toLowerCase().includes(texto) ||
-                (r.h_res_cve ?? '').toLowerCase().includes(texto) ||
-                (r.h_num_hab ?? '').toLowerCase().includes(texto) ||
-                (r.h_cod_reserva ?? '').toLowerCase().includes(texto); // <-- agregamos TSW
-;
+        const hotel = document
+            .getElementById("hotelFilter")
+            .value;
 
-            const coincideHotel = hotel === "" || r.hotel === hotel;
+        const filtradas = [];
 
-            return coincideTexto && coincideHotel;
-        });
+        for (let i = 0; i < reservasGlobal.length; i++) {
+
+            const r = reservasGlobal[i];
+
+            if (
+                (
+                    (r.h_nom ?? '').toLowerCase().includes(texto) ||
+                    (r.h_res_cve ?? '').toLowerCase().includes(texto) ||
+                    (r.h_num_hab ?? '').toLowerCase().includes(texto) ||
+                    (r.h_cod_reserva ?? '').toLowerCase().includes(texto)
+                )
+                &&
+                (hotel === "" || r.hotel === hotel)
+            ) {
+                filtradas.push(r);
+            }
+        }
 
         renderTabla(filtradas);
-        document.getElementById("contador").innerText = filtradas.length + " reservas";
+
+        actualizarContador(filtradas);
     }
 
-    function ordenar(campo) {
-        ascendente = ordenActual === campo ? !ascendente : true;
-        ordenActual = campo;
+    // ==========================================
+    // IMPRIMIR desde modal
+    // ==========================================
 
-        reservasGlobal.sort((a, b) => {
-            const valA = a[campo] ?? '';
-            const valB = b[campo] ?? '';
-            return ascendente
-                ? valA.localeCompare(valB)
-                : valB.localeCompare(valA);
-        });
+    function abrirModalImpresion(folio, reserva, name, room, hotel, type) {
 
-        renderTabla(reservasGlobal);
+        reservaSeleccionada = { folio, name, room, hotel, type };
+
+        document.getElementById("m_reserva").innerText = reserva;  // número de reserva
+        document.getElementById("m_tsw").innerText = folio;         // TSW
+        document.getElementById("m_nombre").innerText = name;
+        document.getElementById("m_habitacion").innerText = room;
+        document.getElementById("m_hotel").innerText = hotel;
+        document.getElementById("m_tipo").innerText = type;
+
+        document.getElementById("printModal").style.display = "block";
+    }
+    function cerrarModal() {
+        document.getElementById("printModal").style.display = "none";
     }
 
-    function imprimir(folio, name, room, hotel) {
+    function confirmarImpresion() {
 
-        const printer = document.getElementById("printerSelect").value;
+        const comentario = document.getElementById("m_comentario").value;
+
+        const reserva = {
+            hotel: reservaSeleccionada.hotel,
+            h_tpo_hsp: reservaSeleccionada.type,
+            h_num_hab: reservaSeleccionada.room
+        };
+
+        const regla = obtenerReglaAplicable(reserva);
+
+        if (!regla || !regla.impresora) {
+            alert("No hay impresora configurada.");
+            return;
+        }
 
         fetch('/Tickets/PrintTicket', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                folio: folio,
-                name: name,
-                room: room,
-                hotel: hotel,
-                printer: printer,
-                comments: "" // si no tienes txtComentarios
+                folio: reservaSeleccionada.folio,
+                name: reservaSeleccionada.name,
+                room: reservaSeleccionada.room,
+                hotel: reservaSeleccionada.hotel,
+                type: reservaSeleccionada.type,
+                printer: regla.impresora,
+                comments: comentario
             })
         })
             .then(res => res.json())
             .then(resp => {
+
+                cerrarModal();
+                document.getElementById("m_comentario").value = "";
+
                 const status = document.getElementById("statusMsg");
 
+                status.innerHTML = resp.success
+                    ? "✔ Ticket enviado correctamente"
+                    : "✖ Error: " + resp.message;
+
+                status.style.color = resp.success ? "#0D5D63" : "#C0392B";
+
                 if (resp.success) {
-                    status.innerHTML = "✔ Ticket enviado correctamente";
-                    status.style.color = "green";
-                } else {
-                    status.innerHTML = "✖ Error: " + resp.message;
-                    status.style.color = "red";
+
+                    ticketsEnviados.push(reservaSeleccionada.folio);
+                    actualizarContadorEnviados(); 
+
+                    renderTabla(reservasGlobal);
+                }
+
+            });
+    }
+
+    //RESERVAS DEL MES PARA USAR EL ENVIO DE MENSAJE CUANDO YA LA PERSONA INGRESO 
+    function abrirBusquedaReserva() {
+        document.getElementById("buscarReservaInput").value = "";
+        document.getElementById("buscarModal").style.display = "block";
+    }
+    function cerrarBusqueda() {
+        document.getElementById("buscarModal").style.display = "none";
+    }
+    function buscarReserva() {
+
+        const folio = document.getElementById("buscarReservaInput").value;
+
+        if (!folio) {
+            alert("Ingrese número de reserva");
+            return;
+        }
+
+        fetch('/Tickets/BuscarReserva?folio=' + folio)
+            .then(res => res.json())
+            .then(r => {
+
+                if (!r) {
+                    alert("Reserva no encontrada en los últimos 30 días");
+                    return;
+                }
+
+                cerrarBusqueda();
+
+                abrirModalImpresion(
+                    r.h_cod_reserva,
+                    r.h_res_cve,     
+
+                    r.h_nom,
+                    r.h_num_hab,
+                    r.hotel,
+                    r.h_tpo_hsp
+                );
+
+            });
+
+    }
+
+    // ==========================================
+    // IMPRIMIR desde regla
+    // ==========================================
+    function imprimirDesdeRegla(folio, name, room, hotel, type) {
+
+        const comentario = prompt("Comentario para el ticket:");
+
+        if (comentario === null) {
+            return; // el usuario canceló
+        }
+
+        const reserva = {
+            hotel: hotel,
+            h_tpo_hsp: type,
+            h_status: status,
+            h_num_hab: room
+        };
+
+        const regla = obtenerReglaAplicable(reserva);
+
+        if (!regla || !regla.impresora) {
+            alert("No hay impresora configurada para esta reserva.");
+            return;
+        }
+
+        let printer = regla.impresora;
+
+        fetch('/Tickets/PrintTicket', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                folio,
+                name,
+                room,
+                hotel,
+                type,
+                printer,
+                comments: comentario
+            })
+        })
+            .then(res => res.json())
+            .then(resp => {
+
+                const status = document.getElementById("statusMsg");
+
+                status.innerHTML = resp.success
+                    ? "✔ Ticket enviado correctamente"
+                    : "✖ Error: " + resp.message;
+
+                status.style.color =
+                    resp.success ? "#0D5D63" : "#C0392B";
+                if (resp.success) {
+
+                    ticketsEnviados.add(folio);
+                    actualizarContadorEnviados(); 
+
+                    localStorage.setItem(
+                        "ticketsEnviados",
+                        JSON.stringify([...ticketsEnviados])
+                    );
+
+                    renderTabla(reservasGlobal);
                 }
             });
     }
 
+    window.onclick = function (event) {
+
+        const modal = document.getElementById("printModal");
+        const modal2 = document.getElementById("buscarModal");
+
+        if (event.target === modal) {
+            cerrarModal();
+        }
+        if (event.target === modal2) {
+            cerrarBusqueda();
+        }
+
+    }
+
+    function actualizarContadorEnviados() {
+
+        const totalEnviados = ticketsEnviados.length;
+        document.getElementById("contadorEnviados").innerText =
+            totalEnviados + " tickets enviados hoy";
+
+        document.getElementById("statEnviados").innerText = totalEnviados;
+    }
+
+    function verHistorial() {
+        window.location.href = "/Tickets/historial";
+    }
 </script>

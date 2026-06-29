@@ -13,14 +13,30 @@ body {
 .container-fluid {
     box-sizing: border-box;
 }
+#tablaOperadora {
+    width: 100%;
+    table-layout: fixed;
+}
+
+    #tablaOperadora td,
+    #tablaOperadora th {
+        white-space: normal; 
+        word-break: break-word;
+    }
+
+.input-operadora,
+.form-control {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
 
 /* =============================
    TABLA
 ============================= */
 
 .table-responsive {
-    width: 100%;
-    overflow-x: auto; /* IMPORTANTE: permitir que se vea todo */
+    overflow-x: hidden;
 }
 
 table {
@@ -148,10 +164,8 @@ tbody tr:hover td {
 
 #tablaOperadora th:nth-child(12),
 #tablaOperadora td:nth-child(12) {
-    width: 220px;
-    min-width: 220px;
-    text-align: center;
-    overflow: visible; /* CLAVE para que se vean los ... */
+    width: 200px;
+    max-width: 200px;
 }
 
 /* =============================

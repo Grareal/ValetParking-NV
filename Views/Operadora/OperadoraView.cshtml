@@ -1,340 +1,885 @@
-
-
 @model List<AppValetParking.Models.ValetRegistro>
 
-    @{
+@{
     ViewData["Title"] = "Operadora";
-    }
 
-    <div class="operadora-input d-flex align-items-center">
-        <label for="codigoOperador" class="me-2">Operadora:</label>
-        <input type="text" id="codigoOperador" placeholder="Coloque su gaffete" />
-        <span id="nombreEmpleado" style="margin-left: 10px; font-weight: bold;"></span>
+    int paginaActual = (int)(ViewBag.PaginaActual ?? 1);
+    int totalPaginas = (int)(ViewBag.TotalPaginas ?? 1);
+    int totalRegistros = (int)(ViewBag.TotalRegistros ?? 0);
+    int pageSize = (int)(ViewBag.PageSize ?? 20);
 
-        <div class="ms-auto">
-            <form asp-controller="Account" asp-action="Logout" method="post" class="mb-0" onsubmit="limpiarCamposOperadora()">
-                <button type="submit" class="btn btn-outline-danger">Cerrar sesi�n</button>
-            </form>
-        </div>
-    </div>
+    int desde = totalRegistros == 0 ? 0 : (paginaActual - 1) * pageSize + 1;
+    int hasta = Math.Min(paginaActual * pageSize, totalRegistros);
 
-
-
-    <!-- CSS externo -->
-    <link href="~/css/operadora.css" rel="stylesheet" />
-
-    <div class="d-flex justify-content-between align-items-end mb-3 flex-wrap">
-
-        <!-- Formulario de filtro fechas (GET para filtrar en la vista) -->
-        <form method="get" asp-controller="Operadora" asp-action="Index" class="d-flex gap-2 align-items-end flex-wrap">
-            <div>
-                <label for="fechaInicioFiltro">Fecha inicio:</label>
-                <input type="date" id="fechaInicioFiltro" name="fechaInicio" class="form-control" value="@ViewBag.FechaInicio" />
-            </div>
-            <div>
-                <label for="fechaFinFiltro">Fecha fin:</label>
-                <input type="date" id="fechaFinFiltro" name="fechaFin" class="form-control" value="@ViewBag.FechaFin" />
-            </div>
-            <div>
-                <button type="submit" class="btn btn-primary">
-                    Filtrar
-                </button>
-            </div>
-            <div>
-                <a asp-controller="Operadora" asp-action="Index" class="btn btn-secondary">
-                    Limpiar
-                </a>
-            </div>
-        </form>
-
-        <!--PROBANDO ANDO -->
-        <div class="card mb-3 p-3 shadow-sm">
-            <form asp-controller="Operadora" asp-action="LiberarFolioVP" method="post" class="d-flex gap-2 align-items-end">
-                <div>
-                    <label for="folioLiberar">Liberar FolioVP:</label>
-                    <input type="text" id="folioLiberar" name="folioVP" class="form-control" placeholder="Ingrese FolioVP" required />
-                </div>
-
-                <div>
-                    <button type="submit" class="btn btn-danger">
-                        Liberar
-                    </button>
-                </div>
-            </form>
-        </div>
-
-
-        <!-- Formulario Exportar a Excel -->
-        <form asp-controller="Operadora" asp-action="ExportarExcel" method="post" class="d-flex gap-2 align-items-end flex-wrap" target="_blank">
-            <div>
-                <label for="fechaInicioExportar">Fecha inicio:</label>
-                <input type="date" id="fechaInicioExportar" name="fechaInicio" class="form-control" required value="@DateTime.Now.ToString("yyyy-MM-dd")" />
-            </div>
-            <div>
-                <label for="fechaFinExportar">Fecha fin:</label>
-                <input type="date" id="fechaFinExportar" name="fechaFin" class="form-control" required value="@DateTime.Now.ToString("yyyy-MM-dd")" />
-            </div>
-            <div>
-                <button type="submit" class="btn btn-success">
-                    Exportar a Excel
-                </button>
-            </div>
-        </form>
-
-    </div>
-
-
-
-
-
-    <div class="container-fluid mt-4 px-0">
-        @ViewData["Title"]
-
-        <div class="mb-3">
-            <form method="get" asp-action="Index" class="mb-3 d-flex gap-2">
-                <input type="hidden" name="fechaInicio" value="@ViewBag.FechaInicio" />
-                <input type="hidden" name="fechaFin" value="@ViewBag.FechaFin" />
-
-                <input type="text"
-                       name="buscar"
-                       value="@ViewBag.Buscar"
-                       class="form-control"
-                       placeholder="Buscar en todos los registros..." />
-
-                <button type="submit" class="btn btn-dark">
-                    Buscar
-                </button>
-            </form>
-        </div>
-
-        <div class="table-responsive shadow-sm rounded">
-            <table class="table table-striped align-middle" id="tablaOperadora">
-                <thead>
-                    <tr>
-                        <th>Fecha Registro</th>
-                        <th>N. Operacion</th>
-                        <th>Solicitud</th>
-                        <th>Hab</th>
-                        <th>Hotel</th>
-                        <th>N.Res</th>
-                        <th>Folio VP</th>
-                        <th>Valet</th>
-                        <th>Servicio</th>
-                        <th>Ultimo mov.</th>
-                        <th>Caj�n</th>
-                        <th>Acci�n</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-  {
-                    <tr data-id="@item.Id">
-                        <td>@item.Fecha.ToShortDateString()</td>
-                        <td>@item.Operacion</td>
-                        <td>@(item.Solicitud?.ToString(@"hh\:mm\:ss") ?? "")</td>
-                        <td>@item.Habitacion</td>
-                        <td>@item.Hotel</td>
-                        <td>@item.Reserva</td>
-                        <td>@item.FolioVP</td>
-                        <td>
-                            <input type="text" name="Valet" value="@item.Valet" class="form-control input-operadora" placeholder="Valet" form="form-@item.Id" />
-                        </td>
-                        <td>
-                            <select name="Servicio" class="form-control input-operadora" form="form-@item.Id">
-                                @foreach (var opcion in (List<ServicioItem>)ViewBag.Servicios)
+    var paginas = new List<int?>();
+    if (totalPaginas <= 7)
     {
-                                <option value="@opcion.Value" selected="@(item.Servicio == opcion.Value ? "selected" : null)">
-                                    @opcion.Text
-                                </option>
+        for (int i = 1; i <= totalPaginas; i++) paginas.Add(i);
     }
-                            </select>
+    else
+    {
+        paginas.Add(1);
+        if (paginaActual > 3) paginas.Add(null);
 
+        int inicio = Math.Max(2, paginaActual - 1);
+        int fin = Math.Min(totalPaginas - 1, paginaActual + 1);
+        for (int i = inicio; i <= fin; i++) paginas.Add(i);
 
-                        </td>
-                        <td>
-                            <input type="time" name="HoraSalida" value="@(item.HoraSalida?.ToString(@"hh\:mm") ?? "")" class="form-control input-operadora" form="form-@item.Id" />
-                        </td>
-                        <td>
-                            <input type="text" name="CajonBuffer" value="@item.CajonBuffer" class="form-control input-operadora" placeholder="Caj�n" form="form-@item.Id" />
-                        </td>
-                        <td>
-                            <form asp-action="ActualizarRegistro" method="post" id="form-@item.Id">
-                                <input type="hidden" name="Id" value="@item.Id" />
-                                <input type="hidden" name="Operacion" class="input-operadora-nombre" />
+        if (paginaActual < totalPaginas - 2) paginas.Add(null);
+        paginas.Add(totalPaginas);
+    }
+}
 
-                                <button type="button" class="btn btn-info btn-sm btn-ver-movimientos" data-id="@item.Id" style="min-width: 50px;">
-                                    Ver M.
-                                </button>
-                                <button type="submit" class="btn btn-primary btn-sm" title="Guardar cambios" style="min-width: 80px;">
-                                    Guardar
-                                </button>
+<!-- ====== Estilos de marca Smart Valet (incrustados; puedes moverlos a operadora.css) ====== -->
+<style>
+    :root {
+        --sv-primary: #0D5C63;
+        --sv-primary-dark: #134A54;
+        --sv-gold: #D4AF37;
+        --sv-bg: #F8F5EF;
+        --sv-ink: #263238;
+        --sv-ink-soft: rgba(38, 50, 56, 0.62);
+        --sv-border: rgba(38, 50, 56, 0.10);
+        --sv-white: #FFFFFF;
+        --sv-radius-lg: 20px;
+        --sv-radius-md: 14px;
+        --sv-radius-sm: 10px;
+        --sv-shadow-sm: 0 2px 8px rgba(19, 74, 84, 0.06);
+        --sv-shadow-md: 0 8px 24px rgba(19, 74, 84, 0.10);
+        --sv-shadow-lg: 0 16px 40px rgba(19, 74, 84, 0.14);
+    }
 
-                                <button type="button"
-                                        class="btn btn-secondary btn-sm btn-mas-opciones"
-                                        data-id="@item.Id"
-                                        data-hostname="@item.HOSTNAME"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalOpciones"
-                                        title="M�s opciones"
-                                        style="min-width: 40px;">
-                                    ...
-                                </button>
-                            </form>
+    body {
+        background: var(--sv-bg);
+        color: var(--sv-ink);
+    }
 
+    /* ---------- Barra superior: Operadora ---------- */
+    .operadora-input {
+        background: var(--sv-white);
+        border: 1px solid var(--sv-border);
+        border-radius: var(--sv-radius-md);
+        box-shadow: var(--sv-shadow-sm);
+        padding: 16px 20px;
+        margin-bottom: 24px;
+        gap: 8px;
+    }
 
+    .operadora-input label {
+        font-weight: 600;
+        color: var(--sv-primary-dark);
+        letter-spacing: 0.2px;
+        margin-bottom: 0;
+    }
 
-                        </td>
-                    </tr>
-  }
-                </tbody>
+    .operadora-input input#codigoOperador {
+        border: 1.5px solid var(--sv-border);
+        border-radius: var(--sv-radius-sm);
+        padding: 9px 14px;
+        font-size: 0.95rem;
+        transition: border-color .15s ease, box-shadow .15s ease;
+        min-width: 220px;
+    }
 
-            </table>
-        </div>
-        <nav class="mt-3">
-            <ul class="pagination justify-content-center">
+    .operadora-input input#codigoOperador:focus {
+        outline: none;
+        border-color: var(--sv-gold);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+    }
 
-                @if (ViewBag.PaginaActual > 1)
-        {
-                <li class="page-item">
-                    <a class="page-link"
-                       asp-action="Index"
-                       asp-route-pagina="@(ViewBag.PaginaActual - 1)"
-                       asp-route-fechaInicio="@ViewBag.FechaInicio"
-                       asp-route-fechaFin="@ViewBag.FechaFin"
-                       asp-route-buscar="@ViewBag.Buscar">
-                        Anterior
-                    </a>
-                </li>
+    #nombreEmpleado {
+        color: var(--sv-primary);
+        font-weight: 700 !important;
+    }
+
+    .operadora-input .btn-outline-danger {
+        border-radius: var(--sv-radius-sm);
+        font-weight: 600;
+        padding: 8px 18px;
+    }
+
+    /* ---------- Tarjetas / formularios de acciones ---------- */
+    .sv-toolbar {
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .sv-card {
+        background: var(--sv-white);
+        border: 1px solid var(--sv-border);
+        border-radius: var(--sv-radius-md);
+        box-shadow: var(--sv-shadow-sm);
+        padding: 16px 18px;
+        transition: box-shadow .2s ease, transform .2s ease;
+    }
+
+    .sv-card:hover {
+        box-shadow: var(--sv-shadow-md);
+    }
+
+    .sv-card label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: var(--sv-ink-soft);
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .sv-card .form-control {
+        border: 1.5px solid var(--sv-border);
+        border-radius: var(--sv-radius-sm);
+        padding: 8px 12px;
+    }
+
+    .sv-card .form-control:focus {
+        border-color: var(--sv-primary);
+        box-shadow: 0 0 0 3px rgba(13, 92, 99, 0.14);
+    }
+
+    /* Botones de marca, todos con la misma forma y feedback consistente */
+    .btn {
+        border-radius: var(--sv-radius-sm) !important;
+        font-weight: 600;
+        padding: 9px 20px;
+        letter-spacing: 0.2px;
+        transition: filter .15s ease, transform .1s ease, box-shadow .15s ease;
+        border: none;
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+    }
+
+    .btn-primary {
+        background: var(--sv-primary);
+        color: var(--sv-white);
+    }
+
+    .btn-primary:hover, .btn-primary:focus {
+        background: var(--sv-primary-dark);
+        color: var(--sv-white);
+    }
+
+    .btn-secondary {
+        background: var(--sv-white);
+        color: var(--sv-primary-dark);
+        border: 1.5px solid var(--sv-border);
+    }
+
+    .btn-secondary:hover, .btn-secondary:focus {
+        background: var(--sv-bg);
+        color: var(--sv-primary-dark);
+    }
+
+    .btn-success {
+        background: var(--sv-gold);
+        color: var(--sv-ink);
+    }
+
+    .btn-success:hover, .btn-success:focus {
+        background: #c29c2e;
+        color: var(--sv-ink);
+    }
+
+    .btn-danger {
+        background: #B3372C;
+        color: var(--sv-white);
+    }
+
+    .btn-danger:hover, .btn-danger:focus {
+        background: #9c2f25;
+        color: var(--sv-white);
+    }
+
+    .btn-outline-danger {
+        color: #B3372C;
+        border: 1.5px solid #B3372C;
+        background: transparent;
+    }
+
+    .btn-outline-danger:hover {
+        background: #B3372C;
+        color: var(--sv-white);
+    }
+
+    .btn-info {
+        background: rgba(13, 92, 99, 0.10);
+        color: var(--sv-primary-dark);
+    }
+
+    .btn-info:hover {
+        background: rgba(13, 92, 99, 0.18);
+        color: var(--sv-primary-dark);
+    }
+
+    .btn-dark {
+        background: var(--sv-ink);
+        color: var(--sv-white);
+    }
+
+    .btn-dark:hover {
+        background: #18222a;
+        color: var(--sv-white);
+    }
+
+    /* ---------- Barra de filtros unificada ---------- */
+    .sv-filter-bar {
+        background: var(--sv-white);
+        border: 1px solid var(--sv-border);
+        border-radius: var(--sv-radius-md);
+        box-shadow: var(--sv-shadow-sm);
+        padding: 16px 18px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+    }
+
+    .sv-filter-bar .field-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sv-filter-bar .field-group.field-buscar {
+        flex: 1 1 260px;
+        min-width: 220px;
+    }
+
+    .sv-filter-bar label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: var(--sv-ink-soft);
+        margin-bottom: 4px;
+    }
+
+    .sv-filter-bar .form-control {
+        border: 1.5px solid var(--sv-border);
+        border-radius: var(--sv-radius-sm);
+        padding: 9px 14px;
+        box-shadow: var(--sv-shadow-sm);
+    }
+
+    .sv-filter-bar .form-control:focus {
+        outline: none;
+        border-color: var(--sv-gold);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+    }
+
+    .sv-filter-bar .field-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    /* ---------- Tabla ---------- */
+    .table-responsive.shadow-sm.rounded {
+        box-shadow: var(--sv-shadow-md) !important;
+        border-radius: var(--sv-radius-lg) !important;
+        background: var(--sv-white);
+        border: 1px solid var(--sv-border);
+        padding: 4px;
+    }
+
+    #tablaOperadora {
+        margin-bottom: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    #tablaOperadora thead th {
+        background: var(--sv-primary-dark);
+        color: var(--sv-white);
+        font-weight: 600;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        border: none;
+        padding: 14px 12px;
+        white-space: nowrap;
+    }
+
+    #tablaOperadora thead th:first-child {
+        border-top-left-radius: var(--sv-radius-md);
+    }
+
+    #tablaOperadora thead th:last-child {
+        border-top-right-radius: var(--sv-radius-md);
+    }
+
+    #tablaOperadora tbody tr {
+        transition: background-color .15s ease;
+    }
+
+    #tablaOperadora.table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(13, 92, 99, 0.035);
+    }
+
+    #tablaOperadora tbody tr:hover {
+        background-color: rgba(212, 175, 55, 0.10);
+    }
+
+    #tablaOperadora tbody td {
+        padding: 10px 12px;
+        border-top: 1px solid var(--sv-border);
+        font-size: 0.92rem;
+        vertical-align: middle;
+    }
+
+    .input-operadora {
+        border: 1.5px solid var(--sv-border);
+        border-radius: var(--sv-radius-sm);
+        padding: 6px 10px;
+        font-size: 0.88rem;
+        background: var(--sv-white);
+        transition: border-color .15s ease, box-shadow .15s ease;
+    }
+
+    .input-operadora:focus {
+        outline: none;
+        border-color: var(--sv-primary);
+        box-shadow: 0 0 0 3px rgba(13, 92, 99, 0.14);
+    }
+
+    #tablaOperadora .btn-sm {
+        padding: 6px 12px;
+        font-size: 0.80rem;
+        border-radius: 8px !important;
+    }
+
+    /* ---------- Paginacion estilo data table ---------- */
+    .sv-pagination-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 16px;
+    }
+
+    .sv-pagination-info {
+        font-size: 0.85rem;
+        color: var(--sv-ink-soft);
+    }
+
+    .sv-pagination-info strong {
+        color: var(--sv-primary-dark);
+    }
+
+    .sv-pagination {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .sv-page-btn,
+    .sv-page-ellipsis {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--sv-radius-sm);
+        border: 1.5px solid var(--sv-border);
+        background: var(--sv-white);
+        color: var(--sv-primary-dark);
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: all .15s ease;
+    }
+
+    .sv-page-btn:hover {
+        border-color: var(--sv-gold);
+        background: rgba(212, 175, 55, 0.10);
+        color: var(--sv-primary-dark);
+    }
+
+    .sv-page-btn.active {
+        background: var(--sv-primary);
+        border-color: var(--sv-primary);
+        color: var(--sv-white);
+        cursor: default;
+    }
+
+    .sv-page-btn.disabled {
+        opacity: 0.4;
+        pointer-events: none;
+    }
+
+    .sv-page-ellipsis {
+        border: none;
+        background: transparent;
+        color: var(--sv-ink-soft);
+        cursor: default;
+    }
+
+    @@media (max-width: 768px) {
+        .sv-pagination-bar {
+            justify-content: center;
         }
 
-                @for (int i = 1; i <= ViewBag.TotalPaginas; i++)
-        {
-                <li class="page-item @(i == ViewBag.PaginaActual ? "active" : "")">
-                    <a class="page-link"
-                       asp-action="Index"
-                       asp-route-pagina="@i"
-                       asp-route-fechaInicio="@ViewBag.FechaInicio"
-                       asp-route-fechaFin="@ViewBag.FechaFin"
-                       asp-route-buscar="@ViewBag.Buscar">
-                        @i
-                    </a>
-                </li>
+        .sv-pagination {
+            justify-content: center;
         }
+    }
 
-                @if (ViewBag.PaginaActual < ViewBag.TotalPaginas)
-        {
-                <li class="page-item">
-                    <a class="page-link"
-                       asp-action="Index"
-                       asp-route-pagina="@(ViewBag.PaginaActual + 1)"
-                       asp-route-fechaInicio="@ViewBag.FechaInicio"
-                       asp-route-fechaFin="@ViewBag.FechaFin"
-                       asp-route-buscar="@ViewBag.Buscar">
-                        Siguiente
-                    </a>
-                </li>
-        }
+    /* ---------- Modal ---------- */
+    .modal-content {
+        border: none;
+        border-radius: var(--sv-radius-lg);
+        box-shadow: var(--sv-shadow-lg);
+        overflow: hidden;
+    }
 
-            </ul>
-        </nav>
+    .modal-header {
+        background: var(--sv-primary-dark);
+        color: var(--sv-white);
+        border-bottom: none;
+        padding: 18px 24px;
+    }
 
+    .modal-header .modal-title {
+        font-weight: 700;
+        letter-spacing: 0.2px;
+    }
 
+    .modal-header .btn-close {
+        filter: invert(1) brightness(2);
+    }
 
+    .modal-body {
+        padding: 24px;
+    }
+
+    .modal-body label {
+        font-weight: 600;
+        color: var(--sv-primary-dark);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    .modal-body .form-control {
+        border: 1.5px solid var(--sv-border);
+        border-radius: var(--sv-radius-sm);
+        padding: 10px 14px;
+        margin-top: 6px;
+    }
+
+    .modal-body .form-control:focus {
+        border-color: var(--sv-gold);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+    }
+
+    .modal-footer {
+        border-top: 1px solid var(--sv-border);
+        padding: 16px 24px;
+    }
+
+    /* ---------- Titulo de seccion ---------- */
+    .sv-page-title {
+        font-weight: 700;
+        color: var(--sv-primary-dark);
+        font-size: 1.4rem;
+        letter-spacing: 0.2px;
+        margin-bottom: 18px;
+    }
+</style>
+
+<div class="operadora-input d-flex align-items-center">
+    <label for="codigoOperador" class="me-2">Operadora:</label>
+    <input type="text" id="codigoOperador" placeholder="Coloque su gafete" />
+    <span id="nombreEmpleado" style="margin-left: 10px; font-weight: bold;"></span>
+
+    <div class="ms-auto">
+        <form asp-controller="Account" asp-action="Logout" method="post" class="mb-0" onsubmit="limpiarCamposOperadora()">
+            <button type="submit" class="btn btn-outline-danger">Cerrar sesión</button>
+        </form>
     </div>
-    <!-- Modal para editar informaci�n adicional -->
-    <div class="modal fade" id="modalOpciones" tabindex="-1" aria-labelledby="modalOpcionesLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form method="post" asp-controller="Operadora" asp-action="ActualizarHostname">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalOpcionesLabel">Editar informaci�n adicional</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="Id" id="modalRegistroId" />
-                        <div class="mb-3">
-                            <label for="modalHostname" class="form-label">Detalles:</label>
-                            <input type="text" class="form-control" id="modalHostname" name="HOSTNAME" />
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+</div>
+
+
+
+<!-- CSS externo -->
+<link href="~/css/operadora.css" rel="stylesheet" />
+
+<div class="d-flex justify-content-between align-items-end mb-3 flex-wrap sv-toolbar">
+
+    <!-- Formulario de liberación de folio -->
+    <div class="card mb-3 sv-card">
+        <form asp-controller="Operadora" asp-action="LiberarFolioVP" method="post" class="d-flex gap-2 align-items-end" onsubmit="return confirm('¿Seguro que deseas liberar este FolioVP? Esta acción eliminará el registro y no se puede deshacer.');">
+            <div>
+                <label for="folioLiberar">Liberar FolioVP:</label>
+                <input type="text" id="folioLiberar" name="folioVP" class="form-control" placeholder="Ingrese FolioVP" required />
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-danger">
+                    Liberar
+                </button>
+            </div>
+        </form>
     </div>
 
 
+    <!-- Formulario Exportar a Excel -->
+    <form asp-controller="Operadora" asp-action="ExportarExcel" method="post" class="d-flex gap-2 align-items-end flex-wrap sv-card" target="_blank">
+        <div>
+            <label for="fechaInicioExportar">Fecha inicio:</label>
+            <input type="date" id="fechaInicioExportar" name="fechaInicio" class="form-control" required value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        </div>
+        <div>
+            <label for="fechaFinExportar">Fecha fin:</label>
+            <input type="date" id="fechaFinExportar" name="fechaFin" class="form-control" required value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success">
+                Exportar a Excel
+            </button>
+        </div>
+    </form>
+
+</div>
+
+<div class="container-fluid mt-4 px-0">
+    <div class="sv-page-title">@ViewData["Title"]</div>
+
+    <!-- Filtro unificado: búsqueda + rango de fechas -->
+    <form method="get" asp-controller="Operadora" asp-action="Index" class="sv-filter-bar">
+        <div class="field-group field-buscar">
+            <label for="buscarFiltro">Buscar</label>
+            <input type="text"
+                   id="buscarFiltro"
+                   name="buscar"
+                   value="@ViewBag.Buscar"
+                   class="form-control"
+                   placeholder="Folio VP, habitación, hotel, reserva o valet..." />
+        </div>
+
+        <div class="field-group">
+            <label for="fechaInicioFiltro">Fecha inicio</label>
+            <input type="date" id="fechaInicioFiltro" name="fechaInicio" class="form-control" value="@ViewBag.FechaInicio" />
+        </div>
+
+        <div class="field-group">
+            <label for="fechaFinFiltro">Fecha fin</label>
+            <input type="date" id="fechaFinFiltro" name="fechaFin" class="form-control" value="@ViewBag.FechaFin" />
+        </div>
+
+        <div class="field-group field-actions">
+            <button type="submit" class="btn btn-primary">
+                Filtrar
+            </button>
+            <a asp-controller="Operadora" asp-action="Index" class="btn btn-secondary">
+                Limpiar
+            </a>
+        </div>
+    </form>
+
+    <div class="table-responsive shadow-sm rounded" style="overflow-x:auto;">
+        <table class="table table-striped align-middle" id="tablaOperadora">
+            <thead>
+                <tr>
+                    <th>Fecha Registro</th>
+                    <th>N. Operacion</th>
+                    <th>Solicitud</th>
+                    <th>Hab</th>
+                    <th>Hotel</th>
+                    <th>N.Res</th>
+                    <th>Folio VP</th>
+                    <th>Valet</th>
+                    <th>Servicio</th>
+                    <th>Ultimo mov.</th>
+                    <th>Cajón</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr data-id="@item.Id">
+                    <td>@item.Fecha.ToShortDateString()</td>
+                    <td>@item.Operacion</td>
+                    <td>@(item.Solicitud?.ToString(@"hh\:mm\:ss") ?? "")</td>
+                    <td>@item.Habitacion</td>
+                    <td>@item.Hotel</td>
+                    <td>@item.Reserva</td>
+                    <td>@item.FolioVP</td>
+                    <td>
+                        <input type="text" name="Valet" value="@item.Valet" class="form-control input-operadora" placeholder="Valet" form="form-@item.Id" />
+                    </td>
+                    <td>
+                        <select name="Servicio" class="form-control input-operadora" form="form-@item.Id">
+                            @foreach (var opcion in (List<ServicioItem>)ViewBag.Servicios)
+                            {
+                            <option value="@opcion.Value" selected="@(item.Servicio == opcion.Value ? "selected" : null)">
+                                @opcion.Text
+                            </option>
+                            }
+                        </select>
 
 
-    <!-- JS externo -->
-    <script src="~/js/operadora.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.js"></script>
+                    </td>
+                    <td>
+                        <input type="time" name="HoraSalida" value="@(item.HoraSalida?.ToString(@"hh\:mm") ?? "")" class="form-control input-operadora" form="form-@item.Id" />
+                    </td>
+                    <td>
+                        <input type="text" name="CajonBuffer" value="@item.CajonBuffer" class="form-control input-operadora" placeholder="Cajón" form="form-@item.Id" />
+                    </td>
+                    <td>
+                        <form asp-action="ActualizarRegistro" method="post" id="form-@item.Id">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <input type="hidden" name="Operacion" class="input-operadora-nombre" />
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
+                            <button type="button" class="btn btn-info btn-sm btn-ver-movimientos" data-id="@item.Id" style="min-width: 50px;">
+                                Ver M.
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-sm" title="Guardar cambios" style="min-width: 80px;">
+                                Guardar
+                            </button>
 
-            // Funci�n para enviar la solicitud al API
-            function solicitarCoche(folio, hotel) {
+                            <button type="button"
+                                    class="btn btn-secondary btn-sm btn-mas-opciones"
+                                    data-id="@item.Id"
+                                    data-hostname="@item.HOSTNAME"
+                                    data-folio="@item.FolioVP"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalOpciones"
+                                    title="Más opciones"
+                                    style="min-width: 40px;">
+                                ...
+                            </button>
+                        </form>
 
-                const confirmar = confirm("�Deseas confirmar la solicitud para el folio " + folio + "?");
-                if (!confirmar) return;
-                const datos = {
-                    FolioVP: folio,
-                    Destino: "Lobby",
-                    Resort: hotel,
-                    NombreSolicitante: document.getElementById("codigoOperador").value,
-                    ApellidoSolicitante: "",
-                    Telefono: "",
-                    Correo: "",
-                    MarcaVehiculo: "",
-                    ColorVehiculo: "",
-                    TipoSalida: "Normal",
-                    Comentarios: ""
-                };
 
-                fetch("/api/valet/crear", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(datos)
-                })
-                    .then(resp => resp.json())
-                    .then(res => {
-                        console.log(res); // ver en consola qu� devuelve la API
-                        if (res.exito) {
-                            alert("Solicitud enviada para el folio " + folio);
-                        } else {
-                            alert("Error: " + (res.mensaje || JSON.stringify(res)));
-                        }
-                    })
-                    .catch(err => alert("Error en la solicitud: " + err));
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- Paginacion estilo data table: profesional, centrada y sin desbordar -->
+    <div class="sv-pagination-bar">
+        <div class="sv-pagination-info">
+            @if (totalRegistros == 0)
+            {
+                <span>Sin registros</span>
+            }
+            else
+            {
+                <span>Mostrando <strong>@desde</strong>–<strong>@hasta</strong> de <strong>@totalRegistros</strong> registros</span>
+            }
+        </div>
+
+        <ul class="sv-pagination">
+            <li>
+                @if (paginaActual > 1)
+                {
+                    <a class="sv-page-btn"
+                       asp-action="Index"
+                       asp-route-pagina="@(paginaActual - 1)"
+                       asp-route-fechaInicio="@ViewBag.FechaInicio"
+                       asp-route-fechaFin="@ViewBag.FechaFin"
+                       asp-route-buscar="@ViewBag.Buscar">
+                        ‹ Anterior
+                    </a>
+                }
+                else
+                {
+                    <span class="sv-page-btn disabled">‹ Anterior</span>
+                }
+            </li>
+
+            @foreach (var p in paginas)
+            {
+                <li>
+                    @if (p == null)
+                    {
+                        <span class="sv-page-ellipsis">…</span>
+                    }
+                    else if (p == paginaActual)
+                    {
+                        <span class="sv-page-btn active">@p</span>
+                    }
+                    else
+                    {
+                        <a class="sv-page-btn"
+                           asp-action="Index"
+                           asp-route-pagina="@p"
+                           asp-route-fechaInicio="@ViewBag.FechaInicio"
+                           asp-route-fechaFin="@ViewBag.FechaFin"
+                           asp-route-buscar="@ViewBag.Buscar">
+                            @p
+                        </a>
+                    }
+                </li>
             }
 
-            // Botones de "M�s opciones"
-            const botones = document.querySelectorAll(".btn-mas-opciones");
-            botones.forEach(btn => {
-                btn.addEventListener("click", function () {
-                    const id = btn.getAttribute("data-id");
-                    const hostname = btn.getAttribute("data-hostname");
+            <li>
+                @if (paginaActual < totalPaginas)
+                {
+                    <a class="sv-page-btn"
+                       asp-action="Index"
+                       asp-route-pagina="@(paginaActual + 1)"
+                       asp-route-fechaInicio="@ViewBag.FechaInicio"
+                       asp-route-fechaFin="@ViewBag.FechaFin"
+                       asp-route-buscar="@ViewBag.Buscar">
+                        Siguiente ›
+                    </a>
+                }
+                else
+                {
+                    <span class="sv-page-btn disabled">Siguiente ›</span>
+                }
+            </li>
+        </ul>
+    </div>
 
-                    document.getElementById("modalRegistroId").value = id;
-                    document.getElementById("modalHostname").value = hostname;
-                });
+</div>
+<!-- Modal para editar informacion adicional -->
+<div class="modal fade" id="modalOpciones" tabindex="-1" aria-labelledby="modalOpcionesLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="post" asp-controller="Operadora" asp-action="ActualizarHostname">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalOpcionesLabel">Editar información adicional</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="Id" id="modalRegistroId" />
+
+                    <div class="mb-3" id="modalVehiculoInfo" style="background:var(--sv-bg); border-radius:var(--sv-radius-sm); padding:10px 14px;">
+                        <label class="form-label mb-1">Vehículo vinculado:</label>
+                        <div id="modalVehiculoTexto" style="font-weight:600; color:var(--sv-ink);">Buscando...</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="modalHostname" class="form-label">Detalles:</label>
+                        <input type="text" class="form-control" id="modalHostname" name="HOSTNAME" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+<!-- JS externo -->
+<script src="~/js/operadora.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let habilitarClickDerecho = false;
+
+        // Función para enviar la solicitud al API
+        function solicitarCoche(folio, hotel) {
+
+            const confirmar = confirm("¿Deseas confirmar la solicitud para el folio " + folio + "?");
+            if (!confirmar) return;
+            const datos = {
+                FolioVP: folio,
+                Destino: "Lobby",
+                Resort: hotel,
+                NombreSolicitante: document.getElementById("codigoOperador").value,
+                ApellidoSolicitante: "",
+                Telefono: "",
+                Correo: "",
+                MarcaVehiculo: "",
+                ColorVehiculo: "",
+                TipoSalida: "Normal",
+                Comentarios: ""
+            };
+
+            fetch("/api/valet/crear", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(datos)
+            })
+                .then(resp => resp.json())
+                .then(res => {
+                    console.log(res); // ver en consola que devuelve la API
+                    if (res.exito) {
+                        alert("Solicitud enviada para el folio " + folio);
+                    } else {
+                        alert("Error: " + (res.mensaje || JSON.stringify(res)));
+                    }
+                })
+                .catch(err => alert("Error en la solicitud: " + err));
+        }
+
+        // Botones de "Mas opciones"
+        const botones = document.querySelectorAll(".btn-mas-opciones");
+        botones.forEach(btn => {
+            btn.addEventListener("click", function () {
+                const id = btn.getAttribute("data-id");
+                const hostname = btn.getAttribute("data-hostname");
+                const folio = btn.getAttribute("data-folio");
+
+                document.getElementById("modalRegistroId").value = id;
+                document.getElementById("modalHostname").value = hostname;
+
+                const textoVehiculo = document.getElementById("modalVehiculoTexto");
+                textoVehiculo.textContent = "Buscando...";
+
+                if (!folio) {
+                    textoVehiculo.textContent = "Sin folio asociado.";
+                    return;
+                }
+
+                fetch(`/api/Vehiculos/PorFolio/${encodeURIComponent(folio)}`)
+                    .then(resp => {
+                        if (!resp.ok) throw new Error("sin vehiculo");
+                        return resp.json();
+                    })
+                    .then(v => {
+                        const partes = [v.marca, v.modelo, v.color].filter(Boolean).join(" ");
+                        textoVehiculo.textContent = partes
+                            ? `${partes} · Placas: ${v.placas || "—"}`
+                            : `Placas: ${v.placas || "—"}`;
+                    })
+                    .catch(() => {
+                        textoVehiculo.textContent = "Sin vehículo registrado para este folio.";
+                    });
             });
-
-            // Click derecho en filas
-            const filas = document.querySelectorAll("#tablaOperadora tbody tr");
-            filas.forEach(fila => {
-                fila.addEventListener("contextmenu", function (e) {
-                    e.preventDefault(); // evita el men� del navegador
-                    const folio = fila.querySelector("td:nth-child(6)").innerText; // columna Folio VP
-                    const hotel = fila.querySelector("td:nth-child(5)").innerText; // columna Hotel
-                    solicitarCoche(folio, hotel);
-                });
-            });
-
         });
-    </script>
 
+        // Click derecho en filas
+        const filas = document.querySelectorAll("#tablaOperadora tbody tr");
+
+        filas.forEach(fila => {
+            fila.addEventListener("contextmenu", function (e) {
+
+                if (!habilitarClickDerecho) {
+                    e.preventDefault(); // opcional: solo bloquea el menu
+                    return;
+                }
+
+                e.preventDefault(); // evita el menu del navegador
+                const folio = fila.querySelector("td:nth-child(6)").innerText;
+                const hotel = fila.querySelector("td:nth-child(5)").innerText;
+                solicitarCoche(folio, hotel);
+            });
+        });
+
+    });
+</script>

@@ -1,0 +1,108 @@
+﻿@{
+    var permisos = (ViewBag.Permisos as string ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries);
+    var modulos = ViewBag.Modulos as List<AppValetParking.Models.Modulo> ?? new List<AppValetParking.Models.Modulo>();
+}
+
+<style>
+
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: 'Segoe UI';
+        background: linear-gradient(135deg,#2f6ea3,#5cc6b7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* TARJETA PRINCIPAL */
+    .panel {
+        background: #f5f5f5;
+        width: 90%;
+        max-width: 1200px;
+        padding: 50px;
+        border-radius: 18px;
+        box-shadow: 0 25px 60px rgba(0,0,0,.25);
+    }
+
+    /* TITULO */
+    .title {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        color: #2c3e50;
+        letter-spacing: 1px;
+    }
+
+    /* GRID HORIZONTAL Y RESPONSIVE */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 25px;
+    }
+
+    /* CARD MODULO */
+    .module {
+        background: white;
+        border-radius: 12px;
+        padding: 28px;
+        text-align: center;
+        border: 1px solid rgba(0,0,0,.05);
+        transition: .3s;
+        box-shadow: 0 8px 18px rgba(0,0,0,.1);
+    }
+
+        .module:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(0,0,0,.2);
+        }
+
+    /* ICON */
+    .icon {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    /* TITULO MODULO */
+    .module-title {
+        font-size: 18px;
+        margin-bottom: 14px;
+        color: #2f6ea3;
+    }
+
+    /* BOTON */
+    .module-btn {
+        display: inline-block;
+        padding: 10px 24px;
+        background: #b98a4a;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: .25s;
+    }
+
+        .module-btn:hover {
+            background: #8c6535;
+        }
+</style>
+
+
+
+<div class="panel">
+    <div class="title">Panel Valet Parking</div>
+    <div class="grid">
+        @foreach (var modulo in modulos)
+        {
+            if (permisos.Contains(modulo.Permiso) || permisos.Contains("Administracion") || permisos.Contains("TI"))
+            {
+        <div class="module">
+            <div class="icon">@modulo.Icono</div>
+            <div class="module-title">@modulo.Titulo</div>
+            <a href="@modulo.Url" class="module-btn">Abrir</a>
+        </div>
+            }
+        }
+    </div>
+</div>

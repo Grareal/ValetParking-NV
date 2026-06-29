@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.IO;
 using ClosedXML.Excel;
+using AppValetParking.Services;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -37,7 +38,7 @@ namespace AppValetParking.Controllers
             if (fechaFin.HasValue)
                 query = query.Where(r => r.Fecha <= fechaFin.Value);
 
-            //  BÚSQUEDA GLOBAL EN TODA LA TABLA
+            //  Bï¿½SQUEDA GLOBAL EN TODA LA TABLA
             if (!string.IsNullOrWhiteSpace(buscar))
             {
                 buscar = buscar.Trim();
@@ -62,6 +63,8 @@ namespace AppValetParking.Controllers
 
             ViewBag.PaginaActual = pagina;
             ViewBag.TotalPaginas = (int)Math.Ceiling((double)totalRegistros / pageSize);
+            ViewBag.TotalRegistros = totalRegistros;
+            ViewBag.PageSize = pageSize;
 
             ViewBag.FechaInicio = fechaInicio?.ToString("yyyy-MM-dd");
             ViewBag.FechaFin = fechaFin?.ToString("yyyy-MM-dd");
@@ -95,21 +98,12 @@ namespace AppValetParking.Controllers
             );
 
             using var workbook = new ClosedXML.Excel.XLWorkbook();
-            var worksheet = workbook.Worksheets.Add("Registros");
-
-            // Encabezados
-            worksheet.Cell(1, 1).Value = "Fecha";
-            worksheet.Cell(1, 2).Value = "Operadora";
-            worksheet.Cell(1, 3).Value = "H. Solicitud";
-            worksheet.Cell(1, 4).Value = "Habitación";
-            worksheet.Cell(1, 5).Value = "Hotel";
-            worksheet.Cell(1, 6).Value = "Reserva";
-            worksheet.Cell(1, 7).Value = "FolioVP";
-            worksheet.Cell(1, 8).Value = "Codigo Gafette";
-            worksheet.Cell(1, 9).Value = "Nombre Valet";
-            worksheet.Cell(1, 10).Value = "Servicio";
-            worksheet.Cell(1, 11).Value = "H. Ultimo Mov";
-            worksheet.Cell(1, 12).Value = "Cajón";
+            var headers = new[]
+            {
+                "Fecha", "Operadora", "H. Solicitud", "HabitaciÃ³n", "Hotel", "Reserva",
+                "FolioVP", "Codigo Gafette", "Nombre Valet", "Servicio", "H. Ultimo Mov", "CajÃ³n"
+            };
+            var worksheet = ExcelExportHelper.CreateStyledSheet(workbook, "Registros", headers);
 
             int row = 2;
             foreach (var r in registros)
@@ -129,6 +123,8 @@ namespace AppValetParking.Controllers
 
                 row++;
             }
+
+            ExcelExportHelper.FinalizeStyledSheet(worksheet, row - 1, headers.Length);
 
             var stream = new MemoryStream();
             workbook.SaveAs(stream);
@@ -156,7 +152,7 @@ namespace AppValetParking.Controllers
                 return RedirectToAction("Index");
             }
 
-            // También eliminar movimientos relacionados si existen
+            // Tambiï¿½n eliminar movimientos relacionados si existen
             var movimientos = _contextApp.ValetMovimientos
                 .Where(m => m.IdRegistro == registro.Id);
 
@@ -187,10 +183,10 @@ namespace AppValetParking.Controllers
                 cambios.Add($"Servicio cambiado de '{registroDb.Servicio}' a '{registro.Servicio}'");
 
             if (registroDb.CajonBuffer != registro.CajonBuffer)
-                cambios.Add($"Cajón Buffer cambiado de '{registroDb.CajonBuffer}' a '{registro.CajonBuffer}'");
+                cambios.Add($"Cajï¿½n Buffer cambiado de '{registroDb.CajonBuffer}' a '{registro.CajonBuffer}'");
 
             if (registroDb.Operacion != registro.Operacion)
-                cambios.Add($"Operación cambiada de '{registroDb.Operacion}' a '{registro.Operacion}'");
+                cambios.Add($"Operaciï¿½n cambiada de '{registroDb.Operacion}' a '{registro.Operacion}'");
 
             if (TimeSpan.TryParse(Request.Form["HoraSalida"], out var horaSalida))
             {
@@ -239,7 +235,7 @@ namespace AppValetParking.Controllers
         public IActionResult BuscarPorCodigo(string codigo)
         {
             if (string.IsNullOrWhiteSpace(codigo))
-                return BadRequest("Código vacío");
+                return BadRequest("Cï¿½digo vacï¿½o");
 
             var empleado = _contextPegasys.VV_TARJETAS_EMPLEADOS
                 .FirstOrDefault(e =>

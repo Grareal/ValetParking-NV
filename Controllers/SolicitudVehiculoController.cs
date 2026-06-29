@@ -3,9 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using AppValetParking.Data;
 using AppValetParking.Models;
 using ClosedXML.Excel;
+using AppValetParking.Services;
 
 namespace AppValetParking.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")] 
     public class SolicitudVehiculoController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,7 +23,6 @@ namespace AppValetParking.Controllers
         // ======================================================
         public IActionResult Index(DateTime? inicio, DateTime? fin)
         {
-            // ?? USAMOS LA TABLA REAL: ValetSolicitudes
             var query = _context.ValetSolicitudes.AsQueryable();
 
             if (inicio.HasValue)
@@ -31,6 +33,7 @@ namespace AppValetParking.Controllers
 
             var lista = query
                 .OrderByDescending(x => x.TiempoCreado)
+                .AsNoTracking()
                 .ToList();
 
             // ---------- CONTADORES ----------
@@ -40,18 +43,18 @@ namespace AppValetParking.Controllers
 
             int rapidos = lista.Count(x =>
                 x.TiempoAtendido != null &&
-                EF.Functions.DateDiffMinute(x.TiempoCreado, x.TiempoAtendido) <= 10
+                (x.TiempoAtendido.Value - x.TiempoCreado).TotalMinutes <= 10
             );
 
             int normales = lista.Count(x =>
                 x.TiempoAtendido != null &&
-                EF.Functions.DateDiffMinute(x.TiempoCreado, x.TiempoAtendido) > 10 &&
-                EF.Functions.DateDiffMinute(x.TiempoCreado, x.TiempoAtendido) <= 20
+                (x.TiempoAtendido.Value - x.TiempoCreado).TotalMinutes > 10 &&
+                (x.TiempoAtendido.Value - x.TiempoCreado).TotalMinutes <= 20
             );
 
             int lentos = lista.Count(x =>
                 x.TiempoAtendido != null &&
-                EF.Functions.DateDiffMinute(x.TiempoCreado, x.TiempoAtendido) > 20
+                (x.TiempoAtendido.Value - x.TiempoCreado).TotalMinutes > 20
             );
 
             ViewBag.Total = total;
@@ -64,6 +67,51 @@ namespace AppValetParking.Controllers
             return View(lista);
         }
 
+        [HttpPost("crear")]
+        public async Task<IActionResult> CrearSolicitud([FromBody] ValetSolicitud solicitud)
+        {
+            var solicitudExistente = await _context.ValetSolicitudes
+                .Where(x => x.FolioVP == solicitud.FolioVP &&
+                            x.TiempoAtendido == null)
+                .FirstOrDefaultAsync();
+
+            if (solicitudExistente != null)
+            {
+                return Ok(new
+                {
+                    exito = false,
+                    mensaje = "Este vehï¿½culo ya fue solicitado y estï¿½ en proceso."
+                });
+            }
+
+            solicitud.FechaSolicitud = DateTime.Now;
+
+            _context.ValetSolicitudes.Add(solicitud);
+
+            // Buscar vehï¿½culo asociado
+            var vehiculo = await _context.VehiculosInfo
+                .FirstOrDefaultAsync(x => x.FolioVP == solicitud.FolioVP);
+
+            if (vehiculo != null && !string.IsNullOrEmpty(solicitud.TipoSalida))
+            {
+                var tipo = solicitud.TipoSalida.Trim().ToUpperInvariant();
+
+                if (tipo == "PARCIAL" || tipo == "PASEO")
+                    vehiculo.Estatus = "Parcial";
+                else if (tipo == "PERMANENTE" || tipo == "SALIDA")
+                    vehiculo.Estatus = "Fuera";
+                else if (tipo == "REGRESO")
+                    vehiculo.Estatus = "Dentro";
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                exito = true,
+                mensaje = "Solicitud registrada correctamente."
+            });
+        }
         // ======================================================
         // =============== MARCAR COMO ATENDIDO =================
         // ======================================================
@@ -99,16 +147,12 @@ namespace AppValetParking.Controllers
                 .ToList();
 
             using var workbook = new XLWorkbook();
-            var ws = workbook.Worksheets.Add("Solicitudes");
-
-            ws.Cell(1, 1).Value = "ID";
-            ws.Cell(1, 2).Value = "Folio";
-            ws.Cell(1, 3).Value = "Huésped";
-            ws.Cell(1, 4).Value = "Habitación";
-            ws.Cell(1, 5).Value = "Hotel";
-            ws.Cell(1, 6).Value = "Fecha Solicitud";
-            ws.Cell(1, 7).Value = "Fecha Atención";
-            ws.Cell(1, 8).Value = "Minutos Atención";
+            var headers = new[]
+            {
+                "ID", "Folio", "HuÃ©sped", "HabitaciÃ³n", "Hotel",
+                "Fecha Solicitud", "Fecha AtenciÃ³n", "Minutos AtenciÃ³n"
+            };
+            var ws = ExcelExportHelper.CreateStyledSheet(workbook, "Solicitudes", headers);
 
             int fila = 2;
 
@@ -120,7 +164,9 @@ namespace AppValetParking.Controllers
                 ws.Cell(fila, 4).Value = x.Habitacion;
                 ws.Cell(fila, 5).Value = x.Resort;
                 ws.Cell(fila, 6).Value = x.TiempoCreado;
+                ws.Cell(fila, 6).Style.DateFormat.Format = "yyyy-MM-dd HH:mm";
                 ws.Cell(fila, 7).Value = x.TiempoAtendido;
+                ws.Cell(fila, 7).Style.DateFormat.Format = "yyyy-MM-dd HH:mm";
 
                 if (x.TiempoAtendido != null)
                     ws.Cell(fila, 8).Value =
@@ -131,13 +177,15 @@ namespace AppValetParking.Controllers
                 fila++;
             }
 
+            ExcelExportHelper.FinalizeStyledSheet(ws, fila - 1, headers.Length);
+
             using var stream = new MemoryStream();
             workbook.SaveAs(stream);
             stream.Position = 0;
 
             return File(stream.ToArray(),
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                "Solicitudes.xlsx");
+                $"Solicitudes_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
         }
     }
 }

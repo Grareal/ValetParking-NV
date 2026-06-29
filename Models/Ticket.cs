@@ -40,9 +40,15 @@ namespace AppValetParking.Models
         {
             PrintDocument pd = new PrintDocument();
             pd.DocumentName = "VALET " + this.FOLIO;
+
             pd.PrinterSettings.PrinterName = printerName;
-            pd.PrintController = new StandardPrintController(); // evita diálogos
+
+            // ancho ticket 80mm
+            pd.DefaultPageSettings.PaperSize = new PaperSize("Ticket", 315, 800);
+
+            pd.PrintController = new StandardPrintController();
             pd.PrintPage += new PrintPageEventHandler(this.PrintPage);
+
             pd.Print();
             pd.Dispose();
         }
@@ -57,11 +63,13 @@ namespace AppValetParking.Models
             StringFormat center = new StringFormat() { Alignment = StringAlignment.Center };
 
             // Encabezado
-            e.Graphics.DrawString("***** VALET PARKING *****",
+            string titulo = $"*** {HOTEL} ***"; ;
+            e.Graphics.DrawString(titulo.ToUpper(),
                 new Font("Courier New", 12, FontStyle.Bold),
                 Brushes.Black,
                 new RectangleF(x, y, width, lineHeight),
                 center);
+
             y += lineHeight + 4;
             e.Graphics.DrawString(DateTime.Now.ToString("dd/MM/yyyy hh:mm tt"), font, Brushes.Black, x, y);
             y += lineHeight;
@@ -74,11 +82,30 @@ namespace AppValetParking.Models
 
             e.Graphics.DrawString($"Habitación: {ROOM}", font, Brushes.Black, x, y);
             y += lineHeight;
-
-            if (!string.IsNullOrEmpty(HOTEL) && HOTEL != "NULL")
+            if (!string.IsNullOrWhiteSpace(TYPE))
             {
-                e.Graphics.DrawString($"Hotel: {HOTEL}", font, Brushes.Black, x, y);
+                e.Graphics.DrawString($"Tipo: {TYPE}", font, Brushes.Black, x, y);
                 y += lineHeight;
+            }
+
+
+            y += 5;
+
+            // Comentarios
+            if (!string.IsNullOrWhiteSpace(OBS))
+            {
+                e.Graphics.DrawString("Comentarios:", font, Brushes.Black, x, y);
+                y += lineHeight;
+
+                int pos = 0;
+                int chunk = 28;
+                while (pos < OBS.Length)
+                {
+                    var part = OBS.Substring(pos, Math.Min(chunk, OBS.Length - pos));
+                    e.Graphics.DrawString(part, font, Brushes.Black, x, y);
+                    y += lineHeight;
+                    pos += chunk;
+                }
             }
 
             y += 5;
@@ -99,22 +126,7 @@ namespace AppValetParking.Models
                 }
             }
 
-            // Comentarios
-            if (!string.IsNullOrWhiteSpace(OBS))
-            {
-                e.Graphics.DrawString("Comentarios:", font, Brushes.Black, x, y);
-                y += lineHeight;
-
-                int pos = 0;
-                int chunk = 28;
-                while (pos < OBS.Length)
-                {
-                    var part = OBS.Substring(pos, Math.Min(chunk, OBS.Length - pos));
-                    e.Graphics.DrawString(part, font, Brushes.Black, x, y);
-                    y += lineHeight;
-                    pos += chunk;
-                }
-            }
+            
 
         }
 
