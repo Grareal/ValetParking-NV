@@ -79,7 +79,9 @@ namespace AppValetParking.Controllers
                         Marca = vehiculo?.Marca,
                         Modelo = vehiculo?.Modelo,
                         Color = vehiculo?.Color,
-                        HoraEntrada = registro?.Fecha
+                        HoraEntrada = registro?.Fecha,
+                        c.UltimoMotivoLiberacion,
+                        c.FechaUltimaLiberacion
                     };
                 })
                 .ToList();

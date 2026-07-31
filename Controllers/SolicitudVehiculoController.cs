@@ -67,6 +67,51 @@ namespace AppValetParking.Controllers
             return View(lista);
         }
 
+        // ======================================================
+        // ===== LISTAR POR TIPO (Reservación, etc.) ============
+        // ======================================================
+        /// GET api/SolicitudVehiculo/lista?tipo=RESERVACION
+        /// Devuelve solicitudes filtradas por TipoSalida y/o PorEntregar.
+        [HttpGet("lista")]
+        public async Task<IActionResult> Lista(string? tipo = null, bool? porEntregar = null)
+        {
+            var query = _context.ValetSolicitudes
+                .Where(x => x.TiempoAtendido == null)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(tipo))
+                query = query.Where(x => x.TipoSalida == tipo.ToUpperInvariant());
+
+            if (porEntregar == true)
+                query = query.Where(x => x.Estatus == "Por entregar");
+
+            var lista = await query
+                .OrderByDescending(x => x.TiempoCreado)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return Ok(lista);
+        }
+
+        // ======================================================
+        // ===== MARCAR COMO "POR ENTREGAR" =====================
+        // ======================================================
+        /// POST api/solicitudes/porEntregar/{id}
+        /// Indica que el vehículo ya está en lobby, pendiente de entrega al huésped.
+        [HttpPost("/api/solicitudes/porEntregar/{id}")]
+        public async Task<IActionResult> MarcarPorEntregar(int id)
+        {
+            var solicitud = await _context.ValetSolicitudes.FindAsync(id);
+            if (solicitud == null)
+                return NotFound(new { success = false });
+
+            // Usa el campo Estatus existente; no requiere migración.
+            solicitud.Estatus = "Por entregar";
+            await _context.SaveChangesAsync();
+
+            return Ok(new { success = true });
+        }
+
         [HttpPost("crear")]
         public async Task<IActionResult> CrearSolicitud([FromBody] ValetSolicitud solicitud)
         {

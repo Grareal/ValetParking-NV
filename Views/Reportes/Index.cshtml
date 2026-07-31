@@ -420,6 +420,11 @@
             </select>
         </div>
 
+        <div class="col-md-2">
+            <label>Placas</label>
+            <input type="text" id="placa" class="form-control" placeholder="Ej. ABC123" />
+        </div>
+
         <div class="col-md-2 d-flex align-items-end">
             <button id="btnFiltrar" class="btn btn-primary w-100">Aplicar filtros</button>
         </div>
@@ -484,6 +489,7 @@
                 <th>Habitacion</th>
                 <th>Hotel</th>
                 <th>Folio</th>
+                <th>Placas</th>
                 <th>Valet</th>
                 <th>Servicio</th>
                 <th>Detalle</th>
@@ -559,7 +565,8 @@ function getFilters() {
         fin: document.getElementById("fin").value,
         servicio: document.getElementById("servicio").value,
         valet: document.getElementById("valet").value,
-        hotel: document.getElementById("hotel").value
+        hotel: document.getElementById("hotel").value,
+        placa: document.getElementById("placa").value
     };
 }
 
@@ -572,6 +579,7 @@ function cargarTabla() {
 
     tabla = $('#tablaReportes').DataTable({
         serverSide: true,
+        order: [[0, 'desc']], // por defecto: más recientes primero
         ajax: {
             url: '@Url.Action("GetData")',
             type: 'POST',
@@ -585,11 +593,12 @@ function cargarTabla() {
             }
         },
         columns: [
-            { data: "fecha", render: d => new Date(d).toLocaleDateString() },
+            { data: "fecha", render: d => new Date(d).toLocaleString() },
             { data: "operacion" },
             { data: "habitacion" },
             { data: "hotel" },
             { data: "folioVP" },
+            { data: "placas" },
             { data: "valet" },
             { data: "servicio" },
             {

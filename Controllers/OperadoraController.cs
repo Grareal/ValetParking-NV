@@ -23,12 +23,15 @@ namespace AppValetParking.Controllers
             _contextPegasys = contextPegasys;
         }
 
-        public IActionResult Index(DateTime? fechaInicio, DateTime? fechaFin, string buscar, int pagina = 1)
+        public async Task<IActionResult> Index(DateTime? fechaInicio, DateTime? fechaFin, string buscar, string servicio, int pagina = 1)
         {
             int pageSize = 20;
 
+            // Sin filtro de Situacion por defecto: se ven registros activos
+            // (USADO) y con salida (SALIDA) por igual. El filtro por
+            // "servicio" (ANDENES/EN.REMOTO/EN.BUFFER/SALIDA/PASEO/GRAVIN)
+            // permite acotar la vista cuando se necesite.
             var query = _contextApp.ValetRegistros
-                .Where(r => r.Situacion == "USADO")
                 .AsNoTracking()
                 .AsQueryable();
 
@@ -37,6 +40,9 @@ namespace AppValetParking.Controllers
 
             if (fechaFin.HasValue)
                 query = query.Where(r => r.Fecha <= fechaFin.Value);
+
+            if (!string.IsNullOrWhiteSpace(servicio))
+                query = query.Where(r => r.Servicio == servicio);
 
             //  B�SQUEDA GLOBAL EN TODA LA TABLA
             if (!string.IsNullOrWhiteSpace(buscar))
@@ -52,14 +58,14 @@ namespace AppValetParking.Controllers
                 );
             }
 
-            int totalRegistros = query.Count();
+            int totalRegistros = await query.CountAsync();
 
-            var registros = query
+            var registros = await query
                 .OrderByDescending(r => r.Fecha)
                 .ThenByDescending(r => r.Solicitud)
                 .Skip((pagina - 1) * pageSize)
                 .Take(pageSize)
-                .ToList();
+                .ToListAsync();
 
             ViewBag.PaginaActual = pagina;
             ViewBag.TotalPaginas = (int)Math.Ceiling((double)totalRegistros / pageSize);
@@ -69,6 +75,7 @@ namespace AppValetParking.Controllers
             ViewBag.FechaInicio = fechaInicio?.ToString("yyyy-MM-dd");
             ViewBag.FechaFin = fechaFin?.ToString("yyyy-MM-dd");
             ViewBag.Buscar = buscar;
+            ViewBag.ServicioSeleccionado = servicio;
 
             // Servicios JSON (con fix null)
             string rutaJson = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Config", "servicios.json");
@@ -76,7 +83,7 @@ namespace AppValetParking.Controllers
 
             if (System.IO.File.Exists(rutaJson))
             {
-                var json = System.IO.File.ReadAllText(rutaJson);
+                var json = await System.IO.File.ReadAllTextAsync(rutaJson);
                 var opciones = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 servicios = JsonSerializer.Deserialize<List<ServicioItem>>(json, opciones) ?? new List<ServicioItem>();
             }

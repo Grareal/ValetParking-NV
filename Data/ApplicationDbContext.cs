@@ -16,7 +16,22 @@ namespace AppValetParking.Data
         public DbSet<TicketEnviado> TicketsEnviados { get; set; }
         public DbSet<VehiculoInfo> VehiculosInfo { get; set; }
         public DbSet<VehiculoFoto> VehiculoFotos { get; set; }
+        public DbSet<CodigoLiberacion> CodigosLiberacion { get; set; }
+        public DbSet<FolioTransferido> FoliosTransferidos { get; set; }
+        public DbSet<VistaSistema> VistasSistema { get; set; }
+        public DbSet<RolVista> RolVistas { get; set; }
+        public DbSet<SolicitudAuditoria> SolicitudesAuditoria { get; set; }
 
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<VistaSistema>().HasIndex(v => v.Clave).IsUnique();
+            modelBuilder.Entity<RolVista>().HasIndex(rv => new { rv.Rol, rv.VistaSistemaId }).IsUnique();
+            modelBuilder.Entity<RolVista>()
+                .HasOne(rv => rv.VistaSistema)
+                .WithMany(v => v.Roles)
+                .HasForeignKey(rv => rv.VistaSistemaId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

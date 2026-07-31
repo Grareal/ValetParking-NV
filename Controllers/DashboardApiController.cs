@@ -33,6 +33,10 @@ namespace AppValetParking.Controllers
             int salidasPermanentesHoy = await _context.ValetMovimientos
                 .CountAsync(m => m.Servicio == "SALIDA" && m.FechaHora >= hoy && m.FechaHora < maniana);
 
+            // Salidas parciales activas: coches en paseo que se espera regresen.
+            int salidasParcialesActivas = await _context.VehiculosInfo
+                .CountAsync(v => v.Estatus == "Parcial");
+
             var solicitudesAtendidasHoy = await _context.ValetSolicitudes
                 .Where(s => s.TiempoAtendido != null && s.TiempoCreado >= hoy && s.TiempoCreado < maniana)
                 .Select(s => new { s.TiempoCreado, s.TiempoAtendido })
@@ -47,6 +51,7 @@ namespace AppValetParking.Controllers
                 vehiculosActivos,
                 entradasHoy,
                 salidasPermanentesHoy,
+                salidasParcialesActivas,
                 tiempoPromedioMinutos = Math.Round(tiempoPromedioMinutos, 1)
             });
         }

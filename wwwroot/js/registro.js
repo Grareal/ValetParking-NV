@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Escáner o escritura rápida - con detección de velocidad
+    // Escï¿½ner o escritura rï¿½pida - con detecciï¿½n de velocidad
     let folioScanTimer;
     let scanStartTime = null;
     folioInput.addEventListener('input', () => {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 folioInput.focus();
             } else {
                 folioInput.classList.remove('error');
-                if (duration <= 500) reservaInput.focus(); // solo avanza si fue escaneo rápido
+                if (duration <= 500) reservaInput.focus(); // solo avanza si fue escaneo rï¿½pido
             }
         }, 300);
     });
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 data = await response.json();
             } catch {
-                throw new Error("La respuesta no es JSON válido");
+                throw new Error("La respuesta no es JSON vï¿½lido");
             }
 
             if (!response.ok) {
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 valetNombreInput.value = '';
                 valetNombreHidden.value = '';
-                console.warn("No se encontró el operador:", error);
+                console.warn("No se encontrï¿½ el operador:", error);
             }
             fetchInProgress = false;
         });
@@ -257,11 +257,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
+                // Limpiamos cualquier auto-envÃ­o pendiente del escaneo: ya
+                // estamos resolviendo el Enter aquÃ­, no queremos que el
+                // timeout de abajo dispare un segundo envÃ­o mÃ¡s tarde.
+                if (typingTimeout) clearTimeout(typingTimeout);
+
                 if (buffer.length === 0) {
                     if (valetNombreHidden.value.trim() === '') {
                          return;
                     }
-                    numeroInput.form.submit();
+                    // requestSubmit() (no submit()) para que SÃ dispare el
+                    // evento 'submit' del form y el guard anti-doble-envÃ­o
+                    // de BotonesView.cshtml (btnSubmit.disabled) lo cubra.
+                    numeroInput.form.requestSubmit();
                     return;
                 }
 
@@ -293,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log('Entrada scanner detectada, procesando buffer...');
                         await processBuffer();
                     } else {
-                        console.log("Entrada manual detectada o buffer muy corto, NO se envía automáticamente.");
+                        console.log("Entrada manual detectada o buffer muy corto, NO se envï¿½a automï¿½ticamente.");
                     }
                     buffer = '';
                 }, 7000);
@@ -315,11 +323,13 @@ document.addEventListener('DOMContentLoaded', () => {
             await new Promise(resolve => setTimeout(resolve, 100));
 
             if (document.getElementById('ValetNombreHidden').value.trim() !== '') {
-                console.log('Enviando formulario automáticamente');
+                console.log('Enviando formulario automï¿½ticamente');
                 const form = numeroInput.form;
-                if (form) form.submit();
+                // requestSubmit() para que el guard anti-doble-envÃ­o del
+                // listener 'submit' (BotonesView.cshtml) tambiÃ©n aplique aquÃ­.
+                if (form) form.requestSubmit();
             } else {
-                console.warn('Nombre de valet no disponible, no se envía formulario');
+                console.warn('Nombre de valet no disponible, no se envï¿½a formulario');
             }
         }
 

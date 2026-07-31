@@ -205,6 +205,65 @@
             font-size: 0.85rem;
             padding: 16px 0;
         }
+
+        .sv-cajon.senalado {
+            border-left-color: #b8860b;
+            box-shadow: 0 0 0 1px rgba(184, 134, 11, 0.4) inset;
+        }
+
+        .sv-cajon-senal {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #8a6300;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ---------- Administración de cajones ---------- */
+        .sv-btn-admin {
+            border: 1px solid var(--sv-border);
+            background: #fff;
+            color: var(--sv-primary-dark);
+            border-radius: var(--sv-radius-sm);
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            height: 34px;
+        }
+        .sv-btn-admin.activo { background: var(--sv-primary); color: #fff; border-color: var(--sv-primary); }
+
+        .sv-admin-panel {
+            background: #fff;
+            border: 1px solid var(--sv-border);
+            border-radius: var(--sv-radius-md);
+            box-shadow: var(--sv-shadow-sm);
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            display: none;
+        }
+        .sv-admin-panel.abierto { display: block; }
+        .sv-admin-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 8px; }
+        .sv-admin-row label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--sv-ink-soft); display: block; margin-bottom: 3px; }
+        .sv-admin-row input { border: 1.5px solid var(--sv-border); border-radius: var(--sv-radius-sm); padding: 6px 10px; font-size: 0.82rem; height: 34px; }
+        .sv-admin-btn { background: var(--sv-primary); color: #fff; border: none; border-radius: var(--sv-radius-sm); padding: 7px 16px; font-size: 0.82rem; font-weight: 700; cursor: pointer; height: 34px; }
+        .sv-admin-sep { border-left: 1px solid var(--sv-border); align-self: stretch; }
+        .sv-admin-msg { font-size: 0.8rem; margin-top: 4px; }
+
+        .sv-cajon-del {
+            float: right;
+            border: none;
+            background: var(--sv-danger-bg);
+            color: var(--sv-danger);
+            border-radius: 6px;
+            width: 20px;
+            height: 20px;
+            line-height: 1;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body class="container-fluid px-3">
@@ -232,9 +291,45 @@
         <input type="checkbox" id="chkZonasLegacy" /> Incluir zonas legacy
     </label>
     -->
+    <button id="btnAdmin" class="sv-btn-admin" onclick="toggleAdmin()">⚙ Administrar cajones</button>
+
     <div class="sv-stats">
         <span class="ocupado" id="statOcupados">0 ocupados</span>
         <span class="libre" id="statLibres">0 libres</span>
+    </div>
+</div>
+
+<div id="adminPanel" class="sv-admin-panel">
+    <div class="sv-admin-row">
+        <div>
+            <label>Zona</label>
+            <input id="admZona" placeholder="Ej. A, BUFFER" style="width:120px;">
+        </div>
+        <div>
+            <label>Número</label>
+            <input id="admNumero" placeholder="Ej. 12" style="width:100px;">
+        </div>
+        <button class="sv-admin-btn" onclick="crearCajon()">+ Agregar cajón</button>
+
+        <div class="sv-admin-sep"></div>
+
+        <div>
+            <label>Zona (rango)</label>
+            <input id="admZonaR" placeholder="Ej. A" style="width:120px;">
+        </div>
+        <div>
+            <label>Desde</label>
+            <input id="admDesde" type="number" min="0" style="width:90px;">
+        </div>
+        <div>
+            <label>Hasta</label>
+            <input id="admHasta" type="number" min="0" style="width:90px;">
+        </div>
+        <button class="sv-admin-btn" onclick="crearRango()">+ Crear rango</button>
+    </div>
+    <div id="admMsg" class="sv-admin-msg"></div>
+    <div style="font-size:0.76rem; color:var(--sv-ink-soft);">
+        En modo administración, cada cajón <strong>libre</strong> muestra una ✕ para borrarlo. Los ocupados no se pueden borrar.
     </div>
 </div>
 
@@ -242,6 +337,49 @@
 
 <script>
     let cajonesData = [];
+    let adminMode = false;
+
+    function toggleAdmin() {
+        adminMode = !adminMode;
+        document.getElementById('btnAdmin').classList.toggle('activo', adminMode);
+        document.getElementById('adminPanel').classList.toggle('abierto', adminMode);
+        renderTodo();
+    }
+
+    function admMsg(texto, ok) {
+        const el = document.getElementById('admMsg');
+        el.textContent = texto;
+        el.style.color = ok ? '#2e7d4f' : '#b3261e';
+    }
+
+    async function crearCajon() {
+        const ubicacion = document.getElementById('admZona').value.trim();
+        const numero = document.getElementById('admNumero').value.trim();
+        if (!ubicacion || !numero) { admMsg('Zona y número son obligatorios.', false); return; }
+        const res = await fetch(`/Cajones/CrearCajon?ubicacion=${encodeURIComponent(ubicacion)}&numero=${encodeURIComponent(numero)}`, { method: 'POST' });
+        const data = await res.json();
+        admMsg(data.success ? `Cajón ${ubicacion.toUpperCase()}${numero} agregado.` : data.mensaje, data.success);
+        if (data.success) { document.getElementById('admNumero').value = ''; cargarMapa(); }
+    }
+
+    async function crearRango() {
+        const ubicacion = document.getElementById('admZonaR').value.trim();
+        const desde = parseInt(document.getElementById('admDesde').value, 10);
+        const hasta = parseInt(document.getElementById('admHasta').value, 10);
+        if (!ubicacion || isNaN(desde) || isNaN(hasta)) { admMsg('Completa zona, desde y hasta.', false); return; }
+        const res = await fetch(`/Cajones/CrearRango?ubicacion=${encodeURIComponent(ubicacion)}&desde=${desde}&hasta=${hasta}`, { method: 'POST' });
+        const data = await res.json();
+        admMsg(data.success ? `${data.creados} cajón(es) creados en ${ubicacion.toUpperCase()}.` : data.mensaje, data.success);
+        if (data.success) cargarMapa();
+    }
+
+    async function eliminarCajon(id) {
+        if (!confirm('¿Borrar este cajón?')) return;
+        const res = await fetch(`/Cajones/EliminarCajon?id=${id}`, { method: 'POST' });
+        const data = await res.json();
+        if (!data.success) { alert(data.mensaje || 'No se pudo borrar.'); return; }
+        cargarMapa();
+    }
 
     function escapeHtml(valor) {
         if (valor === null || valor === undefined) return '';
@@ -253,17 +391,28 @@
 
     function renderCajon(c) {
         const ocupado = c.ocupado;
-        const titulo = ocupado
+        const senalado = !ocupado && !!c.ultimoMotivoLiberacion;
+        let titulo = ocupado
             ? `${c.folioVP || 'Sin folio'} · ${[c.marca, c.modelo, c.color].filter(Boolean).join(' ')} ${c.placas || ''}`.trim()
             : 'Disponible';
+        if (senalado) {
+            const fecha = c.fechaUltimaLiberacion ? new Date(c.fechaUltimaLiberacion).toLocaleString() : '';
+            titulo = `⚠ Liberado forzosamente${fecha ? ' · ' + fecha : ''} · ${c.ultimoMotivoLiberacion}`;
+        }
+
+        const btnDel = (adminMode && !ocupado)
+            ? `<button class="sv-cajon-del" title="Borrar cajón" onclick="eliminarCajon(${c.id})">✕</button>`
+            : '';
 
         return `
-            <div class="sv-cajon ${ocupado ? 'ocupado' : ''}" title="${escapeHtml(titulo)}">
-                <div class="sv-cajon-numero">${escapeHtml(c.numero)}</div>
+            <div class="sv-cajon ${ocupado ? 'ocupado' : ''} ${senalado ? 'senalado' : ''}" title="${escapeHtml(titulo)}">
+                <div class="sv-cajon-numero">${escapeHtml(c.numero)}${btnDel}</div>
                 ${ocupado
                     ? `<div class="sv-cajon-folio">${escapeHtml(c.folioVP) || '—'}</div>
                        <div class="sv-cajon-detalle">${escapeHtml(c.nombreReserva || c.placas || '')}</div>`
-                    : `<div class="sv-cajon-detalle">Libre</div>`}
+                    : senalado
+                        ? `<div class="sv-cajon-senal">⚠ ${escapeHtml(c.ultimoMotivoLiberacion)}</div>`
+                        : `<div class="sv-cajon-detalle">Libre</div>`}
             </div>`;
     }
 

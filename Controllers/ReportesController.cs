@@ -47,7 +47,7 @@ namespace AppValetParking.Controllers
         //  DATATABLE
         // ====================================================================
         [HttpPost]
-        public async Task<IActionResult> GetData(DateTime? inicio, DateTime? fin, string? servicio, string? valet, string? hotel)
+        public async Task<IActionResult> GetData(DateTime? inicio, DateTime? fin, string? servicio, string? valet, string? hotel, string? placa)
         {
             var form = Request.Form;
             int start = Convert.ToInt32(form["start"]);
@@ -55,7 +55,24 @@ namespace AppValetParking.Controllers
             string searchValue = form["search[value]"];
             string draw = form["draw"];
 
-            var q = _context.ValetRegistros.AsQueryable();
+            // Se une VehiculosInfo (por FolioVP) para poder mostrar/filtrar/ordenar
+            // por placas, que no viven en ValetRegistros. LEFT JOIN: si un folio no
+            // tiene vehículo vinculado, el registro igual aparece (placas = null).
+            var q = from r in _context.ValetRegistros
+                    join v in _context.VehiculosInfo on r.FolioVP equals v.FolioVP into gj
+                    from v in gj.DefaultIfEmpty()
+                    select new
+                    {
+                        r.Fecha,
+                        r.Operacion,
+                        r.Habitacion,
+                        r.Hotel,
+                        r.FolioVP,
+                        Placas = v != null ? v.Placas : null,
+                        r.Valet,
+                        r.Servicio,
+                        r.Estatus
+                    };
 
             // FILTROS
             if (inicio.HasValue)
@@ -73,7 +90,11 @@ namespace AppValetParking.Controllers
             if (!string.IsNullOrWhiteSpace(hotel))
                 q = q.Where(x => x.Hotel == hotel);
 
-            // BUSQUEDA GENERAL
+            // FILTRO POR PLACAS (dedicado)
+            if (!string.IsNullOrWhiteSpace(placa))
+                q = q.Where(x => (x.Placas ?? "").Contains(placa));
+
+            // BUSQUEDA GENERAL (incluye placas)
             if (!string.IsNullOrWhiteSpace(searchValue))
             {
                 q = q.Where(x =>
@@ -81,13 +102,32 @@ namespace AppValetParking.Controllers
                     (x.Hotel ?? "").Contains(searchValue) ||
                     (x.Servicio ?? "").Contains(searchValue) ||
                     (x.Estatus ?? "").Contains(searchValue) ||
-                    (x.Valet ?? "").Contains(searchValue)
+                    (x.Valet ?? "").Contains(searchValue) ||
+                    (x.FolioVP ?? "").Contains(searchValue) ||
+                    (x.Placas ?? "").Contains(searchValue)
                 );
             }
 
+            // ORDEN: respeta el clic en el encabezado que envía DataTables
+            // (order[0][column] + dir). Por defecto, Fecha descendente.
+            string orderCol = form["order[0][column]"].ToString();
+            bool asc = form["order[0][dir]"].ToString() == "asc";
+
+            q = orderCol switch
+            {
+                "0" => asc ? q.OrderBy(x => x.Fecha)      : q.OrderByDescending(x => x.Fecha),
+                "1" => asc ? q.OrderBy(x => x.Operacion)  : q.OrderByDescending(x => x.Operacion),
+                "2" => asc ? q.OrderBy(x => x.Habitacion) : q.OrderByDescending(x => x.Habitacion),
+                "3" => asc ? q.OrderBy(x => x.Hotel)      : q.OrderByDescending(x => x.Hotel),
+                "4" => asc ? q.OrderBy(x => x.FolioVP)    : q.OrderByDescending(x => x.FolioVP),
+                "5" => asc ? q.OrderBy(x => x.Placas)     : q.OrderByDescending(x => x.Placas),
+                "6" => asc ? q.OrderBy(x => x.Valet)      : q.OrderByDescending(x => x.Valet),
+                "7" => asc ? q.OrderBy(x => x.Servicio)   : q.OrderByDescending(x => x.Servicio),
+                _   => q.OrderByDescending(x => x.Fecha)
+            };
+
             int total = await q.CountAsync();
             var data = await q
-                .OrderByDescending(x => x.Fecha)
                 .Skip(start)
                 .Take(length)
                 .ToListAsync();

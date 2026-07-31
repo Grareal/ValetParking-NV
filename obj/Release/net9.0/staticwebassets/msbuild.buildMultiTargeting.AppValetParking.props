@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\AppValetParking.props" />
-</Project>

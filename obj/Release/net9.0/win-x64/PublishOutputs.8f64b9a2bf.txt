@@ -2,6 +2,7 @@ C:\ValetParking\AppValetParking\publish\AppValetParking.exe
 C:\ValetParking\AppValetParking\publish\appsettings.Development.json
 C:\ValetParking\AppValetParking\publish\appsettings.json
 C:\ValetParking\AppValetParking\publish\Data\hotel-printer-config.json
+C:\ValetParking\AppValetParking\publish\Data\ticket-rules.json
 C:\ValetParking\AppValetParking\publish\AppValetParking.dll
 C:\ValetParking\AppValetParking\publish\AppValetParking.deps.json
 C:\ValetParking\AppValetParking\publish\AppValetParking.runtimeconfig.json
@@ -326,7 +327,7 @@ C:\ValetParking\AppValetParking\publish\createdump.exe
 C:\ValetParking\AppValetParking\publish\hostfxr.dll
 C:\ValetParking\AppValetParking\publish\hostpolicy.dll
 C:\ValetParking\AppValetParking\publish\mscordaccore.dll
-C:\ValetParking\AppValetParking\publish\mscordaccore_amd64_amd64_9.0.1125.51716.dll
+C:\ValetParking\AppValetParking\publish\mscordaccore_amd64_amd64_9.0.1726.26416.dll
 C:\ValetParking\AppValetParking\publish\mscordbi.dll
 C:\ValetParking\AppValetParking\publish\mscorrc.dll
 C:\ValetParking\AppValetParking\publish\msquic.dll

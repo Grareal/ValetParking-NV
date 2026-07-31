@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using AppValetParking.Data;
 using AppValetParking.Services;
+using AppValetParking.Filters;
 
 
 
@@ -29,7 +30,9 @@ builder.Services.AddAuthentication("MyCookieAuth")
 builder.Services.AddSingleton<PrinterConfigService>();
 
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<AccesoVistasService>();
+builder.Services.AddScoped<AccesoVistaFilter>();
+builder.Services.AddControllersWithViews(options => options.Filters.AddService<AccesoVistaFilter>());
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<PegasysDbContext>(options =>
@@ -77,6 +80,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
 
-
-
+await DatabaseInitializer.InicializarAccesosAsync(app.Services);
 app.Run();

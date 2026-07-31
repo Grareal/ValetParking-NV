@@ -22,7 +22,7 @@ namespace AppValetParking.Controllers
         public async Task<IActionResult> ObtenerDatosFolio(string folio)
         {
             if (string.IsNullOrWhiteSpace(folio))
-                return BadRequest(new { mensaje = "Folio vacío" });
+                return BadRequest(new { mensaje = "Folio vacï¿½o" });
 
             var registro = await _context.ValetRegistros
                 .FirstOrDefaultAsync(r => r.FolioVP == folio);
@@ -44,7 +44,7 @@ namespace AppValetParking.Controllers
         public async Task<IActionResult> CrearSolicitud([FromBody] SolicitudVehiculoDto solicitud)
         {
             if (solicitud == null || string.IsNullOrWhiteSpace(solicitud.FolioVP))
-                return BadRequest(new { exito = false, mensaje = "Folio vacío" });
+                return BadRequest(new { exito = false, mensaje = "Folio vacï¿½o" });
 
             var registro = await _context.ValetRegistros
                 .FirstOrDefaultAsync(r => r.FolioVP == solicitud.FolioVP);
@@ -71,51 +71,29 @@ namespace AppValetParking.Controllers
 
             _context.ValetSolicitudes.Add(nuevaSolicitud);
 
-            // Actualiza el Estatus del vehículo según el tipo de movimiento:
-            // PASEO/Parcial -> "Parcial", SALIDA/Permanente -> "Fuera",
-            // REGRESO -> vuelve a "Dentro" (el huésped regresó de su paseo).
-            var nuevoEstatus = MapTipoSalidaAEstatus(solicitud.TipoSalida);
-            if (nuevoEstatus != null)
-            {
-                var vehiculo = await _context.VehiculosInfo
-                    .FirstOrDefaultAsync(v => v.FolioVP == solicitud.FolioVP);
-
-                if (vehiculo != null)
-                    vehiculo.Estatus = nuevoEstatus;
-            }
-
+            // NOTA: el estatus del vehÃ­culo NO se cambia aquÃ­. Pedir una salida
+            // solo crea la tarea; el estatus cambia cuando el valet confirma la
+            // entrega (click) en api/solicitudes/entregar/{id}. AsÃ­ el estado
+            // refleja la acciÃ³n real, no la solicitud.
             await _context.SaveChangesAsync();
 
             return Ok(new { exito = true, mensaje = $"Solicitud enviada para el folio {solicitud.FolioVP}" });
         }
 
-        private static string MapTipoSalidaAEstatus(string tipoSalida)
-        {
-            if (string.IsNullOrWhiteSpace(tipoSalida)) return null;
-
-            return tipoSalida.Trim().ToUpperInvariant() switch
-            {
-                "PARCIAL" or "PASEO" => "Parcial",
-                "PERMANENTE" or "SALIDA" => "Fuera",
-                "REGRESO" => "Dentro",
-                _ => null
-            };
-        }
-
 
         public class SolicitudVehiculoDto
         {
-            public string FolioVP { get; set; }
+            public string FolioVP { get; set; } = string.Empty;
             public string? Destino { get; set; }
-            public string Resort { get; set; }
+            public string? Resort { get; set; }
             public string? NombreSolicitante { get; set; }
             public string? ApellidoSolicitante { get; set; }
             public string? Telefono { get; set; }
             public string? Correo { get; set; }
-            public string MarcaVehiculo { get; set; }
-            public string ColorVehiculo { get; set; }
-            public string TipoSalida { get; set; }
-            public string Comentarios { get; set; }
+            public string? MarcaVehiculo { get; set; }
+            public string? ColorVehiculo { get; set; }
+            public string? TipoSalida { get; set; }
+            public string? Comentarios { get; set; }
         }
     }
 }

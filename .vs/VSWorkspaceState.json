@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Data",
-    "\\Services",
+    "\\Filters",
+    "\\Models",
     "\\Views",
-    "\\Views\\ControlSolicitudes",
-    "\\Views\\Home",
-    "\\Views\\Reportes",
-    "\\Views\\SolicitudVehiculo",
+    "\\Views\\Botones",
+    "\\Views\\Dashboard",
+    "\\Views\\Usuarios",
     "\\wwwroot",
+    "\\wwwroot\\css",
     "\\wwwroot\\js"
   ],
-  "SelectedNode": "\\Models\\Reserva.cs",
+  "SelectedNode": "\\Models\\ValetSolicitud.cs",
   "PreviewInSolutionExplorer": false
 }

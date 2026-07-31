@@ -8,13 +8,16 @@ using AppValetParking.Models;
 using ClosedXML.Excel;
 using AppValetParking.Services;
 using System.IO;
+using QRCoder;
 
 namespace AppValetParking.Controllers
 {
     public class TicketsController : Controller
     {
         private readonly ValetParkingDbContext _valetContext;
+        private readonly ApplicationDbContext _context;
         private readonly TcabdopeNewDbContext _tcabdopeContext;
+        private readonly PegasysDbContext _pegasysContext;
         private readonly IWebHostEnvironment _env;
         private readonly ILogger<TicketsController> _logger;
 
@@ -23,14 +26,145 @@ namespace AppValetParking.Controllers
 
         public TicketsController(
     ValetParkingDbContext valetContext,
+    ApplicationDbContext context,
     TcabdopeNewDbContext tcabdopeContext,
+    PegasysDbContext pegasysContext,
     IWebHostEnvironment env,
     ILogger<TicketsController> logger)
         {
             _valetContext = valetContext;
+            _context = context;
             _tcabdopeContext = tcabdopeContext;
+            _pegasysContext = pegasysContext;
             _env = env;
             _logger = logger;
+        }
+
+        // Resuelve el operador del usuario web logueado: su gafete (desde
+        // Usuarios) y su nombre (desde el padrón Pegasys). Si algo falla, cae al
+        // Username de la sesión.
+        private async Task<(string codigoOperador, string nombre)> ResolverOperadorSesionAsync()
+        {
+            var username = HttpContext.Session.GetString("Usuario") ?? "";
+            var gafete = await _context.Usuarios
+                .Where(u => u.Username == username)
+                .Select(u => u.Gafete)
+                .FirstOrDefaultAsync() ?? "";
+
+            string nombre = username;
+            if (!string.IsNullOrWhiteSpace(gafete))
+            {
+                try
+                {
+                    var n = await _pegasysContext.VV_TARJETAS_EMPLEADOS
+                        .Where(e => e.ID_ICLASS == gafete
+                                 || e.clavenomina == gafete
+                                 || e.ID_MIFARE == gafete)
+                        .Select(e => (e.c_mname + " " + e.c_lname).Trim())
+                        .FirstOrDefaultAsync();
+                    if (!string.IsNullOrWhiteSpace(n)) nombre = n;
+                }
+                catch { /* Pegasys no disponible: se queda con el username */ }
+            }
+            return (gafete, nombre);
+        }
+
+        // Genera un PNG con el QR del texto dado (p. ej. el código de la
+        // operadora). Se usa desde la vista Config para imprimir/mostrar los QR
+        // con los que se cierran los ciclos de estacionado.
+        // PngByteQRCode es multiplataforma (no usa System.Drawing).
+        [HttpGet]
+        public IActionResult GenerarQR(string texto)
+        {
+            if (string.IsNullOrWhiteSpace(texto))
+                return BadRequest("Texto vacío");
+
+            using var gen = new QRCodeGenerator();
+            var data = gen.CreateQrCode(texto.Trim(), QRCodeGenerator.ECCLevel.Q);
+            var png = new PngByteQRCode(data).GetGraphic(10);
+            return File(png, "image/png");
+        }
+
+        // Lista de códigos de liberación (para la vista Config).
+        [HttpGet]
+        public IActionResult ListaCodigos()
+        {
+            var codigos = _context.CodigosLiberacion
+                .OrderByDescending(c => c.Fecha)
+                .Select(c => new { c.Id, c.Codigo, c.Nombre, c.CodigoOperador, c.Activo, c.Fecha, c.ExpiraEn })
+                .ToList();
+            return Json(codigos);
+        }
+
+        // Borrado LÓGICO (conserva el histórico): el código queda "Borrado" y ya
+        // no valida, pero sigue visible para consulta.
+        [HttpPost]
+        public async Task<IActionResult> EliminarCodigo(int id)
+        {
+            var c = await _context.CodigosLiberacion.FindAsync(id);
+            if (c == null) return Ok(new { success = false, mensaje = "No encontrado." });
+            c.Activo = false;
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        // Reactiva un código previamente borrado.
+        [HttpPost]
+        public async Task<IActionResult> RestaurarCodigo(int id)
+        {
+            var c = await _context.CodigosLiberacion.FindAsync(id);
+            if (c == null) return Ok(new { success = false, mensaje = "No encontrado." });
+            c.Activo = true;
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        // Fija (o quita) la vigencia de un código. expira vacío = sin caducidad.
+        [HttpPost]
+        public async Task<IActionResult> SetVigencia(int id, string? expira)
+        {
+            var c = await _context.CodigosLiberacion.FindAsync(id);
+            if (c == null) return Ok(new { success = false, mensaje = "No encontrado." });
+            if (string.IsNullOrWhiteSpace(expira))
+                c.ExpiraEn = null;
+            else if (DateTime.TryParse(expira, out var dt))
+                c.ExpiraEn = dt;
+            else
+                return Ok(new { success = false, mensaje = "Fecha inválida." });
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true, expiraEn = c.ExpiraEn });
+        }
+
+        // Crea un código propio vinculado a un nombre. Ese nombre aparecerá en
+        // movimientos como quien aprobó cuando se use el código.
+        [HttpPost]
+        public async Task<IActionResult> CrearCodigo([FromBody] CodigoLiberacion dto)
+        {
+            if (dto == null || string.IsNullOrWhiteSpace(dto.Codigo))
+                return BadRequest(new { success = false, mensaje = "El código es obligatorio." });
+
+            var codigo = dto.Codigo.Trim();
+            var existe = await _context.CodigosLiberacion.AnyAsync(c => c.Codigo == codigo);
+            if (existe)
+                return Ok(new { success = false, mensaje = "Ese código ya existe." });
+
+            // Autocaptura del operador logueado (código + nombre real). El código
+            // queda ligado a esa persona: al usarse, en movimientos sale que
+            // ELLA autorizó.
+            var (codigoOperador, nombre) = await ResolverOperadorSesionAsync();
+
+            _context.CodigosLiberacion.Add(new CodigoLiberacion
+            {
+                Codigo = codigo,
+                Nombre = nombre,
+                CodigoOperador = codigoOperador,
+                Activo = true,
+                CreadoPor = HttpContext.Session.GetString("Usuario"),
+                Fecha = DateTime.Now,
+                ExpiraEn = dto.ExpiraEn   // opcional: vigencia al crear (o null = sin caducidad)
+            });
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true, nombre, codigoOperador });
         }
 
         public IActionResult Index()
@@ -77,7 +211,97 @@ namespace AppValetParking.Controllers
         }
 
         // ==========================================
-        // OBTENER RESERVAS DEL MES 
+        // BUSCAR RESERVAS DEL DÍA (server-side, bajo demanda)
+        // ==========================================
+        // Evita descargar todas las reservas del día al abrir la pantalla de
+        // Reservación: solo consulta la BD cuando el usuario ya escribió algo.
+        [HttpGet]
+        // NOTA DE RENDIMIENTO: dbo.hothsp2 tiene ~1.24M filas y NINGÚN índice,
+        // así que toda consulta la recorre completa (medido: ~1-2 s caliente;
+        // fría, con la tabla fuera de caché, se va a decenas de segundos). Por
+        // eso se evita '%q%' donde se puede: un Like de prefijo ('q%') cuesta
+        // como la mitad que uno con comodín al inicio. La cura de fondo sería
+        // un índice sobre h_res_cve / h_cod_reserva (decisión del DBA del
+        // hotel: la BD es TCADBOPE, no nuestra).
+        //
+        // soloClaves = búsqueda por número de reserva / TSW y nada más. Lo usa
+        // la pantalla Reservación: buscar por habitación traía decenas de
+        // coincidencias parecidas y se prestaba a confusión.
+        public async Task<IActionResult> BuscarReservasDia(string? q, bool todas = false, bool soloClaves = false)
+        {
+            if (string.IsNullOrWhiteSpace(q) || q.Trim().Length < 2)
+                return Json(new List<object>());
+
+            var query = q.Trim();
+            var fechaHoy = DateTime.Today.ToString("yyyyMMdd");
+
+            // El huésped llega indistintamente con el número de reserva
+            // (h_res_cve, 9 dígitos) o con el TSW (h_cod_reserva, 7).
+            var esDigitos = query.All(char.IsDigit);
+
+            var baseQuery = _tcabdopeContext.Reservas
+                .Where(r =>
+                    !string.IsNullOrEmpty(r.h_res_cve) &&
+                    !string.IsNullOrEmpty(r.h_cod_reserva));
+
+            if (soloClaves)
+            {
+                // Solo dígitos: además de ser lo único que tiene sentido aquí,
+                // evita que un '%' o '_' tecleado entre como comodín al Like.
+                if (!esDigitos)
+                    return Json(new List<object>());
+
+                // Prefijo: se busca conforme se teclea (2+ dígitos) sin obligar
+                // a escribir el número completo. Sin filtro de fecha: si tienes
+                // la clave, la reserva que quieres es esa, sea de hoy o no.
+                baseQuery = baseQuery.Where(r =>
+                    EF.Functions.Like(r.h_res_cve, $"{query}%") ||
+                    EF.Functions.Like(r.h_cod_reserva, $"{query}%"));
+            }
+            else if (esDigitos && query.Length >= 6)
+            {
+                // Clave completa (una habitación nunca llega a 6 dígitos):
+                // igualdad, en todo el historial.
+                baseQuery = baseQuery.Where(r =>
+                    r.h_res_cve == query || r.h_cod_reserva == query);
+            }
+            else
+            {
+                baseQuery = baseQuery.Where(r =>
+                    EF.Functions.Like(r.h_nom, $"%{query}%") ||
+                    EF.Functions.Like(r.h_num_hab, $"%{query}%"));
+
+                // El filtro por fecha solo aplica a nombre/habitación.
+                if (!todas)
+                    baseQuery = baseQuery.Where(r => r.h_fec_lld == fechaHoy);
+            }
+
+            var reservas = await baseQuery
+                .OrderByDescending(r => r.h_fec_lld)
+                .ThenBy(r => r.Hotel)
+                .ThenBy(r => r.h_num_hab)
+                .Select(r => new
+                {
+                    h_status = r.h_status,
+                    r.h_res_cve,
+                    r.h_nom,
+                    r.h_num_hab,
+                    r.Hotel,
+                    r.h_tpo_hab,
+                    r.h_tpo_hsp,
+                    r.m_msg0,
+                    r.h_cod_reserva,
+                    r.h_vip,
+                    r.h_fec_lld
+                })
+                .Take(todas ? 50 : 30)
+                .ToListAsync();
+
+            return Json(reservas);
+        }
+
+        // ==========================================
+        // OBTENER RESERVAS DEL MES
         // ==========================================
 
 
@@ -194,10 +418,31 @@ namespace AppValetParking.Controllers
     
         [HttpGet]
         [Permiso("Configuracion")]  // aquí colocas el permiso que corresponde
-        public IActionResult Config()
+        public async Task<IActionResult> Config()
         {
             // No necesitas validar sesión ni permisos manualmente
             ViewBag.Permisos = HttpContext.Session.GetString("Permisos") ?? "";
+            ViewBag.Usuario = HttpContext.Session.GetString("Usuario") ?? "";
+            // Operador logueado (gafete + nombre real) al que se ligarán los códigos.
+            var (codigoOperador, nombre) = await ResolverOperadorSesionAsync();
+            ViewBag.OperadorCodigo = codigoOperador;
+            ViewBag.OperadorNombre = nombre;
+            return View();
+        }
+
+        // Vista dedicada SOLO a los códigos de liberación (separada de Config,
+        // que ahora solo tiene las reglas de impresión). Reutiliza los mismos
+        // endpoints JSON (ListaCodigos, CrearCodigo, etc.).
+        [HttpGet]
+        [Permiso("Configuracion")]
+        public async Task<IActionResult> Codigos()
+        {
+            ViewBag.Permisos = HttpContext.Session.GetString("Permisos") ?? "";
+            ViewBag.Usuario = HttpContext.Session.GetString("Usuario") ?? "";
+            // Operador logueado (gafete + nombre real) al que se ligarán los códigos.
+            var (codigoOperador, nombre) = await ResolverOperadorSesionAsync();
+            ViewBag.OperadorCodigo = codigoOperador;
+            ViewBag.OperadorNombre = nombre;
             return View();
         }
 
@@ -238,6 +483,19 @@ namespace AppValetParking.Controllers
 
                 _valetContext.TicketsEnviados.Add(ticketDb);
                 await _valetContext.SaveChangesAsync();
+
+                // Crear solicitud "REGISTRAR" para que aparezca en la cola de
+                // Solicitudes en cuanto se envía el ticket.
+                _context.ValetSolicitudes.Add(new ValetSolicitud
+                {
+                    FolioVP = request.Folio,
+                    NombreReserva = request.Name,
+                    Habitacion = request.Room,
+                    Resort = request.Hotel,
+                    TipoSalida = "REGISTRAR",
+                    FechaSolicitud = DateTime.Now,
+                });
+                await _context.SaveChangesAsync();
 
                 return Ok(new { success = true });
             }

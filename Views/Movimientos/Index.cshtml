@@ -1,0 +1,264 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Movimientos</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --sv-primary: #0D5C63;
+            --sv-primary-dark: #134A54;
+            --sv-gold: #D4AF37;
+            --sv-bg: #F8F5EF;
+            --sv-ink: #263238;
+            --sv-ink-soft: rgba(38, 50, 56, 0.62);
+            --sv-border: rgba(38, 50, 56, 0.10);
+            --sv-white: #FFFFFF;
+            --sv-radius-md: 14px;
+            --sv-radius-sm: 8px;
+            --sv-shadow-sm: 0 2px 8px rgba(19, 74, 84, 0.06);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background: var(--sv-bg);
+            color: var(--sv-ink);
+            font-family: 'Inter', sans-serif;
+            padding-bottom: 24px;
+            font-size: 0.85rem;
+        }
+
+        .sv-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 0 4px;
+        }
+
+        .sv-logo-mark {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, var(--sv-primary) 0%, var(--sv-primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sv-white);
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .sv-header h3 {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            color: var(--sv-primary-dark);
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .sv-header p {
+            margin: 0;
+            font-size: 0.78rem;
+            color: var(--sv-ink-soft);
+        }
+
+        .sv-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--sv-bg);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--sv-border);
+            margin-bottom: 12px;
+        }
+
+        .sv-toolbar label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--sv-ink-soft);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .sv-toolbar .form-control {
+            border: 1.5px solid var(--sv-border);
+            border-radius: var(--sv-radius-sm);
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            height: 34px;
+        }
+
+        .sv-toolbar .form-control:focus {
+            outline: none;
+            border-color: var(--sv-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+        }
+
+        .sv-toolbar .btn-primary {
+            background: var(--sv-primary);
+            border: none;
+            border-radius: var(--sv-radius-sm);
+            height: 34px;
+            padding: 0 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sv-table-wrap {
+            background: var(--sv-white);
+            border: 1px solid var(--sv-border);
+            border-radius: var(--sv-radius-md);
+            box-shadow: var(--sv-shadow-sm);
+            overflow: hidden;
+        }
+
+        table { margin: 0; font-size: 0.8rem; }
+
+        thead th {
+            background: var(--sv-primary-dark);
+            color: var(--sv-white);
+            font-weight: 600;
+            border: none;
+            white-space: nowrap;
+        }
+
+        tbody td {
+            vertical-align: middle;
+            border-color: var(--sv-border);
+        }
+
+        .sv-empty {
+            color: var(--sv-ink-soft);
+            font-size: 0.85rem;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .sv-count {
+            margin-left: auto;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--sv-ink-soft);
+            align-self: center;
+        }
+    </style>
+</head>
+<body class="container-fluid px-3">
+
+<div class="sv-header">
+    <div class="sv-logo-mark">P</div>
+    <div>
+        <h3>Movimientos</h3>
+        <p>Historial completo de eventos (tomar / entregar / liberar) por folio</p>
+    </div>
+</div>
+
+<div class="sv-toolbar">
+    <div>
+        <label>Desde</label>
+        <input type="date" id="fInicio" class="form-control" />
+    </div>
+    <div>
+        <label>Hasta</label>
+        <input type="date" id="fFin" class="form-control" />
+    </div>
+    <div>
+        <label>Folio</label>
+        <input type="text" id="fFolio" class="form-control" placeholder="Folio VP" style="width:140px;" />
+    </div>
+    <div>
+        <label>Operador</label>
+        <input type="text" id="fOperador" class="form-control" placeholder="Nombre operador" style="width:160px;" />
+    </div>
+    <button class="btn btn-primary" onclick="cargar()">Filtrar</button>
+    <span class="sv-count" id="contador"></span>
+</div>
+
+<div class="sv-table-wrap">
+    <table class="table table-hover mb-0">
+        <thead>
+            <tr>
+                <th>Fecha / Hora</th>
+                <th>Folio</th>
+                <th>Huésped</th>
+                <th>Habitación / Hotel</th>
+                <th>Tipo</th>
+                <th>Operador</th>
+                <th>Movimiento</th>
+            </tr>
+        </thead>
+        <tbody id="cuerpo"></tbody>
+    </table>
+    <div class="sv-empty" id="vacio" style="display:none;">Sin movimientos en el rango seleccionado.</div>
+</div>
+
+<script>
+    function escapeHtml(valor) {
+        if (valor === null || valor === undefined) return '';
+        return valor.toString()
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
+    function hoyISO(offsetDias) {
+        const d = new Date();
+        d.setDate(d.getDate() + offsetDias);
+        return d.toISOString().slice(0, 10);
+    }
+
+    async function cargar() {
+        const params = new URLSearchParams();
+        if (document.getElementById('fInicio').value) params.set('inicio', document.getElementById('fInicio').value);
+        if (document.getElementById('fFin').value) params.set('fin', document.getElementById('fFin').value);
+        if (document.getElementById('fFolio').value) params.set('folio', document.getElementById('fFolio').value);
+        if (document.getElementById('fOperador').value) params.set('operador', document.getElementById('fOperador').value);
+
+        const resp = await fetch('@Url.Action("GetMovimientos")?' + params.toString());
+        const data = await resp.json();
+
+        const cuerpo = document.getElementById('cuerpo');
+        const vacio = document.getElementById('vacio');
+        document.getElementById('contador').textContent = `${data.length} movimiento(s)`;
+
+        if (!data.length) {
+            cuerpo.innerHTML = '';
+            vacio.style.display = 'block';
+            return;
+        }
+        vacio.style.display = 'none';
+
+        cuerpo.innerHTML = data.map(m => `
+            <tr>
+                <td>${m.fechaHora ? new Date(m.fechaHora).toLocaleString() : ''}</td>
+                <td><strong>${escapeHtml(m.folioVP || m.reserva || '—')}</strong></td>
+                <td>${escapeHtml(m.nombreReserva || '')}</td>
+                <td>${escapeHtml(m.habitacion || '')} ${m.hotel ? '· ' + escapeHtml(m.hotel) : ''}</td>
+                <td>${escapeHtml(m.servicio || '')}</td>
+                <td>${escapeHtml(m.operador || '')}</td>
+                <td>${escapeHtml(m.movimientoTexto || '')}</td>
+            </tr>`).join('');
+    }
+
+    document.getElementById('fInicio').value = hoyISO(-1);
+    document.getElementById('fFin').value = hoyISO(0);
+    cargar();
+</script>
+</body>
+</html>

@@ -304,6 +304,30 @@
             padding: 5px 12px;
         }
 
+        /* ---------- Badges de tipo / estatus ---------- */
+        .sv-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .sv-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .sv-badge-tipo { background: rgba(212, 175, 55, 0.20); color: #8a6d0b; }
+        .sv-badge-estatus { background: rgba(13, 92, 99, 0.12); color: var(--sv-primary-dark); }
+        .sv-badge-proceso { background: #dbeafe; color: #1e40af; }
+        .sv-badge-paseo { background: var(--sv-warning-bg); color: var(--sv-warning); }
+        .sv-badge-entregado { background: var(--sv-success-bg); color: var(--sv-success); }
+
         .parpadeo {
             animation: alertBlink 1s infinite;
         }
@@ -409,6 +433,26 @@
         ? (item.TiempoAtendido - item.TiempoCreado)?.TotalMinutes.ToString("0") + " min"
         : "Pendiente";
 
+        // Tipo de solicitud legible (mismo criterio que la app).
+        var tipoRaw = (item.TipoSalida ?? "").Trim().ToUpperInvariant();
+        var tipoTexto = tipoRaw switch
+        {
+            "RESERVACION" or "REGISTRAR" => "RESERVADO",
+            "ESTACIONAR" => "REGISTRADO",
+            "PARCIAL" or "PASEO" => "SALIDA PARCIAL",
+            "PERMANENTE" or "SALIDA" => "SALIDA PERMANENTE",
+            "REGRESO" => "REGRESO",
+            "LIBERACION_FORZADA" => "LIBERACIÓN FORZADA",
+            _ => string.IsNullOrEmpty(tipoRaw) ? "LLEGADA" : tipoRaw
+        };
+
+        var estatusTexto = string.IsNullOrWhiteSpace(item.Estatus) ? "Pendiente" : item.Estatus!;
+        var estatusLower = estatusTexto.ToLowerInvariant();
+        var estatusClase = estatusLower.Contains("proceso") ? "sv-badge-proceso"
+            : estatusLower.Contains("paseo") ? "sv-badge-paseo"
+            : (estatusLower.Contains("entreg") || estatusLower.Contains("finaliz")) ? "sv-badge-entregado"
+            : "sv-badge-estatus";
+
         <div class="col-md-4 ticket"
              data-hotel="@item.Resort"
              data-creado="@item.TiempoCreado.ToString("o")"
@@ -418,10 +462,24 @@
                 <span class="badge tiempo"></span>
 
                 <h5>Folio: @item.FolioVP</h5>
+
+                <div class="sv-badges">
+                    <span class="sv-badge sv-badge-tipo">@tipoTexto</span>
+                    <span class="sv-badge @estatusClase">@estatusTexto</span>
+                </div>
+
                 <p><strong>Huésped:</strong> @item.NombreReserva</p>
                 <p><strong>Habitación:</strong> @item.Habitacion</p>
                 <p><strong>Hotel:</strong> @item.Resort</p>
                 <p><strong>Ubicación:</strong> @item.Destino</p>
+                @if (!string.IsNullOrWhiteSpace(item.Posicion))
+                {
+                    <p><strong>Cajón:</strong> @item.Posicion</p>
+                }
+                @if (!string.IsNullOrWhiteSpace(item.TomadoPor))
+                {
+                    <p><strong>Tomó:</strong> @item.TomadoPor</p>
+                }
                 <p><strong>Tiempo atención:</strong> @tiempoAt</p>
 
                 <form asp-action="CambiarEstatus" method="post">

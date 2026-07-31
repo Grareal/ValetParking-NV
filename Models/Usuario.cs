@@ -12,6 +12,11 @@ namespace AppValetParking.Models
         [Column("gaffete")]
         public string? Gafete { get; set; }
 
+        // Nombre real del empleado (ej. "JUAN PEREZ"). Se captura al crear el
+        // usuario desde /Usuarios/Crear (buscador de empleado). La app Flutter lo
+        // usa para el saludo "Buen turno, <nombre>" en vez del username (oth53226).
+        public string? Nombre { get; set; }
+
 
     }
 }

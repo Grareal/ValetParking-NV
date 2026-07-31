@@ -1,6 +1,6 @@
 ﻿@{
     var permisos = (ViewBag.Permisos as string ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries);
-    var modulos = ViewBag.Modulos as List<AppValetParking.Models.Modulo> ?? new List<AppValetParking.Models.Modulo>();
+    var modulos = ViewBag.Modulos as List<AppValetParking.Models.VistaSistema> ?? new List<AppValetParking.Models.VistaSistema>();
 }
 
 <style>
@@ -92,17 +92,18 @@
 
 <div class="panel">
     <div class="title">Panel Valet Parking</div>
+    @if (ViewBag.AccesoDenegado == true)
+    {
+        <div style="margin:-25px auto 25px;padding:12px 16px;max-width:620px;border-radius:10px;background:#fff3cd;color:#664d03;text-align:center">Tu rol no tiene acceso a esa vista.</div>
+    }
     <div class="grid">
         @foreach (var modulo in modulos)
         {
-            if (permisos.Contains(modulo.Permiso) || permisos.Contains("Administracion") || permisos.Contains("TI"))
-            {
         <div class="module">
             <div class="icon">@modulo.Icono</div>
             <div class="module-title">@modulo.Titulo</div>
             <a href="@modulo.Url" class="module-btn">Abrir</a>
         </div>
-            }
         }
     </div>
 </div>

@@ -1,0 +1,209 @@
+@{
+    ViewData["Title"] = "Códigos de liberación";
+}
+
+<style>
+    .codlib-card {
+        background: #fff;
+        border: 1px solid rgba(38, 50, 56, .12);
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(19, 74, 84, .08);
+        padding: 22px;
+    }
+    .codlib-title { font-weight: 800; color: #134A54; font-size: 1.3rem; margin: 0; }
+    .codlib-sub { color: rgba(38, 50, 56, .62); font-size: .86rem; margin: 4px 0 0; }
+    .codlib-form { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin: 18px 0 6px; }
+    .codlib-field { display: flex; flex-direction: column; gap: 4px; }
+    .codlib-field label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: rgba(38, 50, 56, .62); }
+    .codlib-filtros { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+    .codlib-chip { border: 1px solid rgba(38, 50, 56, .12); background: #f5f7f6; color: #134A54; border-radius: 999px; padding: 6px 14px; font-size: .8rem; font-weight: 700; cursor: pointer; }
+    .codlib-chip.active { background: #0D5C63; color: #fff; border-color: #0D5C63; }
+    .codlib-estado { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .3px; }
+    .codlib-estado.vigente { background: #e3f3e9; color: #2e7d4f; }
+    .codlib-estado.caducado { background: #fbf1da; color: #b8860b; }
+    .codlib-estado.borrado { background: #fbe4e2; color: #b3261e; }
+    .codlib-vig { display: flex; gap: 6px; align-items: center; }
+    .codlib-vig input { max-width: 190px; }
+    .codlib-acciones { display: flex; gap: 6px; white-space: nowrap; }
+    #tablaCodigos td { vertical-align: middle; }
+</style>
+
+<div class="container mt-4 mb-5">
+    <div class="codlib-card">
+        <h2 class="codlib-title">Códigos de liberación</h2>
+        <p class="codlib-sub">
+            Crea un código (escrito o aleatorio) con vigencia opcional. Se liga al operador
+            de la sesión: al usarse para cerrar un estacionado, en movimientos aparecerá que
+            ESA persona autorizó. Se ligará a:
+            <strong>@(ViewBag.OperadorNombre)</strong>
+            @if (!string.IsNullOrWhiteSpace((string)(ViewBag.OperadorCodigo ?? "")))
+            {
+                <span class="text-muted">(operador @(ViewBag.OperadorCodigo))</span>
+            }
+        </p>
+
+        <div class="codlib-form">
+            <div class="codlib-field">
+                <label>Código</label>
+                <input id="codLibCodigo" class="form-control" placeholder="Escribe o genera">
+            </div>
+            <div class="codlib-field">
+                <label>Vigente hasta (opcional)</label>
+                <input id="codLibExpira" type="datetime-local" class="form-control">
+            </div>
+            <button class="btn btn-outline-secondary" onclick="codigoAleatorio()">Aleatorio</button>
+            <button class="btn btn-primary" onclick="crearCodigo()">Crear</button>
+        </div>
+        <div id="codLibMsg" class="mb-2"></div>
+
+        <div class="codlib-filtros">
+            <button class="codlib-chip active" data-filtro="vigente" onclick="filtrarCodigos('vigente', this)">Vigentes</button>
+            <button class="codlib-chip" data-filtro="caducado" onclick="filtrarCodigos('caducado', this)">Caducados</button>
+            <button class="codlib-chip" data-filtro="borrado" onclick="filtrarCodigos('borrado', this)">Borrados</button>
+            <button class="codlib-chip" data-filtro="todos" onclick="filtrarCodigos('todos', this)">Todos</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-sm align-middle">
+                <thead>
+                    <tr>
+                        <th>Código</th><th>Nombre</th><th>Operador</th><th>Creado</th>
+                        <th>Vigencia</th><th>Estado</th><th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaCodigos"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", cargarCodigos);
+
+    let _codigos = [];
+    let _filtroCod = 'vigente';
+
+    function estadoCodigo(c) {
+        if (!c.activo) return { txt: 'Borrado', cls: 'borrado' };
+        if (c.expiraEn && new Date(c.expiraEn) < new Date()) return { txt: 'Caducado', cls: 'caducado' };
+        return { txt: 'Vigente', cls: 'vigente' };
+    }
+
+    function fmtFecha(dt) {
+        if (!dt) return '—';
+        return new Date(dt).toLocaleString();
+    }
+
+    // Convierte una fecha ISO a valor de <input type="datetime-local">.
+    function toLocalInput(dt) {
+        if (!dt) return '';
+        const d = new Date(dt);
+        const p = n => String(n).padStart(2, '0');
+        return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+    }
+
+    async function cargarCodigos() {
+        try {
+            const res = await fetch('/Tickets/ListaCodigos');
+            _codigos = await res.json() || [];
+            renderCodigos();
+        } catch (e) { /* ignora */ }
+    }
+
+    function filtrarCodigos(f, btn) {
+        _filtroCod = f;
+        document.querySelectorAll('.codlib-chip').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        renderCodigos();
+    }
+
+    function renderCodigos() {
+        const tbody = document.getElementById('tablaCodigos');
+        const filtrados = _codigos.filter(c =>
+            _filtroCod === 'todos' ? true : estadoCodigo(c).cls === _filtroCod);
+
+        if (filtrados.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" class="text-muted text-center py-3">Sin códigos en esta categoría.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = filtrados.map(c => {
+            const est = estadoCodigo(c);
+            const vigTxt = c.expiraEn ? fmtFecha(c.expiraEn) : 'Sin caducidad';
+            const accion = c.activo
+                ? `<button class="btn btn-sm btn-outline-danger" onclick="eliminarCodigo(${c.id})">Borrar</button>`
+                : `<button class="btn btn-sm btn-outline-success" onclick="restaurarCodigo(${c.id})">Restaurar</button>`;
+            return `
+                <tr>
+                    <td><strong>${c.codigo}</strong></td>
+                    <td>${c.nombre || ''}</td>
+                    <td>${c.codigoOperador || ''}</td>
+                    <td>${fmtFecha(c.fecha)}</td>
+                    <td>
+                        <div class="codlib-vig">
+                            <input type="datetime-local" class="form-control form-control-sm" id="vig-${c.id}" value="${toLocalInput(c.expiraEn)}">
+                            <button class="btn btn-sm btn-outline-secondary" onclick="guardarVigencia(${c.id})">Guardar</button>
+                        </div>
+                        <small class="text-muted">${vigTxt}</small>
+                    </td>
+                    <td><span class="codlib-estado ${est.cls}">${est.txt}</span></td>
+                    <td class="codlib-acciones">
+                        <a class="btn btn-sm btn-outline-primary" href="/Tickets/GenerarQR?texto=${encodeURIComponent(c.codigo)}" target="_blank">QR</a>
+                        ${accion}
+                    </td>
+                </tr>`;
+        }).join('');
+    }
+
+    function codigoAleatorio() {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        let code = '';
+        for (let i = 0; i < 8; i++) code += chars[Math.floor(Math.random() * chars.length)];
+        document.getElementById('codLibCodigo').value = code;
+    }
+
+    async function crearCodigo() {
+        const codigo = document.getElementById('codLibCodigo').value.trim();
+        const expira = document.getElementById('codLibExpira').value; // '' = sin caducidad
+        const msg = document.getElementById('codLibMsg');
+        if (!codigo) {
+            msg.innerHTML = "<span style='color:red'>Escribe o genera un código.</span>";
+            return;
+        }
+        const body = { codigo };
+        if (expira) body.expiraEn = expira;
+        const res = await fetch('/Tickets/CrearCodigo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (data.success) {
+            msg.innerHTML = "<span style='color:green'>Código creado y ligado a " + (data.nombre || 'ti') + ".</span>";
+            document.getElementById('codLibCodigo').value = '';
+            document.getElementById('codLibExpira').value = '';
+            cargarCodigos();
+        } else {
+            msg.innerHTML = "<span style='color:red'>" + (data.mensaje || 'Error') + "</span>";
+        }
+    }
+
+    async function eliminarCodigo(id) {
+        if (!confirm('¿Borrar este código? Podrás verlo en "Borrados" y restaurarlo.')) return;
+        const res = await fetch('/Tickets/EliminarCodigo?id=' + id, { method: 'POST' });
+        if ((await res.json()).success) cargarCodigos();
+    }
+
+    async function restaurarCodigo(id) {
+        const res = await fetch('/Tickets/RestaurarCodigo?id=' + id, { method: 'POST' });
+        if ((await res.json()).success) cargarCodigos();
+    }
+
+    async function guardarVigencia(id) {
+        const val = document.getElementById('vig-' + id).value; // '' = sin caducidad
+        const res = await fetch('/Tickets/SetVigencia?id=' + id + '&expira=' + encodeURIComponent(val), { method: 'POST' });
+        const data = await res.json();
+        if (data.success) cargarCodigos();
+        else alert(data.mensaje || 'Error al guardar la vigencia.');
+    }
+</script>

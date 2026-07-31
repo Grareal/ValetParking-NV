@@ -45,12 +45,13 @@ namespace AppValetParking.Controllers
                                   && u.Password == request.Password);
 
             if (usuario == null)
-                return Unauthorized(new { error = "Usuario o contraseña incorrectos." });
+                return Unauthorized(new { error = "Usuario o contraseï¿½a incorrectos." });
 
             return Json(new
             {
                 id = usuario.Id,
                 username = usuario.Username,
+                nombre = usuario.Nombre,   // nombre real para el saludo en la app
                 funciones = usuario.Funciones,
                 gaffete = usuario.Gafete  // el numeroOperador
             });
@@ -71,15 +72,15 @@ namespace AppValetParking.Controllers
 
             if (usuario == null)
             {
-                ViewBag.Error = "Usuario o contraseña incorrectos.";
+                ViewBag.Error = "Usuario o contraseï¿½a incorrectos.";
                 return View();
             }
 
-            // Guardar sesión
+            // Guardar sesiï¿½n
             HttpContext.Session.SetString("Usuario", usuario.Username);
             HttpContext.Session.SetString("Permisos", usuario.Funciones);
 
-            // Ir al menú principal
+            // Ir al menï¿½ principal
             return RedirectToAction("Index", "Dashboard");
         }
 

@@ -576,6 +576,19 @@
             <input type="date" id="fechaFinFiltro" name="fechaFin" class="form-control" value="@ViewBag.FechaFin" />
         </div>
 
+        <div class="field-group">
+            <label for="servicioFiltro">Servicio</label>
+            <select id="servicioFiltro" name="servicio" class="form-control">
+                <option value="">Todos</option>
+                @foreach (var opcion in (List<ServicioItem>)ViewBag.Servicios)
+                {
+                    <option value="@opcion.Value" selected="@(ViewBag.ServicioSeleccionado == opcion.Value ? "selected" : null)">
+                        @opcion.Text
+                    </option>
+                }
+            </select>
+        </div>
+
         <div class="field-group field-actions">
             <button type="submit" class="btn btn-primary">
                 Filtrar
@@ -693,7 +706,8 @@
                        asp-route-pagina="@(paginaActual - 1)"
                        asp-route-fechaInicio="@ViewBag.FechaInicio"
                        asp-route-fechaFin="@ViewBag.FechaFin"
-                       asp-route-buscar="@ViewBag.Buscar">
+                       asp-route-buscar="@ViewBag.Buscar"
+                       asp-route-servicio="@ViewBag.ServicioSeleccionado">
                         ‹ Anterior
                     </a>
                 }
@@ -736,7 +750,8 @@
                        asp-route-pagina="@(paginaActual + 1)"
                        asp-route-fechaInicio="@ViewBag.FechaInicio"
                        asp-route-fechaFin="@ViewBag.FechaFin"
-                       asp-route-buscar="@ViewBag.Buscar">
+                       asp-route-buscar="@ViewBag.Buscar"
+                       asp-route-servicio="@ViewBag.ServicioSeleccionado">
                         Siguiente ›
                     </a>
                 }

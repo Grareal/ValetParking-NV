@@ -64,6 +64,20 @@
             var registro = await _context.ValetRegistros
                 .FirstOrDefaultAsync(r => r.FolioVP == folio);
 
+            // Fallback: si el folio fue transferido a uno nuevo, resolverlo para
+            // que la etiqueta vieja siga encontrando el vehículo.
+            if (registro == null)
+            {
+                var nuevo = await _context.FoliosTransferidos
+                    .Where(t => t.FolioAnterior == folio)
+                    .OrderByDescending(t => t.Fecha)
+                    .Select(t => t.FolioNuevo)
+                    .FirstOrDefaultAsync();
+                if (nuevo != null)
+                    registro = await _context.ValetRegistros
+                        .FirstOrDefaultAsync(r => r.FolioVP == nuevo);
+            }
+
             if (registro == null)
                 return NotFound(new { error = "No encontrado" });
 
@@ -84,8 +98,8 @@
 
 
         [HttpPost]
-        [IgnoreAntiforgeryToken] 
-        public async Task<IActionResult> Index(ValetRegistro registro)
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> Index(ValetRegistro registro, int? solicitudReservacionId = null)
             {
                 bool esMovil = Request.Headers["User-Agent"].ToString().ToLower().Contains("iphone") ||
                                Request.Headers["User-Agent"].ToString().ToLower().Contains("android") ||
@@ -225,6 +239,47 @@
                 registro.Operacion = movimiento.Id.ToString();
                 await _context.SaveChangesAsync();  // Guardar actualización en registro
 
+                // Cierra la solicitud RESERVADO (RESERVACION/REGISTRAR) de esta
+                // reservación: el coche pasó de RESERVADO a REGISTRADO, así que
+                // esa tarea ya se cumplió y debe desaparecer de la cola.
+                // ROBUSTO: se cierra por el Id de la solicitud que se tomó (viene
+                // desde la app). El folio como respaldo (compat con flujos viejos),
+                // porque el folio del RESERVADO suele ser el número de reserva y no
+                // el folio VP del registro.
+                ValetSolicitud reservado = null;
+                if (solicitudReservacionId.HasValue && solicitudReservacionId.Value > 0)
+                {
+                    reservado = await _context.ValetSolicitudes.FirstOrDefaultAsync(s =>
+                        s.Id == solicitudReservacionId.Value
+                        && (s.TipoSalida == "RESERVACION" || s.TipoSalida == "REGISTRAR")
+                        && s.Estatus != "Finalizado" && s.Estatus != "Entregado");
+                }
+                if (reservado == null && !string.IsNullOrWhiteSpace(registro.FolioVP))
+                {
+                    reservado = await _context.ValetSolicitudes.FirstOrDefaultAsync(s =>
+                        s.FolioVP == registro.FolioVP
+                        && (s.TipoSalida == "RESERVACION" || s.TipoSalida == "REGISTRAR")
+                        && s.Estatus != "Finalizado" && s.Estatus != "Entregado");
+                }
+                if (reservado != null)
+                {
+                    reservado.Estatus = "Finalizado";
+                    reservado.TiempoAtendido ??= now;
+                }
+
+                // Crear solicitud "ESTACIONAR" para que el vehículo recién
+                // registrado aparezca en la cola de Solicitudes.
+                _context.ValetSolicitudes.Add(new ValetSolicitud
+                {
+                    FolioVP = registro.FolioVP,
+                    NombreReserva = registro.NombreReserva,
+                    Habitacion = registro.Habitacion,
+                    Resort = registro.Hotel,
+                    TipoSalida = "ESTACIONAR",
+                    FechaSolicitud = now,
+                });
+                await _context.SaveChangesAsync();
+
                 ViewBag.Mensaje = "Registro guardado correctamente.";
                 bool modoRafaga = _configuration.GetValue<bool>("modoRafaga");
                 int cantidadDisparos = _configuration.GetValue<int>("cantidadDisparos");
@@ -248,6 +303,9 @@
                     return BadRequest("Folio vacío");
 
                 bool existe = await _context.ValetRegistros.AnyAsync(r => r.FolioVP == folio);
+                // También cuenta como existente si el folio fue transferido a otro.
+                if (!existe)
+                    existe = await _context.FoliosTransferidos.AnyAsync(t => t.FolioAnterior == folio);
                 return Json(new { existe });
             }
 
@@ -395,37 +453,21 @@
                     return BadRequest(new { error = "Confirmación vacía" });
                 }
 
-                // 🔍 Ver si EXISTE exacto
-                var countExacto = await _tcabdopeContext.ReservationAllView
-                    .Where(r => r.CONFIRMATION_NO == confirmacion)
-                    .CountAsync();
-
-                Console.WriteLine($"Coincidencias exactas: {countExacto}");
-
-                // 🔍 Buscar similares (para detectar espacios o formato raro)
-                var similares = await _tcabdopeContext.ReservationAllView
-                    .Where(r => r.CONFIRMATION_NO.Contains(confirmacion))
-                    .Select(r => r.CONFIRMATION_NO)
-                    .Take(5)
-                    .ToListAsync();
-
-                Console.WriteLine("Coincidencias parciales:");
-                foreach (var s in similares)
-                {
-                    Console.WriteLine($" - '{s}' (len: {s.Length})");
-                }
-
                 ReservationAllView reserva = null;
 
                 // ==============================
-                // 1. BUSCAR NORMAL
+                // 1. BUSCAR POR RESERVA O TSW
                 // ==============================
+                // El huésped llega indistintamente con el número de reserva
+                // (CONFIRMATION_NO) o con el TSW (EXTERNAL_REFERENCE), así que
+                // se buscan los dos de una vez y por igualdad.
                 reserva = await _tcabdopeContext.ReservationAllView
-                    .FirstOrDefaultAsync(r => r.CONFIRMATION_NO == confirmacion);
+                    .FirstOrDefaultAsync(r => r.CONFIRMATION_NO == confirmacion ||
+                                              r.EXTERNAL_REFERENCE == confirmacion);
 
                 Console.WriteLine(reserva == null
-                    ? "❌ No encontrado por CONFIRMATION_NO"
-                    : "✅ Encontrado por CONFIRMATION_NO");
+                    ? "❌ No encontrado por CONFIRMATION_NO / EXTERNAL_REFERENCE"
+                    : "✅ Encontrado por CONFIRMATION_NO / EXTERNAL_REFERENCE");
 
                 // ==============================
                 // 2. BUSCAR POR RESV_NAME_ID
@@ -486,7 +528,8 @@
                     habitacion = reserva.ROOM,
                     hotel = reserva.ROOM_CLASS,
                     nombre = reserva.GUEST_NAME,
-                    confirmation = reserva.CONFIRMATION_NO
+                    confirmation = reserva.CONFIRMATION_NO,
+                    tsw = reserva.EXTERNAL_REFERENCE
                 });
             }
             catch (Exception ex)
